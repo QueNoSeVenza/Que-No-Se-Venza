@@ -12,7 +12,7 @@ class Medicamento(models.Model):
         ('Analgesico', 'Analgesico'),
         ('Androgenos', 'Androgenos'),
     )
-    funcion = models.CharField(max_length=60, choices=FUNCION_FARMACEUTICA, default=0)
+    funcion = models.CharField(max_length=60, choices=FUNCION_FARMACEUTICA, default="Null")
     PRESCRIPCION_MEDICA = (
         ('Con Receta','Con Receta'),
         ('Sin Receta','Sin Receta'),
@@ -25,9 +25,9 @@ class Medicamento(models.Model):
     )
     tipo = models.CharField(max_length=60, choices=TIPO, default=0)
     concentracion_gramos = models.CharField(max_length=60)
+    nombre = models.CharField(max_length=60)
     cantidad = models.CharField(max_length=60)
     laboratorio = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.BooleanField(default=False)
-    
     
