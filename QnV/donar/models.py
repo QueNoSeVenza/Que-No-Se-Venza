@@ -30,4 +30,19 @@ class Medicamento(models.Model):
     laboratorio = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.BooleanField(default=False)
+
+class Donacion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+
+class Pedir(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     
+class VerificarIngreso(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    
+class VerificarRestiro(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)

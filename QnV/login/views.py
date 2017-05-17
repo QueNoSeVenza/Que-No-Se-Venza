@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.template import RequestContext, loader
 from django.http import Http404
 from django.views import generic
-from qnv.models import *
+from .models import *
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView

@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class QnvConfig(AppConfig):
-    name = 'qnv'
+class LoginConfig(AppConfig):
+    name = 'login'

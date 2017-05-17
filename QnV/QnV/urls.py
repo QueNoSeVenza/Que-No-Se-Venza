@@ -21,5 +21,6 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('qnv.urls', namespace='index')),
+    url(r'^', include('login.urls', namespace='login')),
+    url(r'^', include('donar.urls', namespace='donar')),
 ]
