@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('login.urls', namespace='login')),
     url(r'^', include('donar.urls', namespace='donar')),
+    url(r'^', include('qnv.urls', namespace='qnv')),
 ]
