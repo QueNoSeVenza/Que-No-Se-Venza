@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
-from donar.models import Medicamento
-from donar.forms import MedicamentoForm
+from qnv.models import Medicamento
+from .forms import MedicamentoForm
 from django.http import HttpResponseRedirect,HttpResponse
 
 def donar (request):
