@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from qnv.models import *
+<<<<<<< HEAD
 from .forms import *
+=======
+from .forms import MedicamentoForm, PeticionForm
+>>>>>>> da1b7acaba4e4234c89500a06fba0180cccc9bc2
 from django.http import HttpResponseRedirect,HttpResponse
 
 def donar (request):
@@ -10,7 +14,14 @@ def donar (request):
 		form = MedicamentoForm(request.POST)
 		if form.is_valid():
 			form.save()
+<<<<<<< HEAD
 			print(Medicamento.objects.all())
+=======
+			print("Entra")
+			medicamentos = Medicamento.objects.all()
+			for i in medicamentos:
+				print(i.nombre)
+>>>>>>> da1b7acaba4e4234c89500a06fba0180cccc9bc2
 			return HttpResponseRedirect('/thanks')
 		else:
 			form = MedicamentoForm()
@@ -19,6 +30,25 @@ def donar (request):
 		'donar.html',
 		{'form' : form}
 )
+
+def pedir (request):
+	form = PeticionForm()
+	if request.method == 'POST':
+		form = PeticionForm(request.POST)
+		if form.is_valid():
+			form.save()
+			print("Entra")
+			return HttpResponseRedirect('/thanks')
+			print(Pedir.objects.all())
+		else:
+			print("Invalid form")
+			form = PeticionForm()
+	return render(
+		request,
+		'pedir.html',
+		{'form' : form}
+)
+
 
 def thanks (request):
 	return render(
