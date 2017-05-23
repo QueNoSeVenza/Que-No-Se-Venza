@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from qnv.models import Medicamento
-from .forms import MedicamentoForm
+from qnv.models import *
+from .forms import *
 from django.http import HttpResponseRedirect,HttpResponse
 
 def donar (request):
@@ -10,8 +10,8 @@ def donar (request):
 		form = MedicamentoForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/thanks')
 			print(Medicamento.objects.all())
+			return HttpResponseRedirect('/thanks')
 		else:
 			form = MedicamentoForm()
 	return render(

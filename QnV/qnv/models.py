@@ -13,6 +13,11 @@ class Medicamento(models.Model):
         ('Androgenos', 'Androgenos'),
     )
     funcion = models.CharField(max_length=60, choices=FUNCION_FARMACEUTICA, default="Null")
+    nombre = models.CharField(max_length=60)
+    concentracion_gramos = models.CharField(max_length=60)
+    cantidad = models.CharField(max_length=60)
+    laboratorio = models.CharField(max_length=60)
+    fecha_vencimiento = models.DateField()
     PRESCRIPCION_MEDICA = (
         ('Con Receta','Con Receta'),
         ('Sin Receta','Sin Receta'),
@@ -24,11 +29,6 @@ class Medicamento(models.Model):
         ('Gotas', 'Gotas'),
     )
     tipo = models.CharField(max_length=60, choices=TIPO, default=0)
-    concentracion_gramos = models.CharField(max_length=60)
-    nombre = models.CharField(max_length=60)
-    cantidad = models.CharField(max_length=60)
-    laboratorio = models.CharField(max_length=60)
-    fecha_vencimiento = models.DateField()
     stock = models.BooleanField(default=False)
 
 class Donacion(models.Model):

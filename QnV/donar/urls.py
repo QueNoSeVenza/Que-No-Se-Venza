@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .models import *
+from qnv.models import *
 from .views import *
 
 urlpatterns = [
