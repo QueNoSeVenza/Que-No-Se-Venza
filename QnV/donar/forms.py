@@ -1,10 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from qnv.models import *
-=======
-from qnv.models import Medicamento, Pedir
->>>>>>> da1b7acaba4e4234c89500a06fba0180cccc9bc2
+
 
 
 
