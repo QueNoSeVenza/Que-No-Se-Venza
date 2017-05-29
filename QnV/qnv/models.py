@@ -23,13 +23,17 @@ class Medicamento(models.Model):
         ('Jarabe', 'Jarabe'),
         ('Gotas', 'Gotas'),
     )
+    nombre = models.CharField(default = '',max_length=60)
     tipo = models.CharField(max_length=60, choices=TIPO, default=0)
     concentracion_gramos = models.CharField(max_length=60)
-    nombre = models.CharField(max_length=60)
     cantidad = models.CharField(max_length=60)
     laboratorio = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.nombre
+
 
 class Donacion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
