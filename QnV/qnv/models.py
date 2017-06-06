@@ -38,15 +38,19 @@ class Medicamento(models.Model):
 class Donacion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
 class Pedir(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
     
 class VerificarIngreso(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
     
 class VerificarRestiro(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
