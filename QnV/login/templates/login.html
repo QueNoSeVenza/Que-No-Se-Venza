@@ -18,7 +18,7 @@
                     <div class="login-content s12">
                         <img class="myImg" src="{% static 'logo.png' %}">
                         <br>
-                        <form  method="POST" action="{% url 'login:log' %}">
+                        <form method="POST" action="{% url 'login_index:log' %}">
                             {% csrf_token %}
                             <div class="input-field col s12 m10 push-m1">
                                 <input id="email" name="username" type="text" class="monts">
@@ -55,12 +55,12 @@
                         <i class="material-icons green-text text-accent-2 datArrow">keyboard_backspace</i><a class="btn-flat center nohover center-btn grey-text">volver al ingreso</a></div>
 
                         <div class="divider"></div>
-                        <form  method="POST" action="{% url 'login:reg' %}">
+                        <form  method="POST" action="{% url 'login_index:reg' %}">
                             {% csrf_token %}
                             <h5 class="center grey-text monts tSp">REGISTRO</h5>
                             <div class="input-field col s12 m10 push-m1">
                                 <input id="namm" name="name" type="text" class="monts">
-                                <label for="namm">Nombre</label>
+                                <label for="namm">Nombre y Apellido</label>
                             </div>
 
                             <div class="input-field col s12 m10 push-m1">

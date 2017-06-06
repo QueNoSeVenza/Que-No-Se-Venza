@@ -1,0 +1,258 @@
+// Variables menu 
+$bar_color: #616161;
+$size: 28px;
+$bar_height: $size / 7;
+$offset: $bar_height * 2;
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400, 700');
+//Globales
+html,
+body {
+	height: 100%;
+	font-family: 'Libre Franklin', sans-serif;
+}
+.franklin-bold {
+	font-weight: 700;
+}
+p {
+	font-size: 1.1em;
+}
+// Nav
+.button-collapse {
+	z-index: 999;
+	margin: 20;
+	margin-top: 25;
+	position: absolute;
+}
+nav {
+	position: fixed;
+	z-index: 500;
+	.icon {
+		margin-top: 25%;
+		width: 42px;
+		height: 42px;
+		-webkit-mask: url(img/logo.svg);
+		mask: url(img/logo.svg);
+		-webkit-mask-size: cover;
+		mask-size: cover;
+		background-color: #616161;
+	}
+	.userText {
+		transition: .3s linear;
+		color: #616161;
+	}
+}
+// Slide-Out
+.side-nav {
+	width: 100% !important;
+	background-color: #fff !important;
+	z-index: 998 !important;
+	transition: 0.3s ease-out;
+	opacity: 0.98;
+	.row {
+		margin-bottom: 0;
+	}
+}
+.collapsible-container1 {
+	height: 100%;
+	width: 100%;
+}
+.collapsible-container2 {
+	position: absolute;
+	top: 30%;
+	margin-top: -8% !important;
+}
+.accordion {
+	width: 50%;
+	margin: 0 auto;
+}
+.collapsible-header {
+	padding-top: 25% !important;
+}
+.tem {
+	font-size: 3em;
+}
+//Secciones slide-out
+#navsection1 {
+	padding-top: 10%;
+	line-height: 30px !important;
+}
+#navsection2 {
+	padding-top: 10%;
+	line-height: 15px !important;
+	input[type=text] {
+		border-bottom: 1px solid #424242;
+	}
+	input[type=text]:focus {
+		box-shadow: 0 1px 0 0 #616161 !important;
+	}
+	textarea.materialize-textarea {
+		border-bottom: 1px solid #424242 !important;
+		line-height: 20px;
+	}
+	textarea.materialize-textarea:focus {
+		box-shadow: 0 1px 0 0 #616161 !important;
+	}
+	label {
+		color: #616161 !important
+	}
+	button {
+		margin-top: 20px;
+		margin-right: 10px;
+	}
+}
+#navsection3 {
+	margin-top: 10%;
+	line-height: 30px;
+	vertical-align: middle;
+}
+// Slider inicio
+.bigpanel {
+	height: 100%;
+	margin: 0;
+	padding: 0 !important;
+}
+.textsection {
+	padding-top: 5%;
+}
+.btnsection {
+	padding: 3em 0 0 0;
+}
+.btn-large {
+	width: 13%;
+	min-width: 100px;
+	border-radius: 50px !important;
+}
+.optbutton {
+	margin-left: 3% !important;
+	margin-right: 3% !important;
+	letter-spacing: 1px !important;
+}
+// Slider rojo de donar
+// Slider azul de solicitar
+// Ambos sliders
+.comingbackbtn {
+	position: relative;
+	&.izq {
+		margin-top: -16%;
+		right: 2%;
+		float: right;
+		img {
+			margin-top: 16px;
+			margin-left: 16px;
+		}
+	}
+	&.der {
+		margin-top: -16%;
+		float: left;
+		margin-left: 2%;
+		img {
+			-webkit-transform: rotate(180deg);
+			/* Chrome */
+			-moz-transform: rotate(180deg);
+			/* FF */
+			-o-transform: rotate(180deg);
+			/* Opera */
+			-ms-transform: rotate(180deg);
+			/* IE9 */
+			transform: rotate(180deg);
+			/* W3C compliant browsers */
+			width: 16px;
+			margin-top: 16px;
+			margin-left: 15px;
+		}
+	}
+}
+.btn-floating {
+	width: 48px !important;
+	height: 48px !important;
+}
+// Menu icon animation
+@mixin bar {
+	display: block;
+	width: $size;
+	height: $bar_height;
+	background: $bar_color;
+	border-radius: 0px;
+}
+.menu-toggle {
+	width: 30px;
+	height: 20px;
+	cursor: pointer;
+	z-index: 999 !important;
+	.bars {
+		@include bar;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		margin-top: -($bar_height/2);
+		transition: all .2s linear;
+		&:before,
+		&:after {
+			@include bar;
+			content: "";
+			position: absolute;
+			transition: .2s linear;
+		}
+		&:before {
+			top: -$offset;
+		}
+		&:after {
+			bottom: -$offset;
+		}
+	}
+	.barsTwo {
+		@include bar;
+		background: white;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		margin-top: -($bar_height/2);
+		transition: all .2s linear;
+		&:before,
+		&:after {
+			@include bar;
+			background: white;
+			content: "";
+			position: absolute;
+			transition: .2s linear;
+		}
+		&:before {
+			top: -$offset;
+		}
+		&:after {
+			bottom: -$offset;
+		}
+	}
+}
+.active {
+	.bars {
+		background-color: transparent;
+		transition: all .2s linear;
+		&:before {
+			top: 0;
+			transform: rotate(45deg);
+		}
+		&:after {
+			bottom: 0;
+			transform: rotate(-45deg);
+		}
+	}
+	.barsTwo {
+		transition: all .2s linear;
+		&:before {
+			background: #616161;
+			top: 0;
+			transform: rotate(45deg);
+		}
+		&:after {
+			background: #616161;
+			bottom: 0;
+			transform: rotate(-45deg);
+		}
+	}
+}
+//FullSlider
+div.section.fp-section.active.fp-completely {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}

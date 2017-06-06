@@ -3,5 +3,5 @@ from .models import *
 from .views import *
 
 urlpatterns = [ 
-    url(r'^$', precentacion, name='precentacion'),
+    url(r'^$', presentacion, name='presentacion'),
 ]

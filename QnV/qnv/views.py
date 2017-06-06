@@ -6,7 +6,7 @@ from qnv.models import *
 from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
-def precentacion(request):
-    template = loader.get_template('index.html')
+def presentacion(request):
+    template = loader.get_template('presentacion.html')
     context = {}
     return HttpResponse(template.render(context, request))
