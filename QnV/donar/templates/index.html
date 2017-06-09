@@ -112,11 +112,14 @@
                             <div class="input-field col s6 offset-s3">
                                 <input name="m_prescripcion" id="c" type="text">
                                 <label for="c">Prescripcion</label>
+                            </div>
+                            <div class="input-field col s6 offset-s3">
+                                <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
                             </div> 
                         </form>
                     </div>
                     <div class="comingbackbtn izq">
-                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toRight()"><img src="{% static 'css/img/arrow2_donar.png' %}"></a>
+                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toRight()"><img src="{% static 'css/img/arrow2.png' %}"></a>
                     </div>
                 </div>
                 <!--Slide del medio-->
@@ -138,22 +141,22 @@
                     <div class="row center white-text">
                         <form method="POST" action="{% url 'donar_index:pedir' %}">
                             {% csrf_token %}
-                            <!-- <div class="input-field col s6 offset-s3">
-                                <input id="a" name="" type="text">
-                                <label for="a">Nombre</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input id="b" type="text">
-                                <label for="b">Correo electrónico</label>
-                            </div> -->
                             <div class="input-field col s6 offset-s3">
                                 <input name="medicamento_pedido" id="c" type="text">
                                 <label for="c">Medicamento</label>
                             </div>
+                            <div class="input-field col s6 offset-s3">
+                                <input id="a" name="concentracion_medicamento" type="text">
+                                <label for="a">Concentracion en Gramos</label>
+                            </div>
+                            <div class="input-field col s6 offset-s3">
+                                <input name="cantidad_medicamento" id="b" type="text">
+                                <label for="b">Cantidad</label>
+                            </div> 
                         </form>
                     </div>
                     <div class="comingbackbtn der">
-                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toLeft()"><img src="{% static 'css/img/arrow2_donar.png' %}"></a>
+                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toLeft()"><img src="{% static 'css/img/arrow2.png' %}"></a>
                     </div>
                 </div>
             </div>
