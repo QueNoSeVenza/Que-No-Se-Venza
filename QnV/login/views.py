@@ -26,10 +26,11 @@ def log(request):
         user = authenticate(username=usern, password=passw)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect('/donar_index')
         else:
-            messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
-            return redirect ('/')
+            #messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
+            print "hola"
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def reg(request):
     if 'POST' in request.method:
@@ -44,7 +45,7 @@ def reg(request):
             userant = authenticate(username=email, password=password)
             if userant is not None:
                 login(request, userant)
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return redirect('/donar_index')
             else:
                 messages.add_message(request, messages.INFO, 'Algo salio mal')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
