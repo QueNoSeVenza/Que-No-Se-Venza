@@ -1,0 +1,189 @@
+//Global
+body {
+	font-family: Montserrat;
+}
+h2 {
+	margin: 0 !important;
+}
+.row {
+	margin: 0 !important;
+}
+@mixin transition($transition...) {
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	-webkit-transition: $transition;
+	transition: $transition;
+}
+// Portada
+.panelbig {
+	width: 100%;
+	background-image: url(img/background.jpg);
+	height: 100%;
+	button {
+		color: #fff;
+		background: #FF1744;
+		padding: 15 40 15 40;
+		border: none;
+		letter-spacing: 1.5 px;
+		box-shadow: inset 0 0 0 0 #C51162;
+		@include transition(all ease 0.8s);
+		&:hover {
+			box-shadow: inset 200px 0 0 0 #651FFF;
+			color: #FFF;
+		}
+	}
+}
+// Que
+.panelintro {
+	background-color: #222326;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	p {
+		margin-top: 8%;
+	}
+}
+// Donde
+.paneldonde {
+	h2 {
+		padding-top: 4%;
+	}
+	p {
+		padding-top: 2%;
+	}
+}
+figure.effect-sarah {
+	background: #42b078;
+	margin: 10% 0 15% 0;
+}
+figure.effect-sarah img {
+	max-width: none;
+	/*
+	width: calc(100% + 20px);*/
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(-10px, 0, 0);
+	transform: translate3d(-10px, 0, 0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+figure.effect-sarah:hover img {
+	opacity: 0.3;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+figure.effect-sarah figcaption {
+	text-align: left;
+}
+figure.effect-sarah h2 {
+	position: relative;
+	overflow: hidden;
+	padding: 0.5em 0;
+}
+figure.effect-sarah h2::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #fff;
+	content: '';
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0);
+}
+figure.effect-sarah:hover h2::after {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+figure.effect-sarah p {
+	padding: 1em 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(100%, 0, 0);
+	transform: translate3d(100%, 0, 0);
+}
+figure.effect-sarah:hover p {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.grid figure {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	max-width: 100%;
+	background: #311B92;
+	@media screen and (max-width: 400px) {
+		max-width: 90%;
+	}
+}
+.grid figure img {
+	opacity: 0.8;
+}
+.grid figure figcaption {
+	padding: 2em;
+	color: #fff;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.grid figure figcaption,
+.grid figure figcaption > a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+// Como
+.panelcomo {
+	background-color: #222326;
+}
+// Contacto
+.panelcontact {
+	height: 20%;
+	background-image: url(img/mountain.png);
+	background-color: rgb(0, 0, 0);
+	h4 {
+		margin: 0 !important;
+	}
+}
+// Final
+.panelfinal {
+	height: 75%;
+	background-image: url(img/repback.png);
+	background-repeat: repeat;
+	h2 {
+		padding-top: 7%;
+	}
+	h5 {
+		padding-top: 3%;
+	}
+	a {
+		border-radius: 50px;
+		margin-top: 5%;
+		padding: 10 75 47 75;
+		&:hover {
+			border-radius: 0px;
+		}
+	}
+}
+// Footer
+// Block reveal
+.content__title {
+	font-size: 8vw;
+	line-height: 1.2;
+	padding: 0 5vw;
+}
+.content__title__inner {
+	flex: none;
+	display: inline-block;
+	white-space: nowrap;
+	position: relative;
+}
+.content__title__inner--offset-1 {
+	top: -0.25em;
+	left: 13.6vw;
+}
