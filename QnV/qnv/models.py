@@ -33,7 +33,6 @@ class Donacion(models.Model):
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=60)
-    laboratorio = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
     
