@@ -17,7 +17,7 @@ class Medicamento(models.Model):
         ('Androgenos', 'Androgenos'),
     )
     funcion = models.CharField(max_length=60, choices=FUNCION_FARMACEUTICA, default="Null")
-    prescripcion = models.BooleanField()
+    prescripcion = models.BooleanField(default=False)
     TIPO = (
         ('Pastillas', 'Pastillas'),
         ('Jarabe', 'Jarabe'),
