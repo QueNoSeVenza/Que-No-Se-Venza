@@ -23,17 +23,17 @@ def donar(request):
         author = request.user
         
         #comparar medicamento con nombre, concentracion y/o (opcional) laboratorio
-        medicamneto_tabla = Medicamento.objects.get(nombre=m_nombre, 
+        medicamneto_tabla = Medicamento.objects.get(nombre=m_nombre,
                                                     concentracion_gramos=m_concentracion_gramos,
                                                     laboratorio=m_laboratorio)
         
         #if exist:
         if medicamento is not None:
             #crear donacio y pasar objeto medicamneto a la tabla donacion
-            donacion_save = Donacion(medicamento=medicamneto_tabla
-                                     user=author,
-                                     cantidad=m_cantidad,
-                                     fecha_vencimiento=m_fecha_vencimiento)
+            donacion_save = Donacion(medicamento=medicamneto_tabla,
+                                    user=author,
+                                    cantidad=m_cantidad,
+                                    fecha_vencimiento=m_fecha_vencimiento)
             donacion_save.save()
             return redirect('/thanks')
         #else:
@@ -48,7 +48,7 @@ def donar(request):
             
             id_medicamento_nuevo = Medicamento.objects.get(id=medicamento_nuevo.id)
             
-            donacion_nueva = Donacion(medicamento=id_medicamento_nuevo
+            donacion_nueva = Donacion(medicamento=id_medicamento_nuevo,
                                      user=author,
                                      cantidad=m_cantidad,
                                      fecha_vencimiento=m_fecha_vencimiento)
