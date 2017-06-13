@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('login.urls', namespace='login_index')),
+    url(r'^', include('donar.urls', namespace='donar_index')),
+    url(r'^', include('qnv.urls', namespace='qnv')),
 ]
