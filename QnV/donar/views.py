@@ -70,4 +70,3 @@ def guardarMedicamento(request, arry):
     medicamento.save()
     medicamento_guardado = Medicamento.objects.get(id=medicamento.id)
     guardarDonacion(request, arry, medicamento_guardado)
-    return redirect('/donar_index')
