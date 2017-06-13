@@ -87,30 +87,30 @@
                         <form method="POST" action="{% url 'donar_index:donar' %}">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3 roboto">
-                                <input name="m_nombre" id="a" type="text">
+                                <input name="donar_nombre" id="a" type="text">
                                 <label for="a">Nombre Comercial</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="m_concentracion_gramos" id="b" type="text">
+                                <input name="donar_concentracion_gramos" id="b" type="text">
                                 <label for="b">Concentracion en Gramos</label>
                             </div>
                         	<div class="input-field col s6 offset-s3">
-                                <input name="m_cantidad" id="c" type="text">
+                                <input name="donar_cantidad" id="c" type="text">
                                 <label for="c">Cantidad</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="m_droga" id="c" type="text">
+                                <input name="donar_droga" id="c" type="text">
                                 <label for="c">Droga</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="m_laboratorio" id="c" type="text">
+                                <input name="donar_laboratorio" id="c" type="text">
                                 <label for="c">Laboratorio</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="m_fecha_vencimiento" id="c" type="date" class="datepicker">
+                                <input name="donar_fecha_vencimiento" id="c" type="date" class="datepicker">
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="m_tipo" id="c" type="text">
+                                <input name="donar_tipo" id="c" type="text">
                                 <label for="c">Tipo</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
@@ -142,15 +142,15 @@
                         <form method="POST" action="{% url 'donar_index:pedir' %}">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3">
-                                <input name="medicamento_pedido" id="c" type="text">
+                                <input name="pedir_nombre" id="c" type="text">
                                 <label for="c">Medicamento</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input id="a" name="concentracion_medicamento" type="text">
+                                <input id="a" name="pedir_concentracion_gramos" type="text">
                                 <label for="a">Concentracion en Gramos</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="cantidad_medicamento" id="b" type="text">
+                                <input name="pedir_cantidad" id="b" type="text">
                                 <label for="b">Cantidad</label>
                             </div> 
                         </form>
