@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Libre+Franklin:400, 700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
 html,
 body {
   height: 100%;
-  font-family: 'Libre Franklin', sans-serif; }
+  font-family: 'Montserrat', sans-serif; }
 
-.franklin-bold {
-  font-weight: 700; }
+.montserrat-bold {
+  font-weight: 600; }
 
 p {
   font-size: 1.1em; }
@@ -23,18 +23,14 @@ nav {
     margin-top: 25%;
     width: 42px;
     height: 42px;
-    -webkit-mask: url(img/logo.svg);
-    mask: url(img/logo.svg);
-    -webkit-mask-size: cover;
-    mask-size: cover;
-    background-color: #616161; }
+    background-image: url(../css/img/logo.svg); }
   nav .userText {
     transition: .3s linear;
     color: #616161; }
 
 .side-nav {
   width: 100% !important;
-  background-color: #fff !important;
+  background-color: #000 !important;
   z-index: 998 !important;
   transition: 0.3s ease-out;
   opacity: 0.98; }
@@ -68,16 +64,16 @@ nav {
   padding-top: 10%;
   line-height: 15px !important; }
   #navsection2 input[type=text] {
-    border-bottom: 1px solid #424242; }
+    border-bottom: 1px solid white; }
   #navsection2 input[type=text]:focus {
-    box-shadow: 0 1px 0 0 #616161 !important; }
+    box-shadow: 0 1px 0 0 white !important; }
   #navsection2 textarea.materialize-textarea {
-    border-bottom: 1px solid #424242 !important;
+    border-bottom: 1px solid white !important;
     line-height: 20px; }
   #navsection2 textarea.materialize-textarea:focus {
-    box-shadow: 0 1px 0 0 #616161 !important; }
+    box-shadow: 0 1px 0 0 white !important; }
   #navsection2 label {
-    color: #616161 !important; }
+    color: #fff !important; }
   #navsection2 button {
     margin-top: 20px;
     margin-right: 10px; }
@@ -107,26 +103,6 @@ nav {
   margin-left: 3% !important;
   margin-right: 3% !important;
   letter-spacing: 1px !important; }
-
-.comingbackbtn.izq img {
-  margin-top: 16px;
-  margin-left: 2px; }
-.comingbackbtn.der {
-  position: absolute; }
-  .comingbackbtn.der img {
-    -webkit-transform: rotate(180deg);
-    /* Chrome */
-    -moz-transform: rotate(180deg);
-    /* FF */
-    -o-transform: rotate(180deg);
-    /* Opera */
-    -ms-transform: rotate(180deg);
-    /* IE9 */
-    transform: rotate(180deg);
-    /* W3C compliant browsers */
-    width: 16px;
-    margin-top: 16px;
-    margin-left: 2px; }
 
 .btn-floating {
   width: 48px !important;
@@ -167,7 +143,7 @@ nav {
     height: 4px;
     background: #616161;
     border-radius: 0px;
-    background: white;
+    background: black;
     position: absolute;
     top: 50%;
     left: 0;
@@ -179,7 +155,7 @@ nav {
       height: 4px;
       background: #616161;
       border-radius: 0px;
-      background: white;
+      background: #fff;
       content: "";
       position: absolute;
       transition: .2s linear; }
@@ -200,11 +176,11 @@ nav {
 .active .barsTwo {
   transition: all .2s linear; }
   .active .barsTwo:before {
-    background: #616161;
+    background: #fff;
     top: 0;
     transform: rotate(45deg); }
   .active .barsTwo:after {
-    background: #616161;
+    background: #fff;
     bottom: 0;
     transform: rotate(-45deg); }
 

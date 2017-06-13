@@ -4,19 +4,6 @@ function hideSections() {
 	$(navsection.join(', ')).hide();
 }
 
-function whiteNav() {
-	$(".userText").css("color", "white");
-	$(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
-	$(".icon").css("background-color", "white");
-	panel = false;
-}
-
-function greyNav() {
-	$(".userText").css("color", "#616161");
-	$(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
-	$(".icon").css("background-color", "#616161");
-	panel = true;
-}
 
 function toLeft() {
 	$.fn.fullpage.moveSlideLeft();
@@ -43,8 +30,13 @@ function thirdSection() {
 
 $(document).ready(function () {
 	firstSection();
+	// Materialize
 	$('select').material_select();
 	$('.collapsible').collapsible('open', 0);
+	$('.datepicker').pickadate({
+		selectMonths: true, // Creates a dropdown to control month
+		selectYears: 15 // Creates a dropdown of 15 years to control year
+	});
 	var toggle = $('.menu-toggle');
 
 	// Fullpage
@@ -53,16 +45,18 @@ $(document).ready(function () {
 		closeOnClick: true,
 		loopHorizontal: false,
 		keyboardScrolling: false,
-		onSlideLeave: function (anchorLink, index, slideIndex, direction, nextSlideIndex) {
-			var leavingSlide = $(this);
-			if (slideIndex == 1) {
-				whiteNav();
-			}
-			if (slideIndex == 2 || slideIndex == 0) {
-				greyNav();
-			}
-		}
+		scrollOverflow: true,
+		/*		onSlideLeave: function (anchorLink, index, slideIndex, direction, nextSlideIndex) {
+					var leavingSlide = $(this);
+					if (slideIndex == 1) {
+						whiteNav();
+					}
+					if (slideIndex == 2 || slideIndex == 0) {
+						greyNav();
+					}
+				}*/
 	});
+
 
 	$('.button-collapse').sideNav({
 		draggable: true // Choose whether you can drag to open on touch screens
@@ -70,6 +64,11 @@ $(document).ready(function () {
 
 	$(toggle).click(function () {
 		$(toggle).toggleClass('active');
+		if ($('.menu-toggle span').hasClass('bars')) {
+			$(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
+		} else {
+			$(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
+		}
 		/*$('body').toggleClass('active');*/
 	});
 

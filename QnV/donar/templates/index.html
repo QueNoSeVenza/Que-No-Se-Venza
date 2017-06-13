@@ -11,16 +11,16 @@
 
 <body>
 	<div class="menu-toggle button-collapse" data-activates="slide-out">
-		<span class="bars"></span>
+		<span class="myownspan bars"></span>
 	</div>
 
 	<nav class="transparent z-depth-0 ">
 		<a href="#" class="brand-logo center grey-text">
-			<div class="icon gris"></div>
+			<div class="icon gris"><img src="{% static 'css/img/logo.png' %}"></div>
 		</a>
 
 		<ul id="nav-mobile" class="right hide-on-small-only">
-			<li><a class="franklin-bold userText" href="#">Francisco Bardin</a></li>
+			<li><a class="montserrat-bold userText" href="#">Francisco Bardin</a></li>
 		</ul>
 	</nav>
 
@@ -31,16 +31,16 @@
 					<div class="collapsible-container2">
 						<ul class="collapsible" data-collapsible="accordion">
 							<li onclick="firstSection();">
-								<div class="collapsible-header franklin-bold tem transparent grey-text text-darken-3" id="active">Perfil</div>
-								<div class="collapsible-body"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
+								<div class="collapsible-header montserrat-bold tem transparent white-text" id="active">Perfil</div>
+								<div class="collapsible-body grey-text lighten-4"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
 							</li>
 							<li onclick="secondSection();">
-								<div class="collapsible-header franklin-bold tem grey-text text-darken-3">Contacto</div>
-								<div class="collapsible-body"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
+								<div class="collapsible-header montserrat-bold tem white-text">Contacto</div>
+								<div class="collapsible-body grey-text lighten-4"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
 							</li>
 							<li onclick="thirdSection();">
-								<div class="collapsible-header franklin-bold tem grey-text text-darken-3">Acerca de</div>
-								<div class="collapsible-body"><span>Lorem ipsum dolor sit ametasdddddddt.</span></div>
+								<div class="collapsible-header montserrat-bold tem white-text">Acerca de</div>
+								<div class="collapsible-body grey-text lighten-4"><span>Lorem ipsum dolor sit ametasdddddddt.</span></div>
 							</li>
 						</ul>
 					</div>
@@ -49,7 +49,7 @@
 			<div class="col s5">
 				<ul>
 					<!--Seccion NAV 1-->
-					<li id="navsection1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right</li>
+					<li id="navsection1" class="white-text">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right</li>
 					<!--Seccion NAV 2-->
 					<li id="navsection2">
 						<div class="row">
@@ -74,7 +74,7 @@
 						</div>
 					</li>
 					<!--Seccion NAV 3-->
-					<li id="navsection3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right</li>
+					<li id="navsection3" class="white-text">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right</li>
 				</ul>
 			</div>
 
@@ -84,23 +84,27 @@
 	<div id="fullpage">
 		<div class="section">
 			<!--Slide rojo donar-->
-			<div class="slide red" id="slide1">
+			<div class="slide grey lighten-4" id="slide1">
 				<div class="row center white-text">
 					<form method="POST" action="{% url 'donar_index:donar' %}">
 						{% csrf_token %}
-						<div class="input-field col s6 offset-s3 roboto">
+						<div class="input-field col s4 offset-s2 roboto">
 							<input name="m_nombre" id="a" type="text">
 							<label for="a">Nombre Comercial</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s4">
 							<input name="m_concentracion_gramos" id="b" type="text">
 							<label for="b">Concentracion en Gramos</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s4 offset-s2">
 							<input name="m_cantidad" id="c" type="text">
 							<label for="c">Cantidad</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s4">
+							<input name="m_laboratorio" id="c" type="text">
+							<label for="c">Laboratorio</label>
+						</div>
+						<div class="input-field col s8 offset-s2">
 							<select>
 								<option value="" disabled selected>Choose your option</option>
 								<option value="1">Option 1</option>
@@ -109,24 +113,20 @@
 							</select>
 							<label>Materialize Select</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_laboratorio" id="c" type="text">
-							<label for="c">Laboratorio</label>
-						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s8 offset-s2">
 							<input name="m_fecha_vencimiento" id="c" type="date" class="datepicker">
 						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s4 offset-s2">
 							<input name="m_tipo" id="c" type="text">
 							<label for="c">Tipo</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
+						<div class="input-field col s4">
 							<input name="m_prescripcion" id="c" type="text">
 							<label for="c">Prescripcion</label>
 						</div>
-						<!--						<div class="comingbackbtn izq">
-								<a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toRight()"><img src="{% static 'css/img/arrow2.png' %}"></a>
-						</div>-->
+						<div class="col s12 center">
+							<button class="btn red accent-2">Aceptar</button>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -134,60 +134,25 @@
 			<div class="slide active" id="slide2">
 				<div class="col s12 grey lighten-4 bigpanel">
 					<div class="row center textsection">
-						<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text franklin-bold">Fran</span></h3>
-						<p class="col l6 push-l3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="franklin-bold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="franklin-bold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
+						<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text montserrat-bold">Fran</span></h3>
+						<p class="col l6 push-l3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="montserrat-bold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="montserrat-bold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
 					</div>
 
 					<div class="col l6 push-l3 center btnsection">
-						<button class="waves-effect waves-light btn-large red z-depth-3 franklin-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
-						<button class="waves-effect waves-light btn-large blue z-depth-3 franklin-bold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
+						<button class="waves-effect waves-light btn-large red z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
+						<button class="waves-effect waves-light btn-large blue z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
 					</div>
 				</div>
 			</div>
 			<!--Slide derecho solicitar-->
-			<div class="slide blue" id="slide3">
-				<div class="row center white-text">
+			<div class="slide grey lighten-4" id="slide3">
+				<div class="row center">
 					<form method="POST" action="{% url 'donar_index:pedir' %}">
 						{% csrf_token %}
-						<div class="input-field col s6 offset-s3 roboto">
-							<input name="m_nombre" id="a" type="text">
-							<label for="a">Nombre Comercial</label>
-						</div>
 						<div class="input-field col s6 offset-s3">
-							<input name="m_concentracion_gramos" id="b" type="text">
-							<label for="b">Concentracion en Gramos</label>
+							<input name="medicamento_pedido" id="c" type="text">
+							<label for="c">Medicamento</label>
 						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_cantidad" id="c" type="text">
-							<label for="c">Cantidad</label>
-						</div>
-						<div class="input-field col s6 offset-s3">
-							<select>
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-							<label>Materialize Select</label>
-						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_laboratorio" id="c" type="text">
-							<label for="c">Laboratorio</label>
-						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_fecha_vencimiento" id="c" type="date" class="datepicker">
-						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_tipo" id="c" type="text">
-							<label for="c">Tipo</label>
-						</div>
-						<div class="input-field col s6 offset-s3">
-							<input name="m_prescripcion" id="c" type="text">
-							<label for="c">Prescripcion</label>
-						</div>
-						<!--						<div class="comingbackbtn der">
-								<a class="btn-floating waves-effect waves-dark white z-depth-2" ><img src="{% static 'css/img/arrow2.png' %}"></a>
-						</div>-->
 					</form>
 				</div>
 
@@ -197,6 +162,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="{% static 'js/javascript/js.js' %}"></script>
 	<script src="{% static 'js/bin/materialize.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fullpage/scrollplugin.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage.min.js' %}"></script>
 </body>
 
