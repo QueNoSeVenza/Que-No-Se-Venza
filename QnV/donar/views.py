@@ -28,9 +28,11 @@ def donar(request):
             print "if"
             medicamento_guardado = Medicamento.objects.get(nombre=arry[0], concentracion_gramos=arry[1], laboratorio=arry[3])
             guardarDonacion(request, arry, medicamento_guardado)
+            return redirect('/donar_index')
         else:
             print "else"
             guardarMedicamento(request, arry)
+            return redirect('/donar_index')
             
             
 def pedir(request):
