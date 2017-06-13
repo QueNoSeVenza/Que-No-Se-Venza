@@ -108,33 +108,25 @@ nav {
   margin-right: 3% !important;
   letter-spacing: 1px !important; }
 
-.comingbackbtn {
-  position: relative; }
-  .comingbackbtn.izq {
-    margin-top: -16%;
-    right: 2%;
-    float: right; }
-    .comingbackbtn.izq img {
-      margin-top: 16px;
-      margin-left: 16px; }
-  .comingbackbtn.der {
-    margin-top: -16%;
-    float: left;
-    margin-left: 2%; }
-    .comingbackbtn.der img {
-      -webkit-transform: rotate(180deg);
-      /* Chrome */
-      -moz-transform: rotate(180deg);
-      /* FF */
-      -o-transform: rotate(180deg);
-      /* Opera */
-      -ms-transform: rotate(180deg);
-      /* IE9 */
-      transform: rotate(180deg);
-      /* W3C compliant browsers */
-      width: 16px;
-      margin-top: 16px;
-      margin-left: 15px; }
+.comingbackbtn.izq img {
+  margin-top: 16px;
+  margin-left: 2px; }
+.comingbackbtn.der {
+  position: absolute; }
+  .comingbackbtn.der img {
+    -webkit-transform: rotate(180deg);
+    /* Chrome */
+    -moz-transform: rotate(180deg);
+    /* FF */
+    -o-transform: rotate(180deg);
+    /* Opera */
+    -ms-transform: rotate(180deg);
+    /* IE9 */
+    transform: rotate(180deg);
+    /* W3C compliant browsers */
+    width: 16px;
+    margin-top: 16px;
+    margin-left: 2px; }
 
 .btn-floating {
   width: 48px !important;
@@ -220,4 +212,4 @@ div.section.fp-section.active.fp-completely {
   padding-top: 0px !important;
   padding-bottom: 0px !important; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style_donar.css.map */

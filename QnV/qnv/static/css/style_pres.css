@@ -1,11 +1,20 @@
 body {
   font-family: Montserrat; }
 
-h2 {
-  margin: 0 !important; }
+.blancot {
+  color: white !important; }
 
-.row {
-  margin: 0 !important; }
+h2 {
+  font-size: 3em; }
+
+p {
+  line-height: 22px; }
+
+.center {
+  text-align: center; }
+
+.rightimg {
+  float: right; }
 
 .panelbig {
   width: 100%;
@@ -27,16 +36,21 @@ h2 {
       color: #FFF; }
 
 .panelintro {
-  background-color: #222326;
-  padding-top: 5%;
+  background-color: #ff1744;
+  padding-top: 2%;
   padding-bottom: 5%; }
   .panelintro p {
-    margin-top: 8%; }
+    margin-top: 4%;
+    text-align: center; }
 
-.paneldonde h2 {
-  padding-top: 4%; }
-.paneldonde p {
-  padding-top: 2%; }
+.paneldonde {
+  background-color: #EDE7F6; }
+  .paneldonde h2 {
+    padding-top: 4%; }
+  .paneldonde .mytitle {
+    font-size: 2em; }
+  .paneldonde .violeta {
+    color: #651fff; }
 
 figure.effect-sarah {
   background: #42b078;
@@ -44,8 +58,7 @@ figure.effect-sarah {
 
 figure.effect-sarah img {
   max-width: none;
-  /*
-  width: calc(100% + 20px);*/
+  /*width: calc(100% + 20px);*/
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
   -webkit-transform: translate3d(-10px, 0, 0);
@@ -102,9 +115,10 @@ figure.effect-sarah:hover p {
   overflow: hidden;
   max-width: 100%;
   background: #311B92; }
-  @media screen and (max-width: 400px) {
+  @media screen and (min-width: 400px) {
     .grid figure {
-      max-width: 90%; } }
+      max-width: 70%;
+      margin-left: 15%; } }
 
 .grid figure img {
   opacity: 0.8; }
@@ -125,34 +139,114 @@ figure.effect-sarah:hover p {
   height: 100%; }
 
 .panelcomo {
-  background-color: #222326; }
+  background-color: black;
+  padding-top: 2%;
+  padding-bottom: 8% !important; }
+  .panelcomo .pure-u-lg-1-2 {
+    padding-top: 5% !important; }
+  .panelcomo img {
+    text-align: center !important;
+    padding-top: 7%;
+    width: 250px; }
+  .panelcomo .right {
+    padding-right: 7%;
+    float: right;
+    text-align: right; }
+  .panelcomo .left {
+    text-align: left;
+    padding-left: 3%; }
 
 .panelcontact {
-  height: 20%;
-  background-image: url(img/mountain.png);
-  background-color: black; }
-  .panelcontact h4 {
-    margin: 0 !important; }
+  padding-top: 2.2%;
+  height: 150px;
+  background-color: #00e676; }
+  .panelcontact span {
+    font-weight: bold; }
+  .panelcontact p {
+    font-size: 2em; }
+  .panelcontact input, .panelcontact textarea {
+    width: 100%;
+    padding-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #00c853;
+    resize: none;
+    padding: 60	 20 20 20; }
+    .panelcontact input:focus, .panelcontact textarea:focus {
+      outline: none; }
+  .panelcontact img {
+    cursor: pointer;
+    padding-top: 30px; }
+
+/*input::-webkit-input-placeholder, input:-ms-input-placeholder, input::-moz-placeholder, input:-moz-placeholder {
+color: red !important;
+}*/
+input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: white !important; }
+
+.sliding-u {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 13px; }
+  .sliding-u:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    width: 0;
+    transition: width 0s ease, background .5s ease; }
+  .sliding-u:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    width: 0;
+    background: white;
+    transition: width .5s ease; }
+  .sliding-u:hover:before {
+    width: 100%;
+    background: white;
+    transition: width .5s ease; }
+  .sliding-u:hover:after {
+    width: 100%;
+    background: transparent;
+    transition: all 0s ease; }
 
 .panelfinal {
-  height: 75%;
+  height: 500px;
   background-image: url(img/repback.png);
   background-repeat: repeat; }
   .panelfinal h2 {
-    padding-top: 7%; }
-  .panelfinal h5 {
-    padding-top: 3%; }
+    margin-top: 5%; }
+  .panelfinal h3 {
+    margin-top: 5% !important; }
+  .panelfinal .center.sp {
+    margin-top: 5%; }
   .panelfinal a {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background-color: #03a9f4;
     border-radius: 50px;
-    margin-top: 5%;
-    padding: 10 75 47 75; }
+    padding: 25 75 25 75; }
     .panelfinal a:hover {
       border-radius: 0px; }
+
+footer {
+  background-color: black; }
 
 .content__title {
   font-size: 8vw;
   line-height: 1.2;
-  padding: 0 5vw; }
+  padding: 0 10vw; }
 
 .content__title__inner {
   flex: none;
@@ -164,4 +258,4 @@ figure.effect-sarah:hover p {
   top: -0.25em;
   left: 13.6vw; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style_pres.css.map */

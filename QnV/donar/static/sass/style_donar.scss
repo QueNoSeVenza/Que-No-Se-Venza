@@ -131,20 +131,14 @@ nav {
 // Slider azul de solicitar
 // Ambos sliders
 .comingbackbtn {
-	position: relative;
 	&.izq {
-		margin-top: -16%;
-		right: 2%;
-		float: right;
 		img {
 			margin-top: 16px;
-			margin-left: 16px;
+			margin-left: 2px;
 		}
 	}
 	&.der {
-		margin-top: -16%;
-		float: left;
-		margin-left: 2%;
+		position: absolute;
 		img {
 			-webkit-transform: rotate(180deg);
 			/* Chrome */
@@ -158,7 +152,7 @@ nav {
 			/* W3C compliant browsers */
 			width: 16px;
 			margin-top: 16px;
-			margin-left: 15px;
+			margin-left: 2px;
 		}
 	}
 }
@@ -251,7 +245,7 @@ nav {
 		}
 	}
 }
-//FullSlider
+//FullPage
 div.section.fp-section.active.fp-completely {
 	padding-top: 0px !important;
 	padding-bottom: 0px !important;
