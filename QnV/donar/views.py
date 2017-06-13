@@ -13,24 +13,26 @@ def donar_index(request):
 
 def donar(request):
     if 'POST' in request.method:
-        m_nombre = request.POST['m_nombre']            
-        m_concentracion_gramos = request.POST['m_concentracion_gramos']
-        m_cantidad = request.POST['m_cantidad']
-        m_laboratorio = request.POST['m_laboratorio']
-        m_fecha_vencimiento = request.POST['m_fecha_vencimiento']
-        m_tipo = request.POST['m_tipo']
-        m_droga = request.POST['m_droga']
+        donar_nombre = request.POST['donar_nombre']            
+        donar_concentracion_gramos = request.POST['donar_concentracion_gramos']
+        donar_cantidad = request.POST['donar_cantidad']
+        donar_laboratorio = request.POST['donar_laboratorio']
+        donar_fecha_vencimiento = request.POST['donar_fecha_vencimiento']
+        donar_tipo = request.POST['donar_tipo']
+        donar_droga = request.POST['donar_droga']
         author = request.user
         
-        arry = [m_nombre,m_concentracion_gramos,m_cantidad,m_laboratorio,m_fecha_vencimiento,m_tipo,m_droga]
+        med_donar = [donar_nombre,donar_concentracion_gramos,donar_cantidad,donar_laboratorio,donar_fecha_vencimiento,donar_tipo,donar_droga]
         
-        if Medicamento.objects.filter(nombre=arry[0], concentracion_gramos=arry[1], laboratorio=arry[3]).exists():
+        if Medicamento.objects.filter(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3]).exists():
             print "if"
-            medicamento_guardado = Medicamento.objects.get(nombre=arry[0], concentracion_gramos=arry[1], laboratorio=arry[3])
-            guardarDonacion(request, arry, medicamento_guardado)
+            medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
+            guardarDonacion(request, med_donar, medicamento_guardado)
+            return redirect('/donar_index')
         else:
             print "else"
-            guardarMedicamento(request, arry)
+            guardarMedicamento(request, med_donar)
+            return redirect('/donar_index')
             
             
 def pedir(request):
@@ -52,21 +54,21 @@ def thanks(request):
 )
 
 
-def guardarDonacion(request, arry, medicamento_guardado):
+def guardarDonacion(request, med_donar, medicamento_guardado):
     donacion = Donacion(medicamento=medicamento_guardado,
                             user=request.user,
-                            cantidad=arry[2],
-                            fecha_vencimiento=arry[4])
+                            cantidad=med_donar[2],
+                            fecha_vencimiento=med_donar[4])
     donacion.save()
     return redirect('/donar_index')
 
 
-def guardarMedicamento(request, arry):
-    medicamento = Medicamento(nombre=arry[0],
-                            concentracion_gramos=arry[1],
-                            laboratorio=arry[3],
-                            droga=arry[6],
-                            tipo=arry[5])
+def guardarMedicamento(request, med_donar):
+    medicamento = Medicamento(nombre=med_donar[0],
+                            concentracion_gramos=med_donar[1],
+                            laboratorio=med_donar[3],
+                            droga=med_donar[6],
+                            tipo=med_donar[5])
     medicamento.save()
     medicamento_guardado = Medicamento.objects.get(id=medicamento.id)
-    guardarDonacion(request, arry, medicamento_guardado)
+    guardarDonacion(request, med_donar, medicamento_guardado)
