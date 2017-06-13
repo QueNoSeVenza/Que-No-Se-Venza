@@ -36,9 +36,6 @@ class Donacion(models.Model):
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
     
-    def __unicode__(self):
-        return self.nombre
-    
 
 class Pedir(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
