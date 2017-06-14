@@ -34,7 +34,7 @@ class Donacion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
-    stock = models.CharField(max_length=60, default="En Espera")
+    stock = models.CharField(max_length=60, default="Pendiente")
     
 class Pedir(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

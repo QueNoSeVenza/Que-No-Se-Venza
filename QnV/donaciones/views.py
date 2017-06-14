@@ -7,7 +7,10 @@ from django.template import loader
 
 def principal(request):
     template = loader.get_template('index.html')
-    context = {}
+    verificador = False
+    if request.user.groups.filter(name='Verificadores').exists():
+        verificador = True
+    context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
 
 
@@ -28,11 +31,11 @@ def donar(request):
             print "if"
             medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
             guardarDonacion(request, med_donar, medicamento_guardado)
-            return redirect('/main')
+            return redirect('/principal')
         else:
             print "else"
             guardarMedicamento(request, med_donar)
-            return redirect('/main')
+            return redirect('/principal')
             
             
 def pedir(request):
