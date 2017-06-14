@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from qnv.models import *
+from .models import *
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 
-def donar_index(request):
+def principal(request):
     template = loader.get_template('index.html')
     context = {}
     return HttpResponse(template.render(context, request))
@@ -28,11 +28,11 @@ def donar(request):
             print "if"
             medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
             guardarDonacion(request, med_donar, medicamento_guardado)
-            return redirect('/donar_index')
+            return redirect('/main')
         else:
             print "else"
             guardarMedicamento(request, med_donar)
-            return redirect('/donar_index')
+            return redirect('/main')
             
             
 def pedir(request):

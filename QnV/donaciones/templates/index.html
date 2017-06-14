@@ -84,7 +84,7 @@
                 <!--Slide rojo donar-->
                 <div class="slide grey lighten-4" id="slide1">
                     <div class="row center white-text">
-                        <form method="POST" action="{% url 'donar_index:donar' %}">
+                        <form method="POST" action="{% url 'donaciones:donar' %}">
                             {% csrf_token %}
                             <div class="input-field col s4 offset-s2 roboto">
                                 <input name="donar_nombre" id="a" type="text">
@@ -145,7 +145,7 @@
                 <!--Slide derecho solicitar-->
                 <div class="slide grey lighten-4" id="slide3">
                     <div class="row center">
-                        <form method="POST" action="{% url 'donar_index:pedir' %}">
+                        <form method="POST" action="{% url 'donaciones:pedir' %}">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3">
                                 <input name="medicamento_pedido" id="c" type="text">

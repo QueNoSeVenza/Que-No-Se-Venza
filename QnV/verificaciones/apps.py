@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class VerificarConfig(AppConfig):
-    name = 'verificar'
+    name = 'verificaciones'

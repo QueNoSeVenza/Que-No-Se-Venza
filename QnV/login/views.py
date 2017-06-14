@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.template import loader
 from django.views import generic
-from qnv.models import *
+from .models import *
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
-def login1(request):
+def login(request):
     template = loader.get_template('login.html')
     context = {}
     return HttpResponse(template.render(context, request))
@@ -26,7 +26,7 @@ def log(request):
         user = authenticate(username=usern, password=passw)
         if user is not None:
             login(request, user)
-            return redirect('/donar_index')
+            return redirect('/principal')
         else:
             #messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
             print "hola"
@@ -45,7 +45,7 @@ def reg(request):
             userant = authenticate(username=email, password=password)
             if userant is not None:
                 login(request, userant)
-                return redirect('/donar_index')
+                return redirect('/principal')
             else:
                 messages.add_message(request, messages.INFO, 'Algo salio mal')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

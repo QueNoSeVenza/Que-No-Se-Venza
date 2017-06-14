@@ -7,10 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 # Create your models here.
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    verificador = models.BooleanField(default=False)
-
 class Medicamento(models.Model):
     nombre = models.CharField(max_length=60)
     concentracion_gramos = models.CharField(max_length=60)
@@ -39,19 +35,8 @@ class Donacion(models.Model):
     cantidad = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
-
-
+    
 class Pedir(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-
-class VerificarIngreso(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-
-class VerificarRetiro(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class QnvConfig(AppConfig):
-    name = 'qnv'
+    name = 'presentacion'

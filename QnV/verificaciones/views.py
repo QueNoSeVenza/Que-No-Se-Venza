@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 #Usando caracteres no ASCII
 from django.shortcuts import render
-from qnv.models import *
+from .models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
 
 def menu (request):
