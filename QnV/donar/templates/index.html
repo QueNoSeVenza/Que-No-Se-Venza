@@ -87,23 +87,23 @@
                         <form method="POST" action="{% url 'donar_index:donar' %}">
                             {% csrf_token %}
                             <div class="input-field col s4 offset-s2 roboto">
-                                <input name="m_nombre" id="a" type="text">
+                                <input name="donar_nombre" id="a" type="text">
                                 <label for="a">Nombre Comercial</label>
                             </div>
                             <div class="input-field col s4">
-                                <input name="m_concentracion_gramos" id="b" type="text">
+                                <input name="donar_concentracion_gramos" id="b" type="text">
                                 <label for="b">Concentracion en Gramos</label>
                             </div>
                             <div class="input-field col s4 offset-s2">
-                                <input name="m_cantidad" id="c" type="text">
+                                <input name="donar_cantidad" id="c" type="text">
                                 <label for="c">Cantidad</label>
                             </div>
                             <div class="input-field col s4">
-                                <input name="m_laboratorio" id="c" type="text">
+                                <input name="donar_laboratorio" id="c" type="text">
                                 <label for="c">Laboratorio</label>
                             </div>
                             <div class="input-field col s8 offset-s2">
-                                <select name="m_droga">
+                                <select name="donar_droga">
                                     <option value="" disabled selected>Elije una opcion</option>
                                     <option value="Androgenos">Androgenos</option>
                                     <option value="Analgesico">Analgesico</option>
@@ -111,10 +111,10 @@
                                 <label>Droga</label>
                             </div>
                             <div class="input-field col s8 offset-s2">
-                                <input name="m_fecha_vencimiento" id="c" type="date" >
+                                <input name="donar_fecha_vencimiento" id="c" type="date" >
                             </div>
                             <div class="input-field col s8 offset-s2">
-                                <select name="m_tipo">
+                                <select name="donar_tipo">
                                     <option value="" disabled selected>Elije una opcion</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
