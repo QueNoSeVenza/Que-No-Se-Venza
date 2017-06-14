@@ -1,0 +1,18 @@
+
+
+ <form action="/verificar/entrada/" method="POST">
+ {% csrf_token %}
+   <input type="hidden" name="donation_id" value="{{donacion.id}}"/>
+ Verificar si los siguientes datos coinciden con los de medicamento presentado: <br>
+  <input type="checkbox" name="checks" value="nombre">Nombre : {{donacion.nombre}}<br>
+  <input type="checkbox" name="checks" value="tipo" >Tipo : {{donacion.tipo}}<br>
+  <input type="checkbox" name="checks" value="fecha" >Fecha de vencimiento : {{donacion.fecha_vencimiento}}<br>
+ Especificar la función terapeutica: <br>
+ <label for="id_funcion"></label><select id="id_funcion" name="funcion">
+ {% for option in donacion.FUNCION_FARMACEUTICA %}
+<option value="{{option.0}}">{{option.0}}</option>
+{% endfor %}
+</select>
+<br>
+  <input type="submit" value="Submit">
+</form> 

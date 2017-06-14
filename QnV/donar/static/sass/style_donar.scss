@@ -3,15 +3,17 @@ $bar_color: #616161;
 $size: 28px;
 $bar_height: $size / 7;
 $offset: $bar_height * 2;
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400, 700');
 //Globales
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+
 html,
 body {
 	height: 100%;
-	font-family: 'Libre Franklin', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
-.franklin-bold {
-	font-weight: 700;
+.montserrat-bold {
+	font-weight: 600;
 }
 p {
 	font-size: 1.1em;
@@ -30,11 +32,7 @@ nav {
 		margin-top: 25%;
 		width: 42px;
 		height: 42px;
-		-webkit-mask: url(img/logo.svg);
-		mask: url(img/logo.svg);
-		-webkit-mask-size: cover;
-		mask-size: cover;
-		background-color: #616161;
+		background-image: url(../css/img/logo.svg);
 	}
 	.userText {
 		transition: .3s linear;
@@ -44,7 +42,7 @@ nav {
 // Slide-Out
 .side-nav {
 	width: 100% !important;
-	background-color: #fff !important;
+	background-color: #000 !important;
 	z-index: 998 !important;
 	transition: 0.3s ease-out;
 	opacity: 0.98;
@@ -80,20 +78,20 @@ nav {
 	padding-top: 10%;
 	line-height: 15px !important;
 	input[type=text] {
-		border-bottom: 1px solid #424242;
+		border-bottom: 1px solid white;
 	}
 	input[type=text]:focus {
-		box-shadow: 0 1px 0 0 #616161 !important;
+		box-shadow: 0 1px 0 0 white !important;
 	}
 	textarea.materialize-textarea {
-		border-bottom: 1px solid #424242 !important;
+		border-bottom: 1px solid white !important;
 		line-height: 20px;
 	}
 	textarea.materialize-textarea:focus {
-		box-shadow: 0 1px 0 0 #616161 !important;
+		box-shadow: 0 1px 0 0 white !important;
 	}
 	label {
-		color: #616161 !important
+		color: #fff !important
 	}
 	button {
 		margin-top: 20px;
@@ -130,38 +128,6 @@ nav {
 // Slider rojo de donar
 // Slider azul de solicitar
 // Ambos sliders
-.comingbackbtn {
-	position: relative;
-	&.izq {
-		margin-top: -16%;
-		right: 2%;
-		float: right;
-		img {
-			margin-top: 16px;
-			margin-left: 16px;
-		}
-	}
-	&.der {
-		margin-top: -16%;
-		float: left;
-		margin-left: 2%;
-		img {
-			-webkit-transform: rotate(180deg);
-			/* Chrome */
-			-moz-transform: rotate(180deg);
-			/* FF */
-			-o-transform: rotate(180deg);
-			/* Opera */
-			-ms-transform: rotate(180deg);
-			/* IE9 */
-			transform: rotate(180deg);
-			/* W3C compliant browsers */
-			width: 16px;
-			margin-top: 16px;
-			margin-left: 15px;
-		}
-	}
-}
 .btn-floating {
 	width: 48px !important;
 	height: 48px !important;
@@ -202,7 +168,7 @@ nav {
 	}
 	.barsTwo {
 		@include bar;
-		background: white;
+		background: black;
 		position: absolute;
 		top: 50%;
 		left: 0;
@@ -211,7 +177,7 @@ nav {
 		&:before,
 		&:after {
 			@include bar;
-			background: white;
+			background: #fff;
 			content: "";
 			position: absolute;
 			transition: .2s linear;
@@ -240,18 +206,18 @@ nav {
 	.barsTwo {
 		transition: all .2s linear;
 		&:before {
-			background: #616161;
+			background: #fff;
 			top: 0;
 			transform: rotate(45deg);
 		}
 		&:after {
-			background: #616161;
+			background: #fff;
 			bottom: 0;
 			transform: rotate(-45deg);
 		}
 	}
 }
-//FullSlider
+//FullPage
 div.section.fp-section.active.fp-completely {
 	padding-top: 0px !important;
 	padding-bottom: 0px !important;

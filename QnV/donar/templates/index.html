@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 {% load staticfiles %}
 <html>
     <head>
@@ -79,91 +79,91 @@
             </div>
         </ul>
 
-        <div id="wrapper">
-            <div class="section">
-                <!--Slide rojo donar-->
-                <div class="slide red">
-                    <div class="row center white-text">
-                        <form method="POST" action="{% url 'donar_index:donar' %}">
-                            {% csrf_token %}
-                            <div class="input-field col s6 offset-s3 roboto">
-                                <input name="donar_nombre" id="a" type="text">
-                                <label for="a">Nombre Comercial</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="donar_concentracion_gramos" id="b" type="text">
-                                <label for="b">Concentracion en Gramos</label>
-                            </div>
-                        	<div class="input-field col s6 offset-s3">
-                                <input name="donar_cantidad" id="c" type="text">
-                                <label for="c">Cantidad</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="donar_droga" id="c" type="text">
-                                <label for="c">Droga</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="donar_laboratorio" id="c" type="text">
-                                <label for="c">Laboratorio</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="donar_fecha_vencimiento" id="c" type="date" class="datepicker">
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="donar_tipo" id="c" type="text">
-                                <label for="c">Tipo</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
-                            </div> 
-                        </form>
-                    </div>
-                    <div class="comingbackbtn izq">
-                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toRight()"><img src="{% static 'css/img/arrow2.png' %}"></a>
-                    </div>
-                </div>
-                <!--Slide del medio-->
-                <div class="slide active">
-                    <div class="col s12 grey lighten-4 bigpanel">
-                        <div class="row center textsection">
-                            <h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text franklin-bold">Fran</span></h3>
-                            <p class="col l6 push-l3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="franklin-bold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="franklin-bold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
-                        </div>
+		</div>
+	</ul>
 
-                        <div class="col l6 push-l3 center btnsection">
-                            <button class="waves-effect waves-light btn-large red z-depth-3 franklin-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
-                            <button class="waves-effect waves-light btn-large blue z-depth-3 franklin-bold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
-                        </div>
-                    </div>
-                </div>
-                <!--Slide derecho solicitar-->
-                <div class="slide blue">
-                    <div class="row center white-text">
-                        <form method="POST" action="{% url 'donar_index:pedir' %}">
-                            {% csrf_token %}
-                            <div class="input-field col s6 offset-s3">
-                                <input name="pedir_nombre" id="c" type="text">
-                                <label for="c">Medicamento</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input id="a" name="pedir_concentracion_gramos" type="text">
-                                <label for="a">Concentracion en Gramos</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input name="pedir_cantidad" id="b" type="text">
-                                <label for="b">Cantidad</label>
-                            </div> 
-                        </form>
-                    </div>
-                    <div class="comingbackbtn der">
-                        <a class="btn-floating waves-effect waves-dark white z-depth-2" onclick="toLeft()"><img src="{% static 'css/img/arrow2.png' %}"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="{% static 'js/javascript/js_donar.js' %}"></script>
-        <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
-    </body>
+	<div id="fullpage">
+		<div class="section">
+			<!--Slide rojo donar-->
+			<div class="slide grey lighten-4" id="slide1">
+				<div class="row center white-text">
+					<form method="POST" action="{% url 'donar_index:donar' %}">
+						{% csrf_token %}
+						<div class="input-field col s4 offset-s2 roboto">
+							<input name="m_nombre" id="a" type="text">
+							<label for="a">Nombre Comercial</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="m_concentracion_gramos" id="b" type="text">
+							<label for="b">Concentracion en Gramos</label>
+						</div>
+						<div class="input-field col s4 offset-s2">
+							<input name="m_cantidad" id="c" type="text">
+							<label for="c">Cantidad</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="m_laboratorio" id="c" type="text">
+							<label for="c">Laboratorio</label>
+						</div>
+						<div class="input-field col s8 offset-s2">
+							<select name="m_droga">
+								<option value="" disabled selected>Elije una opcion</option>
+								<option value="Androgenos">Androgenos</option>
+								<option value="Analgesico">Analgesico</option>
+							</select>
+							<label>Droga</label>
+						</div>
+						<div class="input-field col s8 offset-s2">
+							<input name="m_fecha_vencimiento" id="c" type="date" >
+						</div>
+						<div class="input-field col s8 offset-s2">
+							<select name="m_tipo">
+								<option value="" disabled selected>Elije una opcion</option>
+								<option value="Pastillas">Pastillas</option>
+								<option value="Jarabe">Jarabe</option>
+								<option value="Gotas">Gotas</option>
+							</select>
+							<label>Tipo</label>
+						<div class="col s12 center">
+							<button class="btn red accent-2">Aceptar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--Slide del medio-->
+			<div class="slide active" id="slide2">
+				<div class="col s12 grey lighten-4 bigpanel">
+					<div class="row center textsection">
+						<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text montserrat-bold">Fran</span></h3>
+						<p class="col l6 push-l3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="montserrat-bold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="montserrat-bold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
+					</div>
+
+					<div class="col l6 push-l3 center btnsection">
+						<button class="waves-effect waves-light btn-large red z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
+						<button class="waves-effect waves-light btn-large blue z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
+					</div>
+				</div>
+			</div>
+			<!--Slide derecho solicitar-->
+			<div class="slide grey lighten-4" id="slide3">
+				<div class="row center">
+					<form method="POST" action="{% url 'donar_index:pedir' %}">
+						{% csrf_token %}
+						<div class="input-field col s6 offset-s3">
+							<input name="medicamento_pedido" id="c" type="text">
+							<label for="c">Medicamento</label>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="{% static 'js/javascript/js_donar.js' %}"></script>
+	<script src="{% static 'js/bin/materialize_donar.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fullpage/scrollplugin.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
+</body>
+
 </html>
