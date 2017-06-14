@@ -18,7 +18,7 @@ def donar(request):
         donar_cantidad = request.POST['donar_cantidad']
         donar_laboratorio = request.POST['donar_laboratorio']
         donar_fecha_vencimiento = request.POST['donar_fecha_vencimiento']
-        donar_tipo = request.POST['donar_tipo']
+        donar_tipo = request.POST.get('donar_tipo')
         donar_droga = request.POST['donar_droga']
         author = request.user
         
@@ -28,11 +28,11 @@ def donar(request):
             print "if"
             medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
             guardarDonacion(request, med_donar, medicamento_guardado)
-            return redirect('/main')
+            return redirect('/thanks')
         else:
             print "else"
             guardarMedicamento(request, med_donar)
-            return redirect('/main')
+            return redirect('/thanks')
             
             
 def pedir(request):
