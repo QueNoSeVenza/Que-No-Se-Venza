@@ -9,7 +9,8 @@ from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
@@ -25,7 +26,7 @@ def log(request):
         print usern + passw
         user = authenticate(username=usern, password=passw)
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             return redirect('/principal')
         else:
             #messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
@@ -44,11 +45,11 @@ def reg(request):
             user.save()
             userant = authenticate(username=email, password=password)
             if userant is not None:
-                login(request, userant)
+                auth_login(request, userant)
                 return redirect('/principal')
             else:
-                messages.add_message(request, messages.INFO, 'Algo salio mal')
+                #messages.add_message(request, messages.INFO, 'Algo salio mal')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
+            #messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
