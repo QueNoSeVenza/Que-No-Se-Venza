@@ -6,16 +6,22 @@
  Verificar si los siguientes datos coinciden con los de medicamento presentado: <br>
   <input type="checkbox" name="checks" value="nombre">Nombre : {{donacion.medicamento.nombre}}<br>
   <input type="checkbox" name="checks" value="tipo" >Tipo : {{donacion.medicamento.tipo}}<br>
-  <input type="checkbox" name="checks" value="fecha" >Fecha de vencimiento : {{donacion.fecha_vencimiento}}<br>
+  <input type="checkbox" name="checks" value="fecha" >Fecha de vencimiento :   {{donacion.fecha_vencimiento}}<br>
+
+
+ ¿Necesita prescripcion medica?: <br>
+ <label for="id_prescripcion"></label><select id="id_prescripcion" name="prescripcion">
+<option value="True">Si</option>
+<option value="False">No</option>
+</select>
+</br>
+
  Especificar la función terapeutica: <br>
  <label for="id_funcion"></label><select id="id_funcion" name="funcion">
  {% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
 <option value="{{option.0}}">{{option.0}}</option>
 {% endfor %}
- <label for="id_prescripcion"></label><select id="id_prescripcion" name="prescripcion">
-}
-<option value="True">Si</option>
-<option value="False">No</option>
+
 
 </select>
 <br>

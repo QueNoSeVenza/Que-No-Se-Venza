@@ -57,10 +57,12 @@ def entrada(request):
 
 		if len(request.POST.getlist('checks')) == 3:
 			funcion  = request.POST['funcion']
-			prescripcion  = request.POST['prescripcion']	
-			print(funcion)
+			prescripcion  = request.POST['prescripcion']
+
+			print(funcion,"    ",prescripcion)
 			donacion = Donacion.objects.get(pk = request.POST['donation_id'])
 			donacion.medicamento.funcion = funcion
+			donacion.medicamento.prescripcion = prescripcion
 			donacion.stock = "Disponible"
 			donacion.save()
 			donacion.medicamento.save()
@@ -95,9 +97,13 @@ def salida(request):
 
 		if len(request.POST.getlist('checks')) == 3:
 			funcion  = request.POST['funcion']
+			prescripcion  = request.POST['prescripcion']
+
 			print(funcion)
 			donacion = Donacion.objects.get(pk = request.POST['donation_id'])
 			donacion.medicamento.funcion = funcion
+			donacion.medicamento.prescripcion = prescripcion
+
 			donacion.stock = "Disponible"
 			donacion.save()
 			donacion.medicamento.save()
@@ -115,7 +121,8 @@ def salida(request):
 
 		donacion = Donacion.objects.get(pk = request.GET['id'])
 
-		if donacion.stock == "Pendiente":
+		if donacion.stock == "Disponible":
+			
 			return render(request,'salida.html',{'donacion' : donacion})
 		else:
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en Stock
