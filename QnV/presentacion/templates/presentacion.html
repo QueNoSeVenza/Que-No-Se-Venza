@@ -63,7 +63,7 @@
 				</h2>
 
 				<div class="center">
-					<button id="ingbtn">INGRESAR</button>
+					<button id="ingbtn" onclick="window.location.href = '/principal'">INGRESAR</button>
 				</div>
 			</div>
 		</div>
@@ -169,7 +169,7 @@
 				</div>
 				<div class="pure-u-md-1">
 				<img class="center" id="subircontacto" src="{% static 'css/img/arrowtop.png' %}">
-				</div>	
+				</div>
 			</div>
 		</div>
 	</section>
@@ -265,7 +265,7 @@
 				});
 			});
 
-			
+
 			$('textarea').each(function() {
 				this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
 			}).on('input', function() {
