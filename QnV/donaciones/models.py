@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -24,17 +23,19 @@ class Medicamento(models.Model):
         ('Gotas', 'Gotas'),
     )
     tipo = models.CharField(max_length=60, choices=TIPO, default=0)
-    #cantidad = models.CharField(max_length=60)
 
     def __unicode__(self):
         return self.nombre
 
-class Donacion(models.Model):
+class MedicamentoDonado(models.Model):
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
+
+class Donacion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    medicamentoDonado = models.ForeignKey(MedicamentoDonado, on_delete=models.CASCADE)
     
 class Pedir(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
