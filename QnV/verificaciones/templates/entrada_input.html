@@ -1,4 +1,13 @@
-<form action="/verificacion/entrada"  method="GET" >
-    <input type="text" name = "id">
-    <input type="submit" value="Seleccionar"/>
-</form>
+{% load static %} {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/verificacion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/_grid.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
+<div class="row sp4">
+	<form action="/verificacion/entrada" method="GET">
+		<div class="col m8 l6 offset-l3 offset-m2">
+			<input class="semiinput" placeholder="Placeholder" name="id" type="text">
+			<input class="button button-primary" value="Buscar" type="submit">
+		</div>
+	</form>
+</div>
