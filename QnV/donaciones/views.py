@@ -82,36 +82,36 @@ def pedir(request):
         fechas_medicamento = []
         
         
-        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
-            
-            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
-            print medicamento_pedido
-            
-            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
-            print donaciones_medicamento
-        
-            for a in donaciones_medicamento:
-                print a
-                if timezone.now().date() < a.fecha_vencimiento: 
-                    fechas_medicamento.append(a.fecha_vencimiento)
-            
-            print fechas_medicamento
-            
-            fe = fechas_medicamento[0]
-            print fe
-            
-            for b in fechas_medicamento:
-                print b
-                if fe > b:
-                    print "if"
-                    fe = b
-            
-            print fe
-            
-            return redirect('/thanks')
-        else:
-            print "else"
-            return redirect('/thanks')
+#        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
+#            
+#            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+#            print medicamento_pedido
+#            
+#            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
+#            print donaciones_medicamento
+#        
+#            for a in donaciones_medicamento:
+#                print a
+#                if timezone.now().date() < a.fecha_vencimiento: 
+#                    fechas_medicamento.append(a.fecha_vencimiento)
+#            
+#            print fechas_medicamento
+#            
+#            fe = fechas_medicamento[0]
+#            print fe
+#            
+#            for b in fechas_medicamento:
+#                print b
+#                if fe > b:
+#                    print "if"
+#                    fe = b
+#            
+#            print fe
+#            
+#            return redirect('/thanks')
+#        else:
+#            print "else"
+#            return redirect('/thanks')
         
         
         # fecha  LISTO
@@ -138,7 +138,8 @@ def pedir(request):
 #        if medicamento_pedido.exists():
 #            for m in medicamento_pedido:
 #                #
-#        medicamento_objeto = Medicamento.objects.get(nombre=medicamento_pedido)
-#        pedir_save = Pedir(user=author,
-#                          medicamento=medicamento_objeto)
-#        pedir_save.save()
+        medicamento_objeto = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+        pedir_save = Pedir(user=author,
+                          medicamento=medicamento_objeto)
+        pedir_save.save()
+        return redirect('/thanks')
