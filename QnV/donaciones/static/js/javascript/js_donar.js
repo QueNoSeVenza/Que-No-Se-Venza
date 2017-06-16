@@ -57,7 +57,7 @@ $(document).ready(function () {
 				}*/
 	});
 
-
+	$('#slide1').css('height', '100%');
 	$('.button-collapse').sideNav({
 		draggable: true // Choose whether you can drag to open on touch screens
 	});
