@@ -72,3 +72,12 @@ def guardarMedicamento(request, med_donar):
     medicamento.save()
     medicamento_guardado = Medicamento.objects.get(id=medicamento.id)
     guardarDonacion(request, med_donar, medicamento_guardado)
+
+# def logout(request):
+#     context = RequestContext(request)
+#     auth.logout(request)
+#     print request.META.get('HTTP_REFERER')
+#     if request.META.get('HTTP_REFERER') == "http://127.0.0.1:8000/showfav/":
+#             return redirect ('/')
+#     else:
+#         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
