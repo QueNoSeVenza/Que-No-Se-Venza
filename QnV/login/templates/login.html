@@ -21,12 +21,12 @@
                         <form method="POST" action="{% url 'login:log' %}">
                             {% csrf_token %}
                             <div class="input-field col s12 m10 push-m1">
-                                <input id="email" name="username" type="text" class="monts">
+                                <input id="email" name="username" type="text" class="monts" required >
                                 <label for="email">Correo electrónico</label>
                             </div>
 
                             <div class="input-field col s12 m10 push-m1">
-                                <input id="uspswd" name="password" type="password" class="monts" required>
+                                <input id="uspswd" name="password" type="password" class="monts" required oninvalid="this.setCustomValidity('Completar este campo')">
                                 <label for="uspswd">Contraseña</label>
                             </div>
                             <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
@@ -36,7 +36,7 @@
                         <ul class="messages">
                             {% for message in messages %}
                             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
                                 {{ message }}
                             </li>
                             {% endfor %}
@@ -84,7 +84,7 @@
                             </li>
                             {% endfor %}
                         </ul>
-                        {% endif %} --> 
+                        {% endif %} -->
                       </div>
                 </div>
             </div>
