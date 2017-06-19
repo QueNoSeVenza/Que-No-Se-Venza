@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600");
 html,
 body {
   height: 100%;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Source Sans Pro', sans-serif !important; }
 
-.montserrat-bold {
+.semibold {
   font-weight: 600; }
 
 p {
@@ -83,23 +83,11 @@ nav {
   line-height: 30px;
   vertical-align: middle; }
 
-.bigpanel {
-  height: 100%;
-  margin: 0;
-  padding: 0 !important; }
-
-.textsection {
-  padding-top: 5%; }
-
-.btnsection {
+#slide2 h3 {
+  margin-top: 0px; }
+#slide2 .btnsection {
   padding: 3em 0 0 0; }
-
-.btn-large {
-  width: 13%;
-  min-width: 100px;
-  border-radius: 50px !important; }
-
-.optbutton {
+#slide2 .optbutton {
   margin-left: 3% !important;
   margin-right: 3% !important;
   letter-spacing: 1px !important; }
