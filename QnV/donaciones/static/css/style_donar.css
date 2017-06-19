@@ -83,10 +83,11 @@ nav {
   line-height: 30px;
   vertical-align: middle; }
 
-.btnsection {
+#slide2 h3 {
+  margin-top: 0px; }
+#slide2 .btnsection {
   padding: 3em 0 0 0; }
-
-.optbutton {
+#slide2 .optbutton {
   margin-left: 3% !important;
   margin-right: 3% !important;
   letter-spacing: 1px !important; }

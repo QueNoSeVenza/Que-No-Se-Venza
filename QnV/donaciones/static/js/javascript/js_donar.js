@@ -45,8 +45,6 @@ $(document).ready(function () {
 		$(self).show();
 	});
 
-
-
 	// Fullpage
 	$('#fullpage').fullpage({
 		controlArrows: true,

@@ -102,14 +102,18 @@ nav {
 	vertical-align: middle;
 }
 // Slider inicio
-
-.btnsection {
-	padding: 3em 0 0 0;
-}
-.optbutton {
-	margin-left: 3% !important;
-	margin-right: 3% !important;
-	letter-spacing: 1px !important;
+#slide2 {
+	h3 {
+		margin-top: 0px;
+	}
+	.btnsection {
+		padding: 3em 0 0 0;
+	}
+	.optbutton {
+		margin-left: 3% !important;
+		margin-right: 3% !important;
+		letter-spacing: 1px !important;
+	}
 }
 // Slider rojo de donar
 // Slider azul de solicitar
