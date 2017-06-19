@@ -29,6 +29,7 @@ function thirdSection() {
 };
 
 $(document).ready(function () {
+	var sidenav = $('.side-nav');
 	firstSection();
 	// Materialize
 	$('select').material_select();
@@ -38,7 +39,12 @@ $(document).ready(function () {
 		selectYears: 15 // Creates a dropdown of 15 years to control year
 		// format: 'YYYY-MM-DD'
 	});
-	var toggle = $('.menu-toggle');
+	$('.button-collapse').sideNav({
+		draggable: true // Choose whether you can drag to open on touch screens
+	});
+	$(".collapsible-header").click(function () {
+		$(self).show();
+	});
 
 	// Fullpage
 	$('#fullpage').fullpage({
@@ -47,34 +53,28 @@ $(document).ready(function () {
 		loopHorizontal: false,
 		keyboardScrolling: false,
 		scrollOverflow: true,
-		/*		onSlideLeave: function (anchorLink, index, slideIndex, direction, nextSlideIndex) {
-					var leavingSlide = $(this);
-					if (slideIndex == 1) {
-						whiteNav();
-					}
-					if (slideIndex == 2 || slideIndex == 0) {
-						greyNav();
-					}
-				}*/
+		responsiveHeight: 900,
 	});
-
-
-	$('.button-collapse').sideNav({
-		draggable: true // Choose whether you can drag to open on touch screens
-	});
-
+	var toggle = $('.menu-toggle');
 	$(toggle).click(function () {
-		$(toggle).toggleClass('active');
-		if ($('.menu-toggle span').hasClass('bars')) {
-			$(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
-		} else {
-			$(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
-		}
-		/*$('body').toggleClass('active');*/
+		document.getElementById('sidenav').style.pointerEvents = 'none';
+		sidenav.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+			function (e) {
+				document.getElementById('sidenav').style.pointerEvents = 'auto';
+				if ($('.menu-toggle').hasClass('active')) {
+					/*Cambiar a blanco*/
+					$(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
+					$(toggle).toggleClass('active');
+					console.log(toggle);
+				} else {
+					/*Cambiar a gris*/
+					$(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
+					$(toggle).toggleClass('active');
+					console.log(toggle);
+				}
+			});
 	});
+	/*$('body').toggleClass('active');*/
 
-	$(".collapsible-header").click(function () {
-		$(self).show();
-	});
 
 });
