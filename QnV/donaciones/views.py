@@ -9,7 +9,10 @@ import datetime
 
 def principal(request):
     template = loader.get_template('index.html')
-    context = {}
+    verificador = False
+    if request.user.groups.filter(name='Verificadores').exists():
+        verificador = True
+    context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
 
 def donar(request):
