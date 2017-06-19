@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 {% load staticfiles %}
 <html>
     <head>
@@ -26,25 +26,22 @@
                             </div>
 
                             <div class="input-field col s12 m10 push-m1">
-                                <input id="uspswd" name="password" type="password" class="monts">
+                                <input id="uspswd" name="password" type="password" class="monts" required>
                                 <label for="uspswd">Contraseña</label>
                             </div>
                             <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
                         </form>
                         <button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 datSpace" id="regBtn">REGISTRARSE</button>
-                        <!-- {% if messages %}
-                        <script type="text/javascript">
-                            $(window).load(function(){
-                                $('#modal1').show();
-                            });
-                        </script>
-                        
+                        {% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
                             {% endfor %}
                         </ul>
-                        {% endif %} -->
+                        {% endif %}
                     </div>
                 </div>
 
@@ -64,17 +61,31 @@
                             </div>
 
                             <div class="input-field col s12 m10 push-m1">
-                                <input id="corr" name="email" type="text" class="monts">
+                                <input id="corr" name="email" type="text" class="monts" required>
                                 <label for="corr">Correo electrónico</label>
                             </div>
 
                             <div class="input-field col s12 m10 push-m1">
-                                <input id="popl" name="pass" type="text" class="monts">
+                                <input id="regpass" name="pass1" type="text" class="monts" required>
                                 <label for="popl">Contraseña</label>
+                            </div>
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="regpass2" name="pass2" type="text" class="monts" required>
+                                <label for="popl">Repetir contraseña</label>
                             </div>
                             <button class="waves-effect waves-light btn logBtn monts green accent-2 z-depth-0 datSpace" type="submit" name="action">REGISTRARSE</button>
                         </form>
-                    </div>
+                        <!-- {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %} --> 
+                      </div>
                 </div>
             </div>
         </div>
@@ -109,6 +120,23 @@
                     $('.login-content').delay(360).show(0);
                 });
             });
+            $(document).ready(function () {
+              $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
+            });
+            $(document).ready(function () {
+              $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
+            });
+
+  function checkPasswordMatch() {
+    var password = $("#regpass").val();
+    var confirmPassword = $("#regpass2").val();
+
+    if (password != confirmPassword && confirmPassword!="" ){
+        $("#regpass2").css("border-bottom-color","red");}
+    else{
+
+        $("#regpass2").css("border-bottom-color","green");
+    }}
         </script>
     </body>
 </html>
