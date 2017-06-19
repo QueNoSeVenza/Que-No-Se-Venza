@@ -18,19 +18,21 @@ def donar(request):
         donar_concentracion_gramos = request.POST['donar_concentracion_gramos']
         donar_cantidad = request.POST['donar_cantidad']
         donar_laboratorio = request.POST['donar_laboratorio']
-        donar_fecha_vencimiento = request.POST['donar_fecha_vencimiento']
+        donar_fecha_vencimiento = (request.POST.get('mes')+"/"+request.POST.get('anio'))
         donar_tipo = request.POST.get('donar_tipo')
         donar_droga = request.POST['donar_droga']
         author = request.user
          
-        print donar_fecha_vencimiento
+        print(request.POST.get('mes'),request.POST.get('anio'))
         
         med_donar = [donar_nombre,donar_concentracion_gramos,donar_cantidad,donar_laboratorio,donar_fecha_vencimiento,donar_tipo,donar_droga]
+        print med_donar
         
         if Medicamento.objects.filter(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3]).exists():
             print "if"
             medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
-            guardarMedicamentoDonado(request, med_donar, medicamento_guardado)
+            guardarDonacion(request, med_donar, medicamento_guardado)
+            
             return redirect('/thanks')
         else:
             print "else"
@@ -46,23 +48,23 @@ def guardarMedicamento(request, med_donar):
                             tipo=med_donar[5])
     medicamento.save()
     medicamento_guardado = Medicamento.objects.get(id=medicamento.id)
-    guardarMedicamentoDonado(request, med_donar, medicamento_guardado)
+    guardarDonacion(request, med_donar, medicamento_guardado)
 
-def guardarMedicamentoDonado(request, med_donar, medicamento_guardado):
-    print "medDonado"
-    medicamentoDonado = MedicamentoDonado(medicamento=medicamento_guardado,
-                                        cantidad=med_donar[2],
-                                        fecha_vencimiento=med_donar[4])
-    medicamentoDonado.save()
-    med_donado = MedicamentoDonado.objects.filter(id=medicamentoDonado.id)
-    guardarDonacion(request, med_donado)
-
-    
-def guardarDonacion(request, med_donado):
+def guardarDonacion(request, med_donar, medicamento_guardado):
     print "dona"
-    donacion = Donacion(user=request.user,
-                       medicamentoDonado=med_donado[0])
+    donacion = Donacion(user=request.user)
     donacion.save()
+    donacion_guardada = Donacion.objects.get(id=donacion.id)
+    guardarMedicamentoDonado(request, med_donar, medicamento_guardado,donacion_guardada)
+    
+def guardarMedicamentoDonado(request, med_donar, medicamento_guardado,donacion_guardada):
+    print "medDonado"
+    print med_donar[4]
+    medicamentoDonado = MedicamentoDonado(medicamento=medicamento_guardado,
+                                          donacion=donacion_guardada,
+                                          cantidad=med_donar[2],
+                                          fecha_vencimiento=med_donar[4])
+    medicamentoDonado.save()
     
 def thanks(request):
 	return render(
@@ -82,36 +84,36 @@ def pedir(request):
         fechas_medicamento = []
         
         
-#        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
-#            
-#            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
-#            print medicamento_pedido
-#            
-#            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
-#            print donaciones_medicamento
-#        
-#            for a in donaciones_medicamento:
-#                print a
-#                if timezone.now().date() < a.fecha_vencimiento: 
-#                    fechas_medicamento.append(a.fecha_vencimiento)
-#            
-#            print fechas_medicamento
-#            
-#            fe = fechas_medicamento[0]
-#            print fe
-#            
-#            for b in fechas_medicamento:
-#                print b
-#                if fe > b:
-#                    print "if"
-#                    fe = b
-#            
-#            print fe
-#            
-#            return redirect('/thanks')
-#        else:
-#            print "else"
-#            return redirect('/thanks')
+        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
+            
+            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+            print medicamento_pedido
+            
+            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
+            print donaciones_medicamento
+        
+            for a in donaciones_medicamento:
+                print a
+                if timezone.now().date() < a.fecha_vencimiento: 
+                    fechas_medicamento.append(a.fecha_vencimiento)
+            
+            print fechas_medicamento
+            
+            fe = fechas_medicamento[0]
+            print fe
+            
+            for b in fechas_medicamento:
+                print b
+                if fe > b:
+                    print "if"
+                    fe = b
+            
+            print fe
+            
+            return redirect('/thanks')
+        else:
+            print "else"
+            return redirect('/thanks')
         
         
         # fecha  LISTO
@@ -138,8 +140,8 @@ def pedir(request):
 #        if medicamento_pedido.exists():
 #            for m in medicamento_pedido:
 #                #
-        medicamento_objeto = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
-        pedir_save = Pedir(user=author,
-                          medicamento=medicamento_objeto)
-        pedir_save.save()
-        return redirect('/thanks')
+#        medicamento_objeto = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+#        pedir_save = Pedir(user=author,
+#                          medicamento=medicamento_objeto)
+#        pedir_save.save()
+#        return redirect('/thanks')
