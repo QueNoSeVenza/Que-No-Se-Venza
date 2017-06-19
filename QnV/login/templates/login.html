@@ -32,11 +32,11 @@
                             <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
                         </form>
                         <button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 datSpace" id="regBtn">REGISTRARSE</button>
-                        {% if messages %}
+                        <{% if messages %}
                         <ul class="messages">
                             {% for message in messages %}
                             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+                                <!-- {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %} -->
                                 {{ message }}
                             </li>
                             {% endfor %}
