@@ -1,5 +1,6 @@
 {% load static %} {% load staticfiles %}
 <html>
+
 <head>
 	<title>QNV</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-	<div class="menu-toggle button-collapse" data-activates="slide-out">
+	<div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
 		<span class="bars"></span>
 	</div>
 
@@ -83,27 +84,27 @@
 	<div id="fullpage">
 		<div class="section">
 			<!--Slide rojo donar-->
-			<div class="slide grey lighten-5" id="slide1">
+			<div class="slide grey lighten-5 fp-auto-height-responsive" id="slide1">
 				<div class="row center white-text">
 					<form method="POST" action="{% url 'donaciones:donar' %}">
 						{% csrf_token %}
-						<div class="input-field col s4 offset-s2">
+						<div class="input-field col s10 offset-s1 m4 offset-m2">
 							<input name="donar_nombre" id="d-nombre" type="text">
 							<label for="d-nombre">Nombre Comercial</label>
 						</div>
-						<div class="input-field col s4">
+						<div class="input-field col s10 offset-s1 m4">
 							<input name="donar_concentracion_gramos" id="d-gramos" type="text">
 							<label for="d-gramos">Concentracion en Gramos</label>
 						</div>
-						<div class="input-field col s4 offset-s2">
+						<div class="input-field col s10 offset-s1 m4 offset-m2">
 							<input name="donar_cantidad" id="d-cantidad" type="text">
 							<label for="d-cantidad">Cantidad</label>
 						</div>
-						<div class="input-field col s4">
+						<div class="input-field col s10 offset-s1 m4">
 							<input name="donar_laboratorio" id="d-laboratorio" type="text">
 							<label for="d-laboratorio">Laboratorio</label>
 						</div>
-						<div class="input-field col s8 offset-s2">
+						<div class="input-field col s10 offset-s1 m8 offset-m2">
 							<select name="donar_droga">
 								<option value="" disabled selected>Elije una opcion</option>
 								<option value="Androgenos">Androgenos</option>
@@ -116,7 +117,7 @@
 							</select>
 							<label>Droga</label>
 						</div>
-						<div class="input-field col s8 offset-s2">
+						<div class="input-field col s10 offset-s1 m8 offset-m2">
 							<select name="donar_tipo">
 								<option value="" disabled selected>Elije una opcion</option>
 								<option value="Pastillas">Pastillas</option>
@@ -125,7 +126,7 @@
 							</select>
 							<label>Tipo</label>
 						</div>
-						<div class="input-field col s8 offset-s2">
+						<div class="input-field col s10 offset-s1 m8 offset-m2">
 							<input name="donar_fecha_vencimiento" id="c" type="date">
 						</div>
 						<div class="col s12 center">
@@ -135,21 +136,19 @@
 				</div>
 			</div>
 			<!--Slide del medio-->
-			<div class="slide active" id="slide2">
-				<div class="col s12 grey lighten-5 bigpanel">
-					<div class="row center textsection">
-						<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text semibold">Fran</span></h3>
-						<p class="col l6 push-l3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
-					</div>
+			<div class="slide active col s12 grey lighten-5 fp-auto-height-responsive" id="slide2">
+				<div class="row center textsection">
+					<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text semibold">Fran</span></h3>
+					<p class="col m6 push-m3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
+				</div>
 
-					<div class="col l6 push-l3 center btnsection">
-						<button class="waves-effect waves-light btn-large red z-depth-0 semibold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
-						<button class="waves-effect waves-light btn-large blue z-depth-0 semibold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
-					</div>
+				<div class="col l6 push-l3 center btnsection">
+					<button class="waves-effect waves-light btn-large red z-depth-0 semibold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
+					<button class="waves-effect waves-light btn-large blue z-depth-0 semibold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
 				</div>
 			</div>
 			<!--Slide derecho solicitar-->
-			<div class="slide grey lighten-5" id="slide3">
+			<div class="slide grey lighten-5 fp-auto-height-responsive" id="slide3">
 				<div class="row center">
 					<form method="POST" action="{% url 'donaciones:pedir' %}">
 						{% csrf_token %}
@@ -159,7 +158,6 @@
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
