@@ -35,7 +35,7 @@ class MedicamentoDonado(models.Model):
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     donacion = models.ForeignKey(Donacion, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=60)
-    fecha_vencimiento = models.DateField()
+    fecha_vencimiento = models.CharField(max_length=6)
     stock = models.CharField(max_length=60, default="En Espera")
     
 class Pedir(models.Model):
