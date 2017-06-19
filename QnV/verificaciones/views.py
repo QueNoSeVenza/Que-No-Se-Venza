@@ -19,8 +19,10 @@ def menu (request):
 def stock (request):
 
 	if request.user.groups.filter(name='Verificadores').exists():
-		donaciones = Donacion.objects.all()
-		return render(request,'stock.html',{'donaciones' : donaciones})
+		string = "Verificador! ;)"
+		medicamentos = MedicamentoDonado.objects.all()
+		print(medicamentos)
+		return render(request,'stock.html',{'string' : string,'medicamentos' : medicamentos})
 	else:
 
 		return HttpResponseForbidden()
