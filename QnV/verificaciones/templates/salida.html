@@ -1,0 +1,17 @@
+
+
+<form action="/verificacion/salida/" method="POST">
+{% csrf_token %}
+<input type="hidden" name="donation_id" value="{{donacion.id}}"/>
+{% if donacion.medicamento.prescripcion %}
+
+Retirando {{donacion.medicamento.nombre}} <br>
+
+<input type="checkbox" name="checks" value="nombre">¿Posee el beneficiario la receta correspondiente?<br>
+
+{% endif %}
+ 
+</select>
+<br>
+  <input type="submit" value="Submit">
+</form> 

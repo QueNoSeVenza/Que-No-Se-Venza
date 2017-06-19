@@ -72,19 +72,22 @@ def thanks(request):
 )
 
 def pedir(request):
+ 
+
+
     if 'POST' in request.method:
         pedir_nombre = request.POST['pedir_nombre']
         pedir_gramos = request.POST['pedir_gramos']
         pedir_cantidad = request.POST['pedir_cantidad']
         author = request.user
         
-        arry_pedido = [pedir_nombre,pedir_gramos,pedir_cantidad]
+        array_pedido = [pedir_nombre,pedir_gramos,pedir_cantidad]
         fechas_medicamento = []
         
         
-#        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
+#        if Medicamento.objects.filter(nombre=array_pedido[0], concentracion_gramos=array_pedido[1]).exists():
 #            
-#            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+#            medicamento_pedido = Medicamento.objects.get(nombre=array_pedido[0], concentracion_gramos=array_pedido[1])
 #            print medicamento_pedido
 #            
 #            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
@@ -138,7 +141,7 @@ def pedir(request):
 #        if medicamento_pedido.exists():
 #            for m in medicamento_pedido:
 #                #
-        medicamento_objeto = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
+        medicamento_objeto = Medicamento.objects.get(nombre=array_pedido[0], concentracion_gramos=array_pedido[1])
         pedir_save = Pedir(user=author,
                           medicamento=medicamento_objeto)
         pedir_save.save()
