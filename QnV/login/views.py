@@ -23,14 +23,14 @@ def log(request):
     if 'POST' in request.method:
         usern = request.POST['username']
         passw = request.POST['password']
-        print usern + passw
+        print(usern + passw)
         user = authenticate(username=usern, password=passw)
         if user is not None:
             auth_login(request, user)
             return redirect('/principal')
         else:
             #messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
-            print "hola"
+            print("hola")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def reg(request):

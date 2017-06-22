@@ -4,47 +4,80 @@ from .models import *
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
+from django.utils import timezone
+from datetime import datetime
+import datetime
+import donaciones.matchutils
 
 def principal(request):
     template = loader.get_template('index.html')
-    context = {}
+    verificador = False
+    if request.user.groups.filter(name='Verificadores').exists():
+        verificador = True
+    context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
 
-
 def donar(request):
+
     if 'POST' in request.method:
-        donar_nombre = request.POST['donar_nombre']
-        donar_concentracion_gramos = request.POST['donar_concentracion_gramos']
-        donar_cantidad = request.POST['donar_cantidad']
-        donar_laboratorio = request.POST['donar_laboratorio']
-        donar_fecha_vencimiento = request.POST['donar_fecha_vencimiento']
-        donar_tipo = request.POST.get('donar_tipo')
-        donar_droga = request.POST['donar_droga']
-        author = request.user
+        #Capturando argumentos del request para cada objeto a crear.
+        fecha_vencimiento =  request.POST.get('mes')+"/"+request.POST.get('anio')
 
-        med_donar = [donar_nombre,donar_concentracion_gramos,donar_cantidad,donar_laboratorio,donar_fecha_vencimiento,donar_tipo,donar_droga]
+        medicamento_kwargs = {
+            'nombre' : request.POST['donar_nombre'],
+            'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
+            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'droga' : request.POST['donar_droga']
+        }
 
-        if Medicamento.objects.filter(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3]).exists():
-            print "if"
-            medicamento_guardado = Medicamento.objects.get(nombre=med_donar[0], concentracion_gramos=med_donar[1], laboratorio=med_donar[3])
-            guardarDonacion(request, med_donar, medicamento_guardado)
-            return redirect('/main')
-        else:
-            print "else"
-            guardarMedicamento(request, med_donar)
-            return redirect('/main')
+        medicamento_donado_kwargs = {
+
+        'cantidad' : request.POST['donar_cantidad'],
+        'fecha_vencimiento' : datetime.datetime.strptime(request.POST.get('mes')+
+                                        request.POST.get('anio'),
+                                            '%m%Y').date(),
+
+        }
+
+        donacion_kwargs = {
+
+        'user' : request.user,
+
+        }   
+
+        
+        #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
+        try:
+
+            medicamento_guardado = Medicamento.objects.get(**medicamento_kwargs)
+            nueva_donacion = Donacion(**donacion_kwargs)
+            nueva_donacion.save()
+
+            medicamento_donado_kwargs['donacion'] = nueva_donacion
+            medicamento_donado_kwargs['medicamento'] = medicamento_guardado 
+
+            nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
+            nuevo_medicamento_donado.save()
+ 
+        #De lo contrario, además guardo un medicamento.
+        except Medicamento.DoesNotExist:
+
+            nuevo_medicamento = Medicamento(**medicamento_kwargs)
+            nuevo_medicamento.save()
+
+            nueva_donacion = Donacion(**donacion_kwargs)
+            nueva_donacion.save()
+
+            medicamento_donado_kwargs['donacion'] = nueva_donacion
+            medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
+
+            nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
+            nuevo_medicamento_donado.save()   
 
 
-def pedir(request):
-    if 'POST' in request.method:
-        medicamento_pedido = request.POST['medicamento_pedido']
-        author = request.user
-        medicamento_objeto = Medicamento.objects.get(nombre=medicamento_pedido)
-        pedir_save = Pedir(user=author,
-                          medicamento=medicamento_objeto)
-        pedir_save.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+        return redirect('/thanks')
+                        
 
 def thanks(request):
 	return render(
@@ -53,22 +86,45 @@ def thanks(request):
 		{}
 )
 
+def pedir(request):
 
-def guardarDonacion(request, med_donar, medicamento_guardado):
-    donacion = Donacion(medicamento=medicamento_guardado,
-                            user=request.user,
-                            cantidad=med_donar[2],
-                            fecha_vencimiento=med_donar[4])
-    donacion.save()
-    return redirect('/donar_index')
+    if 'POST' in request.method:
+        #Capturando argumentos para un Pedido y su Medicamento
+        medicamento_kwargs = {
+
+            'nombre' :  request.POST['pedir_nombre'],
+            'concentracion_gramos' : request.POST['pedir_gramos'], 
+
+        }
+
+        pedido_kwargs = {
+
+            'user' : request.user,
+            'cantidad' : request.POST['pedir_cantidad'],
+
+        }
+
+        #Intento crear el Pedido con un Medicamento existente.
+        try:
+
+            pedido_kwargs['medicamento'] = Medicamento.objects.get(**medicamento_kwargs)
+            nuevo_pedido = Pedido(**pedido_kwargs)
+            nuevo_pedido.save()
 
 
-def guardarMedicamento(request, med_donar):
-    medicamento = Medicamento(nombre=med_donar[0],
-                            concentracion_gramos=med_donar[1],
-                            laboratorio=med_donar[3],
-                            droga=med_donar[6],
-                            tipo=med_donar[5])
-    medicamento.save()
-    medicamento_guardado = Medicamento.objects.get(id=medicamento.id)
-    guardarDonacion(request, med_donar, medicamento_guardado)
+
+        #En caso de que lo anterior no funcione creo un Pedido y su Medicamento.
+        #Deberiamos implementar un AJAX para verificar esto y agregar al form 
+        #los campos restantes de medicamento.
+        
+        except Medicamento.DoesNotExist():
+
+            nuevo_medicamento = Medicamento(**medicamento_kwargs)
+            nuevo_medicamento.save()
+            pedido_kwargs['medicamento'] = nuevo_medicamento
+            nuevo_pedido = Pedido(**pedido_kwargs)
+            nuevo_pedido.save()            
+
+        #Cambiar /thanks por la siguiente url del proceso de peticion.
+        getMatches(nuevo_pedido)
+        return redirect('/thanks')
