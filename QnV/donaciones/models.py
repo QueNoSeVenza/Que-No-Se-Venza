@@ -4,6 +4,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import admin
+from datetime import datetime
+
 # Create your models here.
 
 class Medicamento(models.Model):
@@ -29,7 +31,7 @@ class Medicamento(models.Model):
         return self.nombre
 
     def __str__(self):
-        return self.nombre
+        return self.nombre+" "+self.concentracion_gramos
 
 class Donacion(models.Model):
 
@@ -46,12 +48,23 @@ class MedicamentoDonado(models.Model):
     cantidad = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
+    
+    def isDull(self):
+
+        if self.fecha_vencimiento < datetime.now().date():
+            return True 
+        else:
+            return False
 
     def __str__(self):
         return str(self.medicamento) + ": " + str(self.donacion.id)
 
     
-class Pedir(models.Model):
+class Pedido(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE, related_name="pedidos")
+    cantidad = models.CharField(max_length=60)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (self.medicamento) + ": " + str(self.id)    
