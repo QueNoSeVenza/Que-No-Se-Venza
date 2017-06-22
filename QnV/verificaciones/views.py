@@ -19,7 +19,7 @@ def stock (request):
 
 	if request.user.groups.filter(name='Verificadores').exists():
 		string = "Verificador! ;)"
-		medicamentos = Medicamento.objects.all()
+		medicamentos = MedicamentoDonado.objects.all()
 		print(medicamentos)
 		return render(request,'stock.html',{'string' : string,'medicamentos' : medicamentos})
 	else:
