@@ -43,22 +43,16 @@ def reg(request):
         u = User.objects.filter(username=email)
 
         if u is not None:
-            print "ozibaibi"
-            if password == password2:
-                user = User.objects.create_user(email, email, password)
-                user.first_name = name
-                user.save()
-                userant = authenticate(username=email, password=password)
-                if userant is not None:
-                    auth_login(request, userant)
-                    return redirect('/principal')
-                else:
-                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                    print "messi"
+            user = User.objects.create_user(email, email, password)
+            user.first_name = name
+            user.save()
+            userant = authenticate(username=email, password=password)
+            if userant is not None:
+                auth_login(request, userant)
+                return redirect('/principal')
             else:
-                print "nakv"
-                messages.add_message(request, messages.INFO, 'Las Contraseñas no son iguales hermano')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                print "messi"
         else:
             print "malumabaibi"
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
