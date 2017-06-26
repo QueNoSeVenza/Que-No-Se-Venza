@@ -30,7 +30,7 @@ def log(request):
             auth_login(request, user)
             return redirect('/principal')
         else:
-            messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
+            messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
             print "hola"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -57,7 +57,7 @@ def reg(request):
                     print "messi"
             else:
                 print "nakv"
-                messages.add_message(request, messages.INFO, 'Contraseñas no coinciden')
+                messages.add_message(request, messages.INFO, 'Las Contraseñas no son iguales hermano')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             print "malumabaibi"

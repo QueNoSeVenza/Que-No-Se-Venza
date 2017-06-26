@@ -17,21 +17,25 @@
 					<div class="login-content s12">
 						<img class="myImg" src="{% static 'logo.png' %}">
 						<br>
-						<form method="POST" action="{% url 'login:log' %}">
+						<form method="POST" id="formLogin" action="{% url 'login:log' %}">
 							{% csrf_token %}
 							<div class="input-field col s12 m10 push-m1">
-								<input id="email" name="username" type="text" required>
+								<input id="email" name="username" type="email" required >
 								<label for="email">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="uspswd" name="password" type="password" class="monts" required oninvalid="this.setCustomValidity('La contra Bro')">
+								<input id="uspswd" name="password" type="password" class="monts" required>
+								<!-- required
+								oninvalid="setCustomValidity('El password es obligatorio')"
+							oninput="setCustomValidity('')" -->
 								<label for="uspswd">Contraseña</label>
 							</div>
-							<button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
+							<button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace"
+											id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
 						</form>
 						<button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0" id="regBtn">REGISTRARSE</button>
 						{% if messages %}
-                        <script type="text/javascript">
+												<script type="text/javascript">
                             $(window).load(function(){
                                 $('#modal1').show();
                             });
@@ -81,6 +85,25 @@
 	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
 	<script>
+// Desp de que te tire error del mail hay q apretar 2 veces (ai don nou guai)
+	$(document).ready(function () {
+    var intputElements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < intputElements.length; i++) {
+        intputElements[i].oninvalid = function (e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                if (e.target.name == "username") {
+                    e.target.setCustomValidity("Bro pone bien el mail culia");
+                }else if (e.target.name == "password") {
+                    e.target.setCustomValidity("la contrasenia papi");
+                }
+	              else {
+                    e.target.setCustomValidity("Completame este campos tambien bro");
+                }
+            }
+        }
+    	}
+	});
 		$(document).ready(function() {
 			$(".register-content").hide();
 			$("#regBtn").click(function() {
