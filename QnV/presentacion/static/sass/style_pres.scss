@@ -76,6 +76,18 @@ p {
 			color: #FFF;
 		}
 	}
+	@media screen and (max-width: 600px) {
+		#rev-1 {
+			margin-top: 15%;
+		}
+		a {
+			position: absolute;
+			text-align: center;
+			bottom: 50;
+			right: 30;
+			left: 30;
+		}
+	}
 }
 // Que
 .panelintro {
@@ -122,13 +134,16 @@ p {
 		font-weight: 400;
 		font-size: 1rem;
 	}
+	@media screen and (max-width: 600px) {
+	pointer-events: none;	
+	}
 }
 // Como
 .panelcomo {
 	margin-top: 80px;
 	background-color: #000;
 	padding-bottom: 8% !important;
-	h2{
+	h2 {
 		color: #fff;
 	}
 	.frame {
@@ -157,6 +172,11 @@ p {
 		background-size: cover;
 		background-position: 50%;
 	}
+	@media screen and (max-width: 600px) {
+		p, h2{
+			text-align: center;
+		}
+	}
 }
 // Final
 .panelfinal {
@@ -175,6 +195,7 @@ p {
 		border-radius: 5px;
 		padding: 20 65 20 65;
 		@include transition(.5s);
+		box-shadow: -1px 10px 41px -8px rgba(0, 0, 0, 0.23);
 		&:hover {
 			background-color: $azul;
 		}
@@ -182,24 +203,83 @@ p {
 }
 // Footer
 footer {
+	padding-bottom: 40px;
 	background-color: $gris-oscuro;
-	form{
-		input[type="text"], textarea, input[type="email"]{
+	h4 {
+		text-align: center;
+		text-transform: uppercase;
+		padding-top: 20px;
+		color: #fff;
+		padding-bottom: 15px;
+		border-bottom: 1px solid white;
+	}
+	ul {
+		list-style-type: none;
+		color: lighten($gris-oscuro, 25%);
+		li {
+			letter-spacing: 1px;
+			font-size: 12px;
+			font-weight: 600;
+			text-transform: uppercase;
+			margin-left: -15px;
+			padding: 10 0 10 0;
+			&:before {
+				content: '- ';
+			}
+		}
+		#comunicate {
+			text-align: right;
+			&:before {
+				content: none;
+			}
+			&:after {
+				content: ' -';
+			}
+		}
+		@media screen and (max-width: 600px) {
+			li, #comunicate{
+				text-align: center;
+				&:after, &:before{
+					content: ' - ' !important;
+				}
+			}
+		}
+		/*.noupper {
+			text-transform: none !important;
+			font-size: 13px;
+		}*/
+	}
+	form {
+		font-size: 12px !important;
+		input[type="text"],
+		textarea,
+		input[type="email"] {
+			font-family: 'Montserrat', sans-serif;
 			background-color: lighten($gris-oscuro, 10%);
 			margin: 10 0 10 0;
 			color: #fff;
 			padding: 12 35 12 35 !important;
-			border-radius: 3px;
+			border-radius: 0px;
 			border: none;
 			resize: none;
 		}
-		input[type="submit"]{
-			float: right;
+		input[type="submit"] {
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 600;
+			margin-top: 20px;
+			margin-left: 25px;
+			font-size: 12px;
 			text-transform: uppercase;
-			padding: 12 35 12 35;
+			padding: 10 25 10 25;
 			border: none;
-			border-radius: 5px;
+			margin-right: 12px;
+			&:hover {
+				background-color: darken(#fff, 20%);
+			}
 		}
+	}
+	textarea {
+		height: 200px !important;
 	}
 }
 // Block reveal

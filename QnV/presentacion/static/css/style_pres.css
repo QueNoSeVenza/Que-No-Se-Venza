@@ -54,6 +54,15 @@ p {
     .panelbig a:hover {
       box-shadow: inset 200px 0 0 0 #FF2D55;
       color: #FFF; }
+  @media screen and (max-width: 600px) {
+    .panelbig #rev-1 {
+      margin-top: 15%; }
+    .panelbig a {
+      position: absolute;
+      text-align: center;
+      bottom: 50;
+      right: 30;
+      left: 30; } }
 
 .panelintro {
   padding-top: 40px; }
@@ -93,6 +102,9 @@ p {
     display: block;
     font-weight: 400;
     font-size: 1rem; }
+  @media screen and (max-width: 600px) {
+    .plate {
+      pointer-events: none; } }
 
 .panelcomo {
   margin-top: 80px;
@@ -119,6 +131,9 @@ p {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%; }
+  @media screen and (max-width: 600px) {
+    .panelcomo p, .panelcomo h2 {
+      text-align: center; } }
 
 .panelfinal {
   height: 500px;
@@ -136,26 +151,75 @@ p {
     -moz-transition: 0.5s;
     -o-transition: 0.5s;
     -webkit-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    box-shadow: -1px 10px 41px -8px rgba(0, 0, 0, 0.23); }
     .panelfinal a:hover {
       background-color: #707FF9; }
 
 footer {
+  padding-bottom: 40px;
   background-color: #15191C; }
-  footer form input[type="text"], footer form textarea, footer form input[type="email"] {
-    background-color: #2b3339;
-    margin: 10 0 10 0;
-    color: #fff;
-    padding: 12 35 12 35 !important;
-    border-radius: 3px;
-    border: none;
-    resize: none; }
-  footer form input[type="submit"] {
-    float: right;
+  footer h4 {
+    text-align: center;
     text-transform: uppercase;
-    padding: 12 35 12 35;
-    border: none;
-    border-radius: 5px; }
+    padding-top: 20px;
+    color: #fff;
+    padding-bottom: 15px;
+    border-bottom: 1px solid white; }
+  footer ul {
+    list-style-type: none;
+    color: #4c5a65;
+    /*.noupper {
+    	text-transform: none !important;
+    	font-size: 13px;
+    }*/ }
+    footer ul li {
+      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: -15px;
+      padding: 10 0 10 0; }
+      footer ul li:before {
+        content: '- '; }
+    footer ul #comunicate {
+      text-align: right; }
+      footer ul #comunicate:before {
+        content: none; }
+      footer ul #comunicate:after {
+        content: ' -'; }
+    @media screen and (max-width: 600px) {
+      footer ul li, footer ul #comunicate {
+        text-align: center; }
+        footer ul li:after, footer ul li:before, footer ul #comunicate:after, footer ul #comunicate:before {
+          content: ' - ' !important; } }
+  footer form {
+    font-size: 12px !important; }
+    footer form input[type="text"],
+    footer form textarea,
+    footer form input[type="email"] {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #2b3339;
+      margin: 10 0 10 0;
+      color: #fff;
+      padding: 12 35 12 35 !important;
+      border-radius: 0px;
+      border: none;
+      resize: none; }
+    footer form input[type="submit"] {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-left: 25px;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 10 25 10 25;
+      border: none;
+      margin-right: 12px; }
+      footer form input[type="submit"]:hover {
+        background-color: #cccccc; }
+  footer textarea {
+    height: 200px !important; }
 
 .content__title {
   font-size: 8vw;
