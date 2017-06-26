@@ -5,9 +5,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
-from datetime import datetime
 import datetime
-import donaciones.matchutils
+from donaciones.matchutils import *
 
 def principal(request):
     template = loader.get_template('index.html')
@@ -16,6 +15,16 @@ def principal(request):
         verificador = True
     context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
+
+
+def thanks(request):
+    return render(
+        request,
+        'thanks.html',
+        {}
+)
+
+##############################################################################
 
 def donar(request):
 
@@ -33,7 +42,7 @@ def donar(request):
         medicamento_donado_kwargs = {
 
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.datetime.strptime(request.POST.get('mes')+
+        'fecha_vencimiento' : datetime.strptime(request.POST.get('mes')+
                                         request.POST.get('anio'),
                                             '%m%Y').date(),
 
@@ -78,14 +87,6 @@ def donar(request):
 
         return redirect('/thanks')
                         
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
-
 def pedir(request):
 
     if 'POST' in request.method:
@@ -117,7 +118,7 @@ def pedir(request):
         #Deberiamos implementar un AJAX para verificar esto y agregar al form 
         #los campos restantes de medicamento.
         
-        except Medicamento.DoesNotExist():
+        except Medicamento.DoesNotExist:
 
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
@@ -126,5 +127,9 @@ def pedir(request):
             nuevo_pedido.save()            
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
-        getMatches(nuevo_pedido)
+        print(getMatches(nuevo_pedido))
         return redirect('/thanks')
+
+
+
+

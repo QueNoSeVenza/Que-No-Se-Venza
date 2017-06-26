@@ -45,7 +45,7 @@ class MedicamentoDonado(models.Model):
 
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     donacion = models.ForeignKey(Donacion, on_delete=models.CASCADE, related_name="medicamentos_donados")
-    cantidad = models.CharField(max_length=60)
+    cantidad = models.IntegerField()
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
     
@@ -57,14 +57,14 @@ class MedicamentoDonado(models.Model):
             return False
 
     def __str__(self):
-        return str(self.medicamento) + ": " + str(self.donacion.id)
+        return str(self.medicamento.nombre) + ": " + str(self.donacion.id)
 
     
 class Pedido(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE, related_name="pedidos")
-    cantidad = models.CharField(max_length=60)
+    cantidad = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return (self.medicamento) + ": " + str(self.id)    
+        return (self.medicamento.nombre) + ": " + str(self.id)    
