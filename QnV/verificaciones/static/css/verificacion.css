@@ -10,11 +10,12 @@ body {
 	border-color: #1eaedb;
 	background-color: #1eaedb;
 }
-
-.sp4{
+.sp4 {
 	margin-top: 4%;
 }
+
 /* Tablas */
+
 th,
 td {
 	padding: 12px 15px;
@@ -31,6 +32,7 @@ td:last-child {
 }
 
 /* Full */
+
 .full-width {
 	width: 100%;
 	box-sizing: border-box;
@@ -39,7 +41,8 @@ td:last-child {
 	width: 70%;
 }
 
-/* Forms */
+/* Input */
+
 input {
 	height: 38px;
 	padding: 6px 10px;
@@ -55,8 +58,33 @@ input {
 	font-weight: 600;
 	letter-spacing: .1rem;
 }
+input[type="checkbox"] {
+	display: none;
+}
+label input[type=checkbox] ~ span {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #888;
+	padding: 1px;
+	height: 20px;
+	width: 20px;
+	margin-right: 10px;
+}
+label input[type=checkbox]:checked ~ span {
+	/* image: Picol.org, cc-by 3.0, https://commons.wikimedia.org/wiki/File:Accept_Picol_icon.svg */
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M14 18L26 6l4 4-16 16L4 16l4-4z"/></svg>');
+	background-size: 100%;
+}
+@-moz-document url-prefix() {
+	input[type="checkbox"] {
+		height: 0px !important;
+	}
+}
 
 /* Button */
+
 .button {
 	display: inline-block;
 	height: 38px;
@@ -80,4 +108,25 @@ input {
 	color: #FFF;
 	background-color: #33C3F0;
 	border-color: #33C3F0;
+}
+
+/* h6 */
+
+h6 {
+	margin-top: 0;
+	margin-bottom: 2rem;
+	font-weight: 300;
+	font-size: 1.1rem;
+	line-height: 1.6;
+	letter-spacing: 0;
+}
+
+/* entrada.html */
+
+.uptitle {
+	font-size: .8rem;
+	font-weight: 400;
+	border: 1px solid #616161;
+	color: #424242;
+	padding: 10 10 10 10;
 }

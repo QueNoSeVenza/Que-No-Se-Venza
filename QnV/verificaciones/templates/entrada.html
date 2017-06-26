@@ -1,27 +1,65 @@
-<form action="/verificacion/entrada/" method="POST">
-	{% csrf_token %}
-	<input type="hidden" name="donation_id" value="{{donacion.id}}" /> Verificar si los siguientes datos coinciden con los de medicamento presentado:
-	<br>
-	<input type="checkbox" name="checks" value="nombre">Nombre : {{donacion.medicamento.nombre}}
-	<br>
-	<input type="checkbox" name="checks" value="tipo">Tipo : {{donacion.medicamento.tipo}}
-	<br>
-	<input type="checkbox" name="checks" value="fecha">Fecha de vencimiento : {{donacion.fecha_vencimiento}}
-	<br> Especificar la función terapeutica:
-	<br>
-	<label for="id_funcion"></label>
-	<select id="id_funcion" name="funcion">
-		{% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
-		<option value="{{option.0}}">{{option.0}}</option>
-	</select>
-	{% endfor %}
-	<label for="id_prescripcion"></label>
-	<select id="id_prescripcion" name="prescripcion">
-		}
-		<option value="True">Si</option>
-		<option value="False">No</option>
+{% load static %} {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/verificacion.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/_grid.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,600">
+<div class="row">
+	<div class="col s12 center">
+		<form action="/verificacion/entrada/" method="POST">
+			{% csrf_token %}
+			<div class="col s10 offset-s1">
+				<div class="col s12">
+					<div class="col s8 offset-s2">
+						<!--<input type="hidden" name="donation_id" value="{{donacion.id}}"/>-->
+						<h4 class="uptitle">VERIFICAR SI LOS SIGUIENTES DATOS COINCIDEN CON LOS DEL MEDICAMENTO</h4>
+					</div>
+				</div>
+				<!--Valores-->
+				<div class="col s2">
+					<h6>Nombre</h6>
+					<label>
+						<input type="checkbox" name="checks" value="nombre" />
+						<span></span>{{donacion.medicamento.nombre}}
+					</label>
+				</div>
+				<div class="col s2">
+					<h6>Tipo</h6>
+					<label>
+						<input type="checkbox" name="checks" value="tipo" />
+						<span></span>{{donacion.medicamento.tipo}}
+					</label>
+				</div>
+				<div class="col s3">
+					<h6>Fecha de vencimiento</h6>
+					<label>
+						<input type="checkbox" name="checks" value="fecha" />
+						<span></span>{{donacion.fecha_vencimiento}}
+					</label>
+					
+				</div>
+				<div class="col s2">
+					<h6>Función terapeutica</h6>
 
-	</select>
-	<br>
-	<input type="submit" value="Submit">
-</form>
+					<label for="id_funcion"></label>
+					<select id="id_funcion" name="funcion">
+						{% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
+						<option value="{{option.0}}">{{option.0}}</option>
+					</select>
+					{% endfor %}</div>
+				<label for="id_prescripcion"></label>
+				<div class="col s2">
+					<h6>Androgenos</h6>
+					<select id="id_prescripcion" name="prescripcion">
+						<option value="True">Si</option>
+						<option value="False">No</option>
+					</select>
+				</div>
+
+				<br><br>
+				<div class="col s12" style="margin-top:40px;">
+					<input class="button button-primary" type="submit" value="Aceptar">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
