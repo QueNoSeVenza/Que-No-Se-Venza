@@ -65,11 +65,12 @@
 		<div class="row">
 			<div class="col s12 panelcomo center">
 				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
+
+				<!-- Primer paso -->
 				<table>
-					<tr>	
+					<tr>
 						<td>
-							<div class="hide-on-mobile frame  fadeonscroll-left">
-								<span class="helper"></span><img src="{% static 'css/img/step1.png' %}" height=300 />
+							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 />
 							</div>
 						</td>
 						<td>
@@ -81,40 +82,39 @@
 					</tr>
 				</table>
 
-				<div class="col s12">
-					<div class="col m6 fadeonscroll-left hide-on-mobile">
-						<div class=frame>
-							<span class="helper"></span><img src="{% static 'css/img/step1.png' %}" height=300 />
-						</div>
-					</div>
-					<div class="col s12 m6 right fadeonscroll">
-						<h2>Registrate</h2>
-						<p class="col m10 offset-m2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-					</div>
+				<!-- Segundo paso -->
+				<table>
+					<tr>
+						<td>
+							<div class="col m12 fadeonscroll">
+								<h2>Completa el formulario</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+							</div>
+						</td>
+						<td>
+							<div class="hide-on-mobile frame  fadeonscroll-right">
+								<img src="{% static 'css/img/step2.png' %}" height=300 />
+							</div>
+						</td>
+					</tr>
+				</table>
 
-				</div>
-				<div class="col s12">
-					<div class="col s12 m6 left fadeonscroll">
-						<h2>Completa el formulario</h2>
-						<p class="col m10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-					</div>
-					<div class="col m6 rightimg hide-on-mobile fadeonscroll-right">
-						<div class=frame>
-							<span class="helper"></span><img src="{% static 'css/img/step2.png' %}" height=300 />
-						</div>
-					</div>
-				</div>
-				<div class="col s12">
-					<div class="col m6 hide-on-mobile fadeonscroll-left">
-						<div class=frame>
-							<span class="helper"></span><img src="{% static 'css/img/step1.png' %}" height=300 />
-						</div>
-					</div>
-					<div class="col s12 m6 right fadeonscroll">
-						<h2>Paso 3</h2>
-						<p class="col m10 offset-m2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-					</div>
-				</div>
+				<!-- Tercer paso -->
+				<table>
+					<tr>
+						<td>
+							<div class="hide-on-mobile frame  fadeonscroll-left">
+								<img src="{% static 'css/img/step1.png' %}" height=300 />
+							</div>
+						</td>
+						<td>
+							<div class="col m12 right fadeonscroll">
+								<h2>Registrate</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</section>
@@ -135,19 +135,29 @@
 			</div>
 		</div>
 	</section>
-	<!-- cd-section -->
 
 	<footer>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+		<div class="row">
+			<div class="col s6">
+			</div>
+			<div class="col s6">
+				<form>
+					<h2>Envianos un mensaje</h2>
+					<div class="row">
+						<div class="col s6">
+							<input class="col s12" placeholder="Nombre" id="exampleEmailInput" type="text">
+						</div>
+						<div class="col s6">
+							<input class="col s12" placeholder="Correo electrónico" type="email">
+						</div>
+					</div>
+					<div class="col s12">
+						<textarea class="col s12" placeholder="Mensaje" id="exampleMessage"></textarea>
+					</div>
+					<input class="button-primary" value="Enviar" type="submit">
+				</form>
+			</div>
+		</div>
 	</footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -216,4 +226,5 @@
 		});
 	</script>
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   font-family: 'Montserrat', sans-serif; }
 
 body {
@@ -8,6 +9,7 @@ body {
   overflow-x: hidden; }
 
 a {
+  font-weight: 600;
   text-decoration: none !important; }
 
 h2 {
@@ -96,19 +98,12 @@ p {
   margin-top: 80px;
   background-color: #000;
   padding-bottom: 8% !important; }
+  .panelcomo h2 {
+    color: #fff; }
   .panelcomo .frame {
-    height: 350px;
-    /* equals max image height */
+    margin-top: 50px;
     width: 100%;
-    white-space: nowrap;
-    text-align: center;
-    margin: 1em 0; }
-    .panelcomo .frame .helper {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle; }
-    .panelcomo .frame img {
-      vertical-align: middle; }
+    text-align: center; }
   .panelcomo .right {
     float: right;
     text-align: right; }
@@ -147,6 +142,20 @@ p {
 
 footer {
   background-color: #15191C; }
+  footer form input[type="text"], footer form textarea, footer form input[type="email"] {
+    background-color: #2b3339;
+    margin: 10 0 10 0;
+    color: #fff;
+    padding: 12 35 12 35 !important;
+    border-radius: 3px;
+    border: none;
+    resize: none; }
+  footer form input[type="submit"] {
+    float: right;
+    text-transform: uppercase;
+    padding: 12 35 12 35;
+    border: none;
+    border-radius: 5px; }
 
 .content__title {
   font-size: 8vw;

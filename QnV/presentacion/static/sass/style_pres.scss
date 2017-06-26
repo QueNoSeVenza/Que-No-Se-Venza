@@ -12,6 +12,7 @@ $gris-claro: #fcfcfc;
 html,
 body {
 	height: 100%;
+	width: 100%;
 	font-family: 'Montserrat', sans-serif;
 }
 body {
@@ -19,6 +20,7 @@ body {
 	overflow-x: hidden;
 }
 a {
+	font-weight: 600;
 	text-decoration: none !important;
 }
 h2 {
@@ -126,21 +128,13 @@ p {
 	margin-top: 80px;
 	background-color: #000;
 	padding-bottom: 8% !important;
+	h2{
+		color: #fff;
+	}
 	.frame {
-		height: 350px;
-		/* equals max image height */
+		margin-top: 50px;
 		width: 100%;
-		white-space: nowrap;
 		text-align: center;
-		margin: 1em 0;
-		.helper {
-			display: inline-block;
-			height: 100%;
-			vertical-align: middle;
-		}
-		img {
-			vertical-align: middle;
-		}
 	}
 	.right {
 		float: right;
@@ -189,6 +183,24 @@ p {
 // Footer
 footer {
 	background-color: $gris-oscuro;
+	form{
+		input[type="text"], textarea, input[type="email"]{
+			background-color: lighten($gris-oscuro, 10%);
+			margin: 10 0 10 0;
+			color: #fff;
+			padding: 12 35 12 35 !important;
+			border-radius: 3px;
+			border: none;
+			resize: none;
+		}
+		input[type="submit"]{
+			float: right;
+			text-transform: uppercase;
+			padding: 12 35 12 35;
+			border: none;
+			border-radius: 5px;
+		}
+	}
 }
 // Block reveal
 .content__title {
