@@ -59,6 +59,9 @@ def donar(request):
  
         #De lo contrario, además guardo un medicamento.
         else:
+            print "else"
+            guardarMedicamento(request, med_donar)
+            return redirect('/main')
 
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
