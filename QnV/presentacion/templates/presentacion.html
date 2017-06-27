@@ -160,16 +160,7 @@
 				<div class="pure-u-md-1-4">
 					<input placeholder="Nombre" class="blancot" type="text" />
 				</div>
-				<div class="pure-u-md-1-4">
-					<input placeholder="Asunto" class="blancot" type="text" />
-				</div>
-
-				<div class="pure-u-md-1-2">
-					<textarea placeholder="Mensaje" class="blancot"></textarea>
-				</div>
-				<div class="pure-u-md-1">
-				<img class="center" id="subircontacto" src="{% static 'css/img/arrowtop.png' %}">
-				</div>
+	
 			</div>
 		</div>
 	</section>
@@ -265,12 +256,6 @@
 				});
 			});
 
-
-			$('textarea').each(function() {
-				this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-			}).on('input', function() {
-				this.style.height = 'auto';
-				this.style.height = (this.scrollHeight) + 'px';
 			});
 
 		});

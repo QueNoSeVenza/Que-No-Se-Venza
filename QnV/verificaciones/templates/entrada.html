@@ -1,6 +1,4 @@
-
-
- <form action="/verificar/entrada/" method="POST">
+<form action="/verificar/entrada/" method="POST">
  {% csrf_token %}
    <input type="hidden" name="donation_id" value="{{donacion.id}}"/>
  Verificar si los siguientes datos coinciden con los de medicamento presentado: <br>
