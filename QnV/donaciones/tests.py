@@ -1,8 +1,18 @@
 from django.test import TestCase, RequestFactory
 from donaciones.views import donar
 
+
 class DonarTests(TestCase):
-	def test_medicamento_existe_entonces_se_guarda_nueva_donacion_con__med_existente(self):
+    def setUp(self):
+        self.superuser = get_user_model().objects.create_superuser(
+            email='superuser@example.com',
+            username='superuser',
+            password='secret',
+        )
+        super(HistoryViewsTests, self).setUp()
+
+	def test_medicamento_existe_entonces_se_guarda_nueva_donacion_con_med_existente(self):
+	request.user = self.user
 		f = RequestFactory()
 		test_request = f.post('xxx', {'donar_nombre': 'TAFIROL',
 									  'donar_concentracion_gramos': '500',
@@ -11,7 +21,7 @@ class DonarTests(TestCase):
 									  'donar_fecha_vencimiento' : '',
 									  'donar_tipo': 'Pastillas',
 									  'donar_droga': 'PARACETAMOL',
-									  'author': ''
+									  'author': 'username',
 									  })
 		donar(test_request)
 		self.assertTrue(False)
