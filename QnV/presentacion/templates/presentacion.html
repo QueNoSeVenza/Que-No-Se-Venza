@@ -1,7 +1,8 @@
 {% load static %} {% load staticfiles %}
-<html>
 
+<html>
 <head>
+	<!-- Global -->
 	<title>QNV</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
 
@@ -9,33 +10,51 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
 
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style_pres.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/_grid.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'blockreveal/css/revealer.css' %}">
+	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style_pres.css' %}">
+	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+	<link rel="stylesheet" href="{% static 'blockreveal/css/revealer.css' %}">
 </head>
-
 <body>
+	
+	<!-- Nav -->
+	<nav>
+		<div class="col s12">
+			<ul class="center">
+				<div class="center">
+					<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
+				</div>
+				<li><a>QUE SOMOS</a></li>
+				<li><a>DONDE DONAR</a></li>
+				<li class="left-nav"><a>COMO DONAR</a></li>
+				<li class="left-nav"><a>CONTACTO</a></li>
+			</ul>
+		</div>
+	</nav>
+
 	<section id="section1" class="cd-section">
 		<div class="row">
 			<div class="col s12 panelbig fadeonscroll-title">
 				<div class="titleblock">
-					<h2 class="content__title content__title--center">
+					<h2 class="content__title content__title--center hide-on-mobile">
 					<div id="rev-1" class="content__title__inner">Proyecto</div><br/>
 					<div id="rev-2" class="content__title__inner content__title__inner--offset-1">Que no venza</div>
 				</h2>
 					<div class="center">
 						<a href="#">INGRESAR</a>
 					</div>
+					<div id="clipped-title1">
+						<h1 class="tinier-font hide-on-large">QUE NO <span>VENZA</span></h1>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- cd-section -->
+	<!-- Section -->
 	<section id="section2" class="cd-section">
 		<div class="row">
 			<div class="col s12 panelintro">
-				<div class="col s10 offset-s1 fadeonscroll">
+				<div class="col s12 fadeonscroll">
 					<h2 class="center">¿Qué es que no venza?</h2>
 					<div class="col s12 m10 offset-m1 center">
 						<p class="">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean id purus. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Praesent semper, neque vel condimentum hendrerit, lectus elit pretium ligula, nec consequat nisl velit at dui. Nam sed nisl nec elit suscipit ullamcorper. Quisque pretium rutrum ligula. Vivamus quis mi. Praesent scelerisque. Vestibulum non arcu a ante feugiat vestibulum. Phasellus lacinia iaculis mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam massa turpis, nonummy et, consectetuer id, placerat ac, ante. Integer tempus malesuada pede. Pellentesque tempor. </p>
@@ -44,23 +63,23 @@
 			</div>
 		</div>
 	</section>
-	<!-- cd-section -->
 
+	<!-- Section -->
 	<section id="section3" class="cd-section">
 		<div class="row">
 			<div class="col s12 paneldonde center">
 				<h2 class="fadeonscroll wtitle">Puntos de depósito</h2>
-				<div class="col s12 m4 offset-m1 fadeonscroll-left">
+				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
 					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Enrique Bochini</span></div>
 				</div>
-				<div class="col s12 m4 offset-m2 fadeonscroll-right rightimg">
+				<div class="col s12 m8 offset-m2 l4 offset-l2 fadeonscroll-right rightimg">
 					<div id="plate-default-2" class="plate pointer">Talar<span>Daniel Montenegro 1010</span></div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- cd-section -->
 
+	<!-- Section -->
 	<section id="section4" class="cd-section">
 		<div class="row">
 			<div class="col s12 panelcomo center">
@@ -70,7 +89,7 @@
 				<table>
 					<tr>
 						<td>
-							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 />
+							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 1"/>
 							</div>
 						</td>
 						<td>
@@ -93,7 +112,7 @@
 						</td>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-right">
-								<img src="{% static 'css/img/step2.png' %}" height=300 />
+								<img src="{% static 'css/img/step2.png' %}" height=300 alt="Paso 3"/>
 							</div>
 						</td>
 					</tr>
@@ -104,7 +123,7 @@
 					<tr>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-left">
-								<img src="{% static 'css/img/step1.png' %}" height=300 />
+								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3"/>
 							</div>
 						</td>
 						<td>
@@ -119,7 +138,7 @@
 		</div>
 	</section>
 
-	<!-- Section 5 -->
+	<!-- Section -->
 	<section id="section5" class="cd-section">
 		<div class="row">
 			<div class="panelfinal">
@@ -136,9 +155,10 @@
 		</div>
 	</section>
 
+	<!-- Footer -->
 	<footer>
 		<div class="row fadeonscroll">
-			<div class="col s12 m3 offset-m1">
+			<div class="col s12 l3 offset-l1">
 				<h4>Navegacion</h4>
 				<ul>
 					<li>Empezar</li>
@@ -147,7 +167,7 @@
 					<li>Cómo donar</li>
 				</ul>
 			</div>
-			<div class="col s12 m4">
+			<div class="col s12 l4">
 				<h4>correo</h4>
 				<form>
 					<div class="row">
@@ -162,10 +182,11 @@
 						<textarea class="col s12" placeholder="Mensaje" id="exampleMessage"></textarea>
 					</div>
 					<div class="col s12 center">
-					<input value="Enviar" type="submit"></div>
+						<input value="Enviar" type="submit">
+					</div>
 				</form>
 			</div>
-			<div class="col s12 m3">
+			<div class="col s12 l3">
 				<h4>Contacto</h4>
 				<ul>
 					<li id="comunicate">+54 9 351 5115621</li>
