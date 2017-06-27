@@ -25,7 +25,9 @@
 								<label for="email">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="uspswd" name="password" type="password" class="monts" required>
+								<input id="uspswd" name="password" type="password" class="monts"
+								       required oninvalid="setCustomValidity('El password es obligatorio ')"
+                       oninput="setCustomValidity('')">
 								<label for="uspswd">Contraseña</label>
 							</div>
 							<button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace"
@@ -64,15 +66,21 @@
 							</div>
 
 							<div class="input-field col s12 m10 push-m1">
-								<input id="corr" name="email" type="email" class="monts" required>
+								<input id="corr" name="email" type="email" class="monts" required
+								       oninvalid="setCustomValidity('Debe ingresar un email válido')"
+                       oninput="setCustomValidity('')">
 								<label for="corr">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="regpass" name="pass1" type="password" class="monts" required>
+								<input id="regpass" name="pass1" type="password" class="monts" required
+											 oninvalid="setCustomValidity('Debes ingresar una contraseña')"
+								       oninput="setCustomValidity('')">
 								<label for="popl">Contraseña</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="regpass2" name="pass2" type="password" class="monts" required>
+								<input id="regpass2" name="pass2" type="password" class="monts" required
+								       oninvalid="setCustomValidity('#ElQueLasHaceLasPaga')"
+								       oninput="setCustomValidity('')">
 								<label for="popl2">Repetir contraseña</label>
 							</div>
 							<button class="waves-effect waves-light btn logBtn monts green accent-2 z-depth-0 datSpace"
@@ -90,26 +98,71 @@
 	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 	<script>
 // Desp de que te tire error del mail hay q apretar 2 veces (ai don nou guai)
-	$(document).ready(function () {
-    var intputElements = document.getElementsByTagName("INPUT");
-    for (var i = 0; i < intputElements.length; i++) {
-        intputElements[i].oninvalid = function (e) {
-            e.target.setCustomValidity("");
-            if (!e.target.validity.valid) {
-                if (e.target.name == "username") {
-                    e.target.setCustomValidity("Ingrese un email valido");
-                }else if (e.target.name == "password") {
-                    e.target.setCustomValidity("La contraseña no puede ser nula");
-                }else if (e.target.name == "email") {
-									e.target.setCustomValidity("Ingrese un email valido");
-							}
-	              else {
-                    e.target.setCustomValidity("Este campo es obligatorio");
-                }
-            }
-        }
-    	}
-	});
+	// $(document).ready(function () {
+  //   var intputElements = document.getElementsByTagName("INPUT");
+  //   for (var i = 0; i < intputElements.length; i++) {
+  //       intputElements[i].oninvalid = function (e) {
+  //           e.target.setCustomValidity("");
+  //           if (!e.target.validity.valid) {
+  //               if (e.target.name == "username") {
+  //                   e.target.setCustomValidity("Ingrese un email valido");
+  //               }else if (e.target.name == "password") {
+  //                   e.target.setCustomValidity("La contraseña no puede ser nula");
+  //               }else if (e.target.name == "email") {
+	// 								e.target.setCustomValidity("Ingrese un email valido");
+	// 						}
+	//               else {
+  //                   e.target.setCustomValidity("Este campo es obligatorio");
+  //               }
+  //           }
+  //       }
+  //   	}
+	// });
+	(function (exports) { // esto hace que ande bien lo de los mesajes veeebozz
+	function valOrFunction(val, ctx, args) {
+			if (typeof val == "function") {
+					return val.apply(ctx, args);
+			} else {
+					return val;
+			}
+	}
+
+	function InvalidInputHelper(input, options) {
+			input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+
+			function changeOrInput() {
+					if (input.value == "") {
+							input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+					} else {
+							input.setCustomValidity("");
+					}
+			}
+
+			function invalid() {
+					if (input.value == "") {
+							input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
+					} else {
+						 input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
+					}
+			}
+
+			input.addEventListener("change", changeOrInput);
+			input.addEventListener("input", changeOrInput);
+			input.addEventListener("invalid", invalid);
+	}
+	exports.InvalidInputHelper = InvalidInputHelper;
+})(window);
+
+
+
+InvalidInputHelper(document.getElementById("email"), {
+	defaultText: "Ingrese una direccion de correo!",
+	emptyText: "Ingrese una direccion de correo!",
+	invalidText: function (input) {
+			return 'La direccion de correo "' + input.value + '" no es valida!';
+	}
+});
+
 		$(document).ready(function() {
 			$(".register-content").hide();
 			$("#regBtn").click(function() {
