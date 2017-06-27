@@ -53,7 +53,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com",]
+ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com", u"127.0.0.1"]
 ROOT_URLCONF = 'QnV.urls'
 
 TEMPLATES = [
