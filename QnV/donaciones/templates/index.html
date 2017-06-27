@@ -87,35 +87,49 @@
                         <form method="POST" action="{% url 'donaciones:donar' %}">
                             {% csrf_token %}
                             <div class="input-field col s4 offset-s2 roboto">
-                                <input name="donar_nombre" id="a" type="text">
+                                <input name="donar_nombre" id="donar_nombre" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="a">Nombre Comercial</label>
                             </div>
                             <div class="input-field col s4">
-                                <input name="donar_concentracion_gramos" id="b" type="text">
+                                <input name="donar_concentracion_gramos" id="donar_concentracion_gramos" type="text"
+                                       required oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="b">Concentracion en Gramos</label>
                             </div>
                             <div class="input-field col s4 offset-s2">
-                                <input name="donar_cantidad" id="c" type="text">
+                                <input name="donar_cantidad" id="donar_cantidad" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="c">Cantidad</label>
                             </div>
                             <div class="input-field col s4">
-                                <input name="donar_laboratorio" id="c" type="text">
+                                <input name="donar_laboratorio" id="donar_laboratorio" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="c">Laboratorio</label>
                             </div>
                             <div class="input-field col s8 offset-s2">
-                                <input name="donar_droga" id="c" type="text">
+                                <input name="donar_droga" id="donar_droga" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="c">Droga</label>
                             </div>
-                            <div class="input-field col s4">
-                                <input name="mes" id="c" type="text">
+                            <div class="input-field col s4 offset-s2">
+                                <input name="mes" id="mes" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="c">Mes</label>
                             </div>
                             <div class="input-field col s4">
-                                <input name="anio" id="c" type="text">
+                                <input name="anio" id="anio" type="text" required 
+                                       oninvalid="setCustomValidity('Este campo es obligatorio')" 
+                                       oninput="setCustomValidity('')">
                                 <label for="c">Año</label>
                             </div>
                             <div class="input-field col s8 offset-s2">
-                                <select name="donar_tipo">
+                                <select name="donar_tipo" id="donar_tipo">
                                     <option value="" disabled selected>Elije una opcion</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
@@ -152,15 +166,15 @@
                         <form method="POST" action="{% url 'donaciones:pedir' %}">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_nombre" id="c" type="text">
+                                <input name="pedir_nombre" id="medicamento" type="text">
                                 <label for="c">Medicamento</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_gramos" id="c" type="text">
+                                <input name="pedir_gramos" id="pedir_gramos" type="text">
                                 <label for="c">Concentracion en Gramos</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_cantidad" id="c" type="text">
+                                <input name="pedir_cantidad" id="pedir_cantidad" type="text">
                                 <label for="c">Cantidad</label>
                             </div>
                             <div class="col s12 center">

@@ -21,7 +21,7 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+"/"+request.POST.get('anio')
+        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
@@ -31,18 +31,14 @@ def donar(request):
         }
 
         medicamento_donado_kwargs = {
-
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.datetime.strptime(request.POST.get('mes')+
-                                        request.POST.get('anio'),
-                                            '%m%Y').date(),
-
+            
+        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
+                                            '%m%Y').date()
         }
 
         donacion_kwargs = {
-
         'user' : request.user,
-
         }   
 
         
