@@ -83,7 +83,7 @@
         <div id="fullpage">
             <div class="section">
                 <!--Slide rojo donar-->
-                <div class="slide grey lighten-4" id="slide1">
+                <div class="slide grey lighten-5 fp-auto-height-responsive" id="slide1">
                     <div class="row center white-text">
                         <form method="POST" action="{% url 'donaciones:donar' %}">
                             {% csrf_token %}
@@ -107,7 +107,7 @@
                                 <input name="donar_droga" id="c" type="text">
                                 <label for="c">Droga</label>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="input-field col s4 offset-s2 roboto">
                                 <input name="mes" id="c" type="text">
                                 <label for="c">Mes</label>
                             </div>
