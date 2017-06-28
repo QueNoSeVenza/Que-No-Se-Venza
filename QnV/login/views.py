@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-
+from django.http import JsonResponse
 # Create your views here.
 def login(request):
     template = loader.get_template('login.html')
@@ -42,12 +42,10 @@ def reg(request):
         u = User.objects.filter(username=email)
         if u is not None:
             if u.exists():
-                print "entro"
                 messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-<<<<<<< HEAD
             else:
-                print "Juegue"
+
                 user = User.objects.create_user(email, email, password)
                 user.first_name = name
                 user.save()
@@ -57,13 +55,17 @@ def reg(request):
                     return redirect('/principal')
                 else:
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                    print "messi"
-        else:
-            print "no entro"
-=======
         else:
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
->>>>>>> 11f345c87b8d986e01c9b223fd22b291f7f207ce
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# def validate_email(request):
+#     email = request.GET.get('email', None)
+#     data = {
+#         'is_taken': User.objects.filter(email__iexact=email).exists()
+#     }
+#     if data['is_taken']:
+#         data['error_message'] = 'Ese correo electronico ya ha sido utilizado.'
+#     return JsonResponse(data)
