@@ -136,12 +136,15 @@
                 					<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text semibold">Fran</span></h3>
                 					<p class="col m6 push-m3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
                 				</div>
-
-                				<div class="col l6 push-l3 center btnsection">
-                					<button class="waves-effect waves-light btn-large red z-depth-0 semibold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
-                					<button class="waves-effect waves-light btn-large blue z-depth-0 semibold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
-                				</div>
-                			</div>
+                        <div class="col l6 push-l3 center btnsection">
+                            <button class="waves-effect waves-light btn-large red z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
+                            {% if verificador %}
+                            <a href="/verificacion" class="waves-effect waves-light btn-large green z-depth-3 montserrat-bold optbutton" id="panelbtn" >VERIFICAR</a>
+                            {% endif %}
+                            <button class="waves-effect waves-light btn-large blue z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
+                        </div>
+                    </div>
+                </div>
                 <!--Slide derecho solicitar-->
                 <div class="slide grey lighten-4" id="slide3">
                     <div class="row center">

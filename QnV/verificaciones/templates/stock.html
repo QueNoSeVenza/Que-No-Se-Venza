@@ -14,11 +14,14 @@
  th, td {
     border: 1px solid black;
 }
-.True{
+.Disponible{
 	background-color: green;
 }
 
-.False{
+.Pendiente{
+	background-color: yellow;
+}
+.Eliminado{
 	background-color: red;
 }
 
@@ -27,23 +30,25 @@
 
 <table>
 <tr id = "header">
+	<th>ID</th>
 	<th>Nombre</th>
 	<th>Laboratorio</th>
 	<th>Tipo</th>
 	<th>Función farmaceutica</th>
-	<th>Prescripción</th>
+	<th>¿Requiere receta?</th>
 	<th>Fecha de vencimiento</th>
 
 </tr>
 
-{% for medicamento in medicamentos %}
-<tr class = "{{medicamento.stock}}">
-	<th>{{medicamento.nombre}}</th>
-	<th>{{medicamento.laboratorio}}</th>
-	<th>{{medicamento.tipo}}</th>
-	<th>{{medicamento.funcion}}</th>
-	<th>{{medicamento.prescripcion}}</th>
-	<th>{{medicamento.fecha_vencimiento}}</th>
+{% for donacion in donaciones %}
+<tr class = "{{donacion.stock}}">
+	<th>{{donacion.id}}</th>
+	<th>{{donacion.medicamento.nombre}}</th>
+	<th>{{donacion.medicamento.laboratorio}}</th>
+	<th>{{donacion.medicamento.tipo}}</th>
+	<th>{{donacion.medicamento.funcion}}</th>
+	<th>{{donacion.medicamento.prescripcion}}</th>
+	<th>{{donacion.fecha_vencimiento}}</th>
 
 </tr>
 	

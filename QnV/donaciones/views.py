@@ -7,6 +7,7 @@ from django.template import loader
 from django.utils import timezone
 from datetime import datetime
 import datetime
+from donaciones.matchutils import *
 
 def principal(request):
     template = loader.get_template('index.html')
@@ -15,6 +16,16 @@ def principal(request):
         verificador = True
     context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
+
+
+def thanks(request):
+    return render(
+        request,
+        'thanks.html',
+        {}
+)
+
+##############################################################################
 
 def donar(request):
 
@@ -32,22 +43,23 @@ def donar(request):
         medicamento_donado_kwargs = {
 
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.datetime.strptime(request.POST.get('mes')+
+        'fecha_vencimiento' : datetime.strptime(request.POST.get('mes')+
                                         request.POST.get('anio'),
                                             '%m%Y').date(),
-        }
-        
-        donacion_kwargs = {
-        'user' : request.user,
-        }
-        
-        #Intentando seleccionar el Medicamento generico.
 
+        }
+
+        donacion_kwargs = {
+
+        'user' : request.user,
+
+        }   
+
+        
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
-        if Medicamento.objects.filter(**medicamento_kwargs).exists():
+        try:
 
             medicamento_guardado = Medicamento.objects.get(**medicamento_kwargs)
-
             nueva_donacion = Donacion(**donacion_kwargs)
             nueva_donacion.save()
 
@@ -58,11 +70,7 @@ def donar(request):
             nuevo_medicamento_donado.save()
  
         #De lo contrario, además guardo un medicamento.
-        else:
-            print "else"
-            guardarMedicamento(request, med_donar)
-            return redirect('/main')
-
+        except Medicamento.DoesNotExist:
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
 
@@ -70,12 +78,10 @@ def donar(request):
             nueva_donacion.save()
 
             medicamento_donado_kwargs['donacion'] = nueva_donacion
-            medicamento_donado_kwargs['medicamento'] = medicamento_guardado 
+            medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()   
-
-
 
         return redirect('/thanks')
                         
@@ -89,74 +95,48 @@ def thanks(request):
 
 
 def pedir(request):
+
     if 'POST' in request.method:
-        pedir_nombre = request.POST['pedir_nombre']
-        pedir_gramos = request.POST['pedir_gramos']
-        pedir_cantidad = request.POST['pedir_cantidad']
-        author = request.user
+        #Capturando argumentos para un Pedido y su Medicamento
+        medicamento_kwargs = {
+
+            'nombre' :  request.POST['pedir_nombre'],
+            'concentracion_gramos' : request.POST['pedir_gramos'], 
+
+        }
+
+        pedido_kwargs = {
+
+            'user' : request.user,
+            'cantidad' : eval(request.POST['pedir_cantidad'],)
+
+        }
+
+        #Intento crear el Pedido con un Medicamento existente.
+        try:
+
+            pedido_kwargs['medicamento'] = Medicamento.objects.get(**medicamento_kwargs)
+            nuevo_pedido = Pedido(**pedido_kwargs)
+            nuevo_pedido.save()
+
+
+
+        #En caso de que lo anterior no funcione creo un Pedido y su Medicamento.
+        #Deberiamos implementar un AJAX para verificar esto y agregar al form 
+        #los campos restantes de medicamento.
         
-        arry_pedido = [pedir_nombre,pedir_gramos,pedir_cantidad]
-        fechas_medicamento = []
-        
-        
-        if Medicamento.objects.filter(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1]).exists():
-            
-            medicamento_pedido = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
-            print medicamento_pedido
-            
-            donaciones_medicamento = MedicamentoDonado.objects.filter(medicamento=medicamento_pedido)
-            print donaciones_medicamento
-        
-            for a in donaciones_medicamento:
-                print a
-                if timezone.now().date() < a.fecha_vencimiento: 
-                    fechas_medicamento.append(a.fecha_vencimiento)
-            
-            print fechas_medicamento
-            
-            fe = fechas_medicamento[0]
-            print fe
-            
-            for b in fechas_medicamento:
-                print b
-                if fe > b:
-                    print "if"
-                    fe = b
-            
-            print fe
-            
-            return redirect('/thanks')
-        else:
-            print "else"
-            return redirect('/thanks')
-        
-        
-        # fecha  LISTO
-            # no estar vencido   LISTO
-            # tiene que se proxima a el dia msimo LISTO
-            
-        #
-        
-        
-        
-        # cantidad 
-            # cantidad total de todas las donaciones del medicamento
-            # si es igual o menor
-                # restar si es meno o igual 
-                # mostrar otras opciones
-            # sino 
-                # mostrar la cantidad que tengo 
-                # mostrar otras opciones
-            
-            
-            
-            
-            
-#        if medicamento_pedido.exists():
-#            for m in medicamento_pedido:
-#                #
-#        medicamento_objeto = Medicamento.objects.get(nombre=arry_pedido[0], concentracion_gramos=arry_pedido[1])
-#        pedir_save = Pedir(user=author,
-#                          medicamento=medicamento_objeto)
-#        pedir_save.save()
-#        return redirect('/thanks')
+        except Medicamento.DoesNotExist:
+
+            nuevo_medicamento = Medicamento(**medicamento_kwargs)
+            nuevo_medicamento.save()
+            pedido_kwargs['medicamento'] = nuevo_medicamento
+            nuevo_pedido = Pedido(**pedido_kwargs)
+            nuevo_pedido.save()            
+
+        #Cambiar /thanks por la siguiente url del proceso de peticion.
+        print(getMatches(nuevo_pedido))
+        return redirect('/thanks')
+
+
+
+
