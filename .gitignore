@@ -1,4 +1,4 @@
 **.pyc
 **.sqlite3
 **.yml~
-
+**/migrations/0*.py
