@@ -41,21 +41,25 @@ def reg(request):
         password = request.POST['pass1']
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
-
         if u is not None:
-            user = User.objects.create_user(email, email, password)
-            user.first_name = name
-            user.save()
-            userant = authenticate(username=email, password=password)
-            if userant is not None:
-                auth_login(request, userant)
-                return redirect('/principal')
-            else:
+            if u.exists():
+                print "entro"
+                messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                print "messi"
+            else:
+                print "Juegue"
+                user = User.objects.create_user(email, email, password)
+                user.first_name = name
+                user.save()
+                userant = authenticate(username=email, password=password)
+                if userant is not None:
+                    auth_login(request, userant)
+                    return redirect('/principal')
+                else:
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                    print "messi"
         else:
-            print "malumabaibi"
-            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
+            print "no entro"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
