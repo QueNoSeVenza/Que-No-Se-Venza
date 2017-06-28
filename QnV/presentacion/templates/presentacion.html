@@ -1,0 +1,280 @@
+{% load static %} {% load staticfiles %}
+<html>
+
+<head>
+	<title>QNV</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_pres.css' %}">
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'Blockreveal/css/revealer.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vertical-navigation/css/vnav.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+</head>
+
+<body>
+	<nav id="cd-vertical-nav">
+		<ul>
+			<li>
+				<a href="#section1" data-number="1">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Portada</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section2" data-number="2">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Introducción</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section3" data-number="3">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Ubicación</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section4" data-number="4">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Cómo proceder</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section5" data-number="5">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Contacto</span>
+				</a>
+			</li>
+			<li>
+				<a href="#section6" data-number="6">
+					<span class="cd-dot"></span>
+					<span class="cd-label">Empezar</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<section id="section1" class="cd-section">
+		<div class="pure-u-md-1 panelbig">
+			<div class="titleblock">
+				<h2 class="content__title content__title--center">
+					<div id="rev-1" class="content__title__inner blancot">Proyecto</div><br/>
+					<div id="rev-2" class="content__title__inner content__title__inner--offset-1 blancot">Que no venza</div>
+				</h2>
+
+				<div class="center">
+					<button id="ingbtn">INGRESAR</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+	<section id="section2" class="cd-section">
+		<div class="pure-u-lg-1 panelintro">
+			<div class="fadeonscroll">
+				<h2 class="blancot center">¿Qué és que no venza?</h2>
+				<div class="pure-u-md-8-12 center">
+					<p class="blancot pure-u-md-3-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean id purus. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Praesent semper, neque vel condimentum hendrerit, lectus elit pretium ligula, nec consequat nisl velit at dui. Nam sed nisl nec elit suscipit ullamcorper. Quisque pretium rutrum ligula. Vivamus quis mi. Praesent scelerisque. Vestibulum non arcu a ante feugiat vestibulum. Phasellus lacinia iaculis mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam massa turpis, nonummy et, consectetuer id, placerat ac, ante. Integer tempus malesuada pede. Pellentesque tempor. </p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+	<section id="section3" class="cd-section">
+		<div class="pure-u-md-1 paneldonde center">
+			<h2 class="violeta fadeonscroll">Puntos de depósito</h2>
+			<div class="pure-u-md-8-12 fadeonscroll">
+				<p class="pure-u-md-3-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean id purus. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Praesent semper, neque vel condimentum hendrerit, lectus elit pretium ligula, nec consequat nisl velit at dui. Nam sed nisl nec elit suscipit ullamcorper. </p>
+			</div>
+			<div class="pure-u-md-1-2 fadeonscroll center">
+				<div class="grid">
+					<figure class="effect-sarah center">
+						<img src="{% static 'css/img/test.jpg' %}" alt="Ubicación" class="center" />
+						<figcaption>
+							<h2 class="mytitle">Mendiolaza</h2>
+							<p>Ubicación mas larga y larga y larga</p>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="pure-u-md-1-2 fadeonscroll rightimg">
+				<div class="grid">
+					<figure class="effect-sarah">
+						<img src="{% static 'css/img/test.jpg' %}" alt="Ubicación" />
+						<figcaption>
+							<h2 class="mytitle">Talar</h2>
+							<p>Ubicación mas larga y larga y larga</p>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+	<section id="section4" class="cd-section">
+		<div class="pure-u-md-1 panelcomo center">
+			<h2 class="blancot fadeonscroll">¿Cómo donar o solicitar?</h2>
+			<div class="pure-u-lg-1">
+				<div class="pure-u-lg-1-2 fadeonscroll">
+					<img src="{% static 'css/img/step1.png' %}">
+				</div>
+				<div class="pure-u-lg-1-2 right fadeonscroll">
+					<h2 class="blancot">Registrate</h2>
+					<p class="blancot">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+				</div>
+
+			</div>
+			<div class="pure-u-lg-1">
+				<div class="pure-u-lg-1-2 left fadeonscroll">
+					<h2 class="blancot">Completa el formulario</h2>
+					<p class="blancot">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+				</div>
+				<div class="pure-u-lg-1-2 rightimg  fadeonscroll">
+					<img src="{% static 'css/img/step2.png' %}">
+				</div>
+			</div>
+			<div class="pure-u-lg-1">
+				<div class="pure-u-lg-1-2  fadeonscroll">
+					<img src="{% static 'css/img/step1.png' %}">
+				</div>
+				<div class="pure-u-lg-1-2 right  fadeonscroll">
+					<h2 class="blancot">Paso 3</h2>
+					<p class="blancot">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+
+
+	<section id="section5" class="cd-section">
+		<div class="pure-u-md-1 panelcontact center">
+			<div class="fadeonscroll" id="contactsec">
+				<p class="blancot">Tenes dudas? Envianos un <span class="sliding-u">correo</span></p>
+			</div>
+			<div class="contactafter">
+				<div class="pure-u-md-1-4">
+					<input placeholder="Nombre" class="blancot" type="text" />
+				</div>
+				<div class="pure-u-md-1-4">
+					<input placeholder="Asunto" class="blancot" type="text" />
+				</div>
+
+				<div class="pure-u-md-1-2">
+					<textarea placeholder="Mensaje" class="blancot"></textarea>
+				</div>
+				<div class="pure-u-md-1">
+				<img class="center" id="subircontacto" src="{% static 'css/img/arrowtop.png' %}">
+				</div>	
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+	<section id="section6" class="cd-section">
+		<div class="pure-u-md-1 panelfinal">
+			<div class="fadeonscroll">
+				<div class="pure-u-md-8-12 center">
+					<h2 class="black-text center">Follow the code</h2>
+					<p class="pure-u-md-1-2 center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis</p>
+				</div>
+				<div class="center sp">
+					<a href="#" class="blancot">EMPEZAR</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cd-section -->
+
+	<footer>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</footer>
+
+	<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="{% static 'Blockreveal/js/main.js' %}"></script>
+	<script src="{% static 'Blockreveal/js/anime.min.js' %}"></script>
+	<script src="{% static 'vertical-navigation/js/main.js' %}"></script>
+	<script src="{% static 'vertical-navigation/js/modernizr.js' %}"></script>
+	<script>
+		window.sr = ScrollReveal();
+
+		/*Block reveal*/
+		function init() {
+			$("#ingbtn").fadeIn(600);
+			$(".titleblock").show();
+			var rev1 = new RevealFx(document.querySelector('#rev-1'), {
+				revealSettings: {
+					bgcolor: '#FF1744',
+					onCover: function(contentEl, revealerEl) {
+						contentEl.style.opacity = 1;
+					}
+				}
+			});
+			rev1.reveal();
+			var rev2 = new RevealFx(document.querySelector('#rev-2'), {
+				revealSettings: {
+					bgcolor: '#651FFF',
+					delay: 250,
+					onCover: function(contentEl, revealerEl) {
+						contentEl.style.opacity = 1;
+					}
+				}
+			});
+			rev2.reveal();
+		}
+
+		$(document).ready(function() {
+			$("#ingbtn").hide();
+			$(".titleblock").hide();
+			$(".contactafter").hide();
+			setTimeout(init, 200);
+			// Animation on scroll
+			sr.reveal('.fadeonscroll', {
+				duration: 700,
+				mobile: false,
+				viewFactor: 0.7,
+			});
+			// Contacto
+			$(".sliding-u").click(function() {
+				$("#contactsec").fadeOut("fast");
+				$(".contactafter").delay(400).fadeIn("fast");
+				$(".panelcontact").animate({
+					height: '350px',
+				});
+			});
+
+			$("#subircontacto").click(function() {
+				$(".contactafter").fadeOut("fast");
+				$("#contactsec").delay(400).fadeIn("fast");
+				$(".panelcontact").animate({
+					height: '150px',
+				});
+			});
+
+			
+			$('textarea').each(function() {
+				this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+			}).on('input', function() {
+				this.style.height = 'auto';
+				this.style.height = (this.scrollHeight) + 'px';
+			});
+
+		});
+	</script>
+</body>
+
+</html>

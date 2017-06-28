@@ -1,0 +1,52 @@
+{{string}}<br>
+<style type="text/css">
+	table {
+	width: 100%; 
+	border: 3px solid black;
+    border-collapse: collapse;
+}
+
+#header{
+
+	border: 3px solid black;
+
+}
+ th, td {
+    border: 1px solid black;
+}
+.True{
+	background-color: green;
+}
+
+.False{
+	background-color: red;
+}
+
+
+</style>
+
+<table>
+<tr id = "header">
+	<th>Nombre</th>
+	<th>Laboratorio</th>
+	<th>Tipo</th>
+	<th>Función farmaceutica</th>
+	<th>Prescripción</th>
+	<th>Fecha de vencimiento</th>
+
+</tr>
+
+{% for medicamento in medicamentos %}
+<tr class = "{{medicamento.stock}}">
+	<th>{{medicamento.nombre}}</th>
+	<th>{{medicamento.laboratorio}}</th>
+	<th>{{medicamento.tipo}}</th>
+	<th>{{medicamento.funcion}}</th>
+	<th>{{medicamento.prescripcion}}</th>
+	<th>{{medicamento.fecha_vencimiento}}</th>
+
+</tr>
+	
+
+{% endfor %}
+</table>

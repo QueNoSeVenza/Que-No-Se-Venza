@@ -18,7 +18,7 @@
                     <div class="login-content s12">
                         <img class="myImg" src="{% static 'logo.png' %}">
                         <br>
-                        <form method="POST" action="{% url 'login_index:log' %}">
+                        <form method="POST" action="{% url 'login:log' %}">
                             {% csrf_token %}
                             <div class="input-field col s12 m10 push-m1">
                                 <input id="email" name="username" type="text" class="monts">
@@ -32,19 +32,19 @@
                             <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace" type="submit" name="action">INGRESAR</button>
                         </form>
                         <button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 datSpace" id="regBtn">REGISTRARSE</button>
-                        {% if messages %}
+                        <!-- {% if messages %}
                         <script type="text/javascript">
                             $(window).load(function(){
                                 $('#modal1').show();
                             });
                         </script>
-
+                        
                         <ul class="messages">
                             {% for message in messages %}
                             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                             {% endfor %}
                         </ul>
-                        {% endif %}
+                        {% endif %} -->
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                         <i class="material-icons green-text text-accent-2 datArrow">keyboard_backspace</i><a class="btn-flat center nohover center-btn grey-text">volver al ingreso</a></div>
 
                         <div class="divider"></div>
-                        <form  method="POST" action="{% url 'login_index:reg' %}">
+                        <form  method="POST" action="{% url 'login:reg' %}">
                             {% csrf_token %}
                             <h5 class="center grey-text monts tSp">REGISTRO</h5>
                             <div class="input-field col s12 m10 push-m1">

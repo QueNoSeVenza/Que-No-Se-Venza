@@ -21,7 +21,8 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('login.urls', namespace='login_index')),
-    url(r'^', include('donar.urls', namespace='donar_index')),
-    url(r'^', include('qnv.urls', namespace='qnv')),
+    url(r'^', include('login.urls', namespace='login')),
+    url(r'^', include('donaciones.urls', namespace='donaciones')),
+    url(r'^', include('verificaciones.urls', namespace='verificaciones')),    
+    url(r'^', include('presentacion.urls', namespace='presentacion')),
 ]
