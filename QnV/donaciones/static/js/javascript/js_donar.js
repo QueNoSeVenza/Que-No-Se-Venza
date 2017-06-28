@@ -54,6 +54,7 @@ $(document).ready(function () {
 		keyboardScrolling: false,
 		scrollOverflow: true,
 		responsiveHeight: 900,
+		
 	});
 	var toggle = $('.menu-toggle');
 	$(toggle).click(function () {

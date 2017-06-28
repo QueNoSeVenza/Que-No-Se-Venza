@@ -24,27 +24,24 @@
 
         <ul id="slide-out" class="side-nav">
         		<div class="row">
-        			<div class="col s12 l6">
+        			<div class="col s12 m6">
         				<div class="collapsible-container1">
         					<div class="collapsible-container2">
         						<ul class="collapsible" data-collapsible="accordion">
         							<li onclick="firstSection();">
-        								<div class="collapsible-header semibold tem transparent white-text" id="active">Perfil</div>
-        								<div class="collapsible-body grey-text grey-lighten-4"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
+        								<div class="collapsible-header semibold transparent white-text col s4 m12" id="active">Perfil</div>
         							</li>
         							<li onclick="secondSection();">
-        								<div class="collapsible-header semibold tem white-text">Contacto</div>
-        								<div class="collapsible-body grey-text grey-lighten-4"><span>Lorem ipsum dolor sit ametasddddddd.</span></div>
+        								<div class="collapsible-header semibold white-text col s4 m12">Contacto</div>
         							</li>
         							<li onclick="thirdSection();">
-        								<div class="collapsible-header semibold tem white-text">Acerca de</div>
-        								<div class="collapsible-body grey-text grey-lighten-4"><span>Lorem ipsum dolor sit ametasdddddddt.</span></div>
+        								<div class="collapsible-header semibold white-text col s4 m12">Acerca de</div>
         							</li>
         						</ul>
         					</div>
         				</div>
         			</div>
-        			<div class="col s5">
+        			<div class="col s12 m5">
         				<ul class="white-text">
         					<!--Seccion NAV 1-->
         					<li id="navsection1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right</li>
@@ -87,35 +84,35 @@
                     <div class="row center white-text">
                         <form method="POST" action="{% url 'donaciones:donar' %}">
                             {% csrf_token %}
-                            <div class="input-field col s4 offset-s2 roboto">
+                            <div class="input-field col s6 m4 offset-m2 roboto">
                                 <input name="donar_nombre" id="a" type="text">
                                 <label for="a">Nombre Comercial</label>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="input-field col s6 m4">
                                 <input name="donar_concentracion_gramos" id="b" type="text">
-                                <label for="b">Concentracion en Gramos</label>
+                                <label for="b">Concentracion(gr)</label>
                             </div>
-                            <div class="input-field col s4 offset-s2">
+                            <div class="input-field col s6 m4 offset-m2">
                                 <input name="donar_cantidad" id="c" type="text">
                                 <label for="c">Cantidad</label>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="input-field col s6 m4">
                                 <input name="donar_laboratorio" id="c" type="text">
                                 <label for="c">Laboratorio</label>
                             </div>
-                            <div class="input-field col s8 offset-s2">
+                            <div class="input-field col s12 m8 offset-m2">
                                 <input name="donar_droga" id="c" type="text">
                                 <label for="c">Droga</label>
                             </div>
-                            <div class="input-field col s4 offset-s2 roboto">
+                            <div class="input-field col s6 m4 offset-m2 roboto">
                                 <input name="mes" id="c" type="text">
                                 <label for="c">Mes</label>
                             </div>
-                            <div class="input-field col s4">
+                            <div class="input-field col s6 m4">
                                 <input name="anio" id="c" type="text">
                                 <label for="c">Año</label>
                             </div>
-                            <div class="input-field col s8 offset-s2">
+                            <div class="input-field col s12 m8 offset-m2">
                                 <select name="donar_tipo">
                                     <option value="" disabled selected>Elije una opcion</option>
                                     <option value="Pastillas">Pastillas</option>
@@ -131,8 +128,8 @@
                     </div>
                 </div>
                 <!--Slide del medio-->
-                <div class="slide active col s12 grey lighten-5 fp-auto-height-responsive" id="slide2">
-                				<div class="row center textsection">
+                <div class="slide col s12 grey lighten-5 fp-auto-height-responsive" id="slide2">
+                				<div class="row center">
                 					<h3 class="grey-text text-darken-2">Bienvenido, <span class="red-text semibold">Fran</span></h3>
                 					<p class="col m6 push-m3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy</p>
                 				</div>
@@ -171,7 +168,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="{% static 'js/javascript/js_donar.js' %}"></script>
         <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>>
+        <script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
     </body>
 </html>
