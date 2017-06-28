@@ -31,7 +31,6 @@ def log(request):
             return redirect('/principal')
         else:
             messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
-            print "hola"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def reg(request):
@@ -52,9 +51,7 @@ def reg(request):
                 return redirect('/principal')
             else:
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-                print "messi"
         else:
-            print "malumabaibi"
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
