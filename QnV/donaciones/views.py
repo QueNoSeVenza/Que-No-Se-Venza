@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
+from datetime import datetime
 import datetime
 from donaciones.matchutils import *
 
@@ -70,7 +71,6 @@ def donar(request):
  
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
-
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
 
@@ -83,10 +83,17 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()   
 
-
-
         return redirect('/thanks')
                         
+
+def thanks(request):
+	return render(
+		request,
+		'thanks.html',
+		{}
+)
+
+
 def pedir(request):
 
     if 'POST' in request.method:

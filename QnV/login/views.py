@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 # Create your views here.
 def login(request):
@@ -29,16 +30,18 @@ def log(request):
             auth_login(request, user)
             return redirect('/principal')
         else:
-            #messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
-            print("hola")
+            messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
+            print "hola"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def reg(request):
     if 'POST' in request.method:
         name = request.POST['name']
         email = request.POST['email']
-        password = request.POST['pass']
+        password = request.POST['pass1']
+        password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
+
         if u is not None:
             user = User.objects.create_user(email, email, password)
             user.first_name = name
@@ -48,8 +51,11 @@ def reg(request):
                 auth_login(request, userant)
                 return redirect('/principal')
             else:
-                #messages.add_message(request, messages.INFO, 'Algo salio mal')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                print "messi"
         else:
-            #messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
+            print "malumabaibi"
+            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
