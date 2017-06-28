@@ -128,8 +128,6 @@ def pedir(request):
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
         print(getMatches(nuevo_pedido))
-        executeMatch(nuevo_pedido)
-        sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')
 
 
