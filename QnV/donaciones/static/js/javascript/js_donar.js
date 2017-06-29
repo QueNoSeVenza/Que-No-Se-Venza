@@ -29,6 +29,30 @@ function thirdSection() {
 };
 
 $(document).ready(function () {
+	$(".extra_info").hide()
+    $("#pedir_nombre,#pedir_gramos").change(function () {
+    	var nombre = $("#pedir_nombre").val();
+    	var concentracion = $("#pedir_gramos").val();
+    	if (nombre != "" && concentracion != ""){
+      $.ajax({
+        url: '/ajax/validate_medicamento/',
+        data: {
+          'nombre': nombre,
+          'concentracion' : concentracion
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (!data.exists) {
+          	$(".extra_info").show()
+            alert("Este medicamento todavia no se encuentra en nuestra base de datos, por favor, completa los demás campos para que podamos avisarte si alguien lo dona en el futuro");
+          }else{$(".extra_info").hide()}
+        }
+      })};
+
+    });
+
+
+
 	var sidenav = $('.side-nav');
 	firstSection();
 	// Materialize
