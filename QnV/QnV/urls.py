@@ -25,4 +25,4 @@ urlpatterns = [
     url(r'^', include('donaciones.urls', namespace='donaciones')),
     url(r'^', include('verificaciones.urls', namespace='verificaciones')),    
     url(r'^', include('presentacion.urls', namespace='presentacion')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
