@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
-from datetime import datetime
 import datetime
-import donaciones.matchutils
+from datetime import date
+from donaciones.matchutils import *
 
 def principal(request):
     template = loader.get_template('index.html')
@@ -17,30 +17,47 @@ def principal(request):
     context = {'verificador':verificador}
     return HttpResponse(template.render(context, request))
 
+
+def thanks(request):
+    return render(
+        request,
+        'thanks.html',
+        {}
+)
+
+##############################################################################
+
 def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
+        mes = request.POST['mes']
+        print mes
+        if mes > 10:
+            mes = "0"+mes
+
+        fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
             'laboratorio' : request.POST['donar_laboratorio'] ,
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'],
+            'tipo' : request.POST['donar_tipo']
         }
 
         medicamento_donado_kwargs = {
         'cantidad' : request.POST['donar_cantidad'],
             
-        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
+        'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date()
         }
 
         donacion_kwargs = {
         'user' : request.user,
         }   
-
+        
+        print date.today()
         
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
@@ -74,14 +91,6 @@ def donar(request):
 
         return redirect('/thanks')
                         
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
-
 def pedir(request):
 
     if 'POST' in request.method:
@@ -96,7 +105,7 @@ def pedir(request):
         pedido_kwargs = {
 
             'user' : request.user,
-            'cantidad' : request.POST['pedir_cantidad'],
+            'cantidad' : eval(request.POST['pedir_cantidad'],)
 
         }
 
@@ -113,7 +122,7 @@ def pedir(request):
         #Deberiamos implementar un AJAX para verificar esto y agregar al form 
         #los campos restantes de medicamento.
         
-        except Medicamento.DoesNotExist():
+        except Medicamento.DoesNotExist:
 
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
@@ -122,5 +131,11 @@ def pedir(request):
             nuevo_pedido.save()            
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
-        getMatches(nuevo_pedido)
+        print(getMatches(nuevo_pedido))
+        executeMatch(nuevo_pedido)
+        sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')
+
+
+
+
