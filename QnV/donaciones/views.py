@@ -7,6 +7,7 @@ from django.template import loader
 from django.utils import timezone
 from datetime import datetime
 import datetime
+from datetime import date
 from donaciones.matchutils import *
 from django.http import JsonResponse
 
@@ -32,28 +33,30 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+"/"+request.POST.get('anio')
+        mes = request.POST['mes']
+        print mes
+        if mes > 10:
+            mes = "0"+mes
+
+        fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
             'laboratorio' : request.POST['donar_laboratorio'] ,
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'],
+            'tipo' : request.POST['donar_tipo']
         }
 
         medicamento_donado_kwargs = {
-
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.strptime(request.POST.get('mes')+
-                                        request.POST.get('anio'),
-                                            '%m%Y').date(),
-
+            
+        'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
+                                            '%m%Y').date()
         }
 
         donacion_kwargs = {
-
         'user' : request.user,
-
         }   
 
         
@@ -72,6 +75,7 @@ def donar(request):
  
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
+
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
 
@@ -83,7 +87,6 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()   
-        return redirect('/thanks')
 
         for pedido in getMatches(nuevo_medicamento):
             if len(getMatches(pedido)) != 0:
@@ -91,14 +94,6 @@ def donar(request):
                 sendMatchEmail(pedido)     
         return redirect('/thanks')
                         
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
-
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
     print(nombre)
