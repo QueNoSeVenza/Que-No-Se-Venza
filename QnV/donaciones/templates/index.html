@@ -9,6 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
     </head>
 
+
+
+
+
+
     <body>
         <div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
             <span class="bars"></span>
@@ -151,12 +156,31 @@
                         <form method="POST" action="{% url 'donaciones:pedir' %}">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_nombre" id="c" type="text">
+                                <input name="pedir_nombre" id="pedir_nombre" type="text">
                                 <label for="c">Medicamento</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_gramos" id="c" type="text">
+                                <input name="pedir_gramos" id="pedir_gramos" type="text">
                                 <label for="c">Concentracion en Gramos</label>
+                            </div>
+                            <div class="extra_info">
+                            <div class="input-field col s8 offset-s2">
+                                <input name="pedir_droga" id="c" type="text">
+                            <label for="c">Droga</label>
+                            <div class="input-field col s4">
+                                <input name="pedir_laboratorio" id="c" type="text">
+                                <label for="c">Laboratorio</label>
+                            <div class="input-field col s8 offset-s2">
+                                <select name="pedir_tipo">
+                                    <option value="" disabled selected>Elije una opcion</option>
+                                    <option value="Pastillas">Pastillas</option>
+                                    <option value="Jarabe">Jarabe</option>
+                                    <option value="Gotas">Gotas</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>                                
+                            </div>                            
+                            </div>
                             </div>
                             <div class="input-field col s6 offset-s3">
                                 <input name="pedir_cantidad" id="c" type="text">

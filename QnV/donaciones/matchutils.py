@@ -12,13 +12,19 @@ def getMatches(entity):
 	if entity.__class__.__name__ == "Pedido":
 
 		not_dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
-		match_list = MedicamentoDonado.objects.filter(medicamento=entity.medicamento, id__in=not_dull_medicines).order_by('fecha_vencimiento')
+		match_list = MedicamentoDonado.objects.filter(medicamento=entity.medicamento, id__in=not_dull_medicines,stock="Disponible").order_by('fecha_vencimiento')
 		quantities = [medicamento.cantidad for medicamento in match_list]
 		
 
-		if sum(quantities) >= entity.cantidad:
-			return match_list
+		if sum(quantities) < entity.cantidad:
+			match_list = {}
 
+		return match_list
+	
+	elif entity.__class__.__name__ == "MedicamentoDonado":
+
+		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
+		return match_list
 
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de 
 #necesitar reservar parcialmente un MedicamentoDonado le sustrae la cantidad necesaria y
