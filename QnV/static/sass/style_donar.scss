@@ -1,0 +1,232 @@
+// Variables menu 
+$bar_color: #616161;
+$size: 28px;
+$bar_height: $size / 7;
+$offset: $bar_height * 2;
+//Globales
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+html,
+body {
+	height: 100%;
+	font-family: 'Source Sans Pro', sans-serif !important;
+}
+.semibold {
+	font-weight: 600;
+}
+p {
+	font-size: 1.1em;
+}
+// Nav
+.button-collapse {
+	z-index: 999;
+	margin: 20;
+	margin-top: 25;
+	position: absolute;
+}
+nav {
+	position: fixed;
+	z-index: 500;
+	.icon {
+		margin-top: 25%;
+		width: 42px;
+		height: 42px;
+		background-image: url(../css/img/logo.svg);
+	}
+	.userText {
+		transition: .3s linear;
+		color: #616161;
+	}
+}
+// Slide-Out
+.side-nav {
+	width: 100% !important;
+	background-color: #000 !important;
+	z-index: 998 !important;
+	transition: 0.3s ease-out;
+	opacity: 0.98;
+	.row {
+		margin-bottom: 0;
+	}
+}
+.collapsible-container1 {
+	height: 100%;
+	width: 100%;
+	@media (max-width: 600px) {
+		height: auto;
+	}
+}
+.collapsible-container2 {
+	position: absolute;
+	top: 30%;
+	margin-top: -8% !important;
+	@media (max-width: 600px) {
+		width: 100%;
+		top: 40px;
+		text-align: center;
+		position: relative;
+	}
+}
+
+.collapsible-header {
+	font-size: 3em;
+	padding-top: 30% !important;
+	@media (max-width: 600px) {
+		padding-top: 12% !important;
+		font-size: 1em;
+		border-bottom: 1px solid white !important;
+		padding-bottom: 5px;
+	}
+}
+//Secciones slide-out
+#navsection1,
+#navsection2,
+#navsection3 {
+	padding-top: 10%;
+	@media (max-width: 600px) {
+		margin-top: 15px;
+		text-align: center;
+	}
+}
+#navsection1 {
+	line-height: 30px !important;
+}
+#navsection2 {
+	line-height: 15px !important;
+	input[type=text] {
+		color: darken(#fff, 20%);
+		border-bottom: 1px solid white;
+	}
+	input[type=text]:focus {
+		box-shadow: 0 1px 0 0 white !important;
+	}
+	textarea.materialize-textarea {
+		color: darken(#fff, 20%);
+		border-bottom: 1px solid white !important;
+		line-height: 20px;
+	}
+	textarea.materialize-textarea:focus {
+		box-shadow: 0 1px 0 0 white !important;
+	}
+	label {
+		color: #fff !important
+	}
+	button {
+		margin-top: 20px;
+		margin-right: 10px;
+	}
+}
+#navsection3 {
+	line-height: 30px;
+	vertical-align: middle;
+}
+// Slider inicio
+#slide2 {
+	h3 {
+		margin-top: 0px;
+		@media (max-width: 600px) {
+		margin-top: 40px;
+		}
+	}
+	.btnsection {
+		padding: 3em 0 0 0;
+	}
+	.optbutton {
+		margin-left: 3% !important;
+		margin-right: 3% !important;
+		letter-spacing: 1px !important;
+	}
+}
+// Slider rojo de donar
+// Slider azul de solicitar
+// Ambos sliders
+
+// Menu icon animation
+@mixin bar {
+	display: block;
+	width: $size;
+	height: $bar_height;
+	background: $bar_color;
+	border-radius: 0px;
+}
+.menu-toggle {
+	width: 30px;
+	height: 20px;
+	cursor: pointer;
+	z-index: 999 !important;
+	.bars {
+		@include bar;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		margin-top: -($bar_height/2);
+		transition: all .2s linear;
+		&:before,
+		&:after {
+			@include bar;
+			content: "";
+			position: absolute;
+			transition: .2s linear;
+		}
+		&:before {
+			top: -$offset;
+		}
+		&:after {
+			bottom: -$offset;
+		}
+	}
+	.barsTwo {
+		@include bar;
+		background: black;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		margin-top: -($bar_height/2);
+		transition: all .2s linear;
+		&:before,
+		&:after {
+			@include bar;
+			background: #fff;
+			content: "";
+			position: absolute;
+			transition: .2s linear;
+		}
+		&:before {
+			top: -$offset;
+		}
+		&:after {
+			bottom: -$offset;
+		}
+	}
+}
+.active {
+	.bars {
+		background-color: transparent;
+		transition: all .2s linear;
+		&:before {
+			top: 0;
+			transform: rotate(45deg);
+		}
+		&:after {
+			bottom: 0;
+			transform: rotate(-45deg);
+		}
+	}
+	.barsTwo {
+		transition: all .2s linear;
+		&:before {
+			background: #fff;
+			top: 0;
+			transform: rotate(45deg);
+		}
+		&:after {
+			background: #fff;
+			bottom: 0;
+			transform: rotate(-45deg);
+		}
+	}
+}
+//FullPage
+div.section.fp-section.active.fp-completely {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}

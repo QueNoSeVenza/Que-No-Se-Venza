@@ -1,0 +1,315 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif; }
+
+body {
+  background-color: #fcfcfc;
+  overflow-x: hidden; }
+
+a {
+  font-weight: 600;
+  text-decoration: none !important; }
+
+h2 {
+  font-size: 3em; }
+
+p {
+  line-height: 22px; }
+
+.center {
+  text-align: center; }
+
+.rightimg {
+  float: right; }
+
+.row {
+  margin-bottom: 0px !important; }
+
+@media screen and (max-width: 600px) {
+  .hide-on-mobile {
+    visibility: hidden;
+    display: none; } }
+@media screen and (min-width: 600px) {
+  .hide-on-large {
+    visibility: hidden;
+    display: none; } }
+nav ul.center {
+  padding-left: 2%;
+  padding-right: 2%;
+  list-style-type: none;
+  text-align: center; }
+  nav ul.center li {
+    display: inline-block;
+    float: right; }
+    nav ul.center li a {
+      color: #757575;
+      font-size: .7rem;
+      float: right;
+      text-align: right; }
+      @media screen and (max-width: 600px) {
+        nav ul.center li a {
+          display: none;
+          visibility: hidden; } }
+    nav ul.center li#centered {
+      margin-left: -20px;
+      position: absolute;
+      float: none !important; }
+  nav ul.center .left-nav {
+    float: left; }
+
+li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; }
+
+.panelbig {
+  /*background-image: url(img/background.jpg);*/
+  height: 100%;
+  /* Font on large */
+  /* Trying to make font almost responsive */
+  /* Font on mobile */ }
+  .panelbig #rev-1 {
+    color: #262626; }
+  .panelbig #rev-2 {
+    margin-top: 55;
+    color: #262626; }
+  .panelbig a {
+    border-radius: 3px;
+    color: #fff;
+    background: #ff3b30;
+    padding: 15 40 15 40;
+    font-family: 'Montserrat', sans-serif;
+    border: 0;
+    letter-spacing: 1.5px;
+    box-shadow: inset 0 0 0 0 #ff93a8;
+    -moz-transition: all ease 0.8s;
+    -o-transition: all ease 0.8s;
+    -webkit-transition: all ease 0.8s;
+    transition: all ease 0.8s; }
+    .panelbig a:hover {
+      box-shadow: inset 200px 0 0 0 #ff2d55;
+      color: #fff; }
+  @media screen and (max-width: 1100px) and (min-width: 601px) {
+    .panelbig #rev-1 {
+      margin-top: 10%; } }
+  @media screen and (max-width: 600px) {
+    .panelbig #rev-1 {
+      margin-top: 45%; }
+    .panelbig a {
+      position: absolute;
+      text-align: center;
+      bottom: 50;
+      right: 30;
+      left: 30; } }
+  .panelbig #clipped-title1 {
+    background: url(img/font-background.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    height: 90%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .panelbig #clipped-title1 h1 {
+      font-size: 3.7rem;
+      font-family: Verdana, sans-serif;
+      text-align: center;
+      -webkit-transition: text-shadow 1s ease; }
+      .panelbig #clipped-title1 h1 span {
+        display: list-item;
+        font-size: 4rem; }
+
+.panelintro {
+  padding-top: 40px; }
+  .panelintro .fadeonscroll {
+    border-radius: 10px;
+    color: #fff;
+    background-color: #707ff9;
+    box-shadow: 0px 23px 54px -16px rgba(0, 0, 0, 0.43); }
+  .panelintro h2 {
+    color: #fff; }
+  .panelintro p {
+    padding-bottom: 40px;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center; }
+
+.paneldonde {
+  margin-top: 50px; }
+  .paneldonde .wtitle {
+    color: #757575; }
+
+.plate {
+  border-radius: 10px;
+  box-shadow: 0px 23px 54px -16px rgba(0, 0, 0, 0.43);
+  width: 100%;
+  height: 400px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("img/test.jpg");
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  margin: 0 auto;
+  margin-top: 40px;
+  line-height: 200px;
+  text-align: center;
+  font-size: 2rem; }
+  .plate span {
+    display: block;
+    font-weight: 400;
+    font-size: 1rem; }
+  @media screen and (max-width: 800px) {
+    .plate {
+      pointer-events: none; } }
+
+.panelcomo {
+  margin-top: 80px;
+  background-color: #000;
+  padding-bottom: 8% !important; }
+  .panelcomo h2 {
+    color: #fff; }
+  .panelcomo .frame {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center; }
+  .panelcomo .right {
+    float: right;
+    text-align: right; }
+  .panelcomo .left {
+    text-align: left; }
+  .panelcomo .m12 {
+    color: #fff; }
+  @media screen and (min-width: 600px) {
+    .panelcomo td {
+      width: 50%; } }
+  .panelcomo td:first-child {
+    background-image: url("http://placekitten.com/g/200/300");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%; }
+  @media screen and (max-width: 600px) {
+    .panelcomo p,
+    .panelcomo h2 {
+      text-align: center; } }
+
+.panelfinal {
+  height: 500px;
+  background-image: url(img/repback2.png);
+  background-repeat: repeat; }
+  .panelfinal h2 {
+    margin-top: 8%; }
+  .panelfinal p {
+    margin-bottom: 80px; }
+  .panelfinal a {
+    color: #fff;
+    background-color: #5ac8fa;
+    border-radius: 5px;
+    padding: 20 65 20 65;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-shadow: -1px 10px 41px -8px rgba(0, 0, 0, 0.23); }
+    .panelfinal a:hover {
+      background-color: #707ff9; }
+
+footer {
+  padding-bottom: 40px;
+  background-color: #15191c;
+  /* Center placeholder */ }
+  footer h4 {
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 20px;
+    color: #fff;
+    padding-bottom: 15px;
+    border-bottom: 1px solid white; }
+  footer ul {
+    list-style-type: none;
+    color: #4c5a65;
+    /*.noupper {
+    	text-transform: none !important;
+    	font-size: 13px;
+    }*/ }
+    footer ul li {
+      letter-spacing: 1px;
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: -15px;
+      padding: 10 0 10 0; }
+      footer ul li:before {
+        content: '- '; }
+    footer ul #comunicate {
+      text-align: right; }
+      footer ul #comunicate:before {
+        content: none; }
+      footer ul #comunicate:after {
+        content: ' -'; }
+    @media screen and (max-width: 1000px) {
+      footer ul li,
+      footer ul #comunicate {
+        text-align: center; }
+        footer ul li:after, footer ul li:before,
+        footer ul #comunicate:after,
+        footer ul #comunicate:before {
+          content: ' - ' !important; } }
+  footer form {
+    font-size: 12px !important; }
+    footer form input[type="text"],
+    footer form textarea,
+    footer form input[type="email"] {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #2b3339;
+      margin: 10 0 10 0;
+      color: #fff;
+      padding: 12 35 12 35 !important;
+      border-radius: 0px;
+      border: 0;
+      resize: none; }
+    footer form input[type="submit"] {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-left: 25px;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 10 25 10 25;
+      border: 0;
+      margin-right: 12px; }
+      footer form input[type="submit"]:hover {
+        background-color: #cccccc; }
+  footer textarea {
+    height: 200px !important; }
+  footer ::-webkit-input-placeholder {
+    text-align: center; }
+  footer :-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center; }
+  footer ::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center; }
+  footer :-ms-input-placeholder {
+    text-align: center; }
+
+.content__title {
+  font-size: 8vw;
+  line-height: 1.2;
+  padding: 0 10vw; }
+
+.content__title__inner {
+  flex: none;
+  display: inline-block;
+  white-space: nowrap;
+  position: relative; }
+
+.content__title__inner--offset-1 {
+  top: -0.25em;
+  left: 13.6vw; }
+
+/*# sourceMappingURL=style_pres.css.map */
