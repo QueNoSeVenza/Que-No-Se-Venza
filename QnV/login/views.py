@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-
+from django.http import JsonResponse
 # Create your views here.
 def login(request):
     template = loader.get_template('login.html')
@@ -40,19 +40,32 @@ def reg(request):
         password = request.POST['pass1']
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
-
         if u is not None:
-            user = User.objects.create_user(email, email, password)
-            user.first_name = name
-            user.save()
-            userant = authenticate(username=email, password=password)
-            if userant is not None:
-                auth_login(request, userant)
-                return redirect('/principal')
-            else:
+            if u.exists():
+                messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+
+                user = User.objects.create_user(email, email, password)
+                user.first_name = name
+                user.save()
+                userant = authenticate(username=email, password=password)
+                if userant is not None:
+                    auth_login(request, userant)
+                    return redirect('/principal')
+                else:
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# def validate_email(request):
+#     email = request.GET.get('email', None)
+#     data = {
+#         'is_taken': User.objects.filter(email__iexact=email).exists()
+#     }
+#     if data['is_taken']:
+#         data['error_message'] = 'Ese correo electronico ya ha sido utilizado.'
+#     return JsonResponse(data)

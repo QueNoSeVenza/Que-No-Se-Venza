@@ -18,7 +18,7 @@
 						<img class="myImg" src="{% static 'logo.png' %}">
 						<br>
 <!-- form del login -->
-						<form method="POST" id="formLogin" action="{% url 'login:log' %}">
+						<form method="POST" id="formLogin" action="{% url 'login:log' %}" >
 							{% csrf_token %}
 							<div class="input-field col s12 m10 push-m1">
 								<input id="email" name="username" type="email" required >
@@ -57,7 +57,7 @@
 						</div>
 						<div class="divider"></div>
 <!-- form de registro -->
-						<form method="POST" action="{% url 'login:reg' %}">
+						<form method="POST" action="{% url 'login:reg' %}" >
 							{% csrf_token %}
 							<h5 class="center grey-text monts tSp">REGISTRO</h5>
 							<div class="input-field col s12 m10 push-m1">
@@ -96,125 +96,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-	<script>
-// Desp de que te tire error del mail hay q apretar 2 veces (ai don nou guai)
-	// $(document).ready(function () {
-  //   var intputElements = document.getElementsByTagName("INPUT");
-  //   for (var i = 0; i < intputElements.length; i++) {
-  //       intputElements[i].oninvalid = function (e) {
-  //           e.target.setCustomValidity("");
-  //           if (!e.target.validity.valid) {
-  //               if (e.target.name == "username") {
-  //                   e.target.setCustomValidity("Ingrese un email valido");
-  //               }else if (e.target.name == "password") {
-  //                   e.target.setCustomValidity("La contraseña no puede ser nula");
-  //               }else if (e.target.name == "email") {
-	// 								e.target.setCustomValidity("Ingrese un email valido");
-	// 						}
-	//               else {
-  //                   e.target.setCustomValidity("Este campo es obligatorio");
-  //               }
-  //           }
-  //       }
-  //   	}
-	// });
-	(function (exports) { // esto hace que ande bien lo de los mesajes veeebozz
-	function valOrFunction(val, ctx, args) {
-			if (typeof val == "function") {
-					return val.apply(ctx, args);
-			} else {
-					return val;
-			}
-	}
-
-	function InvalidInputHelper(input, options) {
-			input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
-
-			function changeOrInput() {
-					if (input.value == "") {
-							input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
-					} else {
-							input.setCustomValidity("");
-					}
-			}
-
-			function invalid() {
-					if (input.value == "") {
-							input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
-					} else {
-						 input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
-					}
-			}
-
-			input.addEventListener("change", changeOrInput);
-			input.addEventListener("input", changeOrInput);
-			input.addEventListener("invalid", invalid);
-	}
-	exports.InvalidInputHelper = InvalidInputHelper;
-})(window);
-
-
-
-InvalidInputHelper(document.getElementById("email"), {
-	defaultText: "Ingrese una direccion de correo!",
-	emptyText: "Ingrese una direccion de correo!",
-	invalidText: function (input) {
-			return 'La direccion de correo "' + input.value + '" no es valida!';
-	}
-});
-
-		$(document).ready(function() {
-			$(".register-content").hide();
-			$("#regBtn").click(function() {
-				$('.login-content').delay(360).hide(0);
-				$(".login-card").animate({
-					height: "40px"
-				});
-				$('.login-card').animate({
-					height: "530px"
-				});
-				$('.register-content').delay(360).show(0);
-			});
-			$(".comingBack").click(function() {
-				$('.register-content').delay(360).hide(0);
-				$(".login-card").animate({
-					height: "40px"
-				});
-				$('.login-card').animate({
-					height: "420px"
-				});
-				$('.login-content').delay(360).show(0);
-			});
-		});
-    $(document).ready(function () {
-  $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
-});
-$(document).ready(function () {
-  $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
-});
-
-function checkPasswordMatch() {
-var password = $("#regpass").val();
-var confirmPassword = $("#regpass2").val();
-
-if (password != confirmPassword && confirmPassword!="" ){
-$("#regpass2").css("border-bottom-color","red");
-$("#divCheckPasswordMatch").html("Las contraseñas no coinciden!");
-$("#register").prop("disabled",true);
-}else if (password !="" && confirmPassword =="") {
-$("#divCheckPasswordMatch").html(""); // ponemos algo adentro de los ""?
-$("#regpass2").css("border-bottom-color","grey");
-$("#register").prop("disabled",false);
-}else if (password == "" && confirmPassword =="") {
-$("#divCheckPasswordMatch").html("");
-$("#regpass2").css("border-bottom-color","grey");
-$("#register").prop("disabled",false);
-}
-else{
-$("#divCheckPasswordMatch").html("Contraseñas coinciden.")
-$("#regpass2").css("border-bottom-color","green");
-$("#register").prop("disabled",false);
-}}
-</script>
+	<script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
 </body>
 </html>
