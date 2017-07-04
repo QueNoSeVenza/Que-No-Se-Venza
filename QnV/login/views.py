@@ -17,7 +17,10 @@ from django.http import JsonResponse
 # Create your views here.
 def login(request):
     template = loader.get_template('login.html')
-    context = {}
+    all_users = User.objects.all()
+    context = {
+        'django_users' : all_users
+    }
     return HttpResponse(template.render(context, request))
 
 def log(request):
@@ -60,12 +63,3 @@ def reg(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-# def validate_email(request):
-#     email = request.GET.get('email', None)
-#     data = {
-#         'is_taken': User.objects.filter(email__iexact=email).exists()
-#     }
-#     if data['is_taken']:
-#         data['error_message'] = 'Ese correo electronico ya ha sido utilizado.'
-#     return JsonResponse(data)
