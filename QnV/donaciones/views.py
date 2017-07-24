@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
-from datetime import datetime
 import datetime
 from donaciones.matchutils import *
 
@@ -13,7 +12,6 @@ def principal(request):
     template = loader.get_template('index.html')
     verificador = False
     user = request.user
-    print user
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
     context = {'verificador':verificador, 'django_users':user}
@@ -33,7 +31,7 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+"/"+request.POST.get('anio')
+        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
@@ -45,8 +43,7 @@ def donar(request):
         medicamento_donado_kwargs = {
 
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.strptime(request.POST.get('mes')+
-                                        request.POST.get('anio'),
+        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
 
         }
@@ -73,6 +70,7 @@ def donar(request):
 
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
+
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
 
@@ -85,16 +83,9 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
 
+
+
         return redirect('/thanks')
-
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
-
 
 def pedir(request):
 
@@ -137,4 +128,6 @@ def pedir(request):
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
         print(getMatches(nuevo_pedido))
+        executeMatch(nuevo_pedido)
+        sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')

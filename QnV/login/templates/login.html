@@ -61,7 +61,9 @@
 							{% csrf_token %}
 							<h5 class="center grey-text monts tSp">REGISTRO</h5>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="namm" name="name" type="text" class="monts" required>
+								<input id="namm" name="name" type="text" class="monts" required
+								oninvalid="setCustomValidity('Ingrese un nombre')"
+								oninput="setCustomValidity('')">
 								<label for="namm">Nombre y Apellido</label>
 							</div>
 
