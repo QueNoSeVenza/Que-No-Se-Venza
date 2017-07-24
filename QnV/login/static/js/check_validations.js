@@ -100,20 +100,3 @@ $("#register").prop("disabled",false);
 $(document).ready(function () {
   $("#corr").on("keyup", checkUser);
 });
-
-// function checkUser() {
-//   var user = $('#corr').val();
-//   var usuarios = document.getElementById("emailsUsados");
-//   console.log(usuarios)
-//   for (i=0; i<usuarios.length; i++) {
-//     if (usuarios[i] == user){
-//       //hacer que diga que ya existe el usuario
-//       $("#divCheckPasswordMatch").html("Ese email ya fue utilizado!");
-//       $("#corr").css("border-bottom-color","green");
-//       return false
-//     } else {
-//       $("#corr").css("border-bottom-color","red");
-//       return true
-//     }
-//   }
-// }
