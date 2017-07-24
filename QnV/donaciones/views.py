@@ -12,9 +12,11 @@ from donaciones.matchutils import *
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
+    user = request.user
+    print user
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador}
+    context = {'verificador':verificador, 'django_users':user}
     return HttpResponse(template.render(context, request))
 
 
@@ -53,9 +55,9 @@ def donar(request):
 
         'user' : request.user,
 
-        }   
+        }
 
-        
+
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
@@ -64,11 +66,11 @@ def donar(request):
             nueva_donacion.save()
 
             medicamento_donado_kwargs['donacion'] = nueva_donacion
-            medicamento_donado_kwargs['medicamento'] = medicamento_guardado 
+            medicamento_donado_kwargs['medicamento'] = medicamento_guardado
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
- 
+
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
@@ -81,10 +83,10 @@ def donar(request):
             medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()   
+            nuevo_medicamento_donado.save()
 
         return redirect('/thanks')
-                        
+
 
 def thanks(request):
 	return render(
@@ -101,7 +103,7 @@ def pedir(request):
         medicamento_kwargs = {
 
             'nombre' :  request.POST['pedir_nombre'],
-            'concentracion_gramos' : request.POST['pedir_gramos'], 
+            'concentracion_gramos' : request.POST['pedir_gramos'],
 
         }
 
@@ -122,21 +124,17 @@ def pedir(request):
 
 
         #En caso de que lo anterior no funcione creo un Pedido y su Medicamento.
-        #Deberiamos implementar un AJAX para verificar esto y agregar al form 
+        #Deberiamos implementar un AJAX para verificar esto y agregar al form
         #los campos restantes de medicamento.
-        
+
         except Medicamento.DoesNotExist:
 
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
             pedido_kwargs['medicamento'] = nuevo_medicamento
             nuevo_pedido = Pedido(**pedido_kwargs)
-            nuevo_pedido.save()            
+            nuevo_pedido.save()
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
         print(getMatches(nuevo_pedido))
         return redirect('/thanks')
-
-
-
-
