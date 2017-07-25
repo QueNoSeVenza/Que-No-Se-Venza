@@ -44,34 +44,34 @@ invalidText: function (input) {
 }
 });
 // cambia form login o registrarse
-  $(document).ready(function() {
-    $(".register-content").hide();
-    $("#regBtn").click(function() {
-      $('.login-content').delay(360).hide(0);
-      $(".login-card").animate({
-        height: "40px"
-      });
-      $('.login-card').animate({
-        height: "530px"
-      });
-      $('.register-content').delay(360).show(0);
+$(document).ready(function() {
+  $(".register-content").hide();
+  $("#regBtn").click(function() {
+    $('.login-content').delay(360).hide(0);
+    $(".login-card").animate({
+      height: "40px"
     });
-    $(".comingBack").click(function() {
-      $('.register-content').delay(360).hide(0);
-      $(".login-card").animate({
-        height: "40px"
-      });
-      $('.login-card').animate({
-        height: "420px"
-      });
-      $('.login-content').delay(360).show(0);
+    $('.login-card').animate({
+      height: "530px"
     });
+    $('.register-content').delay(360).show(0);
   });
-  $(document).ready(function () {
-$("#txtConfirmPassword").on("keyup",checkPasswordMatch);
+  $(".comingBack").click(function() {
+    $('.register-content').delay(360).hide(0);
+    $(".login-card").animate({
+      height: "40px"
+    });
+    $('.login-card').animate({
+      height: "420px"
+    });
+    $('.login-content').delay(360).show(0);
+  });
 });
 $(document).ready(function () {
-$("#regpass, #regpass2").on("keyup",checkPasswordMatch);
+  $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
+});
+$(document).ready(function () {
+  $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
 });
 // Revisa que los password sean iguales
 function checkPasswordMatch() {
@@ -97,17 +97,6 @@ $("#regpass2").css("border-bottom-color","green");
 $("#register").prop("disabled",false);
 }}
 // Revisa que no se registre nadie con un email ya utilizado
-// $("#corr").change(function () {
-//       var form = $(this).closest("form");
-//       $.ajax({
-//         url: form.attr("data-validate-email-url"),
-//         data: form.serialize(),
-//         dataType: 'json',
-//         success: function (data) {
-//           if (data.is_taken) {
-//             alert(data.error_message);
-//           }
-//         }
-//       });
-//
-//     });
+$(document).ready(function () {
+  $("#corr").on("keyup", checkUser);
+});
