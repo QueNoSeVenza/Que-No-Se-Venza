@@ -1,0 +1,8 @@
+Django==1.11
+django-extensions==1.7.9
+django-simple-email-confirmation==0.21
+ipdb
+ipython
+pyparsing==2.2.0
+pytz==2017.2
+six==1.10.0
