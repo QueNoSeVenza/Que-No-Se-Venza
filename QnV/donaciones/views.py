@@ -7,6 +7,7 @@ from django.template import loader
 from django.utils import timezone
 import datetime
 from donaciones.matchutils import *
+from django.http import JsonResponse
 
 def principal(request):
     template = loader.get_template('index.html')
@@ -83,9 +84,24 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
 
-
-
         return redirect('/thanks')
+
+        for pedido in getMatches(nuevo_medicamento):
+            if len(getMatches(pedido)) != 0:
+                executeMatch(pedido)
+                sendMatchEmail(pedido)
+        return redirect('/thanks')
+
+def validate_medicamento(request):
+    nombre = request.GET.get('nombre', None)
+    print(nombre)
+    concentracion_gramos = request.GET.get('concentracion', None)
+    print(concentracion_gramos)
+    print(Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos))
+    data = {
+        'exists': Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos).exists()
+    }
+    return JsonResponse(data)
 
 def pedir(request):
 
@@ -127,7 +143,12 @@ def pedir(request):
             nuevo_pedido.save()
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
+
         print(getMatches(nuevo_pedido))
         executeMatch(nuevo_pedido)
         sendMatchEmail(nuevo_pedido)
-        return redirect('/thanks')
+
+        if len(getMatches(nuevo_pedido)) != 0:
+            executeMatch(nuevo_pedido)
+            sendMatchEmail(nuevo_pedido)
+
