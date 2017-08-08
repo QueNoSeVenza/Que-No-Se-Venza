@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
-from datetime import datetime
 import datetime
 from donaciones.matchutils import *
 from django.http import JsonResponse
@@ -13,9 +12,10 @@ from django.http import JsonResponse
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
+    user = request.user
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador}
+    context = {'verificador':verificador, 'django_users':user}
     return HttpResponse(template.render(context, request))
 
 
@@ -32,7 +32,7 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+"/"+request.POST.get('anio')
+        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
@@ -44,8 +44,7 @@ def donar(request):
         medicamento_donado_kwargs = {
 
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.strptime(request.POST.get('mes')+
-                                        request.POST.get('anio'),
+        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
 
         }
@@ -54,9 +53,9 @@ def donar(request):
 
         'user' : request.user,
 
-        }   
+        }
 
-        
+
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
@@ -65,13 +64,14 @@ def donar(request):
             nueva_donacion.save()
 
             medicamento_donado_kwargs['donacion'] = nueva_donacion
-            medicamento_donado_kwargs['medicamento'] = medicamento_guardado 
+            medicamento_donado_kwargs['medicamento'] = medicamento_guardado
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
- 
+
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
+
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
 
@@ -82,22 +82,15 @@ def donar(request):
             medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()   
+            nuevo_medicamento_donado.save()
+
         return redirect('/thanks')
 
         for pedido in getMatches(nuevo_medicamento):
             if len(getMatches(pedido)) != 0:
                 executeMatch(pedido)
-                sendMatchEmail(pedido)     
+                sendMatchEmail(pedido)
         return redirect('/thanks')
-                        
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -110,7 +103,6 @@ def validate_medicamento(request):
     }
     return JsonResponse(data)
 
-
 def pedir(request):
 
     if 'POST' in request.method:
@@ -118,7 +110,7 @@ def pedir(request):
         medicamento_kwargs = {
 
             'nombre' :  request.POST['pedir_nombre'],
-            'concentracion_gramos' : request.POST['pedir_gramos'], 
+            'concentracion_gramos' : request.POST['pedir_gramos'],
 
         }
 
@@ -139,23 +131,24 @@ def pedir(request):
 
 
         #En caso de que lo anterior no funcione creo un Pedido y su Medicamento.
-        #Deberiamos implementar un AJAX para verificar esto y agregar al form 
+        #Deberiamos implementar un AJAX para verificar esto y agregar al form
         #los campos restantes de medicamento.
-        
+
         except Medicamento.DoesNotExist:
 
             nuevo_medicamento = Medicamento(**medicamento_kwargs)
             nuevo_medicamento.save()
             pedido_kwargs['medicamento'] = nuevo_medicamento
             nuevo_pedido = Pedido(**pedido_kwargs)
-            nuevo_pedido.save()            
+            nuevo_pedido.save()
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
+
+        print(getMatches(nuevo_pedido))
+        executeMatch(nuevo_pedido)
+        sendMatchEmail(nuevo_pedido)
+
         if len(getMatches(nuevo_pedido)) != 0:
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
-        return redirect('/thanks')
-
-
-
 
