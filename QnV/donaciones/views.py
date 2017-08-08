@@ -56,7 +56,7 @@ def donar(request):
 
         }   
 
-        
+        nuevo_medicamento_donado= ""
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
@@ -83,12 +83,12 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()   
-        return redirect('/thanks')
 
-        for pedido in getMatches(nuevo_medicamento):
+        for pedido in getMatches(nuevo_medicamento_donado):
             if len(getMatches(pedido)) != 0:
                 executeMatch(pedido)
-                sendMatchEmail(pedido)     
+                sendMatchEmail(pedido) 
+                print("Envio mail")    
         return redirect('/thanks')
                         
 
