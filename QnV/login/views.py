@@ -13,11 +13,14 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-
+from django.http import JsonResponse
 # Create your views here.
 def login(request):
     template = loader.get_template('login.html')
-    context = {}
+    all_users = User.objects.all()
+    context = {
+        'django_users' : all_users
+    }
     return HttpResponse(template.render(context, request))
 
 def log(request):
@@ -40,17 +43,21 @@ def reg(request):
         password = request.POST['pass1']
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
-
         if u is not None:
-            user = User.objects.create_user(email, email, password)
-            user.first_name = name
-            user.save()
-            userant = authenticate(username=email, password=password)
-            if userant is not None:
-                auth_login(request, userant)
-                return redirect('/principal')
-            else:
+            if u.exists():
+                messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+
+                user = User.objects.create_user(email, email, password)
+                user.first_name = name
+                user.save()
+                userant = authenticate(username=email, password=password)
+                if userant is not None:
+                    auth_login(request, userant)
+                    return redirect('/principal')
+                else:
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
