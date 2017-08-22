@@ -5,7 +5,7 @@ from django.core import mail
 from django.core.mail import EmailMessage
 
 #Esta funcion devuelve una lista de MedicamentosDonados que comparten campo medicamento con el pedido
-#que se use como argumento solo si hay suficientes unidades para satisfacerlo. 
+#que se use como argumento solo si hay suficientes unidades para satisfacerlo.
 
 def getMatches(entity):
 	print(entity.__class__.__name__)
@@ -22,13 +22,13 @@ def getMatches(entity):
 
 		print(match_list)
 		return match_list
-	
+
 	elif entity.__class__.__name__ == "MedicamentoDonado":
 
 		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
 		return match_list
 
-#Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de 
+#Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
 #necesitar reservar parcialmente un MedicamentoDonado le sustrae la cantidad necesaria y
 #se crea otro MedicamentDonado con esa cantidad y el estado "Reservado".
 
@@ -38,14 +38,14 @@ def executeMatch(petition):
 
 	substaction_values = []
 	match_list = getMatches(petition)
-	
+
 	for match in match_list:
 
 		quantity = match.cantidad
 		quantity -= petition.cantidad
 
 		if quantity > 0:
-			
+
 			print("#1 Block")
 
 			match.cantidad -= petition.cantidad
@@ -58,10 +58,10 @@ def executeMatch(petition):
 
 			return substaction_values
 
-		else: 
+		else:
 
 			print("#2 Block")
-			
+
 			substaction_values.append((match,match.cantidad))
 			petition.cantidad = abs(quantity)
 			match.stock = "Reservado"
@@ -75,14 +75,13 @@ def executeMatch(petition):
 #Devuelve una lista de los medicamentos vencidos.
 
 def getDullMedicines():
-	
+
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
 def sendMatchEmail(petition):
 
-	body = "Le informamos que se encuentran disponibles las "+str(petition.cantidad)+" undidades de "+petition.medicamento.nombre+" qué solicito en su peticion N°"+str(petition.id)
+	body = "Le informamos que se encuentran disponibles las "+str(petition.cantidad)+" undidades de "+petition.medicamento.nombre+" que solicito en su peticion N "+str(petition.id)
 
 	email = EmailMessage('Ya puede buscar su '+petition.medicamento.nombre, body, to=[petition.user.email])
 	email.send()
-	
