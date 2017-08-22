@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
+from datetime import datetime
 import datetime
 from datetime import date
 from donaciones.matchutils import *
@@ -50,16 +51,21 @@ def donar(request):
 
         medicamento_donado_kwargs = {
         'cantidad' : request.POST['donar_cantidad'],
-            
+
         'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
-                                            '%m%Y').date()
+                                            '%m%Y').date(),
+
+
         }
 
         donacion_kwargs = {
         'user' : request.user,
         }   
 
-        
+        }
+
+        nuevo_medicamento_donado= ""
+
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
@@ -86,15 +92,22 @@ def donar(request):
             medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()
+            nuevo_medicamento_donado.save()   
 
-        return redirect('/thanks')
-
-        for pedido in getMatches(nuevo_medicamento):
+        for pedido in getMatches(nuevo_medicamento_donado):
             if len(getMatches(pedido)) != 0:
                 executeMatch(pedido)
-                sendMatchEmail(pedido)
+                sendMatchEmail(pedido) 
+                print("Envio mail")    
         return redirect('/thanks')
+                        
+
+def thanks(request):
+	return render(
+		request,
+		'thanks.html',
+		{}
+)
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -148,11 +161,13 @@ def pedir(request):
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
 
-        print(getMatches(nuevo_pedido))
-        executeMatch(nuevo_pedido)
-        sendMatchEmail(nuevo_pedido)
 
         if len(getMatches(nuevo_pedido)) != 0:
+            print("<<<<<<<<<<<<<<ENTRA>>>>>>>>>>>>>>>>>")
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
+        return redirect('/thanks')
+
+
+
 
