@@ -148,24 +148,24 @@
 				<!--Slide derecho solicitar-->
 				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
 					<div class="row center">
-						<form method="POST" action="{% url 'donaciones:pedir' %}">
+						<form id = "form_donar" method="POST" action="/pedir">
 							{% csrf_token %}
 							<div class="input-field col s6 offset-s3">
 
-								<input name="pedir_nombre" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<input id = "pedir_nombre" name="pedir_nombre" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
 								<label for="c">Medicamento</label>
 							</div>
 							<div class="input-field col s6 offset-s3">
-								<input name="pedir_gramos" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<input id = "pedir_gramos" name="pedir_gramos" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
 
 								<label for="c">Concentracion en Gramos</label>
-							</div>
+>							</div>
 							<div class="extra_info">
 								<div class="input-field col s6 offset-s3">
-									<input name="pedir_droga" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+									<input name="pedir_droga" id="c" type="text"  oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
 									<label for="c">Droga</label>
 									<div class="input-field col s6 offset-s3">
-										<input name="pedir_laboratorio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+										<input name="pedir_laboratorio" id="c" type="text" ">
 										<label for="c">Laboratorio</label>
 										<div class="input-field col s6 offset-s3">
 											<select name="pedir_tipo">
@@ -180,10 +180,12 @@
 								</div>
 							</div>
 							<div class="input-field col s6 offset-s3">
-								<input name="pedir_cantidad" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<input name="pedir_cantidad" id="c" type="text" >
 								<label for="c">Cantidad</label>
 							</div>
 							<div class="col s12 center">
+	            			 <input id ="submit_pedir" type="submit" value="Submit"
+
 								<button class="btn blue">Aceptar</button>
 							</div>
 						</form>

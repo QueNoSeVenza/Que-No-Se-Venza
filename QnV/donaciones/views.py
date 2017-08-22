@@ -45,7 +45,7 @@ def donar(request):
         medicamento_donado_kwargs = {
 
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
+        'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
 
         }
@@ -152,11 +152,9 @@ def pedir(request):
 
         #Cambiar /thanks por la siguiente url del proceso de peticion.
 
-        print(getMatches(nuevo_pedido))
-        executeMatch(nuevo_pedido)
-        sendMatchEmail(nuevo_pedido)
 
         if len(getMatches(nuevo_pedido)) != 0:
+            print("<<<<<<<<<<<<<<ENTRA>>>>>>>>>>>>>>>>>")
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')

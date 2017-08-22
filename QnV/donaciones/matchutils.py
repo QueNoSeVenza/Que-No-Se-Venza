@@ -8,17 +8,19 @@ from django.core.mail import EmailMessage
 #que se use como argumento solo si hay suficientes unidades para satisfacerlo. 
 
 def getMatches(entity):
-
+	print(entity.__class__.__name__)
 	if entity.__class__.__name__ == "Pedido":
 
+		print(entity)
 		not_dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 		match_list = MedicamentoDonado.objects.filter(medicamento=entity.medicamento, id__in=not_dull_medicines,stock="Disponible").order_by('fecha_vencimiento')
 		quantities = [medicamento.cantidad for medicamento in match_list]
-		
+		print(not_dull_medicines,match_list,quantities)
 
 		if sum(quantities) < entity.cantidad:
 			match_list = {}
 
+		print(match_list)
 		return match_list
 	
 	elif entity.__class__.__name__ == "MedicamentoDonado":
@@ -42,7 +44,7 @@ def executeMatch(petition):
 		quantity = match.cantidad
 		quantity -= petition.cantidad
 
-		if quantity >= 0:
+		if quantity > 0:
 			
 			print("#1 Block")
 
