@@ -20,6 +20,7 @@ body {
 	overflow-x: hidden;
 }
 a {
+	outline: 0;
 	font-weight: 600;
 	text-decoration: none !important;
 }
@@ -59,6 +60,7 @@ p {
 }
 // Nav
 nav {
+	-webkit-margin-before: 1%;
 	ul.center {
 		padding-left: 2%;
 		padding-right: 2%;
@@ -96,7 +98,7 @@ li a {
 	text-decoration: none;
 }
 // Portada
-.panelbig {
+.title-pnl {
 	/*background-image: url(img/background.jpg);*/
 	height: 100%;
 	/* Font on large */
@@ -166,7 +168,7 @@ li a {
 	}
 }
 // Que
-.panelintro {
+.intro-pnl {
 	padding-top: 40px;
 	.fadeonscroll {
 		border-radius: 10px;
@@ -185,7 +187,7 @@ li a {
 	}
 }
 // Donde
-.paneldonde {
+.where-pnl {
 	margin-top: 50px;
 	.wtitle {
 		color: #757575;
@@ -215,7 +217,7 @@ li a {
 	}
 }
 // Como
-.panelcomo {
+.how-pnl {
 	margin-top: 80px;
 	background-color: #000;
 	padding-bottom: 8% !important;
@@ -256,7 +258,7 @@ li a {
 	}
 }
 // Final
-.panelfinal {
+.final-pnl {
 	height: 500px;
 	background-image: url(img/repback2.png);
 	background-repeat: repeat;

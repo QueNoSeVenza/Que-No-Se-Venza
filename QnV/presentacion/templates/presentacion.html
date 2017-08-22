@@ -1,6 +1,7 @@
 {% load static %} {% load staticfiles %}
 
 <html>
+
 <head>
 	<!-- Global -->
 	<title>QNV</title>
@@ -15,6 +16,7 @@
 	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
 	<link rel="stylesheet" href="{% static 'blockreveal/css/revealer.css' %}">
 </head>
+
 <body>
 
 	<!-- Nav -->
@@ -24,17 +26,17 @@
 				<div class="center">
 					<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
 				</div>
-				<li><a>QUE SOMOS</a></li>
-				<li><a>DONDE DONAR</a></li>
-				<li class="left-nav"><a>COMO DONAR</a></li>
-				<li class="left-nav"><a>CONTACTO</a></li>
+				<li><a href="#section6">CONTACTO</a></li>
+				<li><a href="#section4">COMO DONAR</a></li>
+				<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
+				<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<section id="section1" class="cd-section">
 		<div class="row">
-			<div class="col s12 panelbig fadeonscroll-title">
+			<div class="col s12 title-pnl fadeonscroll-title">
 				<div class="titleblock">
 					<h2 class="content__title content__title--center hide-on-mobile">
 					<div id="rev-1" class="content__title__inner">Proyecto</div><br/>
@@ -50,10 +52,11 @@
 			</div>
 		</div>
 	</section>
+
 	<!-- Section -->
 	<section id="section2" class="cd-section">
 		<div class="row">
-			<div class="col s12 panelintro">
+			<div class="col s12 intro-pnl">
 				<div class="col s12 m10 offset-m1 fadeonscroll">
 					<h2 class="center">¿Qué es que no venza?</h2>
 					<div class="col s12 m8 offset-m2 center">
@@ -67,7 +70,7 @@
 	<!-- Section -->
 	<section id="section3" class="cd-section">
 		<div class="row">
-			<div class="col s12 paneldonde center">
+			<div class="col s12 where-pnl center">
 				<h2 class="fadeonscroll wtitle">Puntos de depósito</h2>
 				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
 					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Enrique Bochini</span></div>
@@ -82,14 +85,14 @@
 	<!-- Section -->
 	<section id="section4" class="cd-section">
 		<div class="row">
-			<div class="col s12 panelcomo center">
+			<div class="col s12 how-pnl center">
 				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
 
 				<!-- Primer paso -->
 				<table>
 					<tr>
 						<td>
-							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 1"/>
+							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 1" />
 							</div>
 						</td>
 						<td>
@@ -112,7 +115,7 @@
 						</td>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-right">
-								<img src="{% static 'css/img/step2.png' %}" height=300 alt="Paso 3"/>
+								<img src="{% static 'css/img/step2.png' %}" height=300 alt="Paso 3" />
 							</div>
 						</td>
 					</tr>
@@ -123,7 +126,7 @@
 					<tr>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-left">
-								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3"/>
+								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3" />
 							</div>
 						</td>
 						<td>
@@ -141,7 +144,7 @@
 	<!-- Section -->
 	<section id="section5" class="cd-section">
 		<div class="row">
-			<div class="panelfinal">
+			<div class="final-pnl">
 				<div class="fadeonscroll">
 					<div class="col s12 center">
 						<h2 class="black-text center">Follow the code</h2>
@@ -157,7 +160,7 @@
 
 	<!-- Footer -->
 	<footer>
-		<div class="row fadeonscroll">
+		<div class="row fadeonscroll" id="section6">
 			<div class="col s12 l3 offset-l1">
 				<h4>Navegacion</h4>
 				<ul>
@@ -198,6 +201,7 @@
 		</div>
 	</footer>
 
+	<!-- Javascripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="{% static 'blockreveal/js/main.js' %}"></script>
 	<script src="{% static 'blockreveal/js/anime.min.js' %}"></script>
@@ -208,6 +212,7 @@
 	<script>
 		/*Block reveal*/
 		function init() {
+			/* Intro text */
 			var rev1 = new RevealFx(document.querySelector('#rev-1'), {
 				revealSettings: {
 					bgcolor: '#242424',
@@ -217,6 +222,7 @@
 				}
 			});
 			rev1.reveal();
+			/* Intro text */
 			var rev2 = new RevealFx(document.querySelector('#rev-2'), {
 				revealSettings: {
 					bgcolor: '#616161',
@@ -257,6 +263,25 @@
 				reset: true,
 				viewFactor: 0.7,
 				scale: 1,
+			});
+
+			/* Smooth anchor transitions on click */
+			$("a").on('click', function(event) {
+				// Make sure this.hash has a value before overriding default behavior
+				if (this.hash !== "") {
+					// Prevent default anchor click behavior
+					event.preventDefault();
+					// Store hash
+					var hash = this.hash;
+					// Using jQuery's animate() method to add smooth page scroll
+					// The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+					$('html, body').animate({
+						scrollTop: $(hash).offset().top
+					}, 1200, function() {
+						// Add hash (#) to URL when done scrolling (default click behavior)
+						window.hash = "";
+					});
+				}
 			});
 		});
 	</script>
