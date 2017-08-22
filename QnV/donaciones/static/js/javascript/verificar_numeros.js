@@ -1,67 +1,63 @@
 $(document).ready(function () {
-    $('#meses').on("change", checkFecha);
-    $('#anio').on("keyup", checkFecha);
-    $('#n-gramos').on("keyup", checkGramos);
-    $('#n-cantidad').on("keyup", checkCantidad);
-    //$('#activa-fecha').on("mouseover", dissableButtonSend);
-});    
+    var grams = $("#n-gramos");
+    var quantity = $("#n-cantidad");
     
-function checkFecha() {
-    var campoAnio = parseInt($("#anio").val());
-    var campoMes = document.getElementById("meses");
-    var corrienteFecha = new Date();
-    var corrienteAnio = parseInt(corrienteFecha.getFullYear());
-    var selectedMes = campoMes.options[campoMes.selectedIndex].value;
+    $('#anio').on("change", checkDate);
+    $('#n-gramos').keyup(function (event) {
+            checkNumber(grams);
+        });
+    $('#n-cantidad').keyup(function (event) {
+            checkNumber(quantity);
+        });
     
-    if (isNaN(campoAnio) || campoAnio < corrienteAnio) {
-        $("#anio").css("border-bottom-color","red");
-        dissableButtonSend();
-        return false;
-    } else {
-        $("#anio").css("border-bottom-color","grey");
-        dissableButtonSend();
+    inicialiceCmbox();
+});  
+
+function inicialiceCmbox() {
+    var currentDate = new Date();
+    var currentYear = parseInt(currentDate.getFullYear());
+    var listYears = [];
+    var cmboxYear = $("#anio");
+    for (var i = 0; i < 15; i++) {
+        listYears.push(currentYear + i);
     }
+    for (var i = 0; i < listYears.length; i++) {
+        $option = $('<option>', 
+                      { 
+                          value : listYears[i],
+                          text : listYears[i]
+                      }
+                     );
+        cmboxYear.append($option);
+    }
+    cmboxYear.material_select();
+}
     
-    var timestampUsuario = new Date(campoAnio, selectedMes -1, 1).getTime();
-    var timestampAhora = Date.now();
-    
-    if (timestampAhora > timestampUsuario) {
-        console.log(timestampAhora +" ----> "+ timestampUsuario)
-        $("#anio").css("border-bottom-color","red");
-        document.getElementById("meses").style.borderBottomColor = "red";
-        dissableButtonSend();
-        return false;
-    } else {
-        $("#anio").css("border-bottom-color","grey");
-        document.getElementById("meses").style.borderBottomColor = "grey";
-        dissableButtonSend();
+function checkDate() {
+    var cmboxYear = $("#anio");
+    var cmboxMonth = $("#meses");
+    var currentDate = new Date();
+    var currentYear = parseInt(currentDate.getFullYear());
+    var currentMonth = parseInt(currentDate.getMonth());
+    var selectYear = cmboxYear.val();
+    if (selectYear == currentYear) {
+        for (var i = 0; i < (currentMonth+1); i++) {
+            cmboxMonth.find("option[value='"+i+"']").prop("disabled",true);
+        }
+        cmboxMonth.material_select();
     }
 }
 
-function checkGramos() {
-    var num1 = parseInt($("#n-gramos").val());
-    
-    if (num1 <= 0) {
-        $("#n-gramos").css("border-bottom-color","red");
-        $("#n-gramos").value = "red";
+function checkNumber(sel) {
+    var selectNumber = parseInt(sel.val());
+    console.log(selectNumber);
+    console.log(sel);
+    if (selectNumber <= 0) {
+        sel.css("border-bottom-color","red");
         dissableButtonSend();
         return false;
     } else {
-        $("#n-gramos").css("border-bottom-color","grey");
-        dissableButtonSend();
-    }
-}
-
-function checkCantidad() {
-    var num2 = parseInt($("#n-cantidad").val());
-    
-    if (num2 <= 0) {
-        $("#n-cantidad").css("border-bottom-color","red");
-        $("#n-cantidad").value = "red";
-        dissableButtonSend();
-        return false;
-    } else {
-        $("#n-cantidad").css("border-bottom-color","grey");
+        sel.css("border-bottom-color","grey");
         dissableButtonSend();
     }
 }
@@ -74,17 +70,11 @@ function dissableButtonSend() {
          list_inputs.push(inputs[i].style.borderBottomColor);
       }
     }
-    
-    console.log(list_inputs)
-    
     for (var i = 0; i < list_inputs.length; i++) {
-        console.log(list_inputs[i])
         if (list_inputs[i] == "red") {
-            console.log("red")
             $("#activa-fecha").prop("disabled", true);
             break;
         } else {
-            console.log("grey")
             $("#activa-fecha").prop("disabled", false);
         }
     }

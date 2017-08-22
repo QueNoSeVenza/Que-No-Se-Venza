@@ -35,9 +35,6 @@ def donar(request):
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
         mes = request.POST['mes']
-        print mes
-        if mes > 10:
-            mes = "0"+mes
 
         fecha_vencimiento =  mes+request.POST['anio']
 
