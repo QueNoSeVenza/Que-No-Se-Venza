@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 from django.utils import timezone
 import datetime
+from datetime import date
 from donaciones.matchutils import *
 from django.http import JsonResponse
 
@@ -32,30 +33,33 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
+        mes = request.POST['mes']
+        print mes
+        if mes > 10:
+            mes = "0"+mes
+
+        fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
             'laboratorio' : request.POST['donar_laboratorio'] ,
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'],
+            'tipo' : request.POST['donar_tipo']
         }
 
         medicamento_donado_kwargs = {
-
         'cantidad' : request.POST['donar_cantidad'],
-        'fecha_vencimiento' : datetime.datetime.strptime(fecha_vencimiento,
-                                            '%m%Y').date(),
-
+            
+        'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
+                                            '%m%Y').date()
         }
 
         donacion_kwargs = {
-
         'user' : request.user,
+        }   
 
-        }
-
-
+        
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
