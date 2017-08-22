@@ -66,6 +66,8 @@ def executeMatch(petition):
 			petition.cantidad = abs(quantity)
 			match.stock = "Reservado"
 			match.save()
+			if petition.cantidad == 0:
+				return substaction_values
 
 
 
