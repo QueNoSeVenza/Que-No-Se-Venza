@@ -29,7 +29,7 @@ function thirdSection() {
 };
 
 $(document).ready(function () {
-	$(".extra_info").hide()
+	$(".extra_info").hide();
     $("#pedir_nombre,#pedir_gramos").change(function () {
     	var nombre = $("#pedir_nombre").val();
     	var concentracion = $("#pedir_gramos").val();
