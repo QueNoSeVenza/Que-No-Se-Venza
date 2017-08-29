@@ -41,9 +41,16 @@ function checkDate() {
     var currentMonth = parseInt(currentDate.getMonth());
     var selectYear = cmboxYear.val();
     if (selectYear == currentYear) {
-        for (var i = 0; i < (currentMonth+1); i++) {
+        for (var i = 1; i < (currentMonth+1); i++) {
             cmboxMonth.find("option[value='"+i+"']").prop("disabled",true);
         }
+        $('#meses > option[value="0"]').prop('selected', true)
+        cmboxMonth.material_select();
+    } else {
+        for (var i = 1; i < (currentMonth+1); i++) {
+            cmboxMonth.find("option[value='"+i+"']").prop("disabled",false);
+        }
+        $('#meses > option[value="0"]').prop('selected', true)
         cmboxMonth.material_select();
     }
 }
