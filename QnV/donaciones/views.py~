@@ -62,7 +62,7 @@ def donar(request):
         'user' : request.user,
         }   
 
-        
+        }
 
         nuevo_medicamento_donado= ""
 
