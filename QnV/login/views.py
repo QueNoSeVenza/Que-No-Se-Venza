@@ -28,7 +28,7 @@ def log(request):
         usern = request.POST['username']
         passw = request.POST['password']
         print(usern + passw)
-        user = authenticate(username=usern, password=passw)
+        user = authenticate(request, username=usern, password=passw)
         if user is not None:
             auth_login(request, user)
             return redirect('/principal')

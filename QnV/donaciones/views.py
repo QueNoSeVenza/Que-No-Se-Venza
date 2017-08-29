@@ -9,7 +9,9 @@ from datetime import datetime
 import datetime
 from datetime import date
 from donaciones.matchutils import *
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.contrib import auth
 
 def principal(request):
     template = loader.get_template('index.html')
@@ -164,3 +166,8 @@ def pedir(request):
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')
+    
+def logout(request):
+    context = RequestContext(request)
+    logout(request)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
