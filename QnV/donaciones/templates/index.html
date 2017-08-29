@@ -13,14 +13,22 @@
 	<div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
 		<span class="bars"></span>
 	</div>
-
 	<nav class="transparent z-depth-0 ">
 		<a href="#" class="brand-logo center grey-text">
 			<div class="icon gris"></div>
 		</a>
-
-		<ul id="nav-mobile" class="right hide-on-small-only">
-			<li><a class="franklin-bold userText" href="#">{{django_users.first_name}}</a></li>
+		<ul id="nav-mobile" class="my-wrapper right hide-on-small-only">
+			<li class="drop">
+				<a href="#" class="grey-text text-darken-3">{{django_users.first_name}}</a>
+				<div class="dropdownContain">
+					<div class="dropOut">
+						<div class="triangle"></div>
+						<ul>
+							<li>Cerrar sesión</li>
+						</ul>
+					</div>
+				</div>
+			</li>
 		</ul>
 	</nav>
 
@@ -86,32 +94,32 @@
 					<form method="POST" action="{% url 'donaciones:donar' %}">
 						{% csrf_token %}
 						<div class="input-field col s6 m4 offset-m2 roboto">
-							<input name="donar_nombre" id="a" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="a">Nombre Comercial</label>
+							<input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="donar_nombre">Nombre Comercial</label>
 						</div>
 						<div class="input-field col s6 m4">
-							<input name="donar_concentracion_gramos" id="b" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="b">Concentracion en Gramos</label>
+							<input name="donar_concentracion_gramos" id="donar_concentracion_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="donar_concentracion_gramos">Concentracion en Gramos</label>
 						</div>
 						<div class="input-field col s6 m4 offset-m2">
-							<input name="donar_cantidad" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="c">Cantidad</label>
+							<input name="donar_cantidad" id="donar_cantidad" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="donar_cantidad">Cantidad</label>
 						</div>
 						<div class="input-field col s6 m4">
-							<input name="donar_laboratorio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="c">Laboratorio</label>
+							<input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="donar_laboratorio">Laboratorio</label>
 						</div>
 						<div class="input-field col s12 m8 offset-m2">
-							<input name="donar_droga" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="c">Droga</label>
+							<input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="donar_droga">Droga</label>
 						</div>
 						<div class="input-field col s6 m4 offset-m2 roboto">
-							<input name="mes" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="c">Mes</label>
+							<input name="mes" id="mes" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="mes">Mes</label>
 						</div>
 						<div class="input-field col s6 m4">
-							<input name="anio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-							<label for="c">Año</label>
+							<input name="anio" id="anio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="anio">Año</label>
 						</div>
 						<div class="input-field col s12 m8 offset-m2">
 							<select name="donar_tipo">
@@ -152,13 +160,13 @@
 							{% csrf_token %}
 							<div class="input-field col s6 offset-s3">
 
-								<input name="pedir_nombre" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-								<label for="c">Medicamento</label>
+								<input name="pedir_nombre" id="pedir_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<label for="pedir_nombre">Medicamento</label>
 							</div>
 							<div class="input-field col s6 offset-s3">
-								<input name="pedir_gramos" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<input name="pedir_gramos" id="pedir_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
 
-								<label for="c">Concentracion en Gramos</label>
+								<label for="pedir_gramos">Concentracion en Gramos</label>
 							</div>
 							<div class="extra_info">
 								<div class="input-field col s6 offset-s3">
@@ -180,8 +188,8 @@
 								</div>
 							</div>
 							<div class="input-field col s6 offset-s3">
-								<input name="pedir_cantidad" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-								<label for="c">Cantidad</label>
+								<input name="pedir_cantidad" id="pedir_cantidad" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<label for="pedir_cantidad">Cantidad</label>
 							</div>
 							<div class="col s12 center">
 								<button class="btn blue">Aceptar</button>
@@ -199,4 +207,5 @@
 	<script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
 </body>
+
 </html>

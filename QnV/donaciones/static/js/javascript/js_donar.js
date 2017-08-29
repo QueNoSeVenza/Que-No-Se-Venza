@@ -89,12 +89,10 @@ $(document).ready(function () {
 					/*Cambiar a blanco*/
 					$(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
 					$(toggle).toggleClass('active');
-					console.log(toggle);
 				} else {
 					/*Cambiar a gris*/
 					$(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
 					$(toggle).toggleClass('active');
-					console.log(toggle);
 				}
 			});
 	});
