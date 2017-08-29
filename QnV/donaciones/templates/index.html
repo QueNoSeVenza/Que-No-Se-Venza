@@ -88,90 +88,90 @@
 
 	<div id="fullpage">
 		<div class="section">
-      <!--Slide izquierdo donar-->
-    			<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
-    				<div class="row center white-text">
-    					<form method="POST" action="{% url 'donaciones:donar' %}">
-    						{% csrf_token %}
-    						<div class="input-field col s6 m4 offset-m2 roboto">
-    							<input name="donar_nombre" id="a" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    							<label for="a">Nombre Comercial</label>
-    						</div>
-    						<div class="input-field col s6 m4">
-    							<input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    							<label for="b">Concentracion en Gramos</label>
-    						</div>
-    						<div class="input-field col s6 m4 offset-m2">
-    							<input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    							<label for="c">Cantidad</label>
-    						</div>
-    						<div class="input-field col s6 m4">
-    							<input name="donar_laboratorio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    							<label for="c">Laboratorio</label>
-    						</div>
-    						<div class="input-field col s12 m8 offset-m2">
-    							<input name="donar_droga" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    							<label for="c">Droga</label>
-    						</div>
-    						<div class="input-field col s4 offset-s2">
-                                <select name="anio" id="anio" >
-                                    <option value="" disabled selected>Elije un Año</option>
-                                </select>
-                                <label for="anio">Año</label>
-                            </div>
-    						<div class="input-field col s6 m4">
-                                <select name="mes" id="meses" >
-                                    <option value="" disabled selected>Elije una mes</option>
-                                    <option class="meses" value="0">Enero</option>
-                                    <option class="meses" value="1">Febrero</option>
-                                    <option class="meses" value="2">Marzo</option>
-                                    <option class="meses" value="3">Abril</option>
-                                    <option class="meses" value="4">Mayo</option>
-                                    <option class="meses" value="5">Junio</option>
-                                    <option class="meses" value="6">Julio</option>
-                                    <option class="meses" value="7">Agosto</option>
-                                    <option class="meses" value="8">Octubre</option>
-                                    <option class="meses" value="9">Septiembre</option>
-                                    <option class="meses" value="10">Noviembre</option>
-                                    <option class="meses" value="11">diciembre</option>
-                                </select>
-                                <label for="meses">Mes</label>
-    						</div>
-    						<div class="input-field col s12 m8 offset-m2">
-    							<select name="donar_tipo">
-    								<option value="" disabled selected>Elije una opcion</option>
-    								<option value="Pastillas">Pastillas</option>
-    								<option value="Jarabe">Jarabe</option>
-    								<option value="Gotas">Gotas</option>
-    							</select>
-    							<label>Tipo</label>
-    						</div>
-    						<div class="col s12 center">
-    							<button id="activa-fecha" class="btn red accent-2">Aceptar</button>
-    						</div>
-    					</form>
-    				</div>
-    			</div>
-    			<!--Slide del medio-->
-    			<div class="slide active fp-auto-height-responsive grey lighten-4" id="slide2">
-    				<div class="col s12 grey lighten-4 bigpanel">
-    					<div class="row center">
-    						<h3 class="grey-text text-darken-2">Bienvenido,
-                              <span class="red-text semibold">{{django_users.first_name}}</span></h3>
-    						<p class="col m6 push-m3">On the other hand, we denounce with righteous
-                  indignation and dislike men who are so beguiled and demoralized by the
-                  charms of pleasure of the moment, so blinded by desire, that they cannot
-                  foresee the <span class="semibold">pain</span> and trouble that are bound
-                  to ensue; and equal blame belongs to those who fail in their duty through
-                  weakness of will, which is the same as saying through shrinking from toil and
-                   pain. These cases are <span class="semibold">perfectly</span> simple and
-                   easy to distinguish. In a free houasdr, when our power of choice is
-                   untrammelled and when nothing prevents our being able to do what we
-                    like best, every pleasure is to be welcomed and every pain avoided.
-                    But in certain circumstances and owing to the claims of duty or the
-                    obligations of business it will frequentlasdy</p>
-    					</div>
-
+      
+			<!--Slide izquierdo donar-->
+			<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
+				<div class="row center white-text">
+					<form method="POST" action="{% url 'donaciones:donar' %}">
+						{% csrf_token %}
+						<div class="input-field col s6 m4 offset-m2 roboto">
+							<input name="donar_nombre" id="a" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="a">Nombre Comercial</label>
+						</div>
+						<div class="input-field col s6 m4">
+							<input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="b">Concentracion en Gramos</label>
+						</div>
+						<div class="input-field col s6 m4 offset-m2">
+							<input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="c">Cantidad</label>
+						</div>
+						<div class="input-field col s6 m4">
+							<input name="donar_laboratorio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="c">Laboratorio</label>
+						</div>
+						<div class="input-field col s12 m8 offset-m2">
+							<input name="donar_droga" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+							<label for="c">Droga</label>
+						</div>
+						<div class="input-field col s4 offset-s2">
+                            <select name="anio" id="anio" >
+                                <option value="" disabled selected>Elije un Año</option>
+                            </select>
+                            <label for="anio">Año</label>
+                        </div>
+						<div class="input-field col s6 m4">
+                            <select name="mes" id="meses" >
+                                <option value="0" disabled selected>Elije una mes</option>
+                                <option class="meses" value="1">Enero</option>
+                                <option class="meses" value="2">Febrero</option>
+                                <option class="meses" value="3">Marzo</option>
+                                <option class="meses" value="4">Abril</option>
+                                <option class="meses" value="5">Mayo</option>
+                                <option class="meses" value="6">Junio</option>
+                                <option class="meses" value="7">Julio</option>
+                                <option class="meses" value="8">Agosto</option>
+                                <option class="meses" value="9">Octubre</option>
+                                <option class="meses" value="10">Septiembre</option>
+                                <option class="meses" value="11">Noviembre</option>
+                                <option class="meses" value="12">diciembre</option>
+                            </select>
+                            <label for="meses">Mes</label>
+						</div>
+						<div class="input-field col s12 m8 offset-m2">
+							<select name="donar_tipo">
+								<option value="" disabled selected>Elije una opcion</option>
+								<option value="Pastillas">Pastillas</option>
+								<option value="Jarabe">Jarabe</option>
+								<option value="Gotas">Gotas</option>
+							</select>
+							<label>Tipo</label>
+						</div>
+						<div class="col s12 center">
+							<button id="activa-fecha" class="btn red accent-2">Aceptar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--Slide del medio-->
+			<div class="slide active fp-auto-height-responsive grey lighten-4" id="slide2">
+				<div class="col s12 grey lighten-4 bigpanel">
+					<div class="row center">
+						<h3 class="grey-text text-darken-2">Bienvenido,
+                          <span class="red-text semibold">{{django_users.first_name}}</span></h3>
+						<p class="col m6 push-m3">On the other hand, we denounce with righteous
+              indignation and dislike men who are so beguiled and demoralized by the
+              charms of pleasure of the moment, so blinded by desire, that they cannot
+              foresee the <span class="semibold">pain</span> and trouble that are bound
+              to ensue; and equal blame belongs to those who fail in their duty through
+              weakness of will, which is the same as saying through shrinking from toil and
+               pain. These cases are <span class="semibold">perfectly</span> simple and
+               easy to distinguish. In a free houasdr, when our power of choice is
+               untrammelled and when nothing prevents our being able to do what we
+                like best, every pleasure is to be welcomed and every pain avoided.
+                But in certain circumstances and owing to the claims of duty or the
+                obligations of business it will frequentlasdy</p>
+					</div>
     					<div class="col l6 push-l3 center btnsection">
     						<button class="waves-effect waves-light btn-large red z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
     						{% if verificador %}
@@ -181,25 +181,24 @@
                  optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
     					</div>
     				</div>
-
-    				<!--Slide derecho solicitar-->
-    				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
-    					<div class="row center">
-    						<form id = "form_donar" method="POST" action="/pedir">
-    							{% csrf_token %}
-    							<div class="input-field col s6 offset-s3">
-    								<input id = "pedir_nombre" name="pedir_nombre" id="c" type="text" required
-                    oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-    								<label for="c">Medicamento</label>
-    							</div>
-    							<div class="input-field col s6 offset-s3">
-    								<input id = "pedir_gramos" name="pedir_gramos" id="c" type="text" required
-                    oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                    <label for="c">Concentracion en Gramos</label>
-    						</div>
-    							<div class="extra_info">
-    								<div class="input-field col s6 offset-s3">
-
+            
+				<!--Slide derecho solicitar-->
+				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
+					<div class="row center">
+						<form id = "form_donar" method="POST" action="/pedir">
+							{% csrf_token %}
+							<div class="input-field col s6 offset-s3">
+								<input id = "pedir_nombre" name="pedir_nombre" id="c" type="text" required
+                oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<label for="c">Medicamento</label>
+							</div>
+							<div class="input-field col s6 offset-s3">
+								<input id = "pedir_gramos" name="pedir_gramos" id="c" type="text" required
+                oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="c">Concentracion en Gramos</label>
+						  </div>
+							<div class="extra_info">
+								<div class="input-field col s6 offset-s3">
     									<input name="pedir_droga" id="c" type="text" oninvalid="setCustomValidity('Campo requerido')"
                       oninput="setCustomValidity('')">
     									<label for="c">Droga</label></div>
@@ -218,26 +217,24 @@
     										</div>
     							</div>
     							<div class="input-field col s6 offset-s3">
-
     								<input name="pedir_cantidad" id="c" type="text" required
                     oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-
-    								<label for="c">Cantidad</label>
-    							</div>
-    							<div class="col s12 center">
-    	            			 <input id ="submit_pedir" type="submit" value="Aceptar" button class="btn blue"></button>
-    							</div>
-    						</form>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    	<script src="{% static 'js/javascript/js_donar.js' %}"></script>
-        <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
-    	<script src="{% static 'js/bin/materialize_donar.js' %}"></script>
-    	<script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
-    	<script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
-    </body>
-    </html>
+								<label for="c">Cantidad</label>
+							</div>
+							<div class="col s12 center">
+	            			 <input id ="submit_pedir" type="submit" value="Aceptar" button class="btn blue">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="{% static 'js/javascript/js_donar.js' %}"></script>
+    <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
+	<script src="{% static 'js/bin/materialize_donar.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
+</body>
+</html>
