@@ -43,23 +43,27 @@ def reg(request):
         password = request.POST['pass1']
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
+        terms = request.POST.get('terms', False)
+        print terms
         if u is not None:
-            if u.exists():
-                messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            else:
-
-                user = User.objects.create_user(email, email, password)
-                user.first_name = name
-                user.save()
-                userant = authenticate(username=email, password=password)
-                if userant is not None:
-                    auth_login(request, userant)
-                    return redirect('/principal')
-                else:
+            if terms == "on":
+                if u.exists():
+                    messages.add_message(request, messages.INFO, 'Ese email ya esta en uso')
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        else:
-            messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                else:
+
+                    user = User.objects.create_user(email, email, password)
+                    user.first_name = name
+                    user.save()
+                    userant = authenticate(username=email, password=password)
+                    if userant is not None:
+                        auth_login(request, userant)
+                        return redirect('/principal')
+                    else:
+                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.add_message(request, messages.INFO, 'Debe aceptar los terminos y condiciones')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
