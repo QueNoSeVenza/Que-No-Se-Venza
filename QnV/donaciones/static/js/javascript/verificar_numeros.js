@@ -2,7 +2,7 @@ $(document).ready(function () {
     var grams = $("#n-gramos");
     var quantity = $("#n-cantidad");
     
-    $('#anio').on("change", checkDate);
+    $('#anios').on("change", checkDate);
     $('#n-gramos').keyup(function (event) {
             checkNumber(grams);
         });
@@ -17,7 +17,7 @@ function inicialiceCmbox() {
     var currentDate = new Date();
     var currentYear = parseInt(currentDate.getFullYear());
     var listYears = [];
-    var cmboxYear = $("#anio");
+    var cmboxYear = $("#anios");
     for (var i = 0; i < 15; i++) {
         listYears.push(currentYear + i);
     }
@@ -34,7 +34,7 @@ function inicialiceCmbox() {
 }
     
 function checkDate() {
-    var cmboxYear = $("#anio");
+    var cmboxYear = $("#anios");
     var cmboxMonth = $("#meses");
     var currentDate = new Date();
     var currentYear = parseInt(currentDate.getFullYear());

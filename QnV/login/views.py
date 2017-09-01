@@ -35,6 +35,8 @@ def log(request):
         else:
             messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect('/login')
 
 def reg(request):
     if 'POST' in request.method:
@@ -62,4 +64,4 @@ def reg(request):
             messages.add_message(request, messages.INFO, 'Ese usuario ya esta en uso')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect('/login')

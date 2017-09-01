@@ -1,3 +1,4 @@
+{% if not user.is_anonymous %}
 {% load static %} {% load staticfiles %}
 <html>
     <head>
@@ -116,13 +117,13 @@
                                 <label for="c">Droga</label>
                             </div>
                             <div class="input-field col s4 offset-s2">
-                                <select name="anio" id="anio" required>
+                                <select name="anio" id="anios">
                                     <option value="" disabled selected>Elije un Año</option>
                                 </select>
-                                <label for="anio">Año</label>
+                                <label for="anios">Año</label>
                             </div>
                             <div class="input-field col s6 m4">
-                                <select name="mes" id="meses" required>
+                                <select name="mes" id="meses">
                                     <option value="0" disabled selected>Elije una mes</option>
                                     <option class="meses" value="1">Enero</option>
                                     <option class="meses" value="2">Febrero</option>
@@ -244,3 +245,13 @@
         <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
     </body>
 </html>
+{% else %}
+{% load static %} {% load staticfiles %}
+
+You are not logued in 
+
+<div class="center">
+    <a onclick="window.location.href = '/login'">INGRESAR</a>
+</div>
+
+{% endif %}

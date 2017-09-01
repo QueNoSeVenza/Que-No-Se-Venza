@@ -60,8 +60,17 @@ def donar(request):
         donacion_kwargs = {
         'user' : request.user,
         }
-
-    
+        
+        gramos = medicamento_kwargs['concentracion_gramos']
+        cantidad = medicamento_donado_kwargs['cantidad']
+        
+        if gramos <= "0" or cantidad <= "0":
+            print "se fue por gramos o cantidad"
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
+            print "se fue por fecha"
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         nuevo_medicamento_donado= ""
 
@@ -93,20 +102,14 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
 
-        for pedido in getMatches(nuevo_medicamento_donado):
-            if len(getMatches(pedido)) != 0:
-                executeMatch(pedido)
-                sendMatchEmail(pedido)
-                print("Envio mail")
+#        for pedido in getMatches(nuevo_medicamento_donado):
+#            if len(getMatches(pedido)) != 0:
+#                executeMatch(pedido)
+#                sendMatchEmail(pedido)
+#                print("Envio mail")
         return redirect('/thanks')
-
-
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
+    else:
+        return redirect('/principal')
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -166,6 +169,8 @@ def pedir(request):
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')
+    else:
+        return redirect('/principal')
     
 def logout(request):
     context = RequestContext(request)
