@@ -28,13 +28,15 @@ def log(request):
         usern = request.POST['username']
         passw = request.POST['password']
         print(usern + passw)
-        user = authenticate(username=usern, password=passw)
+        user = authenticate(request, username=usern, password=passw)
         if user is not None:
             auth_login(request, user)
             return redirect('/principal')
         else:
             messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect('/login')
 
 def reg(request):
     if 'POST' in request.method:
@@ -66,4 +68,4 @@ def reg(request):
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             
     else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect('/login')

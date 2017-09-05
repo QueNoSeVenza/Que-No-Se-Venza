@@ -12,9 +12,7 @@ from donaciones.matchutils import *
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
@@ -61,6 +59,11 @@ def donar(request):
 
         donacion_kwargs = {
         'user' : request.user,
+<<<<<<< HEAD
+        }   
+
+        
+=======
         }
         
         gramos = medicamento_kwargs['concentracion_gramos']
@@ -73,6 +76,7 @@ def donar(request):
         if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
             print "se fue por fecha"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+>>>>>>> Develop
 
         nuevo_medicamento_donado= ""
 
