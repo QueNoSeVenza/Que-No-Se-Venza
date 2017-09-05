@@ -69,3 +69,8 @@ def reg(request):
             
     else:
         return redirect('/login')
+    
+def logout(request):
+    context = RequestContext(request)
+    logout(request)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

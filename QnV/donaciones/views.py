@@ -173,8 +173,3 @@ def pedir(request):
         return redirect('/thanks')
     else:
         return redirect('/principal')
-    
-def logout(request):
-    context = RequestContext(request)
-    logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
