@@ -1,7 +1,11 @@
 $(document).ready(function () {
     // Revisa que los password sean iguales
-    $("#regpass, #regpass2").on("keyup",checkPasswordMatch);
-    $("#txtConfirmPassword").on("keyup",checkPasswordMatch);
+    $("#regpass, #regpass2, #txtConfirmPassword").keyup(function (event) {
+        checkPasswordMatch();
+    });
+    $("#terms").change(function (event) {
+        dissableButtonSend();
+    });
 
     // cambia form login o registrarse
     $(".register-content").hide();
@@ -25,6 +29,8 @@ $(document).ready(function () {
         });
         $('.login-content').delay(360).show(0);
     });
+
+    dissableButtonSend();
 });
 
 function checkPasswordMatch() {
@@ -33,21 +39,32 @@ function checkPasswordMatch() {
 
     if (password != confirmPassword && confirmPassword!="" ){
         $("#regpass2").css("border-bottom-color","red");
-        $("#divCheckPasswordMatch").html("Las contraseñas no coinciden!");
-        $("#register").prop("disabled",true);
-    }else if (password !="" && confirmPassword =="") {
-        $("#divCheckPasswordMatch").html(""); // ponemos algo adentro de los ""?
-        $("#regpass2").css("border-bottom-color","grey");
-        $("#register").prop("disabled",false);
-    }else if (password == "" && confirmPassword =="") {
-        $("#divCheckPasswordMatch").html("");
-        $("#regpass2").css("border-bottom-color","grey");
-        $("#register").prop("disabled",false);
-    }
-    else{
-        $("#divCheckPasswordMatch").html("Contraseñas coinciden.")
+        dissableButtonSend();
+    } else if (password == confirmPassword && password != "" && confirmPassword != ""){
         $("#regpass2").css("border-bottom-color","green");
-        $("#register").prop("disabled",false);
+        dissableButtonSend();
+    } else {
+        $("#regpass2").css("border-bottom-color","grey");
+        dissableButtonSend();
+    }
+}
+
+function dissableButtonSend() {
+    var inputs = $(".isRed");
+    var terms = $("#terms");
+    var list_inputs = [];
+    for (var i = 0; i < inputs.length; ++i) {
+        if (typeof inputs[i].attributes.id !== "undfined") {
+            list_inputs.push(inputs[i].style.borderBottomColor);
+        }
+    }
+    for (var i = 0; i < list_inputs.length; i++) {
+        if (list_inputs[i] == "red" || terms.prop('checked')==false) {
+            $("#register").prop("disabled", true);
+            break;
+        } else {
+            $("#register").prop("disabled", false);
+        }
     }
 }
 

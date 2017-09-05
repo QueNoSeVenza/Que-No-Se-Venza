@@ -67,6 +67,48 @@
                                     <label for="namm">Nombre y Apellido</label>
                                 </div>
 
+<<<<<<< HEAD
+							<div class="input-field col s12 m10 push-m1">
+								<input id="corr" name="email" type="email" class="monts" required
+								       oninvalid="setCustomValidity('Debe ingresar un email válido')"
+                       oninput="setCustomValidity('')">
+								<label for="corr">Correo electrónico</label>
+							</div>
+							<div class="input-field col s12 m10 push-m1">
+								<input id="regpass" name="pass1" type="password" class="monts" required
+											 oninvalid="setCustomValidity('Debes ingresar una contraseña')"
+								       oninput="setCustomValidity('')">
+								<label for="popl">Contraseña</label>
+							</div>
+							<div class="input-field col s12 m10 push-m1">
+								<input id="regpass2" name="pass2" type="password" class="monts" required
+								       oninvalid="setCustomValidity('#ElQueLasHaceLasPaga')"
+								       oninput="setCustomValidity('')">
+								<label for="popl2">Repetir contraseña</label>
+							</div>
+                            <div class="input-field col s12 m10 push-m1">
+								<input type="checkbox" name="terms" id="terms" > 
+								<label for="terms">Acepto los <a target="_blank" href="https://www.google.com">terminos y condiciones</a></label>
+							</div>
+                             
+							<button class="waves-effect waves-light btn logBtn monts green accent-2 z-depth-0 datSpace"
+											type="submit" id="register" name="action">REGISTRARSE</button>
+						  <div class="registrationFormAlert" id="divCheckPasswordMatch">
+							</div>
+                            
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
+</body>
+</html>
+=======
                                 <div class="input-field col s12 m10 push-m1">
                                     <input id="corr" name="email" type="email" class="monts" required
                                            oninvalid="setCustomValidity('Debe ingresar un email válido')"
@@ -74,23 +116,21 @@
                                     <label for="corr">Correo electrónico</label>
                                 </div>
                                 <div class="input-field col s12 m10 push-m1">
-                                    <input id="regpass" name="pass1" type="password" class="isRed" required
+                                    <input id="regpass" name="pass1" type="password" class="monts" required
                                            oninvalid="setCustomValidity('Debes ingresar una contraseña')"
                                            oninput="setCustomValidity('')">
                                     <label for="popl">Contraseña</label>
                                 </div>
                                 <div class="input-field col s12 m10 push-m1">
-                                    <input id="regpass2" name="pass2" type="password" class="isRed" required
+                                    <input id="regpass2" name="pass2" type="password" class="monts" required
                                            oninvalid="setCustomValidity('#ElQueLasHaceLasPaga')"
                                            oninput="setCustomValidity('')">
                                     <label for="popl2">Repetir contraseña</label>
                                 </div>
-                                <div style="margin-top: -9px;margin-left: 17px;" class="input-field col s12 m10 push-m1">
-                                    <input type="checkbox" name="terms" id="terms" > 
-                                    <label for="terms">Acepto los <a target="_blank" href="https://www.google.com">terminos y condiciones</a></label>
-                                </div>
-                                <button style="margin-top: 28px;" class="waves-effect waves-light btn logBtn monts green accent-2 z-depth-0 datSpace"
+                                <button class="waves-effect waves-light btn logBtn monts green accent-2 z-depth-0 datSpace"
                                         type="submit" id="register" name="action">REGISTRARSE</button>
+                                <div class="registrationFormAlert" id="divCheckPasswordMatch">
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -103,3 +143,4 @@
         <script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
     </body>
 </html>
+>>>>>>> Develop

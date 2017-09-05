@@ -9,12 +9,8 @@ from datetime import datetime
 import datetime
 from datetime import date
 from donaciones.matchutils import *
-from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
@@ -39,6 +35,9 @@ def donar(request):
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
         mes = request.POST['mes']
+        print mes
+        if mes > 10:
+            mes = "0"+mes
 
         fecha_vencimiento =  mes+request.POST['anio']
 
@@ -61,18 +60,9 @@ def donar(request):
 
         donacion_kwargs = {
         'user' : request.user,
+        }   
+
         }
-        
-        gramos = medicamento_kwargs['concentracion_gramos']
-        cantidad = medicamento_donado_kwargs['cantidad']
-        
-        if gramos <= "0" or cantidad <= "0":
-            print "se fue por gramos o cantidad"
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        
-        if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
-            print "se fue por fecha"
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         nuevo_medicamento_donado= ""
 
@@ -102,16 +92,22 @@ def donar(request):
             medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()
+            nuevo_medicamento_donado.save()   
 
-#        for pedido in getMatches(nuevo_medicamento_donado):
-#            if len(getMatches(pedido)) != 0:
-#                executeMatch(pedido)
-#                sendMatchEmail(pedido)
-#                print("Envio mail")
+        for pedido in getMatches(nuevo_medicamento_donado):
+            if len(getMatches(pedido)) != 0:
+                executeMatch(pedido)
+                sendMatchEmail(pedido) 
+                print("Envio mail")    
         return redirect('/thanks')
-    else:
-        return redirect('/principal')
+                        
+
+def thanks(request):
+	return render(
+		request,
+		'thanks.html',
+		{}
+)
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -171,10 +167,7 @@ def pedir(request):
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
         return redirect('/thanks')
-    else:
-        return redirect('/principal')
-    
-def logout(request):
-    context = RequestContext(request)
-    logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+

@@ -1,4 +1,3 @@
-{% if not user.is_anonymous %}
 {% load static %} {% load staticfiles %}
 <html>
     <head>
@@ -117,14 +116,14 @@
                                 <label for="c">Droga</label>
                             </div>
                             <div class="input-field col s4 offset-s2">
-                                <select name="anio" id="anios">
+                                <select name="anio" id="anios" required>
                                     <option value="" disabled selected>Elije un Año</option>
                                 </select>
                                 <label for="anios">Año</label>
                             </div>
                             <div class="input-field col s6 m4">
-                                <select name="mes" id="meses">
-                                    <option value="0" disabled selected>Elije una mes</option>
+                                <select name="mes" id="meses" required>
+                                    <option value="" disabled selected>Elije una mes</option>
                                     <option class="meses" value="1">Enero</option>
                                     <option class="meses" value="2">Febrero</option>
                                     <option class="meses" value="3">Marzo</option>
@@ -150,7 +149,7 @@
                                 <label>Tipo</label>
                             </div>
                             <div class="col s12 center">
-                                <button id="activa-fecha" class="btn red accent-2">Aceptar</button>
+                                <button id="sendDonar" class="btn red accent-2">Aceptar</button>
                             </div>
                         </form>
                     </div>
@@ -245,13 +244,3 @@
         <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
     </body>
 </html>
-{% else %}
-{% load static %} {% load staticfiles %}
-
-You are not logued in 
-
-<div class="center">
-    <a onclick="window.location.href = '/login'">INGRESAR</a>
-</div>
-
-{% endif %}
