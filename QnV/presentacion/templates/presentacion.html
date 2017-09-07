@@ -7,9 +7,6 @@
 	<title>QNV</title>
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8" />
 
-	<!-- Fuente -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
-
 	<!-- CSS -->
 	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style_pres.css' %}">
@@ -19,27 +16,31 @@
 <body>
 
 	<!-- Nav -->
-	<nav>
-		<div class="col s12">
-			<ul class="center">
-				<div class="center">
-					<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
-				</div>
-				<li><a href="#section6">CONTACTO</a></li>
-				<li><a href="#section4">COMO DONAR</a></li>
-				<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
-				<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
-			</ul>
-		</div>
-	</nav>
 
-	<section id="section1" class="cd-section">
+	<section id="section1" class="cd-section fadeonscroll-title">
+		<nav>
+			<div class="col s12">
+				<ul class="center">
+					<div class="center">
+						<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
+					</div>
+					<li><a href="#section6">CONTACTO</a></li>
+					<li><a href="#section4">COMO DONAR</a></li>
+					<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
+					<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
+				</ul>
+			</div>
+		</nav>
 		<div class="row">
-			<div class="title-pnl fadeonscroll-title">
+			<div class="qnv-title center fadeonscroll-title">
+				<h2>QUE</h2>
+				<h1>NO VENZA</h1>
+			</div>
+			<div class="title-pnl">
 				<div onclick="window.location.href = '/login'" class="col s10 offset-s1 m4 offset-m4 l2 offset-l5 center ing-btn">
 					<p>INGRESAR</p>
 				</div>
-				<div class="col s12 position-arrow">
+				<div class="col s12 position-arrow hide-on-mobile">
 					<div class="scroll-down"></div>
 				</div>
 			</div>
@@ -80,7 +81,6 @@
 		<div class="row">
 			<div class="col s12 how-pnl center">
 				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
-
 				<!-- Primer paso -->
 				<table>
 					<tr>
@@ -96,7 +96,6 @@
 						</td>
 					</tr>
 				</table>
-
 				<!-- Segundo paso -->
 				<table>
 					<tr>
@@ -113,7 +112,6 @@
 						</td>
 					</tr>
 				</table>
-
 				<!-- Tercer paso -->
 				<table>
 					<tr>
