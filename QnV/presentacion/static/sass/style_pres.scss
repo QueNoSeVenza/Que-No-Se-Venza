@@ -9,15 +9,31 @@ $rosa: #ff2d55;
 $gris-oscuro: #15191c;
 $gris-claro: #fcfcfc;
 //Global
+@font-face {
+	font-family: Avenir-Normal;
+	src: url(fonts/AvenirLTStd-Medium.otf);
+}
+@font-face {
+	font-family: Avenir-Light;
+	src: url(fonts/AvenirLTStd-Light.otf);
+}
+@font-face {
+	font-family: Avenir-Heavy;
+	src: url(fonts/AvenirLTStd-Heavy.ttf);
+}
+
 html,
 body {
 	height: 100%;
 	width: 100%;
-	font-family: 'Montserrat', sans-serif;
+	font-family: Avenir-Normal;
 }
 body {
-	background-color: $gris-claro;
+	max-width: 100%;
 	overflow-x: hidden;
+	background-color: $gris-claro;
+	background-image: url(img/back.png);
+	background-repeat: repeat-x;
 }
 a {
 	outline: 0;
@@ -70,10 +86,32 @@ nav {
 			display: inline-block;
 			float: right;
 			a {
+				letter-spacing: 0.7px;
+				position: relative;
+				z-index: 9000;
+				display: block;
+				padding: 14px 16px;
 				color: #757575;
 				font-size: .7rem;
-				float: right;
-				text-align: right;
+				@include transition(all ease .4s);
+				&:after {
+					position: absolute;
+					left: 50%;
+					content: '';
+					height: 3px;
+					border-radius: 5px;
+					background: $gris-oscuro;
+					transition: all 0.1s linear;
+					width: 0;
+					bottom: -3px;
+				}
+				&:hover {
+					color: $gris-oscuro;
+				}
+				&:hover:after {
+					width: 40%;
+					left: 30%;
+				}
 				@media screen and (max-width: 600px) {
 					display: none;
 					visibility: hidden;
@@ -90,85 +128,114 @@ nav {
 		}
 	}
 }
-li a {
-	display: block;
-	color: #fff;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
 // Portada
-.title-pnl {
-	/*background-image: url(img/background.jpg);*/
+#section1 {
 	height: 100%;
-	/* Font on large */
-	#rev-1 {
-		color: #262626;
-	}
-	#rev-2 {
-		margin-top: 55;
-		color: #262626;
-	}
-	a {
-		border-radius: 3px;
-		color: #fff;
-		background: $rojo;
-		padding: 15 40 15 40;
-		font-family: 'Montserrat', sans-serif;
-		border: 0;
-		letter-spacing: 1.5px;
-		box-shadow: inset 0 0 0 0 lighten($rosa, 20%);
-		@include transition(all ease .8s);
-		&:hover {
-			box-shadow: inset 200px 0 0 0 $rosa;
-			color: #fff;
-		}
-	}
-	
-	/* Trying to make font almost responsive */
-	@media screen and (max-width: 1100px) and (min-width: 601px) {
-		#rev-1 {
-			margin-top: 10%;
-		}
-	}
-	@media screen and (max-width: 600px) {
-		#rev-1 {
-			margin-top: 45%;
-		}
-		a {
-			position: absolute;
-			text-align: center;
-			bottom: 50;
-			right: 30;
-			left: 30;
-		}
-	}
-	/* Font on mobile */
-	#clipped-title1 {
-		background: url(img/font-background.png) no-repeat center center;
-		background-size: cover;
-		color: #fff;
-		-webkit-text-fill-color: transparent;
-		-webkit-background-clip: text;
-		height: 90%;
+	.qnv-title {
+		position: absolute;
 		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		top: 20%;
 		h1 {
-			font-size: 3.7rem;
-			font-family: Verdana, sans-serif;
-			text-align: center;
-			-webkit-transition: text-shadow 1s ease;
-			span {
-				display: list-item;
-				font-size: 4rem;
+			font-size: 5rem;
+			font-family: Avenir-Heavy;
+		}
+		h2 {
+			font-size: 3rem;
+			font-family: Avenir-Normal;
+		}
+	}
+	.title-pnl {
+		position: absolute;
+		width: 100%;
+		bottom: 1%;
+		.ing-btn {
+			@include transition(all ease .4s);
+			cursor: pointer;
+			position: absolute;
+			font-weight: bold;
+			bottom: 90;
+			border-radius: 3px;
+			background: $rojo;
+			font-family: Avenir-Light;
+			letter-spacing: 1.5px;
+			&:hover {
+				box-shadow: 0 5px 15px rgba(145, 92, 182, .65);
+				background-color: darken($rojo, 5%);
+				color: #fff;
+			}
+			@media screen and (max-width: 600px) {
+				box-shadow: none;
+				bottom: 50;
+			}
+			p {
+				color: #FFF;
+			}
+		}
+		// Arrow animation
+		.position-arrow {
+			position: absolute;
+			bottom: 65;
+			.scroll-down {
+				position: absolute;
+				width: 13px;
+				height: 13px;
+				border-bottom: 2px solid #616161;
+				border-right: 2px solid #616161;
+				left: 50%;
+				margin-left: -7px;
+				-webkit-transform: translate(-50%, 0%) rotate(45deg);
+				-moz-transform: translate(-50%, 0%) rotate(45deg);
+				transform: translate(-50%, 0%) rotate(45deg);
+				-webkit-animation: fade_move_down 1.5s ease-in-out infinite;
+				-moz-animation: fade_move_down 1.5s ease-in-out infinite;
+				animation: fade_move_down 1.5s ease-in-out infinite;
+			}
+		}
+		// Animation to arrow
+		@-webkit-keyframes fade_move_down {
+			0% {
+				-webkit-transform: translate(0, -10px) rotate(45deg);
+				opacity: 0;
+			}
+			50% {
+				opacity: 1;
+			}
+			100% {
+				-webkit-transform: translate(0, 10px) rotate(45deg);
+				opacity: 0;
+			}
+		}
+		@-moz-keyframes fade_move_down {
+			0% {
+				-moz-transform: translate(0, -10px) rotate(45deg);
+				opacity: 0;
+			}
+			50% {
+				opacity: 1;
+			}
+			100% {
+				-moz-transform: translate(0, 10px) rotate(45deg);
+				opacity: 0;
+			}
+		}
+		@keyframes fade_move_down {
+			0% {
+				transform: translate(0, -10px) rotate(45deg);
+				opacity: 0;
+			}
+			50% {
+				opacity: 1;
+			}
+			100% {
+				transform: translate(0, 10px) rotate(45deg);
+				opacity: 0;
 			}
 		}
 	}
 }
 // Que
 .intro-pnl {
+	position: relative;
 	padding-top: 40px;
 	.fadeonscroll {
 		border-radius: 10px;
@@ -178,6 +245,7 @@ li a {
 	}
 	h2 {
 		color: #fff;
+		font-family: Avenir-Light;
 	}
 	p {
 		padding-bottom: 40px;
@@ -189,6 +257,9 @@ li a {
 // Donde
 .where-pnl {
 	margin-top: 50px;
+	h2 {
+		font-family: Avenir-Light;
+	}
 	.wtitle {
 		color: #757575;
 	}
@@ -207,9 +278,11 @@ li a {
 	line-height: 200px;
 	text-align: center;
 	font-size: 2rem;
+	letter-spacing: 2px;
 	span {
 		display: block;
 		font-weight: 400;
+		font-family: Avenir-Normal;
 		font-size: 1rem;
 	}
 	@media screen and (max-width: 800px) {
@@ -262,6 +335,7 @@ li a {
 	height: 500px;
 	background-image: url(img/repback2.png);
 	background-repeat: repeat;
+	background-color: darken(#FFF, 1.5%);
 	h2 {
 		margin-top: 8%;
 	}
@@ -289,6 +363,8 @@ footer {
 		text-transform: uppercase;
 		padding-top: 20px;
 		color: #fff;
+		font-size: 14px;
+		letter-spacing: 1px;
 		padding-bottom: 15px;
 		border-bottom: 1px solid white;
 	}
@@ -301,9 +377,16 @@ footer {
 			font-weight: 600;
 			text-transform: uppercase;
 			margin-left: -15px;
+			text-decoration: none;
 			padding: 10 0 10 0;
 			&:before {
 				content: '- ';
+			}
+			a,
+			a:hover,
+			a:focus,
+			a:link {
+				color: lighten($gris-oscuro, 25%);
 			}
 		}
 		#comunicate {
@@ -325,10 +408,6 @@ footer {
 				}
 			}
 		}
-		/*.noupper {
-			text-transform: none !important;
-			font-size: 13px;
-		}*/
 	}
 	form {
 		font-size: 12px !important;
@@ -377,20 +456,4 @@ footer {
 	:-ms-input-placeholder {
 		text-align: center;
 	}
-}
-// Block reveal
-.content__title {
-	font-size: 8vw;
-	line-height: 1.2;
-	padding: 0 10vw;
-}
-.content__title__inner {
-	flex: none;
-	display: inline-block;
-	white-space: nowrap;
-	position: relative;
-}
-.content__title__inner--offset-1 {
-	top: -0.25em;
-	left: 13.6vw;
 }
