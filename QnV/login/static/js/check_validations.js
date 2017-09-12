@@ -7,6 +7,10 @@ $(document).ready(function () {
     $("#terms").change(function (event) {
         dissableButtonSend();
     });
+    
+    $("#regpass2, #regpass, #corr, #namm").keyup(function (event) {
+        dissableButtonSend();
+    });
 
     // cambia form login o registrarse
     $(".register-content").hide();
@@ -54,13 +58,15 @@ function dissableButtonSend() {
     var inputs = $(".isRed");
     var terms = $("#terms");
     var list_inputs = [];
+    var list_inputs_reds = [];
     for (var i = 0; i < inputs.length; ++i) {
         if (typeof inputs[i].attributes.id !== "undfined") {
-            list_inputs.push(inputs[i].style.borderBottomColor);
+            list_inputs.push(inputs[i].value);
+            list_inputs_reds.push(inputs[i].style.borderBottomColor)
         }
     }
     for (var i = 0; i < list_inputs.length; i++) {
-        if (list_inputs[i] == "red" || terms.prop('checked')==false) {
+        if (list_inputs[i] == "" || terms.prop('checked')==false || list_inputs_reds[i] == "red") {
             $("#register").prop("disabled", true);
             break;
         } else {
@@ -69,7 +75,20 @@ function dissableButtonSend() {
     }
 }
 
-// esto hace que ande bien lo de los mesajes veeebozz
+
+
+
+
+
+
+
+
+
+
+
+
+
+// esto hace que ande bien lo de los mesajes 
 (function (exports) {
     function valOrFunction(val, ctx, args) {
         if (typeof val == "function") {
