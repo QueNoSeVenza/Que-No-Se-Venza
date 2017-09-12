@@ -5,49 +5,43 @@
 <head>
 	<!-- Global -->
 	<title>QNV</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
-
-	<!-- Fuente -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8" />
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style_pres.css' %}">
 	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-	<link rel="stylesheet" href="{% static 'blockreveal/css/revealer.css' %}">
 </head>
 
 <body>
 
 	<!-- Nav -->
-	<nav>
-		<div class="col s12">
-			<ul class="center">
-				<div class="center">
-					<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
-				</div>
-				<li><a href="#section6">CONTACTO</a></li>
-				<li><a href="#section4">COMO DONAR</a></li>
-				<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
-				<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
-			</ul>
-		</div>
-	</nav>
 
-	<section id="section1" class="cd-section">
-		<div class="row">
-			<div class="col s12 title-pnl fadeonscroll-title">
-				<div class="titleblock">
-					<h2 class="content__title content__title--center hide-on-mobile">
-					<div id="rev-1" class="content__title__inner">Proyecto</div><br/>
-					<div id="rev-2" class="content__title__inner content__title__inner--offset-1">Que no venza</div>
-				</h2>
+	<section id="section1" class="cd-section fadeonscroll-title">
+		<nav>
+			<div class="col s12">
+				<ul class="center">
 					<div class="center">
-						<a onclick="window.location.href = '/login'">INGRESAR</a>
+						<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
 					</div>
-					<div id="clipped-title1">
-						<h1 class="tinier-font hide-on-large">QUE NO <span>VENZA</span></h1>
-					</div>
+					<li><a href="#section6">CONTACTO</a></li>
+					<li><a href="#section4">COMO DONAR</a></li>
+					<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
+					<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="qnv-title center fadeonscroll-title">
+				<h2>QUE</h2>
+				<h1>NO VENZA</h1>
+			</div>
+			<div class="title-pnl">
+				<div onclick="window.location.href = '/login'" class="col s10 offset-s1 m4 offset-m4 l2 offset-l5 center ing-btn">
+					<p>INGRESAR</p>
+				</div>
+				<div class="col s12 position-arrow hide-on-mobile">
+					<div class="scroll-down"></div>
 				</div>
 			</div>
 		</div>
@@ -87,7 +81,6 @@
 		<div class="row">
 			<div class="col s12 how-pnl center">
 				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
-
 				<!-- Primer paso -->
 				<table>
 					<tr>
@@ -103,7 +96,6 @@
 						</td>
 					</tr>
 				</table>
-
 				<!-- Segundo paso -->
 				<table>
 					<tr>
@@ -120,7 +112,6 @@
 						</td>
 					</tr>
 				</table>
-
 				<!-- Tercer paso -->
 				<table>
 					<tr>
@@ -164,10 +155,10 @@
 			<div class="col s12 l3 offset-l1">
 				<h4>Navegacion</h4>
 				<ul>
-					<li>Empezar</li>
-					<li>Qué somos</li>
-					<li>Dónde donar</li>
-					<li>Cómo donar</li>
+					<li><a href="#section1">Empezar</a></li>
+					<li><a href="#section2">Qué somos</a></li>
+					<li><a href="#section3">Dónde donar</a></li>
+					<li><a href="#section4">Cómo donar</a></li>
 				</ul>
 			</div>
 			<div class="col s12 l4">
@@ -196,47 +187,27 @@
 					<li id="comunicate">direccion 1</li>
 					<li id="comunicate">direccion 2</li>
 					<li id="comunicate" class="noupper">quenovenza@gmail.com</li>
-                    <li ><a class="noupper" id="comunicate" href="municipalidad-de-mendiolaza/" target="_blank">Mendiolaza</a></li>
 				</ul>
 			</div>
+
+			<div class="col s12 m6 offset-m3 center">
+				<div class="divider"></div><a id="mendiolaza_link" href="municipalidad-de-mendiolaza/" target="_blank">MUNICIPALIDAD EN MENDOZA</a></div>
 		</div>
 	</footer>
 
 	<!-- Javascripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="{% static 'blockreveal/js/main.js' %}"></script>
-	<script src="{% static 'blockreveal/js/anime.min.js' %}"></script>
 	<script src="{% static 'scroll-reveal/scrollreveal.min.js' %}">
 	</script>
 	<script src="{% static 'hover-image/jquery.plate.js' %}">
 	</script>
 	<script>
-		/*Block reveal*/
-		function init() {
-			/* Intro text */
-			var rev1 = new RevealFx(document.querySelector('#rev-1'), {
-				revealSettings: {
-					bgcolor: '#242424',
-					onCover: function(contentEl, revealerEl) {
-						contentEl.style.opacity = 1;
-					}
-				}
-			});
-			rev1.reveal();
-			/* Intro text */
-			var rev2 = new RevealFx(document.querySelector('#rev-2'), {
-				revealSettings: {
-					bgcolor: '#616161',
-					delay: 250,
-					onCover: function(contentEl, revealerEl) {
-						contentEl.style.opacity = 1;
-					}
-				}
-			});
-			rev2.reveal();
-		}
+		$('.titleblock').hide();
+
 		$(document).ready(function() {
-			setTimeout(init, 200);
+			$('.titleblock').show();
+			// Send to the top of page on refresh
+			// $(this).scrollTop(0);
 			// Image on hover
 			$('#plate-default').plate();
 			$('#plate-default-2').plate();
@@ -274,8 +245,8 @@
 					event.preventDefault();
 					// Store hash
 					var hash = this.hash;
-					// Using jQuery's animate() method to add smooth page scroll
-					// The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+					/* Using jQuery's animate() method to add smooth page scroll
+					he optional number (800) specifies the number of milliseconds it takes to scroll to the specified area */
 					$('html, body').animate({
 						scrollTop: $(hash).offset().top
 					}, 1200, function() {

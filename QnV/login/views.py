@@ -30,6 +30,11 @@ def login(request):
     }   
     return render(request, 'login.html', context)
 
+
+def tyc(request):
+    template = loader.get_template('tyc.html')
+    return HttpResponse(template.render(request))
+
 def log(request):
     if 'POST' in request.method:
         usern = request.POST['username']
