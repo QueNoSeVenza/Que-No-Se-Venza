@@ -1,14 +1,25 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600");
+@font-face {
+  font-family: Avenir-Normal;
+  src: url(fonts/AvenirLTStd-Medium.otf); }
+@font-face {
+  font-family: Avenir-Light;
+  src: url(fonts/AvenirLTStd-Light.otf); }
+@font-face {
+  font-family: Avenir-Heavy;
+  src: url(fonts/AvenirLTStd-Heavy.ttf); }
 html,
 body {
   height: 100%;
-  font-family: 'Source Sans Pro', sans-serif !important; }
+  font-family: Avenir-Light; }
 
 .semibold {
-  font-weight: 600; }
+  font-family: Avenir-Heavy !important; }
+
+.normal-font {
+  font-family: Avenir-Normal; }
 
 p {
-  font-size: 1.1em; }
+  font-size: 1.1rem; }
 
 .button-collapse {
   z-index: 999;
@@ -19,11 +30,6 @@ p {
 nav {
   position: fixed;
   z-index: 500; }
-  nav .icon {
-    margin-top: 25%;
-    width: 42px;
-    height: 42px;
-    background-image: url(../css/img/logo.svg); }
 
 .side-nav {
   width: 100% !important;
