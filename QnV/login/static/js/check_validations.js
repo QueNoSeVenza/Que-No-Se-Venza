@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	$(".register-content").css("opacity", "1");
     // Revisa que los password sean iguales
     $("#regpass, #regpass2, #txtConfirmPassword").keyup(function (event) {
         checkPasswordMatch();
@@ -19,7 +20,7 @@ $(document).ready(function () {
             height: "40px"
         });
         $('.login-card').animate({
-            height: "530px"
+            height: "540px"
         });
         $('.register-content').delay(360).show(0);
     });

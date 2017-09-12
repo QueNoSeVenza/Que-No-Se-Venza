@@ -21,7 +21,6 @@ $gris-claro: #fcfcfc;
 	font-family: Avenir-Heavy;
 	src: url(fonts/AvenirLTStd-Heavy.ttf);
 }
-
 html,
 body {
 	height: 100%;
@@ -155,7 +154,7 @@ nav {
 			font-weight: bold;
 			bottom: 90;
 			border-radius: 3px;
-			background: $rojo;
+			background: lighten($rojo, 5%);
 			font-family: Avenir-Light;
 			letter-spacing: 1.5px;
 			&:hover {
@@ -408,6 +407,18 @@ footer {
 				}
 			}
 		}
+	}
+	.divider {
+		margin-top: 40px;
+		height: 2px;
+		background-color: #2B3339;
+		width: 100%;
+		margin-bottom: 40px;
+	}
+	#mendiolaza_link{
+		font-size: .8rem;
+		color: #546e7a;
+		letter-spacing: 2px;
 	}
 	form {
 		font-size: 12px !important;

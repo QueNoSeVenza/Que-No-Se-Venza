@@ -122,7 +122,7 @@ nav {
       font-weight: bold;
       bottom: 90;
       border-radius: 3px;
-      background: #ff3b30;
+      background: #ff534a;
       font-family: Avenir-Light;
       letter-spacing: 1.5px; }
       #section1 .title-pnl .ing-btn:hover {
@@ -324,6 +324,16 @@ footer {
         footer ul #comunicate:after,
         footer ul #comunicate:before {
           content: ' - ' !important; } }
+  footer .divider {
+    margin-top: 40px;
+    height: 2px;
+    background-color: #2B3339;
+    width: 100%;
+    margin-bottom: 40px; }
+  footer #mendiolaza_link {
+    font-size: .8rem;
+    color: #546e7a;
+    letter-spacing: 2px; }
   footer form {
     font-size: 12px !important; }
     footer form input[type="text"],

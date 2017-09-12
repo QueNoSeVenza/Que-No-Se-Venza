@@ -8,7 +8,8 @@
 	<link rel="icon" href="{% static 'logo.png' %}">
 	<link rel="stylesheet" href="{% static 'css/style_login.css' %}">
 </head>
-  
+
+
 <body>
 	<div class="main">
 		<div class="wrapper row">
@@ -58,12 +59,12 @@
 							{% csrf_token %}
 							<h5 class="center grey-text monts tSp">REGISTRO</h5>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="namm" name="name" type="text" class="isRed" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
+								<input id="namm" name="name" type="text" class="monts" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
 								<label for="namm">Nombre y Apellido</label>
 							</div>
 
 							<div class="input-field col s12 m10 push-m1">
-								<input id="corr" name="email" type="email" class="isRed" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
+								<input id="corr" name="email" type="email" class="monts" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
 								<label for="corr">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
@@ -89,4 +90,5 @@
 	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
 </body>
+
 </html>
