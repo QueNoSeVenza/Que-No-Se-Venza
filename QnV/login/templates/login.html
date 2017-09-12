@@ -61,14 +61,14 @@
                                 {% csrf_token %}
                                 <h5 class="center grey-text monts tSp">REGISTRO</h5>
                                 <div class="input-field col s12 m10 push-m1">
-                                    <input id="namm" name="name" type="text" class="monts" required
+                                    <input id="namm" name="name" type="text" class="isRed" required
                                            oninvalid="setCustomValidity('Ingrese un nombre')"
                                            oninput="setCustomValidity('')">
                                     <label for="namm">Nombre y Apellido</label>
                                 </div>
 
                                 <div class="input-field col s12 m10 push-m1">
-                                    <input id="corr" name="email" type="email" class="monts" required
+                                    <input id="corr" name="email" type="email" class="isRed" required
                                            oninvalid="setCustomValidity('Debe ingresar un email válido')"
                                            oninput="setCustomValidity('')">
                                     <label for="corr">Correo electrónico</label>
