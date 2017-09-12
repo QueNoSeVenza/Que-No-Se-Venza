@@ -53,13 +53,13 @@ function checkDate() {
         for (var i = 1; i < (currentMonth + 2); i++) {
             cmboxMonth.find("option[value='"+i+"']").prop("disabled",true);
         }
-        $('#meses > option[value="0"]').prop('selected', true)
+        $('#meses > option[value=""]').prop('selected', true)
         cmboxMonth.material_select();
     } else {
         for (var i = 1; i < (currentMonth + 2); i++) {
             cmboxMonth.find("option[value='"+i+"']").prop("disabled",false);
         }
-        $('#meses > option[value="0"]').prop('selected', true)
+        $('#meses > option[value=""]').prop('selected', true)
         cmboxMonth.material_select();
     }
 }

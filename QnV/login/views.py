@@ -16,12 +16,19 @@ from django.contrib import messages
 from django.http import JsonResponse
 # Create your views here.
 def login(request):
+    '''
     template = loader.get_template('login.html')
     all_users = User.objects.all()
     context = {
         'django_users' : all_users
     }
     return HttpResponse(template.render(context, request))
+    '''
+    all_users = User.objects.all()
+    context = {
+        'django_users' : all_users
+    }   
+    return render(request, 'login.html', context)
 
 
 def tyc(request):
