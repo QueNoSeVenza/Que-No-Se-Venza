@@ -29,6 +29,7 @@
                                            required oninvalid="setCustomValidity('El password es obligatorio ')"
                                            oninput="setCustomValidity('')">
                                     <label for="uspswd">Contraseña</label>
+                                    <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
                                 </div>
                                 <button class="waves-effect waves-dark btn logBtn green accent-2 z-depth-0 center-text datSpace"
                                         id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
