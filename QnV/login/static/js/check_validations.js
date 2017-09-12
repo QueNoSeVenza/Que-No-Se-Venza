@@ -20,7 +20,7 @@ $(document).ready(function () {
             height: "40px"
         });
         $('.login-card').animate({
-            height: "540px"
+            height: "530px"
         });
         $('.register-content').delay(360).show(0);
     });
@@ -30,7 +30,7 @@ $(document).ready(function () {
             height: "40px"
         });
         $('.login-card').animate({
-            height: "420px"
+            height: "450px"
         });
         $('.login-content').delay(360).show(0);
     });
