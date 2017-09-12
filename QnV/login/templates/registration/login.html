@@ -1,6 +1,6 @@
 {% load static %} {% load staticfiles %}
 <html>
- 
+
 <head>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
@@ -8,7 +8,6 @@
 	<link rel="icon" href="{% static 'logo.png' %}">
 	<link rel="stylesheet" href="{% static 'css/style_login.css' %}">
 </head>
-
 
 <body>
 	<div class="main">
@@ -26,13 +25,14 @@
 								<label for="email">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="uspswd" name="password" type="password" class="monts" required oninvalid="setCustomValidity('El password es obligatorio ')" oninput="setCustomValidity('')">
+								<input id="uspswd" name="password" type="password"  required oninvalid="setCustomValidity('El password es obligatorio ')" oninput="setCustomValidity('')">
 								<label for="uspswd">Contraseña</label>
-                <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
 							</div>
-							<button class="waves-effect waves-dark btn logBtn z-depth-0 center-text datSpace" id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
+							<button class="waves-effect waves-dark btn logBtn z-depth-0 center-text datSpace font-heavy" id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
 						</form>
-						<button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0" id="regBtn">REGISTRARSE</button>
+						<button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 font-heavy" id="regBtn">REGISTRARSE</button>
+						<div class="col s12 center psw-label">
+							<a href="{% url 'password_reset' %}" class="font-light">¿Olvidó su contraseña?</a></div>
 						{% if messages %}
 						<script type="text/javascript">
 							$(window).load(function() {
@@ -43,28 +43,28 @@
 						<ul class="messages">
 							{% for message in messages %}
 							<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-								{% endfor %}
+							{% endfor %}
 						</ul>
 						{% endif %}
 					</div>
 				</div>
 				<div class="register-content" style="margin-top:17px;">
 					<div class="row">
-						<div class="comingBack col s12 monts" style="text-align: center;">
+						<div class="comingBack col s12" style="text-align: center;">
 							<a class="btn-flat center nohover center-btn grey-text">volver al ingreso</a>
 						</div>
 						<div class="divider"></div>
 						<!-- form de registro -->
 						<form method="POST" action="{% url 'login:reg' %}">
 							{% csrf_token %}
-							<h5 class="center grey-text monts tSp">REGISTRO</h5>
+							<h5 class="center grey-text font-heavy">REGISTRO</h5>
 							<div class="input-field col s12 m10 push-m1">
-								<input id="namm" name="name" type="text" class="monts" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
+								<input id="namm" name="name" type="text" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
 								<label for="namm">Nombre y Apellido</label>
 							</div>
 
 							<div class="input-field col s12 m10 push-m1">
-								<input id="corr" name="email" type="email" class="monts" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
+								<input id="corr" name="email" type="email" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
 								<label for="corr">Correo electrónico</label>
 							</div>
 							<div class="input-field col s12 m10 push-m1">
@@ -76,10 +76,11 @@
 								<label for="regpass2">Repetir contraseña</label>
 							</div>
 							<div style="margin-top: -9px;margin-left: 17px;" class="input-field col s12 m10 push-m1">
+								<div class="col s12 center">
 								<input type="checkbox" class="filled-in" name="terms" id="terms">
-								<label for="terms">Acepto los <a target="_blank" onclick="window.location.href = 'tyc'">términos y condiciones</a></label>
+								<label for="terms" class="ch-box font-light ">Acepto los <a target="_blank" onclick="window.location.href = 'tyc'" class="font-normal">términos y condiciones</a></label></div>
 							</div>
-							<button style="margin-top: 28px;" class="waves-effect waves-light btn logBtn monts z-depth-0 datSpace" type="submit" id="register" name="action">REGISTRARSE</button>
+							<button style="margin-top: 28px;" class="waves-effect waves-light btn logBtn z-depth-0 datSpace font-heavy" type="submit" id="register" name="action">REGISTRARSE</button>
 						</form>
 					</div>
 				</div>
