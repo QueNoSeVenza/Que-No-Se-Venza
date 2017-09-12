@@ -3692,7 +3692,7 @@ small {
 .btn-floating,
 .btn-large,
 .btn-flat {
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: 0; }
   .btn i, .btn-large i,
   .btn-floating i,
@@ -4531,7 +4531,7 @@ textarea.materialize-textarea {
     position: absolute;
     top: 0.8rem;
     left: 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: text;
     transition: .2s ease-out;
     text-align: initial; }
