@@ -1,0 +1,58 @@
+{% block nav %} {% include "nav.html" %} {% endblock %}
+{{string}}<br>
+<style type="text/css">
+    table {
+        width: 100%; 
+        border: 3px solid black;
+        border-collapse: collapse;
+    }
+
+    #header{
+
+        border: 3px solid black;
+
+    }
+    th, td {
+        border: 1px solid black;
+    }
+    .Disponible{
+        background-color: green;
+    }
+
+    .Pendiente{
+        background-color: yellow;
+    }
+    .Eliminado{
+        background-color: red;
+    }
+
+
+</style>
+
+<table>
+    <tr id = "header">
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Laboratorio</th>
+        <th>Tipo</th>
+        <th>Función farmaceutica</th>
+        <th>¿Requiere receta?</th>
+        <th>Fecha de vencimiento</th>
+
+    </tr>
+
+    {% for donacion in donaciones %}
+    <tr class = "{{donacion.stock}}">
+        <th>{{donacion.id}}</th>
+        <th>{{donacion.medicamento.nombre}}</th>
+        <th>{{donacion.medicamento.laboratorio}}</th>
+        <th>{{donacion.medicamento.tipo}}</th>
+        <th>{{donacion.medicamento.funcion}}</th>
+        <th>{{donacion.medicamento.prescripcion}}</th>
+        <th>{{donacion.fecha_vencimiento}}</th>
+
+    </tr>
+
+
+    {% endfor %}
+</table>

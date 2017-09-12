@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pl#0n19!!#&dit9jy&2hnvnzym(p9m@87#4=9h6v)cy7emy18a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["quenosevenza.pythonanywhere.com"]
 
 
 # Application definition
@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'donar',
+    'django_extensions',    
+    'donaciones',
     'login',
-    'qnv',
+    'presentacion',
+    'verificaciones',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com", u"127.0.0.1"]
 ROOT_URLCONF = 'QnV.urls'
 
 TEMPLATES = [
@@ -122,4 +124,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_URL = '/media/'
+
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'quenosevenza@gmail.com'
+EMAIL_HOST_PASSWORD = 'Quenosevenza123'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
