@@ -28,7 +28,28 @@ function thirdSection() {
 	$('#navsection3').fadeIn("100");
 };
 
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
 $(document).ready(function () {
+	// Select your input element.
+var numInput = document.querySelector('input');
+
+// Listen for input event on numInput.
+numInput.addEventListener('input', function(){
+    // Let's match only digits.
+    var num = this.value.match(/^\d+$/);
+    if (num === null) {
+        // If we have no match, value will be empty.
+        this.value = "";
+    }
+}, false)
 	$(".extra_info").hide();
     $("#pedir_nombre,#pedir_gramos").change(function () {
     	var nombre = $("#pedir_nombre").val();
