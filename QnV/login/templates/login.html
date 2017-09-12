@@ -1,6 +1,6 @@
 {% load static %} {% load staticfiles %}
 <html>
-
+ 
 <head>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
@@ -8,6 +8,7 @@
 	<link rel="icon" href="{% static 'logo.png' %}">
 	<link rel="stylesheet" href="{% static 'css/style_login.css' %}">
 </head>
+
 
 <body>
 	<div class="main">
@@ -27,6 +28,7 @@
 							<div class="input-field col s12 m10 push-m1">
 								<input id="uspswd" name="password" type="password" class="monts" required oninvalid="setCustomValidity('El password es obligatorio ')" oninput="setCustomValidity('')">
 								<label for="uspswd">Contraseña</label>
+                <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
 							</div>
 							<button class="waves-effect waves-dark btn logBtn z-depth-0 center-text datSpace" id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
 						</form>
