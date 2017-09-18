@@ -48,6 +48,7 @@ class MedicamentoDonado(models.Model):
     cantidad = models.IntegerField()
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
+    codigo = models.CharField(max_length=60, default="")
     
     def isDull(self):
 
@@ -57,7 +58,7 @@ class MedicamentoDonado(models.Model):
             return False
 
     def __str__(self):
-        return str(self.medicamento.nombre) + ": " + str(self.donacion.id)
+        return str(self.medicamento.nombre) + ": " + str(self.id)
 
     
 class Pedido(models.Model):
