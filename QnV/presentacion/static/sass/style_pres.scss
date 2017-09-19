@@ -88,10 +88,11 @@ nav {
 				letter-spacing: 0.7px;
 				position: relative;
 				z-index: 9000;
+                font-family: Avenir-Heavy;  
 				display: block;
 				padding: 14px 16px;
 				color: #757575;
-				font-size: .7rem;
+				font-size: .6rem;
 				@include transition(all ease .4s);
 				&:after {
 					position: absolute;
@@ -167,6 +168,7 @@ nav {
 				bottom: 50;
 			}
 			p {
+                font-family: Avenir-Heavy;
 				color: #FFF;
 			}
 		}
@@ -371,8 +373,9 @@ footer {
 		list-style-type: none;
 		color: lighten($gris-oscuro, 25%);
 		li {
+            font-family: Avenir-Heavy;
 			letter-spacing: 1px;
-			font-size: .7rem;
+			font-size: .8rem;
 			font-weight: 600;
 			text-transform: uppercase;
 			margin-left: -15px;
