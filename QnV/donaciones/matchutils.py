@@ -38,7 +38,9 @@ def executeMatch(petition):
 
 	substaction_values = []
 	match_list = getMatches(petition)
-	
+	match_obj = Match(pedido = petition)
+	match_obj.save()
+
 	for match in match_list:
 
 		quantity = match.cantidad
@@ -55,6 +57,9 @@ def executeMatch(petition):
 			kept_medicine.stock = "Reservado"
 			kept_medicine.pk = None
 			kept_medicine.save()
+			match_obj.medicamentos.add(kept_medicine)			
+			match_obj.save()
+			print("<<<<<<<<<<<zzzzzzzz",match_obj.medicamentos.all())
 
 			return substaction_values
 
@@ -66,6 +71,9 @@ def executeMatch(petition):
 			petition.cantidad = abs(quantity)
 			match.stock = "Reservado"
 			match.save()
+			match_obj.medicamentos.add(match)
+			print("<<<<",match_obj.medicamentos.all())
+			match_obj.save()			
 			if petition.cantidad == 0:
 				return substaction_values
 

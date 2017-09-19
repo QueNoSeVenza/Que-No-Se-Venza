@@ -85,11 +85,11 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()   
 
-        for pedido in getMatches(nuevo_medicamento_donado):
-            if len(getMatches(pedido)) != 0:
-                executeMatch(pedido)
-                sendMatchEmail(pedido) 
-                print("Envio mail")    
+ #       for pedido in getMatches(nuevo_medicamento_donado):
+  #          if len(getMatches(pedido)) != 0:
+   #             executeMatch(pedido)
+    #            sendMatchEmail(pedido) 
+     #           print("Envio mail")    
         return redirect('/thanks')
                         
 
