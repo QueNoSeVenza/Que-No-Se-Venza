@@ -132,20 +132,16 @@ def donar(request):
             print "codigo subido"
 
 
- #       for pedido in getMatches(nuevo_medicamento_donado):
-  #          if len(getMatches(pedido)) != 0:
-   #             executeMatch(pedido)
-    #            sendMatchEmail(pedido) 
-     #           print("Envio mail")    
-        return redirect('/thanks')
-                        
+    #    for pedido in getMatches(nuevo_medicamento_donado):
+    #        if len(getMatches(pedido)) != 0:
+    #            executeMatch(pedido)
+    #            sendMatchEmail(pedido)
+    #            print("Envio mail")
+        id_med_donado = str(nuevo_medicamento_donado.id)
+        return redirect('/thanks/'+id_med_donado)
+    else:
+        return redirect('/principal')
 
-def thanks(request):
-	return render(
-		request,
-		'thanks.html',
-		{}
-)
 
 
 def validate_medicamento(request):
