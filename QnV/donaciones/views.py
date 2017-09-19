@@ -35,6 +35,7 @@ def thanks(request, id_med_donado):
 
 def thanks2(request):
     template = loader.get_template('thanks2.html')
+    context = {}
     return HttpResponse(template.render(context, request))
 
 
@@ -76,14 +77,14 @@ def donar(request):
         donacion_kwargs = {
         'user' : request.user,
         }
-        
+
         gramos = medicamento_kwargs['concentracion_gramos']
         cantidad = medicamento_donado_kwargs['cantidad']
-        
+
         if gramos <= "0" or cantidad <= "0":
             print "se fue por gramos o cantidad"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        
+
         if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
             print "se fue por fecha"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -102,10 +103,10 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-            
+
             med_id = str(nuevo_medicamento_donado.id)
             name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
-            
+
             MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
             print "codigo subido"
 
@@ -123,10 +124,10 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-            
+
             med_id = str(nuevo_medicamento_donado.id)
             name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
-            
+
             MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
             print "codigo subido"
 
