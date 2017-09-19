@@ -48,6 +48,7 @@ class MedicamentoDonado(models.Model):
     cantidad = models.IntegerField()
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
+    codigo = models.CharField(max_length=60, default="")
     
     def isDull(self):
 

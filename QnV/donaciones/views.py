@@ -7,9 +7,16 @@ from django.template import loader
 from django.utils import timezone
 from datetime import datetime
 import datetime
+from datetime import date
+from django.contrib.auth import authenticate, logout
 from donaciones.matchutils import *
+from django.contrib.auth.models import User
+from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
@@ -20,12 +27,24 @@ def principal(request):
     return HttpResponse(template.render(context, request))
 
 
-def thanks(request):
-    return render(
-        request,
-        'thanks.html',
-        {}
-)
+def thanks(request, id_med_donado):
+    template = loader.get_template('thanks.html')
+    med_donado = MedicamentoDonado.objects.get(pk=id_med_donado)
+    context = {'medicamento_donado':med_donado}
+    return HttpResponse(template.render(context, request))
+
+def thanks2(request):
+    template = loader.get_template('thanks2.html')
+    return HttpResponse(template.render(context, request))
+
+
+def log_out(request):
+    print "saliendo"
+    logout(request)
+    print "salio "
+    return redirect('/login')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 ##############################################################################
 
@@ -33,30 +52,44 @@ def donar(request):
 
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
-        fecha_vencimiento =  request.POST.get('mes')+request.POST.get('anio')
+        mes = request.POST['mes']
+
+        fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
             'laboratorio' : request.POST['donar_laboratorio'] ,
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'],
+            'tipo' : request.POST['donar_tipo']
         }
 
         medicamento_donado_kwargs = {
-
         'cantidad' : request.POST['donar_cantidad'],
+
         'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
+
 
         }
 
         donacion_kwargs = {
-
         'user' : request.user,
-
         }
+        
+        gramos = medicamento_kwargs['concentracion_gramos']
+        cantidad = medicamento_donado_kwargs['cantidad']
+        
+        if gramos <= "0" or cantidad <= "0":
+            print "se fue por gramos o cantidad"
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
+            print "se fue por fecha"
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         nuevo_medicamento_donado= ""
+
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
 
@@ -69,6 +102,12 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
+            
+            med_id = str(nuevo_medicamento_donado.id)
+            name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
+            
+            MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
+            print "codigo subido"
 
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
@@ -83,7 +122,14 @@ def donar(request):
             medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()   
+            nuevo_medicamento_donado.save()
+            
+            med_id = str(nuevo_medicamento_donado.id)
+            name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
+            
+            MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
+            print "codigo subido"
+
 
  #       for pedido in getMatches(nuevo_medicamento_donado):
   #          if len(getMatches(pedido)) != 0:
@@ -99,6 +145,7 @@ def thanks(request):
 		'thanks.html',
 		{}
 )
+
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -157,8 +204,6 @@ def pedir(request):
             print("<<<<<<<<<<<<<<ENTRA>>>>>>>>>>>>>>>>>")
             executeMatch(nuevo_pedido)
             sendMatchEmail(nuevo_pedido)
-        return redirect('/thanks')
-
-
-
-
+        return redirect('/thanks2')
+    else:
+        return redirect('/principal')
