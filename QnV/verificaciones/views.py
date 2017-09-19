@@ -59,13 +59,17 @@ def entrada(request):
 
 		if len(request.POST.getlist('checks')) == 3:
 			funcion  = request.POST['funcion']
+			print(funcion)
 			prescripcion  = request.POST['prescripcion']
 
 			print(funcion,"    ",prescripcion)
 			donacion = MedicamentoDonado.objects.get(pk = request.POST['donation_id'])
 			donacion.medicamento.funcion = funcion
+			donacion.medicamento.prescripcion = prescripcion
 			donacion.stock = "Disponible"
 			donacion.save()
+			donacion.medicamento.save()
+			
  			#Cambiar /entrada/input por un template que comunique el exito de la operación
 			print("Donación registrada con exito")
 			return HttpResponseRedirect("/verificacion/")
@@ -77,11 +81,14 @@ def entrada(request):
 
 
 	else:
+		print(Donacion.objects.all().values('id'))
+		
+		medicamento_donado = MedicamentoDonado.objects.get(donacion=request.GET['id'])
+		print(medicamento_donado.stock)
+		
 
-		donacion = MedicamentoDonado.objects.get(pk = request.GET['id'])
-
-		if donacion.stock == "Pendiente":
-			return render(request,'entrada.html',{'donacion' : donacion})
+		if medicamento_donado.stock == 'En Espera':
+			return render(request,'entrada.html',{'donacion' : medicamento_donado})
 		else:
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
 			print("Esta donación ya se encuentra en stock")
@@ -92,36 +99,32 @@ def salida(request):
 
 	if request.method == "POST":
 
-		print(request.POST['donation_id'])
 		print(len(request.POST.getlist('checks')))
+		donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
+		if donacion.medicamento.prescripcion == True:
+			if len(request.POST.getlist('checks')) == 1:
+				donacion.stock = 'Entregado'
+				donacion.save()
+				return HttpResponseRedirect("/verificacion/")
 
-		if len(request.POST.getlist('checks')) == 3:
-			funcion  = request.POST['funcion']
-			prescripcion  = request.POST['prescripcion']
-
-			print(funcion)
-			donacion = Donacion.objects.get(pk = request.POST['donation_id'])
-			donacion.medicamento.funcion = funcion
-			donacion.medicamento.prescripcion = prescripcion
-
-			donacion.medicamento_donado.stock = "Disponible"
-			donacion.save()
-			donacion.medicamento.save()
- 			#Cambiar /entrada/input por un template que comunique el exito de la operación
-			print("Donación registrada con exito")
-			return HttpResponseRedirect("/verificacion/")
-
+			else:
+				
+				#Cambiar /entrada/input por un template de error
+				print("No se han verificado todos los campos, la operación ha sido cancelada")
+				return HttpResponseRedirect("/verificacion/input/entrada")
 		else:
-			#Cambiar /entrada/input por un template de error
-			print("No se han verificado todos los campos, la operación ha sido cancelada")
-			return HttpResponseRedirect("/verificacion/input/entrada")
-
+				donacion.stock = 'Entregado'
+				donacion.save()
+				return HttpResponseRedirect("/verificacion/")
 
 	else:
+		d_id = request.GET['id']
+		print(d_id)
 
-		donacion = Donacion.objects.get(pk = request.GET['id'])
+		donacion = MedicamentoDonado.objects.get(pk = d_id )
 
-		if donacion.medicamento_donado.stock == "Disponible":
+		if donacion.stock == "Reservado":
+
 
 			return render(request,'salida.html',{'donacion' : donacion})
 		else:
