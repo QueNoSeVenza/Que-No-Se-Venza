@@ -3,36 +3,30 @@
     <head>
         <title>QNV</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/materialize_donar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage/jquery.fullPage_donar.css' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
         <link rel="shortcut icon" href="">
     </head>
-
-
     <body>
         <div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
             <span class="bars"></span>
         </div>
         <nav class="transparent z-depth-0 ">
-            <a href="#" class="brand-logo center grey-text">
-                <div class="icon gris"></div>
-            </a>
             <ul id="nav-mobile" class="my-wrapper right hide-on-small-only">
                 <li class="drop">
-                    <a href="#" class="grey-text text-darken-3">{{django_users.first_name}}</a>
+                    <a href="#" class="grey-text text-darken-1 light">{{django_users.first_name}}</a>
                     <div class="dropdownContain">
                         <div class="dropOut">
                             <div class="triangle"></div>
                             <ul>
-                                <li onclick="location.href='{% url 'login:logout' %}';" >Cerra Cesión</li>
+                                <li onclick="location.href='{% url 'donaciones:log_out' %}';" >Cerrar sesión</li>
                             </ul>
                         </div>
                     </div>
                 </li>
             </ul>
         </nav>
-
         <ul id="slide-out" class="side-nav">
             <div class="row">
                 <div class="col s12 m6">
@@ -56,7 +50,6 @@
                     <ul class="white-text">
                         <!--Seccion NAV 1-->
                         <li id="navsection1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right </li>
-
                         <!--Seccion NAV 2-->
                         <li id="navsection2">
                             <div class="row">
@@ -93,27 +86,27 @@
                 <!--Slide izquierdo donar-->
                 <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
                     <div class="row center white-text">
-                        <form method="POST" action="{% url 'donaciones:donar' %}">
+                        <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
                             {% csrf_token %}
                             <div class="input-field col s6 m4 offset-m2 roboto">
-                                <input name="donar_nombre" id="a" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                <label for="a">Nombre Comercial</label>
+                                <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_nombre">Nombre Comercial</label>
                             </div>
                             <div class="input-field col s6 m4">
-                                <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                <label for="b">Concentracion en Gramos</label>
+                                <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-gramos">Concentracion en Gramos</label>
                             </div>
                             <div class="input-field col s6 m4 offset-m2">
-                                <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                <label for="c">Cantidad</label>
+                                <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-cantidad">Cantidad</label>
                             </div>
                             <div class="input-field col s6 m4">
-                                <input name="donar_laboratorio" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                <label for="c">Laboratorio</label>
+                                <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_laboratorio">Laboratorio</label>
                             </div>
                             <div class="input-field col s12 m8 offset-m2">
-                                <input name="donar_droga" id="c" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                <label for="c">Droga</label>
+                                <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_droga">Droga</label>
                             </div>
                             <div class="input-field col s4 offset-s2">
                                 <select name="anio" id="anios" required>
@@ -140,7 +133,7 @@
                                 <label for="meses">Mes</label>
                             </div>
                             <div class="input-field col s12 m8 offset-m2">
-                                <select name="donar_tipo">
+                                <select name="donar_tipo" tabindex="-1">
                                     <option value="" disabled selected>Elije una opcion</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
@@ -149,7 +142,7 @@
                                 <label>Tipo</label>
                             </div>
                             <div class="col s12 center">
-                                <button id="sendDonar" class="btn red accent-2">Aceptar</button>
+                                <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
                             </div>
                         </form>
                     </div>
@@ -158,7 +151,7 @@
                 <div class="slide active fp-auto-height-responsive grey lighten-4" id="slide2">
                     <div class="col s12 grey lighten-4 bigpanel">
                         <div class="row center">
-                            <h3 class="grey-text text-darken-2">Bienvenido,
+                            <h3 class="grey-text text-darken-2 normal-font">Bienvenido,
                                 <span class="red-text semibold">{{django_users.first_name}}</span></h3>
                             <p class="col m6 push-m3">On the other hand, we denounce with righteous
                                 indignation and dislike men who are so beguiled and demoralized by the
@@ -176,40 +169,38 @@
                         </div>
 
                         <div class="col l6 push-l3 center btnsection">
-                            <button class="waves-effect waves-light btn-large red z-depth-3 montserrat-bold optbutton" id="panelbtn" onclick="toLeft()">DONAR</button>
+                            <button class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button>
                             {% if verificador %}
                             <a href="/verificacion" class="waves-effect waves-light btn-large green z-depth-3
-                                                           montserrat-bold optbutton" id="panelbtn">VERIFICAR</a> {% endif %}
-                            <button class="waves-effect waves-light btn-large blue z-depth-3 montserrat-bold
-                                           optbutton" id="panelbtn" onclick="toRight()">SOLICITAR</button>
+                                                           optbutton semibold" id="panelbtn">VERIFICAR</a> {% endif %}
+                            <button class="waves-effect waves-light btn-large blue z-depth-3
+                                           optbutton semibold" id="panelbtn" onclick="toRight()" tabindex="-1">SOLICITAR</button>
                         </div>
                     </div>
 
                     <!--Slide derecho solicitar-->
                     <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
                         <div class="row center">
-                            <form id = "form_donar" method="POST" action="/pedir">
+                            <form id="form_donar" method="POST" action="/pedir" class="normal-font">
                                 {% csrf_token %}
                                 <div class="input-field col s6 offset-s3">
-                                    <input id = "pedir_nombre" name="pedir_nombre" id="c" type="text" required
-                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                    <label for="c">Medicamento</label>
+                                    <input id="pedir_nombre" name="pedir_nombre" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1">
+                                    <label for="pedir_nombre">Medicamento</label>
                                 </div>
                                 <div class="input-field col s6 offset-s3">
-                                    <input id = "pedir_gramos" name="pedir_gramos" id="c" type="text" required
-                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                    <label for="c">Concentracion en Gramos</label>
+                                    <input id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                    <label for="pedir_gramos">Concentracion en Gramos</label>
                                 </div>
                                 <div class="extra_info">
                                     <div class="input-field col s6 offset-s3">
-
-                                        <input name="pedir_droga" id="c" type="text" oninvalid="setCustomValidity('Campo requerido')"
+                                        <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
                                                oninput="setCustomValidity('')">
-                                        <label for="c">Droga</label></div>
+                                        <label for="pedir_droga">Droga</label></div>
                                     <div class="input-field col s6 offset-s3">
-                                        <input name="pedir_laboratorio" id="c" type="text">
-                                        <label for="c">Laboratorio</label></div>
-
+                                        <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
+                                        <label for="pedir_laboratorio">Laboratorio</label></div>
                                     <div class="input-field col s6 offset-s3">
                                         <select name="pedir_tipo">
                                             <option value="" disabled selected>Elije una opcion</option>
@@ -222,13 +213,12 @@
                                 </div>
                                 <div class="input-field col s6 offset-s3">
 
-                                    <input name="pedir_cantidad" id="c" type="text" required
-                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-
-                                    <label for="c">Cantidad</label>
+                                    <input name="pedir_cantidad" id="pedir_cantidad" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                    <label for="pedir_cantidad">Cantidad</label>
                                 </div>
                                 <div class="col s12 center">
-                                    <input id ="submit_pedir" type="submit" value="Aceptar" button class="btn blue">
+                                    <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
                                 </div>
                             </form>
                         </div>

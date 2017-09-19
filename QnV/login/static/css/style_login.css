@@ -6,15 +6,22 @@
     font-family: Avenir-Heavy;
     src: url(fonts/AvenirLTStd-Black.otf);
 }
-
+@font-face {
+  font-family: Avenir-Light;
+  src: url(fonts/AvenirLTStd-Light.otf); 
+}
 html,
 body {
 	font-family: Avenir;
 	background-color: #e8eaf6;
 	height: 100%;
 }
-.monts {
-	font-weight: 500 !important;
+.font-light {
+	font-family: Avenir-Light;
+}
+
+.font-normal{
+	font-family: Avenir;
 }
 
 .login-card {
@@ -31,8 +38,12 @@ body {
 	opacity: 0;
 }
 
+.ch-box{
+	margin-left: -50px;
+}
+
 h5 {
-	margin: 3rem 0 1rem 0;
+	margin: 3rem 0 0rem 0;
 }
 .datSpace {
 	margin-top: 20px;
@@ -40,7 +51,7 @@ h5 {
 .datSpace:hover{
 	background-color: #f66055;
 }
-.tSp{
+.font-heavy{
 	font-family: Avenir-Heavy;
 }
 .myImg {
@@ -52,7 +63,6 @@ h5 {
 	height: 48px;
 }
 .logBtn {
-	font-family: Avenir-Heavy;
 	font-weight: 500;
 	font-size: 0.8em;
 	padding-top: 1px;

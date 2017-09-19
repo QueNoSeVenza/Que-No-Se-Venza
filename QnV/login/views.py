@@ -14,6 +14,7 @@ from django.contrib.auth import login as auth_login
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.sessions.models import Session
 # Create your views here.
 def login(request):
     '''
@@ -27,13 +28,12 @@ def login(request):
     all_users = User.objects.all()
     context = {
         'django_users' : all_users
-    }   
+    }
     return render(request, 'login.html', context)
 
 
 def tyc(request):
-    template = loader.get_template('tyc.html')
-    return HttpResponse(template.render(request))
+    return render(request, 'tyc.html', {})
 
 def log(request):
     if 'POST' in request.method:
@@ -78,11 +78,6 @@ def reg(request):
             else:
                 messages.add_message(request, messages.INFO, 'Debe aceptar los terminos y condiciones')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            
+
     else:
         return redirect('/login')
-    
-def logout(request):
-    context = RequestContext(request)
-    logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
