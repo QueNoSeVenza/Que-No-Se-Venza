@@ -26,7 +26,7 @@ $(document).ready(function () {
             height: "40px"
         });
         $('.login-card').animate({
-            height: "420px"
+            height: "440px"
         });
         $('.login-content').delay(360).show(0);
     });
