@@ -30,7 +30,8 @@ def principal(request):
 def thanks(request, id_med_donado):
     template = loader.get_template('thanks.html')
     med_donado = MedicamentoDonado.objects.get(pk=id_med_donado)
-    context = {'medicamento_donado':med_donado}
+    cod = med_donado.codigo()
+    context = {'medicamento_donado':med_donado, 'codigo':cod}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -102,12 +103,6 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-            
-            med_id = str(nuevo_medicamento_donado.id)
-            name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
-            
-            MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
-            print "codigo subido"
 
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
@@ -123,12 +118,6 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-            
-            med_id = str(nuevo_medicamento_donado.id)
-            name_codigo = str(medicamento_kwargs['nombre'][:3]+medicamento_kwargs['concentracion_gramos']+"-"+med_id+medicamento_kwargs['tipo'][:1])
-            
-            MedicamentoDonado.objects.filter(id=nuevo_medicamento_donado.id).update(codigo=name_codigo)
-            print "codigo subido"
 
         for pedido in getMatches(nuevo_medicamento_donado):
             if len(getMatches(pedido)) != 0:
