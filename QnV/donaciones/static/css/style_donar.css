@@ -108,6 +108,21 @@ nav {
   line-height: 30px;
   vertical-align: middle; }
 
+.modal-btn {
+  float: left;
+  width: 50%;
+  height: 100%;
+  font-size: .8rem;
+  padding-top: 19px; }
+  .modal-btn.gr {
+    color: #E0E0E0;
+    background-color: #333;
+    padding-left: 25px; }
+  .modal-btn.ve {
+    text-align: right;
+    background-color: #2AC87D;
+    padding-right: 25px; }
+
 #slide2 h3 {
   margin-top: 100px; }
   @media (max-width: 600px) {

@@ -127,6 +127,26 @@ nav {
 	line-height: 30px;
 	vertical-align: middle;
 }
+
+// Slider izquierda donar
+.modal-btn{
+    float: left;
+    width: 50%;
+    height: 100%;
+    font-size: .8rem;
+    padding-top: 19px;
+    &.gr{
+        color: #E0E0E0;
+        background-color: #333;
+        padding-left: 25px;
+    }
+    &.ve{
+        text-align: right;
+        background-color: #2AC87D;
+        padding-right: 25px;
+    }
+}
+
 // Slider inicio
 #slide2 {
 	h3 {
@@ -147,9 +167,7 @@ nav {
 		letter-spacing: 1px !important;
 	}
 }
-// Slider rojo de donar
-// Slider azul de solicitar
-// Ambos sliders
+
 // Menu icon animation
 @mixin bar {
 	display: block;

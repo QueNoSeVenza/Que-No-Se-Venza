@@ -20,8 +20,8 @@ body {
 	font-family: Avenir-Light;
 }
 
-.font-normal{
-	font-family: Avenir;
+.font-heavy{
+	font-family: Avenir-Heavy;
 }
 
 .login-card {
@@ -80,7 +80,7 @@ h5 {
 	color: #808080;
 }
 
-.fpsw{
+.psw-label{
     margin-top: 15px;
 }
 
