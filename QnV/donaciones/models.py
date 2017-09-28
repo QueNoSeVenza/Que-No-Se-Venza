@@ -56,7 +56,8 @@ class MedicamentoDonado(models.Model):
             return False
         
     def codigo(self):
-        a = str(self.medicamento.nombre[:3]+self.medicamento.concentracion_gramos+"-"+self.id+self.medicamento.tipo[:1])
+        i = str(self.id)
+        a = str(self.medicamento.nombre[:3]+self.medicamento.concentracion_gramos+"-"+i+self.medicamento.tipo[:1])
         return a
     
     def __str__(self):
