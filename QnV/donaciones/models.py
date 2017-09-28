@@ -72,3 +72,8 @@ class Pedido(models.Model):
 
     def __str__(self):
         return (self.medicamento.nombre) + ": " + str(self.id)    
+
+
+class Match(models.Model):
+    medicamentos = models.ManyToManyField(MedicamentoDonado)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
