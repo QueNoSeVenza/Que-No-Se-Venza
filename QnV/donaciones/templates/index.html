@@ -85,6 +85,7 @@
             <div class="section">
                 <!--Slide izquierdo donar-->
                 <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
+                    <h4 style="margin-left:39%;">Donando Una Caja</h4>
                     <div class="row center white-text">
                         <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
                             {% csrf_token %}
@@ -98,7 +99,7 @@
                             </div>
                             <div class="input-field col s6 m4 offset-m2">
                                 <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                                <label for="n-cantidad">Cantidad</label>
+                                <label for="n-cantidad">Cantidad por Caja</label>
                             </div>
                             <div class="input-field col s6 m4">
                                 <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
@@ -116,7 +117,7 @@
                             </div>
                             <div class="input-field col s6 m4">
                                 <select name="mes" id="meses" required>
-                                    <option value="" disabled selected>Elije una mes</option>
+                                    <option value="" disabled selected>Elije una Mes</option>
                                     <option class="meses" value="1">Enero</option>
                                     <option class="meses" value="2">Febrero</option>
                                     <option class="meses" value="3">Marzo</option>
@@ -125,21 +126,21 @@
                                     <option class="meses" value="6">Junio</option>
                                     <option class="meses" value="7">Julio</option>
                                     <option class="meses" value="8">Agosto</option>
-                                    <option class="meses" value="9">Octubre</option>
-                                    <option class="meses" value="10">Septiembre</option>
+                                    <option class="meses" value="9">Septiembre</option>
+                                    <option class="meses" value="10">Octubre</option>
                                     <option class="meses" value="11">Noviembre</option>
-                                    <option class="meses" value="12">diciembre</option>
+                                    <option class="meses" value="12">Diciembre</option>
                                 </select>
                                 <label for="meses">Mes</label>
                             </div>
                             <div class="input-field col s12 m8 offset-m2">
-                                <select name="donar_tipo" tabindex="-1">
-                                    <option value="" disabled selected>Elije una opcion</option>
+                                <select name="donar_tipo" tabindex="-1" id="tipo">
+                                    <option value="" disabled selected>Elije una Opción</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
                                     <option value="Gotas">Gotas</option>
                                 </select>
-                                <label>Tipo</label>
+                                <label for="tipo">Tipo</label>
                             </div>
                             <div class="col s12 center">
                                 <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
