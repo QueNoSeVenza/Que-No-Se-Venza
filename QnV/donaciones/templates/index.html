@@ -79,46 +79,43 @@
                     <li id="navsection3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects</li>
                 </ul>
             </div>
-
-        </div>
-    </ul>
-
-    <div id="fullpage">
-        <div class="section">
-            <!--Slide izquierdo donar-->
-            <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
-                <div class="row center white-text">
-                    <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
-                        {% csrf_token %}
-                        <div class="input-field col s6 m4 offset-m2 roboto">
-                            <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_nombre">Nombre Comercial</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-gramos">Concentracion en Gramos</label>
-                        </div>
-                        <div class="input-field col s6 m4 offset-m2">
-                            <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-cantidad">Cantidad</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_laboratorio">Laboratorio</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_droga">Droga</label>
-                        </div>
-                        <div class="input-field col s4 offset-s2">
-                            <select name="anio" id="anios" required>
+        <div id="fullpage">
+            <div class="section">
+                <!--Slide izquierdo donar-->
+                <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
+                    <h4 style="margin-left:39%;">Donando Una Caja</h4>
+                    <div class="row center white-text">
+                        <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
+                            {% csrf_token %}
+                            <div class="input-field col s6 m4 offset-m2 roboto">
+                                <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_nombre">Nombre Comercial</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-gramos">Concentracion en Gramos</label>
+                            </div>
+                            <div class="input-field col s6 m4 offset-m2">
+                                <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-cantidad">Cantidad por Caja</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_laboratorio">Laboratorio</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_droga">Droga</label>
+                            </div>
+                            <div class="input-field col s4 offset-s2">
+                                <select name="anio" id="anios" required>
                                     <option value="" disabled selected>Elije un Año</option>
                                 </select>
-                            <label for="anios">Año</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <select name="mes" id="meses" required>
-                                    <option value="" disabled selected>Elije un mes</option>
+                                <label for="anios">Año</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <select name="mes" id="meses" required>
+                                    <option value="" disabled selected>Elije una Mes</option>
                                     <option class="meses" value="1">Enero</option>
                                     <option class="meses" value="2">Febrero</option>
                                     <option class="meses" value="3">Marzo</option>
@@ -127,16 +124,17 @@
                                     <option class="meses" value="6">Junio</option>
                                     <option class="meses" value="7">Julio</option>
                                     <option class="meses" value="8">Agosto</option>
-                                    <option class="meses" value="9">Octubre</option>
-                                    <option class="meses" value="10">Septiembre</option>
+                                    <option class="meses" value="9">Septiembre</option>
+                                    <option class="meses" value="10">Octubre</option>
                                     <option class="meses" value="11">Noviembre</option>
-                                    <option class="meses" value="12">diciembre</option>
+                                    <option class="meses" value="12">Diciembre</option>
                                 </select>
-                            <label for="meses">Mes</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <select name="donar_tipo" tabindex="-1">
-                                    <option value="" disabled selected>Elije una opcion</option>
+
+                                <label for="meses">Mes</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <select name="donar_tipo" tabindex="-1" id="tipo">
+                                    <option value="" disabled selected>Elije una Opción</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
                                     <option value="Gotas">Gotas</option>
