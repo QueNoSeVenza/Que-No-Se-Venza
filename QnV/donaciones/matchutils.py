@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 #que se use como argumento solo si hay suficientes unidades para satisfacerlo. 
 
 def getMatches(entity):
-	print(entity.__class__.__name__)
+	print("GETMATCHES>",entity.__class__.__name__)
 	if entity.__class__.__name__ == "Pedido":
 
 		print(entity)

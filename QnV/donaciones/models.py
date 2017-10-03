@@ -59,7 +59,7 @@ class MedicamentoDonado(models.Model):
             return False
 
     def __str__(self):
-        return str(self.medicamento.nombre) + ": " + str(self.id)
+        return str(self.medicamento.nombre[:3].upper()) + str(self.id)
 
     
 class Pedido(models.Model):
@@ -72,4 +72,7 @@ class Pedido(models.Model):
     def __str__(self):
         return (self.medicamento.nombre) + ": " + str(self.id)    
 
+class Match(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    donacion = models.ForeignKey(MedicamentoDonado,on_delete = models.CASCADE)
 
