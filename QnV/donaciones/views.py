@@ -48,6 +48,7 @@ def donar(request):
         'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
 
+
         }
 
         donacion_kwargs = {

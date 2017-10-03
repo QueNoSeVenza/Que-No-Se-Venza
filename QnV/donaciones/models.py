@@ -42,6 +42,8 @@ class Donacion(models.Model):
         return str(self.user) + ": " + str(self.medicamentos.count())
 
 class MedicamentoDonado(models.Model):
+    verificador_ingreso = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True,default="")
+    verificador_salida = models.ForeignKey(User, on_delete=models.CASCADE,default="",blank=True,null=True, related_name="verificador_salida")
 
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
     donacion = models.ForeignKey(Donacion, on_delete=models.CASCADE, related_name="medicamentos_donados")
@@ -71,6 +73,3 @@ class Pedido(models.Model):
         return (self.medicamento.nombre) + ": " + str(self.id)    
 
 
-class Match(models.Model):
-    medicamentos = models.ManyToManyField(MedicamentoDonado)
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
