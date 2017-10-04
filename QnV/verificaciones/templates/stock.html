@@ -1,51 +1,48 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 
+<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
 <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-<link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
-<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
 
 <!--{{string}}<br>-->
 <style type="text/css">
     .Disponible {
         background-color: green;
     }
-    
+
     .Pendiente {
         background-color: yellow;
     }
-    
+
     .Eliminado {
         background-color: red;
     }
 </style>
 <div class="row">
-    <div class="col s12">
-        <table>
-            <tr id="header">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Laboratorio</th>
-                <th>Tipo</th>
-                <th>Función farmaceutica</th>
-                <th>¿Requiere receta?</th>
-                <th>Fecha de vencimiento</th>
+    <table class="col s12">
+        <tr id="header">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Laboratorio</th>
+            <th>Tipo</th>
+            <th>Función farmaceutica</th>
+            <th>¿Requiere receta?</th>
+            <th>Fecha de vencimiento</th>
+        </tr>
 
-            </tr>
+        {% for donacion in donaciones %}
+        <tr class="{{donacion.stock}}">
+            <td>{{donacion.id}}</td>
+            <td>{{donacion.medicamento.nombre}}</td>
+            <td>{{donacion.medicamento.laboratorio}}</td>
+            <td>{{donacion.medicamento.tipo}}</td>
+            <td>{{donacion.medicamento.funcion}}</td>
+            <td>{{donacion.medicamento.prescripcion}}</td>
+            <td>{{donacion.fecha_vencimiento}}</td>
 
-            {% for donacion in donaciones %}
-            <tr class="{{donacion.stock}}">
-                <th>{{donacion.id}}</th>
-                <th>{{donacion.medicamento.nombre}}</th>
-                <th>{{donacion.medicamento.laboratorio}}</th>
-                <th>{{donacion.medicamento.tipo}}</th>
-                <th>{{donacion.medicamento.funcion}}</th>
-                <th>{{donacion.medicamento.prescripcion}}</th>
-                <th>{{donacion.fecha_vencimiento}}</th>
-
-            </tr>
+        </tr>
 
 
-            {% endfor %}
-        </table>
-    </div>
+        {% endfor %}
+    </table>
 </div>
