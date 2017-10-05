@@ -1,8 +1,14 @@
 
-
 <form action="/verificacion/salida/" method="POST">
 {% csrf_token %}
-<input type="hidden" name="donation_id" value="{{donacion.id}}"/>
+<input type="hidden" name="donation_id" value="{{donation_id}}"/>
+{{match_id}}
+{% for medicamento_donado in match %}
+
+<p>{{medicamento_donado}}</p>	
+
+{% endfor %}
+
 {% if donacion.medicamento.prescripcion %}
 
 Retirando {{donacion.medicamento.nombre}} <br>

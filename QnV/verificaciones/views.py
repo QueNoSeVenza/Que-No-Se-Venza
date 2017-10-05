@@ -20,6 +20,7 @@ def stock (request):
 
 	if request.user.groups.filter(name='Verificadores').exists():
 		string = "Verificador! ;)"
+		verificador_ingreso =[]
 		medicamentos = MedicamentoDonado.objects.all()
 		print(medicamentos)
 		return render(request,'stock.html',{'string' : string,'donaciones' : medicamentos})
@@ -66,9 +67,11 @@ def entrada(request):
 			donacion = MedicamentoDonado.objects.get(pk = request.POST['donation_id'])
 			donacion.medicamento.funcion = funcion
 			donacion.medicamento.prescripcion = prescripcion
+			donacion.verificador_ingreso = request.user
 			donacion.stock = "Disponible"
 			donacion.save()
 			donacion.medicamento.save()
+
 			
  			#Cambiar /entrada/input por un template que comunique el exito de la operación
 			print("Donación registrada con exito")
@@ -83,7 +86,7 @@ def entrada(request):
 	else:
 		print(Donacion.objects.all().values('id'))
 		
-		medicamento_donado = MedicamentoDonado.objects.get(donacion=request.GET['id'])
+		medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
 		print(medicamento_donado.stock)
 		
 
@@ -96,11 +99,11 @@ def entrada(request):
 
 def salida(request):
 
-
 	if request.method == "POST":
-
+		d_id = request.POST['donation_id']
 		print(len(request.POST.getlist('checks')))
-        
+		donacion = MedicamentoDonado.objects.get(id = d_id)
+       
         code = request.POST['salida']
         obj_med_donado = MedicamentoDonado.objects.all()
             
@@ -117,16 +120,19 @@ def salida(request):
 		if donacion.medicamento.prescripcion == True:
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
+				donacion.verificador_salida = request.user
 				donacion.save()
+
 				return HttpResponseRedirect("/verificacion/")
 
 			else:
-				
+								
 				#Cambiar /entrada/input por un template de error
 				print("No se han verificado todos los campos, la operación ha sido cancelada")
 				return HttpResponseRedirect("/verificacion/input/entrada")
 		else:
 				donacion.stock = 'Entregado'
+				donacion.verificador_salida = request.user
 				donacion.save()
 				return HttpResponseRedirect("/verificacion/")
 
@@ -147,8 +153,8 @@ def salida(request):
         if donacion.stock == "Reservado":
 
 
-			return render(request,'salida.html',{'donacion' : donacion})
-        else:
+			return render(request,'salida.html',{'donation_id' : d_id,'donacion' : donacion})
+		else:
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
 			print("Esta donación ya se encuentra en stock")
 			return HttpResponseRedirect("/verificacion/input/entrada")

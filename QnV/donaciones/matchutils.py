@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 #que se use como argumento solo si hay suficientes unidades para satisfacerlo.
 
 def getMatches(entity):
-	print(entity.__class__.__name__)
+	print("GETMATCHES>",entity.__class__.__name__)
 	if entity.__class__.__name__ == "Pedido":
 
 		print(entity)
@@ -63,7 +63,7 @@ def executeMatch(petition):
 			match_obj.save()
 			print("<<<<<<<<<<<zzzzzzzz",match_obj.medicamentos.all())
 
-			return substaction_values
+			return match_obj
 
 		else:
 
@@ -77,7 +77,7 @@ def executeMatch(petition):
 			print("<<<<",match_obj.medicamentos.all())
 			match_obj.save()			
 			if petition.cantidad == 0:
-				return substaction_values
+				return match_obj
 
 
 
@@ -89,7 +89,7 @@ def getDullMedicines():
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
-def sendMatchEmail(petition):
+def sendMatchEmail(match):
 
 	body = "Le informamos que se encuentran disponibles las "+str(petition.cantidad)+" undidades de "+petition.medicamento.nombre+" que solicito en su peticion N "+str(petition.id)
 

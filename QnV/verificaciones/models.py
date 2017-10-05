@@ -9,10 +9,10 @@ from donaciones.models import *
 # Create your models here.
 class VerificarIngreso(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicamento = models.ForeignKey(MedicamentoDonado, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(MedicamentoDonado , on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
 class VerificarRetiro(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicamento = models.ForeignKey(MedicamentoDonado, on_delete=models.CASCADE)
+    medicamento = models.ForeignKey(MedicamentoDonado , on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

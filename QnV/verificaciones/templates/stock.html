@@ -18,34 +18,34 @@
         background-color: red;
     }
 </style>
-<div class="row">
-    <div class="col s12">
-        <table>
-            <tr id="header">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Laboratorio</th>
-                <th>Tipo</th>
-                <th>Función farmaceutica</th>
-                <th>¿Requiere receta?</th>
-                <th>Fecha de vencimiento</th>
+<table>
+<tr id = "header">
+	<th>ID</th>
+	<th>Nombre</th>
+	<th>Laboratorio</th>
+	<th>Tipo</th>
+	<th>Función farmaceutica</th>
+	<th>¿Requiere receta?</th>
+	<th>Fecha de vencimiento</th>
+	<th>Veriificador Ingreso</th>
+	<th>Verificador Egreso</th>	
 
-            </tr>
+</tr>
 
-            {% for donacion in donaciones %}
-            <tr class="{{donacion.stock}}">
-                <th>{{donacion.id}}</th>
-                <th>{{donacion.medicamento.nombre}}</th>
-                <th>{{donacion.medicamento.laboratorio}}</th>
-                <th>{{donacion.medicamento.tipo}}</th>
-                <th>{{donacion.medicamento.funcion}}</th>
-                <th>{{donacion.medicamento.prescripcion}}</th>
-                <th>{{donacion.fecha_vencimiento}}</th>
+{% for donacion in donaciones %}
+<tr class = "{{donacion.stock}}">
+	<th>{{donacion.id}}</th>
+	<th>{{donacion.medicamento.nombre}}</th>
+	<th>{{donacion.medicamento.laboratorio}}</th>
+	<th>{{donacion.medicamento.tipo}}</th>
+	<th>{{donacion.medicamento.funcion}}</th>
+	<th>{{donacion.medicamento.prescripcion}}</th>
+	<th>{{donacion.fecha_vencimiento}}</th>
+	<th>{{donacion.verificador_ingreso}}</th>
+	<th>{{donacion.verificador_salida}}</th>
+</tr>
+	
 
-            </tr>
+{% endfor %}
+</table>
 
-
-            {% endfor %}
-        </table>
-    </div>
-</div>

@@ -186,10 +186,31 @@ def pedir(request):
         #Cambiar /thanks por la siguiente url del proceso de peticion.
 
 
+        print(">>>>>>",nuevo_pedido.id)
         if len(getMatches(nuevo_pedido)) != 0:
-            print("<<<<<<<<<<<<<<ENTRA>>>>>>>>>>>>>>>>>")
-            executeMatch(nuevo_pedido)
-            sendMatchEmail(nuevo_pedido)
-        return redirect('/thanks2')
+            return redirect('/matchs/'+str(nuevo_pedido.id))
+        else:
+            return redirect('/thanks')
+
+
+
+
+def matchs(request,pid):
+
+    if "POST" in request.method:
+        mid = request.POST['match']
+        pedido = Pedido.objects.get(pk=pid)
+        donacion = MedicamentoDonado.objects.get(pk=mid)
+        match = Match(pedido=pedido,donacion=donacion)
+        match.save()
+        donacion.stock = "Reservado"
+        donacion.save()
+        return redirect('/thanks')
+
     else:
-        return redirect('/principal')
+
+        matchs = getMatches(Pedido.objects.get(pk = pid))
+        return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
+
+
+
