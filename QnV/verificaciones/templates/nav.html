@@ -1,0 +1,9 @@
+{% load static %} {% load staticfiles %}
+{% block nav %}
+<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+<div class="row"><div class="col s12">
+<a href="/verificacion/input/retiro">Verificar Retiro</a>
+<a href="/verificacion/input/entrada">Verificar Entrada</a>
+<a href="/stock/">Control de Stock</a>
+</div></div>
+{% endblock %}

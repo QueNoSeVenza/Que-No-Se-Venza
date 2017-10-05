@@ -1,33 +1,23 @@
-{{string}}<br>
+{% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
+
+<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+<link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+
+<!--{{string}}<br>-->
 <style type="text/css">
-	table {
-	width: 100%; 
-	border: 3px solid black;
-    border-collapse: collapse;
-}
-
-#header{
-
-	border: 3px solid black;
-
-}
- th, td {
-    border: 1px solid black;
-}
-.Disponible{
-	background-color: green;
-}
-
-.Pendiente{
-	background-color: yellow;
-}
-.Eliminado{
-	background-color: red;
-}
-
-
+    .Disponible {
+        background-color: green;
+    }
+    
+    .Pendiente {
+        background-color: yellow;
+    }
+    
+    .Eliminado {
+        background-color: red;
+    }
 </style>
-
 <table>
 <tr id = "header">
 	<th>ID</th>
@@ -58,3 +48,4 @@
 
 {% endfor %}
 </table>
+

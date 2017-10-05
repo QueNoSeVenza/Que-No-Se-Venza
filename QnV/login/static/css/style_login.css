@@ -1,27 +1,58 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
+@font-face {
+    font-family: Avenir;
+    src: url(fonts/AvenirLTStd-Medium.otf);
+}
+@font-face {
+    font-family: Avenir-Heavy;
+    src: url(fonts/AvenirLTStd-Black.otf);
+}
+@font-face {
+  font-family: Avenir-Light;
+  src: url(fonts/AvenirLTStd-Light.otf); 
+}
 html,
 body {
-	font-family: 'Montserrat', sans-serif;
+	font-family: Avenir;
 	background-color: #e8eaf6;
 	height: 100%;
 }
-.monts {
-	font-weight: 500 !important;
+.font-light {
+	font-family: Avenir-Light;
 }
+
+.font-heavy{
+	font-family: Avenir-Heavy;
+}
+
 .login-card {
 	min-height: 40px;
-	height: 420px;
+	height: 440px;
 	width: 300px;
 	background-color: #FFF;
 	margin: 0 auto 10px;
 	border-radius: 13px;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05), 0 5px 5px 0 rgba(0, 0, 0, 0.005);
 }
+
+.register-content{
+	opacity: 0;
+}
+
+.ch-box{
+	margin-left: -50px;
+}
+
 h5 {
-	margin: 3rem 0 1rem 0;
+	margin: 3rem 0 0rem 0;
 }
 .datSpace {
 	margin-top: 20px;
+}
+.datSpace:hover{
+	background-color: #f66055;
+}
+.font-heavy{
+	font-family: Avenir-Heavy;
 }
 .myImg {
 	margin-top: 5%;
@@ -33,16 +64,26 @@ h5 {
 }
 .logBtn {
 	font-weight: 500;
-	font-size: 0.7em;
+	font-size: 0.8em;
+	padding-top: 1px;
 	border-radius: 40px;
 	height: 35px;
+	background-color: #ff6e66;
 	width: 50%;
 	margin-left: 25%;
 	margin-bottom: 10px;
 }
+.logBtn:focus{
+	background-color: #ff6e66;
+}
 .reg {
 	color: #808080;
 }
+
+.psw-label{
+    margin-top: 15px;
+}
+
 .datArrow {
 	cursor: pointer;
 	position: absolute;
@@ -70,6 +111,11 @@ h5 {
 	cursor: pointer;
 	border-bottom: 1px solid #ccc;
 }
+
+.messages li{
+    color: aliceblue !important;
+}
+
 .field:valid + .floating-label {
 	opacity: 1;
 	top: -5px;

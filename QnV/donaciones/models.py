@@ -52,12 +52,16 @@ class MedicamentoDonado(models.Model):
     stock = models.CharField(max_length=60, default="En Espera")
     
     def isDull(self):
-
         if self.fecha_vencimiento < datetime.now().date():
             return True 
         else:
             return False
-
+        
+    def codigo(self):
+        i = str(self.id)
+        a = str(self.medicamento.nombre[:3]+self.medicamento.concentracion_gramos+"-"+i+self.medicamento.tipo[:1])
+        return a
+    
     def __str__(self):
         return str(self.medicamento.nombre[:3].upper()) + str(self.id)
 

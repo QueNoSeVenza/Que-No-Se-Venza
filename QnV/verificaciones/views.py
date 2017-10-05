@@ -103,6 +103,20 @@ def salida(request):
 		d_id = request.POST['donation_id']
 		print(len(request.POST.getlist('checks')))
 		donacion = MedicamentoDonado.objects.get(id = d_id)
+       
+        code = request.POST['salida']
+        obj_med_donado = MedicamentoDonado.objects.all()
+            
+        for i in obj_med_donado:
+            print i.codigo()
+            print "loop"
+            print code
+            if str(i.codigo()) == str(code):
+                print "if"
+                print code
+                donacion = i
+
+		#donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
 		if donacion.medicamento.prescripcion == True:
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
@@ -123,12 +137,20 @@ def salida(request):
 				return HttpResponseRedirect("/verificacion/")
 
 	else:
-		d_id = request.GET['id']
-		print(d_id)
+		code = request.POST.get('salida', False)
+        obj_med_donado = MedicamentoDonado.objects.all()
+            
+        for i in obj_med_donado:
+            print i.codigo()
+            if i.codigo() == code:
+                print code
+                donacion = i
+                
+        print code
 
-		donacion = MedicamentoDonado.objects.get(pk = d_id )
+		#donacion = MedicamentoDonado.objects.get(pk = d_id )
 
-		if donacion.stock == "Reservado":
+        if donacion.stock == "Reservado":
 
 
 			return render(request,'salida.html',{'donation_id' : d_id,'donacion' : donacion})

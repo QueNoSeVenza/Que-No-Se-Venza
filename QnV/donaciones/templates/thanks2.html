@@ -1,0 +1,17 @@
+{% load static %}
+{% load staticfiles %}
+<html>
+    <head>
+        <title>QNV</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/materialize_donar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage/jquery.fullPage_donar.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+    </head>
+    <body>
+        Gracias por su pedido:
+        <div class="col s12 center">
+            <button class="btn red accent-2" onclick="location.href='/principal'">Volver</button>
+        </div>
+    </body>
+</html>
