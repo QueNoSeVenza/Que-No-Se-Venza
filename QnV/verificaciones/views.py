@@ -72,7 +72,7 @@ def entrada(request):
 			donacion.save()
 			donacion.medicamento.save()
 
-			
+
  			#Cambiar /entrada/input por un template que comunique el exito de la operación
 			print("Donación registrada con exito")
 			return HttpResponseRedirect("/verificacion/")
@@ -85,10 +85,10 @@ def entrada(request):
 
 	else:
 		print(Donacion.objects.all().values('id'))
-		
+
 		medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
 		print(medicamento_donado.stock)
-		
+
 
 		if medicamento_donado.stock == 'En Espera':
 			return render(request,'entrada.html',{'donacion' : medicamento_donado})
@@ -103,18 +103,17 @@ def salida(request):
 		d_id = request.POST['donation_id']
 		print(len(request.POST.getlist('checks')))
 		donacion = MedicamentoDonado.objects.get(id = d_id)
-       
-        code = request.POST['salida']
-        obj_med_donado = MedicamentoDonado.objects.all()
-            
-        for i in obj_med_donado:
-            print i.codigo()
-            print "loop"
-            print code
-            if str(i.codigo()) == str(code):
-                print "if"
-                print code
-                donacion = i
+
+        # code = request.POST['salida']
+        # obj_med_donado = MedicamentoDonado.objects.all()
+        # for i in obj_med_donado:
+        #     print i.codigo()
+        #     print "loop"
+        #     print code
+        #     if str(i.codigo()) == str(code):
+        #         print "if"
+        #         print code
+        #         donacion = i
 
 		#donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
 		if donacion.medicamento.prescripcion == True:
@@ -126,7 +125,6 @@ def salida(request):
 				return HttpResponseRedirect("/verificacion/")
 
 			else:
-								
 				#Cambiar /entrada/input por un template de error
 				print("No se han verificado todos los campos, la operación ha sido cancelada")
 				return HttpResponseRedirect("/verificacion/input/entrada")
@@ -139,22 +137,20 @@ def salida(request):
 	else:
 		code = request.POST.get('salida', False)
         obj_med_donado = MedicamentoDonado.objects.all()
-            
+
         for i in obj_med_donado:
             print i.codigo()
             if i.codigo() == code:
                 print code
                 donacion = i
-                
+
         print code
 
 		#donacion = MedicamentoDonado.objects.get(pk = d_id )
 
         if donacion.stock == "Reservado":
-
-
 			return render(request,'salida.html',{'donation_id' : d_id,'donacion' : donacion})
-		else:
+        else:
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
 			print("Esta donación ya se encuentra en stock")
 			return HttpResponseRedirect("/verificacion/input/entrada")

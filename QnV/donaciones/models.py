@@ -50,22 +50,22 @@ class MedicamentoDonado(models.Model):
     cantidad = models.IntegerField()
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
-    
+
     def isDull(self):
         if self.fecha_vencimiento < datetime.now().date():
-            return True 
+            return True
         else:
             return False
-        
+
     def codigo(self):
         i = str(self.id)
         a = str(self.medicamento.nombre[:3]+self.medicamento.concentracion_gramos+"-"+i+self.medicamento.tipo[:1])
         return a
-    
+
     def __str__(self):
         return str(self.medicamento.nombre[:3].upper()) + str(self.id)
 
-    
+
 class Pedido(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamento = models.ForeignKey(Medicamento, on_delete=models.CASCADE, related_name="pedidos")
@@ -74,9 +74,8 @@ class Pedido(models.Model):
     estado = models.CharField(max_length=60, default="Activo")
 
     def __str__(self):
-        return (self.medicamento.nombre) + ": " + str(self.id)    
+        return (self.medicamento.nombre) + ": " + str(self.id)
 
 class Match(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     donacion = models.ForeignKey(MedicamentoDonado,on_delete = models.CASCADE)
-

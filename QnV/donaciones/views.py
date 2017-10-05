@@ -190,7 +190,7 @@ def pedir(request):
         if len(getMatches(nuevo_pedido)) != 0:
             return redirect('/matchs/'+str(nuevo_pedido.id))
         else:
-            return redirect('/thanks')
+            return redirect('/thanks2')
 
 
 
@@ -205,12 +205,9 @@ def matchs(request,pid):
         match.save()
         donacion.stock = "Reservado"
         donacion.save()
-        return redirect('/thanks')
+        return redirect('/thanks2')
 
     else:
 
         matchs = getMatches(Pedido.objects.get(pk = pid))
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
-
-
-
