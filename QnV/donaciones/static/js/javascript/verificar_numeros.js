@@ -5,17 +5,18 @@ $(document).ready(function () {
     $('#anios').change(function(event){
         checkDate();
     });
-    
+
     $('#n-gramos').keyup(function(event){
         checkNumber(grams);
     });
-    
+
     $('#n-cantidad').keyup(function(event){
+        console.log("ne");
         checkNumber(quantity);
     });
-    
+
     $('#sendDonar').click(function(event){
-        console.log("pene");
+        console.log("pe");
         checkSelects();
     });
 
@@ -68,6 +69,7 @@ function checkNumber(sel) {
     var selectNumber = parseInt(sel.val());
     console.log(selectNumber);
     console.log(sel);
+    console.log("gas");
     if (selectNumber <= 0) {
         sel.css("border-bottom-color","red");
         dissableButtonSend();
@@ -79,30 +81,61 @@ function checkNumber(sel) {
 }
 
 function checkSelects() {
-    var validateSelectMonth = $("#anios");
-    var validateSelectYear = $("#meses");
-    console.log(validateSelectMonth.val() + "  , " + validateSelectYear.val());
-    if (validateSelectMonth.val() == ""){
-        /*validateSelectMonth.css("border-bottom-color","red");
-        validateSelectMonth.material_select();*/
-        return false;
-    } else if (validateSelectYear.val() == ""){
-        /*validateSelectYear.css("border-bottom-color","red");
-        validateSelectYear.material_select();*/
-        return false;
+    var inputs = document.getElementsByClassName("isInput");
+    var selects = [];
+    var inputsValue = [];
+    var salida;
+    
+    selects.push($("#meses"));
+    selects.push($("#anios"));
+    selects.push($("#tipo"));
+    
+    console.log(selects);
+    console.log(inputs);
+    
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+            console.log(inputs[i].value);
+            salida = "no";
+            return;
+        } else {
+            salida = "si";
+            console.log(inputs[i].value);
+            console.log(salida);
+        }
+    }
+    for (var i = 0; i < selects.length; i++) {
+        if (selects[i].val() == null) {
+            return;
+        }
+    }
+    if (salida == "si") {
+        console.log("estoy en salida");
+        for (var i = 0; i < inputs.length; i++) {
+            inputsValue.push(inputs[i].value);
+        }
+        $("#n_1").val(inputsValue[0]);
+        $("#c_1").val(inputsValue[1]);
+        $("#ca_2").val(inputsValue[2]);
+        $("#l_1").val(inputsValue[3]);
+        $("#d_1").val(inputsValue[4]);
+        $("#f_1").val(selects[1].val());
+        $("#f_2").val(selects[0].val());
+        $("#t_1").val(selects[2].val());
+        $("#ahref")[0].click();
     }
 }
 
 function dissableButtonSend() {
-    var inputs = document.getElementsByClassName("isRed");
+    var inputs = document.getElementsByClassName("isInput");
     var list_inputs = [];
     for (var i = 0; i < inputs.length; ++i) {
         if (typeof inputs[i].attributes.id !== "undfined") {
             list_inputs.push(inputs[i].style.borderBottomColor);
         }
     }
-    for (var i = 0; i < list_inputs.length; i++) {
-        if (list_inputs[i] == "red") {
+    for (var i = 0; i < inputs.length; i++) {
+        if (list_inputs[i] == "red" || inputs[i].val == "") {
             $("#sendDonar").prop("disabled", true);
             break;
         } else {

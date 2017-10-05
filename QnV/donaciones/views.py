@@ -26,14 +26,6 @@ def principal(request):
     context = {'verificador':verificador, 'django_users':user}
     return HttpResponse(template.render(context, request))
 
-
-def thanks(request, id_med_donado):
-    template = loader.get_template('thanks.html')
-    med_donado = MedicamentoDonado.objects.get(pk=id_med_donado)
-    cod = med_donado.codigo()
-    context = {'medicamento_donado':med_donado, 'codigo':cod}
-    return HttpResponse(template.render(context, request))
-
 def thanks2(request):
     template = loader.get_template('thanks2.html')
     context = {}
@@ -127,7 +119,7 @@ def donar(request):
     #            sendMatchEmail(pedido)
     #            print("Envio mail")
         id_med_donado = str(nuevo_medicamento_donado.id)
-        return redirect('/thanks/'+id_med_donado)
+        return redirect('/principal')
     else:
         return redirect('/principal')
 
