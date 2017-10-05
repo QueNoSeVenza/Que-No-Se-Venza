@@ -104,16 +104,16 @@ def salida(request):
 		print(len(request.POST.getlist('checks')))
 		donacion = MedicamentoDonado.objects.get(id = d_id)
 
-        # code = request.POST['salida']
-        # obj_med_donado = MedicamentoDonado.objects.all()
-        # for i in obj_med_donado:
-        #     print i.codigo()
-        #     print "loop"
-        #     print code
-        #     if str(i.codigo()) == str(code):
-        #         print "if"
-        #         print code
-        #         donacion = i
+        code = request.POST['salida']
+        obj_med_donado = MedicamentoDonado.objects.all()
+        for i in obj_med_donado:
+            print i.codigo()
+            print "loop"
+            print code
+            if str(i.codigo()) == str(code):
+                print "if"
+                print code
+                donacion = i
 
 		#donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
 		if donacion.medicamento.prescripcion == True:
