@@ -28,6 +28,8 @@
             <th>Función farmaceutica</th>
             <th>¿Requiere receta?</th>
             <th>Fecha de vencimiento</th>
+            <th>Veriificador Ingreso</th>
+	          <th>Verificador Egreso</th>
         </tr>
 
         {% for donacion in donaciones %}
@@ -39,7 +41,8 @@
             <td>{{donacion.medicamento.funcion}}</td>
             <td>{{donacion.medicamento.prescripcion}}</td>
             <td>{{donacion.fecha_vencimiento}}</td>
-
+            <td>{{donacion.verificador_ingreso}}</th>
+          	<td>{{donacion.verificador_salida}}</th>   
         </tr>
 
 

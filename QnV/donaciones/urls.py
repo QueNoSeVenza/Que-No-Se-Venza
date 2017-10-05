@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     url(r'^principal', principal, name='principal'),
     url(r'^donar', donar, name='donar'),
+    url(r'^matchs/(?P<pid>\d+)/$', matchs, name='matchs'),    
     url(r'^pedir', pedir, name='pedir'),
     url(r'^thanks/(?P<id_med_donado>\d+)', thanks, name='thanks'),
     url(r'^thanks2/', thanks2, name='thanks2'),

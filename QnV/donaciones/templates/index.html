@@ -1,124 +1,123 @@
 {% load static %} {% load staticfiles %}
 <html>
-
-<head>
-    <title>QNV</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage/jquery.fullPage_donar.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
-    <link rel="shortcut icon" href="">
-</head>
-
-<body>
-    <div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
-        <span class="bars"></span>
-    </div>
-    <nav class="transparent z-depth-0 ">
-        <ul id="nav-mobile" class="my-wrapper right hide-on-small-only">
-            <li class="drop">
-                <a href="#" class="grey-text text-darken-1 light">{{django_users.first_name}}</a>
-                <div class="dropdownContain">
-                    <div class="dropOut">
-                        <div class="triangle"></div>
-                        <ul>
-                            <li onclick="location.href='{% url 'donaciones:log_out' %}';">Cerrar sesión</li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <ul id="slide-out" class="side-nav">
-        <div class="row">
-            <div class="col s12 m6">
-                <div class="collapsible-container1">
-                    <div class="collapsible-container2">
-                        <ul class="collapsible" data-collapsible="accordion">
-                            <li onclick="firstSection();">
-                                <div class="collapsible-header semibold transparent white-text col s4 m12" id="active">Perfil</div>
-                            </li>
-                            <li onclick="secondSection();">
-                                <div class="collapsible-header semibold white-text col s4 m12">Contacto</div>
-                            </li>
-                            <li onclick="thirdSection();">
-                                <div class="collapsible-header semibold white-text col s4 m12">Acerca de</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m5">
-                <ul class="white-text">
-                    <!--Seccion NAV 1-->
-                    <li id="navsection1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right </li>
-                    <!--Seccion NAV 2-->
-                    <li id="navsection2">
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <h6>Introducción</h6>
-                                    <div class="input-field col s12">
-                                        <input id="a" type="text">
-                                        <label for="a">Nombre</label>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <input id="b" type="text">
-                                        <label for="b">Correo electrónico</label>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="textarea" data-length="420" maxlength="420" class="materialize-textarea  "></textarea>
-                                        <label for="textarea">Mensaje</label>
-                                    </div>
-                                    <button class="btn white-text right">Enviar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <!--Seccion NAV 3-->
-                    <li id="navsection3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects</li>
-                </ul>
-            </div>
-
+    <head>
+        <title>QNV</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage/jquery.fullPage_donar.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+        <link rel="shortcut icon" href="">
+    </head>
+    <body>
+        <div class="menu-toggle button-collapse" data-activates="slide-out" id="sidenav">
+            <span class="bars"></span>
         </div>
-    </ul>
+        <nav class="transparent z-depth-0 ">
+            <ul id="nav-mobile" class="my-wrapper right hide-on-small-only">
+                <li class="drop">
+                    <a href="#" class="grey-text text-darken-1 light">{{django_users.first_name}}</a>
+                    <div class="dropdownContain">
+                        <div class="dropOut">
+                            <div class="triangle"></div>
+                            <ul>
+                                <li onclick="location.href='{% url 'donaciones:log_out' %}';" >Cerrar sesión</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <ul id="slide-out" class="side-nav">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="collapsible-container1">
+                        <div class="collapsible-container2">
+                            <ul class="collapsible" data-collapsible="accordion">
+                                <li onclick="firstSection();">
+                                    <div class="collapsible-header semibold transparent white-text col s4 m12" id="active">Perfil</div>
+                                </li>
+                                <li onclick="secondSection();">
+                                    <div class="collapsible-header semibold white-text col s4 m12">Contacto</div>
+                                </li>
+                                <li onclick="thirdSection();">
+                                    <div class="collapsible-header semibold white-text col s4 m12">Acerca de</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m5">
+                    <ul class="white-text">
+                        <!--Seccion NAV 1-->
+                        <li id="navsection1">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right </li>
+                        <!--Seccion NAV 2-->
+                        <li id="navsection2">
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <h6>Introducción</h6>
+                                        <div class="input-field col s12">
+                                            <input id="a" type="text">
+                                            <label for="a">Nombre</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input id="b" type="text">
+                                            <label for="b">Correo electrónico</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea id="textarea" data-length="420" maxlength="420" class="materialize-textarea  "></textarea>
+                                            <label for="textarea">Mensaje</label>
+                                        </div>
+                                        <button class="btn white-text right">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <!--Seccion NAV 3-->
+                        <li id="navsection3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects</li>
+                    </ul>
+                </div>
 
-    <div id="fullpage">
-        <div class="section">
-            <!--Slide izquierdo donar-->
-            <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
-                <div class="row center white-text">
-                    <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
-                        {% csrf_token %}
-                        <div class="input-field col s6 m4 offset-m2 roboto">
-                            <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_nombre">Nombre Comercial</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-gramos">Concentracion en Gramos</label>
-                        </div>
-                        <div class="input-field col s6 m4 offset-m2">
-                            <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-cantidad">Cantidad</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_laboratorio">Laboratorio</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_droga">Droga</label>
-                        </div>
-                        <div class="input-field col s4 offset-s2">
-                            <select name="anio" id="anios" required>
+            </div>
+        </ul>
+
+        <div id="fullpage">
+            <div class="section">
+                <!--Slide izquierdo donar-->
+                <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
+                    <h4 style="margin-left:39%;">Donando Una Caja</h4>
+                    <div class="row center white-text">
+                        <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
+                            {% csrf_token %}
+                            <div class="input-field col s6 m4 offset-m2 roboto">
+                                <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_nombre">Nombre Comercial</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-gramos">Concentracion en Gramos</label>
+                            </div>
+                            <div class="input-field col s6 m4 offset-m2">
+                                <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-cantidad">Cantidad por Caja</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_laboratorio">Laboratorio</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_droga">Droga</label>
+                            </div>
+                            <div class="input-field col s4 offset-s2">
+                                <select name="anio" id="anios" required>
                                     <option value="" disabled selected>Elije un Año</option>
                                 </select>
-                            <label for="anios">Año</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <select name="mes" id="meses" required>
-                                    <option value="" disabled selected>Elije un mes</option>
+                                <label for="anios">Año</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <select name="mes" id="meses" required>
+                                    <option value="" disabled selected>Elije una Mes</option>
                                     <option class="meses" value="1">Enero</option>
                                     <option class="meses" value="2">Febrero</option>
                                     <option class="meses" value="3">Marzo</option>
@@ -127,146 +126,160 @@
                                     <option class="meses" value="6">Junio</option>
                                     <option class="meses" value="7">Julio</option>
                                     <option class="meses" value="8">Agosto</option>
-                                    <option class="meses" value="9">Octubre</option>
-                                    <option class="meses" value="10">Septiembre</option>
+                                    <option class="meses" value="9">Septiembre</option>
+                                    <option class="meses" value="10">Octubre</option>
                                     <option class="meses" value="11">Noviembre</option>
-                                    <option class="meses" value="12">diciembre</option>
+                                    <option class="meses" value="12">Diciembre</option>
                                 </select>
-                            <label for="meses">Mes</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <select name="donar_tipo" tabindex="-1">
-                                    <option value="" disabled selected>Elije una opcion</option>
+                                <label for="meses">Mes</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <select name="donar_tipo" tabindex="-1" id="tipo">
+                                    <option value="" disabled selected>Elije una Opción</option>
                                     <option value="Pastillas">Pastillas</option>
                                     <option value="Jarabe">Jarabe</option>
                                     <option value="Gotas">Gotas</option>
                                 </select>
-                            <label>Tipo</label>
-                        </div>
-                                                <!-- Modal Trigger -->
-                        <a class="waves-effect waves-light btn modal-trigger" href="#tfd">Modal</a>
-                        <div class="col s12 center">
-                            <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!--Slide del medio-->
-            <div class="slide active fp-auto-height-responsive grey lighten-4" id="slide2">
-                <div class="col s12 grey lighten-4 bigpanel">
-                    <div class="row center">
-                        <h3 class="grey-text text-darken-2 normal-font">Bienvenido,
-                            <span class="red-text semibold">{{django_users.first_name}}</span></h3>
-                        <p class="col m6 push-m3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy </p>
-
+                                <label for="tipo">Tipo</label>
+                            </div>
+                            <!-- Modal Trigger -->
+                            <a class="waves-effect waves-light btn modal-trigger" href="#tfd">Modal</a>
+                            <div class="col s12 center">
+                                <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
+                            </div>
+                        </form>
                     </div>
+                </div>
+                <!--Slide del medio-->
+                <div class="slide active fp-auto-height-responsive grey lighten-4" id="slide2">
+                    <div class="col s12 grey lighten-4 bigpanel">
+                        <div class="row center">
+                            <h3 class="grey-text text-darken-2 normal-font">Bienvenido,
+                                <span class="red-text semibold">{{django_users.first_name}}</span></h3>
+                            <p class="col m6 push-m3">On the other hand, we denounce with righteous
+                                indignation and dislike men who are so beguiled and demoralized by the
+                                charms of pleasure of the moment, so blinded by desire, that they cannot
+                                foresee the <span class="semibold">pain</span> and trouble that are bound
+                                to ensue; and equal blame belongs to those who fail in their duty through
+                                weakness of will, which is the same as saying through shrinking from toil and
+                                pain. These cases are <span class="semibold">perfectly</span> simple and
+                                easy to distinguish. In a free houasdr, when our power of choice is
+                                untrammelled and when nothing prevents our being able to do what we
+                                like best, every pleasure is to be welcomed and every pain avoided.
+                                But in certain circumstances and owing to the claims of duty or the
+                                obligations of business it will frequentlasdy </p>
 
-                    <div class="col l6 push-l3 center btnsection">
-                        <button class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button> {% if verificador %}
-                        <a href="/verificacion" class="waves-effect waves-light btn-large green z-depth-3
+                        </div>
+
+                        <div class="col l6 push-l3 center btnsection">
+                            <button class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button>
+                            {% if verificador %}
+                            <a href="/verificacion" class="waves-effect waves-light btn-large green z-depth-3
                                                            optbutton semibold" id="panelbtn">VERIFICAR</a> {% endif %}
-                        <button class="waves-effect waves-light btn-large blue z-depth-3
+                            <button class="waves-effect waves-light btn-large blue z-depth-3
                                            optbutton semibold" id="panelbtn" onclick="toRight()" tabindex="-1">SOLICITAR</button>
+                        </div>
                     </div>
-                </div>
 
-                <!--Slide derecho solicitar-->
-                <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
-                    <div class="row center">
-                        <form id="form_donar" method="POST" action="/pedir" class="normal-font">
-                            {% csrf_token %}
-                            <div class="input-field col s6 offset-s3">
-                                <input id="pedir_nombre" name="pedir_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1">
-                                <label for="pedir_nombre">Medicamento</label>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
-                                <input id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
-                                <label for="pedir_gramos">Concentracion en Gramos</label>
-                            </div>
-                            <div class="extra_info">
+                    <!--Slide derecho solicitar-->
+                    <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
+                        <div class="row center">
+                            <form id="form_donar" method="POST" action="/pedir" class="normal-font">
+                                {% csrf_token %}
                                 <div class="input-field col s6 offset-s3">
-                                    <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                                    <label for="pedir_droga">Droga</label></div>
+                                    <input id="pedir_nombre" name="pedir_nombre" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1">
+                                    <label for="pedir_nombre">Medicamento</label>
+                                </div>
                                 <div class="input-field col s6 offset-s3">
-                                    <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
-                                    <label for="pedir_laboratorio">Laboratorio</label></div>
-                                <div class="input-field col s6 offset-s3">
-                                    <select name="pedir_tipo">
+                                    <input id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                    <label for="pedir_gramos">Concentracion en Gramos</label>
+                                </div>
+                                <div class="extra_info">
+                                    <div class="input-field col s6 offset-s3">
+                                        <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
+                                               oninput="setCustomValidity('')">
+                                        <label for="pedir_droga">Droga</label></div>
+                                    <div class="input-field col s6 offset-s3">
+                                        <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
+                                        <label for="pedir_laboratorio">Laboratorio</label></div>
+                                    <div class="input-field col s6 offset-s3">
+                                        <select name="pedir_tipo">
                                             <option value="" disabled selected>Elije una opcion</option>
                                             <option value="Pastillas">Pastillas</option>
                                             <option value="Jarabe">Jarabe</option>
                                             <option value="Gotas">Gotas</option>
                                         </select>
-                                    <label>Tipo</label>
+                                        <label>Tipo</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-field col s6 offset-s3">
+                                <div class="input-field col s6 offset-s3">
 
-                                <input name="pedir_cantidad" id="pedir_cantidad" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
-                                <label for="pedir_cantidad">Cantidad</label>
-                            </div>
-                            <div class="col s12 center">
-                                <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
-                            </div>
-                        </form>
+                                    <input name="pedir_cantidad" id="pedir_cantidad" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                    <label for="pedir_cantidad">Cantidad</label>
+                                </div>
+                                <div class="col s12 center">
+                                    <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <!-- Modal Structure -->
-    <div id="tfd" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12 center">
-                    <h4>Confirmar datos</h4>
+        <!-- Modal Structure -->
+        <div id="tfd" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>Confirmar datos</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Nombre Comercial</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Concentracion(gr)</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Droga</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Cantidad</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Laboratorio</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Fecha</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Tipo</label>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Nombre Comercial</label>
-                </div>
-                <div class="input-field col s2">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Concentracion(gr)</label>
-                </div>
-                <div class="input-field col s4">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Droga</label>
-                </div>
-                <div class="input-field col s2">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Cantidad</label>
-                </div>
-                <div class="input-field col s6">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Laboratorio</label>
-                </div>
-                <div class="input-field col s4">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Fecha</label>
-                </div>
-                <div class="input-field col s12">
-                    <input disabled value="Value" id="disabled" type="text" class="validate">
-                    <label for="disabled">Tipo</label>
-                </div>
+            <div class="modal-footer">
+                <div class="modal-btn gr semibold">CANCELAR</div>
+                <div class="modal-btn ve white-text semibold" >ACEPTAR</div>
             </div>
         </div>
-        <div class="modal-footer">
-            <div class="modal-btn gr semibold">CANCELAR</div>
-            <div class="modal-btn ve white-text semibold" >ACEPTAR</div>
-        </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="{% static 'js/javascript/js_donar.js' %}"></script>
-    <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
-    <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
-</body>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="{% static 'js/javascript/js_donar.js' %}"></script>
+        <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
+        <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
+    </body>
 </html>
