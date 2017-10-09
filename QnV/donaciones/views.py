@@ -8,8 +8,9 @@ from django.utils import timezone
 from datetime import datetime
 import datetime
 from datetime import date
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate
 from donaciones.matchutils import *
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
@@ -32,12 +33,7 @@ def thanks2(request):
     return HttpResponse(template.render(context, request))
 
 
-def log_out(request):
-    print "saliendo"
-    logout(request)
-    print "salio "
-    return redirect('/login')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 ##############################################################################

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',    
+    'django_extensions',
     'donaciones',
     'login',
     'presentacion',
@@ -73,6 +73,13 @@ TEMPLATES = [
         },
     },
 ]
+# TEMPLATE_LOADERS = (
+#     'django.template.loaders.filesystem.Loader',
+#     'django.template.loaders.app_directories.Loader',
+#     )
+# TEMPLATE_DIRS = (
+#     os.path.join(BASE_DIR, 'templates'),
+# )
 
 WSGI_APPLICATION = 'QnV.wsgi.application'
 
