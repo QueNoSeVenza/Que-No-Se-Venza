@@ -53,18 +53,15 @@ def donar(request):
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'],
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
-            'laboratorio' : request.POST['donar_laboratorio'] ,
-            'droga' : request.POST['donar_droga'],
-            'tipo' : request.POST['donar_tipo']
+            'droga' : request.POST['donar_droga']
         }
 
         medicamento_donado_kwargs = {
-        'cantidad' : request.POST['donar_cantidad'],
-
-        'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
+            'cantidad' : request.POST['donar_cantidad'],
+            'tipo' : request.POST['donar_tipo'],
+            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
-
-
         }
 
         donacion_kwargs = {
@@ -113,11 +110,12 @@ def donar(request):
             nuevo_medicamento_donado.save()
 
 
-    #    for pedido in getMatches(nuevo_medicamento_donado):
-    #        if len(getMatches(pedido)) != 0:
-    #            executeMatch(pedido)
-    #            sendMatchEmail(pedido)
-    #            print("Envio mail")
+        for pedido in getMatches(nuevo_medicamento_donado):
+            if len(getMatches(pedido)) != 0:
+                executeMatch(pedido)
+                sendMatchEmail(pedido)
+                print("Envio mail")
+                
         id_med_donado = str(nuevo_medicamento_donado.id)
         return redirect('/principal')
     else:
@@ -141,17 +139,13 @@ def pedir(request):
     if 'POST' in request.method:
         #Capturando argumentos para un Pedido y su Medicamento
         medicamento_kwargs = {
-
             'nombre' :  request.POST['pedir_nombre'],
             'concentracion_gramos' : request.POST['pedir_gramos'],
-
+            'droga' : request.POST['pedir_droga'],
         }
 
         pedido_kwargs = {
-
             'user' : request.user,
-            'cantidad' : eval(request.POST['pedir_cantidad'],)
-
         }
 
         #Intento crear el Pedido con un Medicamento existente.

@@ -183,7 +183,7 @@
                     <!--Slide derecho solicitar-->
                     <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
                         <div class="row center">
-                            <form id="form_donar" method="POST" action="/pedir" class="normal-font">
+                            <form id="form_pedir" method="POST" action="/pedir" class="normal-font">
                                 {% csrf_token %}
                                 <div class="input-field col s6 offset-s3">
                                     <input id="pedir_nombre" name="pedir_nombre" type="text" required
@@ -196,10 +196,6 @@
                                     <label for="pedir_gramos">Concentracion en Gramos</label>
                                 </div>
                                 <div class="extra_info">
-                                    <div class="input-field col s6 offset-s3">
-                                        <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
-                                               oninput="setCustomValidity('')">
-                                        <label for="pedir_droga">Droga</label></div>
                                     <div class="input-field col s6 offset-s3">
                                         <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
                                         <label for="pedir_laboratorio">Laboratorio</label></div>
@@ -214,10 +210,9 @@
                                     </div>
                                 </div>
                                 <div class="input-field col s6 offset-s3">
-
-                                    <input name="pedir_cantidad" id="pedir_cantidad" type="text" required
-                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
-                                    <label for="pedir_cantidad">Cantidad</label>
+                                    <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
+                                           oninput="setCustomValidity('')">
+                                    <label for="pedir_droga">Droga</label>
                                 </div>
                                 <div class="col s12 center">
                                     <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
@@ -231,7 +226,7 @@
 
         <!-- Modal Structure -->
         <div id="tfd" class="modal modal-fixed-footer">
-            <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
+            <form id="form_donar" method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
                 {% csrf_token %}
                 <div class="modal-content">
                     <div class="row">
@@ -274,15 +269,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="modal-btn ve white-text semibold" >ACEPTAR</button>
-                </div>
             </form>
-<!--
             <div class="modal-footer">
                 <button class="modal-btn gr semibold close" data-dismiss="modal">CANCELAR</button>
+                <button class="modal-btn ve white-text semibold" form="form_donar">ACEPTAR</button>
             </div>
--->
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

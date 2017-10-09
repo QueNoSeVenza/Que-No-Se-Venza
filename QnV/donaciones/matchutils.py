@@ -17,9 +17,6 @@ def getMatches(entity):
 		quantities = [medicamento.cantidad for medicamento in match_list]
 		print(not_dull_medicines,match_list,quantities)
 
-		if sum(quantities) < entity.cantidad:
-			match_list = {}
-
 		print(match_list)
 		return match_list
 
