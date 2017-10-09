@@ -15,40 +15,39 @@
                 <th class="center-align">Tipo</th>
                 <th class="center-align">Vencimiento</th>
                 <th class="center-align">Prescripcion medica</th>
-                <th class="center-align">Función terapeutica</th>
             </tr>
 
             <tr>
-                <td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
-                <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.medicamento.tipo}}</td>
+                <td id="v_nom" class="entrada-th center-align v_entrada aaa"><input name="nombre" value="{{donacion.medicamento.nombre}}" readonly="true"></td>
+                <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
                 <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
-                <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.medicamento.prescripcion}}</td>
-                <td id="v_ter" class="entrada-th center-align">{{donacion.medicamento.funcion}}</td>
-
+                <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
             </tr>
         </table>
+        <div class="col s12 center-align">
+            <input class="indigo" type="submit" value="Guardar"><br>
+        </div>
     </form>
-</div>
-<div class="col s12 center-align">
-    <input class="indigo" type="submit" value="Guardar"><br>
-    <button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
+    <div class="col s12 center-align">
+        <button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
+    </div>
 </div>
 
 <!--<div class="row">
-    <input type="hidden" name="donation_id" value="{{donacion.id}}" />
-    <label for="id_prescripcion"></label><select id="id_prescripcion" name="prescripcion">
+<input type="hidden" name="donation_id" value="{{donacion.id}}" />
+<label for="id_prescripcion"></label><select id="id_prescripcion" name="prescripcion">
 <option value="True">Si</option>
 <option value="False">No</option>
 </select>
-    <br> Especificar la función terapeutica: <br>
-    <label for="id_funcion"></label><select id="id_funcion" name="funcion">
- {% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
+<br> Especificar la función terapeutica: <br>
+<label for="id_funcion"></label><select id="id_funcion" name="funcion">
+{% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
 <option value="{{option.0}}">{{option.0}}</option>
 {% endfor %}
 
 
 </select></div>
-    <br>-->
+<br>-->
 
 <script>
     var editable = false;
@@ -56,9 +55,8 @@
 
     function make_editable() {
         /*Codigo h o r r i b l e*/
-        document.getElementById('v_nom').contentEditable = "true";
+        document.getElementById('v_nom').readOnly = false;
         document.getElementById('v_ven').contentEditable = "true";
-        document.getElementById('v_ter').contentEditable = "true";
         document.getElementById('edit_btn').style.visibility = "hidden";
         var ths = document.getElementsByClassName('entrada-th');
         for (i = 0; i < ths.length; i++) {
@@ -80,10 +78,10 @@
                 case 'Gotas':
                     document.getElementById('v_tip').innerText = "Pastillas";
                     break;
-            }
+                      }
         }
     }
-    
+
     function txt_pre() {
         if (editable) {
             var pre = document.getElementById('txt_pre').innerText;
