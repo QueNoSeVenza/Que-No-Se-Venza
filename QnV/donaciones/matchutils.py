@@ -24,8 +24,10 @@ def getMatches(entity):
 		return match_list
 	
 	elif entity.__class__.__name__ == "MedicamentoDonado":
-
+		
+		print("MATCHMD")
 		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
+		print("<>",match_list)
 		return match_list
 
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de 
@@ -87,10 +89,9 @@ def getDullMedicines():
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
-def sendMatchEmail(match):
+def sendMatchEmail(petition):
 
-	body = "Le informamos que se encuentran disponibles las "+str(petition.cantidad)+" undidades de "+petition.medicamento.nombre+" qué solicito en su peticion N°"+str(petition.id)
-
+	body = "Quizás tengamos el medicamento que estabas buscando, entra en el siguiente enlace para revisar 127.0.0.1:800/matchs/",petition.id
 	email = EmailMessage('Ya puede buscar su '+petition.medicamento.nombre, body, to=[petition.user.email])
 	email.send()
 	

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .models import *
 from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
+from donaciones.matchutils import *
 
 def menu (request):
 	string = ""
@@ -71,7 +72,11 @@ def entrada(request):
 			donacion.stock = "Disponible"
 			donacion.save()
 			donacion.medicamento.save()
-
+			for pedido in getMatches(donacion):
+				print(pedido)
+				if pedido.estado == 'Activo':
+					sendMatchEmail(pedido)
+					print('email enviado')
 			
  			#Cambiar /entrada/input por un template que comunique el exito de la operación
 			print("Donación registrada con exito")
@@ -103,10 +108,13 @@ def salida(request):
 		d_id = request.POST['donation_id']
 		print(len(request.POST.getlist('checks')))
 		donacion = MedicamentoDonado.objects.get(id = d_id)
+		pedido = Match.objects.get(donacion=donacion).pedido
 		if donacion.medicamento.prescripcion == True:
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
 				donacion.verificador_salida = request.user
+				pedido.estado = "Entregado"
+				pedido.save()
 				donacion.save()
 
 				return HttpResponseRedirect("/verificacion/")
