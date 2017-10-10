@@ -7,25 +7,29 @@
     <div class="col s12 center-align">
         <h3>Verificar si los siguientes datos coinciden con los de medicamento presentado</h3><br>
     </div>
+    <table class="col s10 offset-s1">
+        <tr id="header">
+            <th class="center-align">Nombre</th>
+            <th class="center-align">Tipo</th>
+            <th class="center-align">Vencimiento</th>
+            <th class="center-align">Prescripcion medica</th>
+        </tr>
+
+        <tr>
+            <td id="v_nom" class="entrada-th center-align v_entrada aaa"><input name="nombre" value="{{donacion.medicamento.nombre}}" readonly="true"></td>
+            <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
+            <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
+            <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
+        </tr>
+    </table>
     <form action="/verificacion/entrada/" method="POST">
         {% csrf_token %}
-        <table class="col s10 offset-s1">
-            <tr id="header">
-                <th class="center-align">Nombre</th>
-                <th class="center-align">Tipo</th>
-                <th class="center-align">Vencimiento</th>
-                <th class="center-align">Prescripcion medica</th>
-            </tr>
-
-            <tr>
-                <td id="v_nom" class="entrada-th center-align v_entrada aaa"><input name="nombre" value="{{donacion.medicamento.nombre}}" readonly="true"></td>
-                <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
-                <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
-                <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
-            </tr>
-        </table>
+        <input type="hidden" value="" id="name">
+        <input type="hidden" value="" id="type">
+        <input type="hidden" value="" id="date">
+        <input type="hidden" value="" id="prescripcion">
         <div class="col s12 center-align">
-            <input class="indigo" type="submit" value="Guardar"><br>
+            <input id="btn_entrada" class="indigo" type="submit" value="Guardar"><br>
         </div>
     </form>
     <div class="col s12 center-align">
