@@ -58,7 +58,6 @@ def reg(request):
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
         terms = request.POST.get('terms', False)
-        print terms
         if u is not None:
             if terms == "on":
                 if u.exists():

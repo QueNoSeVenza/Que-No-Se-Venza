@@ -68,11 +68,10 @@ def donar(request):
         cantidad = medicamento_donado_kwargs['cantidad']
 
         if gramos <= "0" or cantidad <= "0":
-            print "se fue por gramos o cantidad"
+
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
-            print "se fue por fecha"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         nuevo_medicamento_donado= ""
