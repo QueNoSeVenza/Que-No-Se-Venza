@@ -103,16 +103,9 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-
-
-        for pedido in getMatches(nuevo_medicamento_donado):
-            if len(getMatches(pedido)) != 0:
-                executeMatch(pedido)
-                sendMatchEmail(pedido)
-                print("Envio mail")
-                
+              
         id_med_donado = str(nuevo_medicamento_donado.id)
-        return redirect('/principal')
+        return redirect('/code/'+id_med_donado)
     else:
         return redirect('/principal')
 
@@ -186,9 +179,12 @@ def matchs(request,pid):
         match.save()
         donacion.stock = "Reservado"
         donacion.save()
-        return redirect('/thanks2')
+        return redirect('/code/'+donacion.codigo())
 
     else:
 
         matchs = getMatches(Pedido.objects.get(pk = pid))
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
+def code(request,id):
+    d_id = id
+    return render(request,'code.html',{'id' : d_id})

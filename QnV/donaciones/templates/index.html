@@ -87,66 +87,67 @@
                 <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
                     <h4 style="margin-left:39%;">Donando Una Caja</h4>
                     <div class="row center white-text">
-                        <!--                        <form class="normal-font">-->
-                        <div class="input-field col s6 m4 offset-m2 roboto">
-                            <input class="isInput" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_nombre">Nombre Comercial</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input class="isInput" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-gramos">Concentracion en Gramos</label>
-                        </div>
-                        <div class="input-field col s6 m4 offset-m2">
-                            <input class="isInput" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
-                            <label for="n-cantidad">Cantidad por Caja</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <input class="isInput" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_laboratorio">Laboratorio</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <input class="isInput" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-                            <label for="donar_droga">Droga</label>
-                        </div>
-                        <div class="input-field col s4 offset-s2">
-                            <select id="anios" required>
-                                <option value="" disabled selected>Elije un Año</option>
-                            </select>
-                            <label for="anios">Año</label>
-                        </div>
-                        <div class="input-field col s6 m4">
-                            <select id="meses" required>
-                                <option value="" disabled selected>Elije una Mes</option>
-                                <option class="meses" value="1">Enero</option>
-                                <option class="meses" value="2">Febrero</option>
-                                <option class="meses" value="3">Marzo</option>
-                                <option class="meses" value="4">Abril</option>
-                                <option class="meses" value="5">Mayo</option>
-                                <option class="meses" value="6">Junio</option>
-                                <option class="meses" value="7">Julio</option>
-                                <option class="meses" value="8">Agosto</option>
-                                <option class="meses" value="9">Septiembre</option>
-                                <option class="meses" value="10">Octubre</option>
-                                <option class="meses" value="11">Noviembre</option>
-                                <option class="meses" value="12">Diciembre</option>
-                            </select>
-                            <label for="meses">Mes</label>
-                        </div>
-                        <div class="input-field col s12 m8 offset-m2">
-                            <select tabindex="-1" id="tipo">
-                                <option value="" disabled selected>Elije una Opción</option>
-                                <option value="Pastillas">Pastillas</option>
-                                <option value="Jarabe">Jarabe</option>
-                                <option value="Gotas">Gotas</option>
-                            </select>
-                            <label for="tipo">Tipo</label>
-                        </div>
-                        <!-- Modal Trigger -->
-                        <a id="ahref" hidden href="#tfd"></a>
-                        <div class="col s12 center">
-                            <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
-                        </div>
-                        <!--                        </form>-->
+                        <form method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
+                            {% csrf_token %}
+                            <div class="input-field col s6 m4 offset-m2 roboto">
+                                <input name="donar_nombre" id="donar_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_nombre">Nombre Comercial</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input class="isRed" name="donar_concentracion_gramos" id="n-gramos" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-gramos">Concentracion en Gramos</label>
+                            </div>
+                            <div class="input-field col s6 m4 offset-m2">
+                                <input class="isRed" name="donar_cantidad" id="n-cantidad" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+                                <label for="n-cantidad">Cantidad por Caja</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <input name="donar_laboratorio" id="donar_laboratorio" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_laboratorio">Laboratorio</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <input name="donar_droga" id="donar_droga" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <label for="donar_droga">Droga</label>
+                            </div>
+                            <div class="input-field col s4 offset-s2">
+                                <select name="anio" id="anios" required>
+                                    <option value="" disabled selected>Elije un Año</option>
+                                </select>
+                                <label for="anios">Año</label>
+                            </div>
+                            <div class="input-field col s6 m4">
+                                <select name="mes" id="meses" required>
+                                    <option value="" disabled selected>Elije una Mes</option>
+                                    <option class="meses" value="1">Enero</option>
+                                    <option class="meses" value="2">Febrero</option>
+                                    <option class="meses" value="3">Marzo</option>
+                                    <option class="meses" value="4">Abril</option>
+                                    <option class="meses" value="5">Mayo</option>
+                                    <option class="meses" value="6">Junio</option>
+                                    <option class="meses" value="7">Julio</option>
+                                    <option class="meses" value="8">Agosto</option>
+                                    <option class="meses" value="9">Septiembre</option>
+                                    <option class="meses" value="10">Octubre</option>
+                                    <option class="meses" value="11">Noviembre</option>
+                                    <option class="meses" value="12">Diciembre</option>
+                                </select>
+                                <label for="meses">Mes</label>
+                            </div>
+                            <div class="input-field col s12 m8 offset-m2">
+                                <select name="donar_tipo" tabindex="-1" id="tipo">
+                                    <option value="" disabled selected>Elije una Opción</option>
+                                    <option value="Pastillas">Pastillas</option>
+                                    <option value="Jarabe">Jarabe</option>
+                                    <option value="Gotas">Gotas</option>
+                                </select>
+                                <label for="tipo">Tipo</label>
+                            </div>
+                            <!-- Modal Trigger -->
+                            <a class="waves-effect waves-light btn modal-trigger" href="#tfd">Modal</a>
+                            <div class="col s12 center">
+                                <button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!--Slide del medio-->
@@ -183,7 +184,7 @@
                     <!--Slide derecho solicitar-->
                     <div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
                         <div class="row center">
-                            <form id="form_pedir" method="POST" action="/pedir" class="normal-font">
+                            <form id="form_donar" method="POST" action="/pedir" class="normal-font">
                                 {% csrf_token %}
                                 <div class="input-field col s6 offset-s3">
                                     <input id="pedir_nombre" name="pedir_nombre" type="text" required
@@ -196,6 +197,10 @@
                                     <label for="pedir_gramos">Concentracion en Gramos</label>
                                 </div>
                                 <div class="extra_info">
+                                    <div class="input-field col s6 offset-s3">
+                                        <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
+                                               oninput="setCustomValidity('')">
+                                        <label for="pedir_droga">Droga</label></div>
                                     <div class="input-field col s6 offset-s3">
                                         <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
                                         <label for="pedir_laboratorio">Laboratorio</label></div>
@@ -210,9 +215,10 @@
                                     </div>
                                 </div>
                                 <div class="input-field col s6 offset-s3">
-                                    <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')"
-                                           oninput="setCustomValidity('')">
-                                    <label for="pedir_droga">Droga</label>
+
+                                    <input name="pedir_cantidad" id="pedir_cantidad" type="text" required
+                                           oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                    <label for="pedir_cantidad">Cantidad</label>
                                 </div>
                                 <div class="col s12 center">
                                     <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
@@ -226,53 +232,46 @@
 
         <!-- Modal Structure -->
         <div id="tfd" class="modal modal-fixed-footer">
-            <form id="form_donar" method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
-                {% csrf_token %}
-                <div class="modal-content">
-                    <div class="row">
-                        <div class="col s12 center">
-                            <h4>Confirmar datos</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input name="donar_nombre" value="value" id="n_1" type="text" class="validate" readonly="readonly">
-                            <label for="n_1">Nombre Comercial</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input name="donar_concentracion_gramos" value="value" id="c_1" type="text" class="validate" readonly="readonly">
-                            <label for="c_1">Concentracion(gr)</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input name="donar_cantidad" value="value" id="ca_2" type="text" class="validate" readonly="readonly">
-                            <label for="ca_2">Cantidad</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input name="donar_droga" value="value" id="d_1" type="text" class="validate" readonly="readonly">
-                            <label for="d_1">Droga</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input name="anio" value="value" id="f_1" type="text" class="validate" readonly="readonly">
-                            <label for="f_1">Año</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input name="mes" value="value" id="f_2" type="text" class="validate" readonly="readonly">
-                            <label for="f_2">Mes</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input name="donar_laboratorio" value="value" id="l_1" type="text" class="validate" readonly="readonly">
-                            <label for="l_1">Laboratorio</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input name="donar_tipo" value="value" id="t_1" type="text" class="validate" readonly="readonly">
-                            <label for="t_1">Tipo</label>
-                        </div>
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>Confirmar datos</h4>
                     </div>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Nombre Comercial</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Concentracion(gr)</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Droga</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Cantidad</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Laboratorio</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Fecha</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input disabled value="Value" id="disabled" type="text" class="validate">
+                        <label for="disabled">Tipo</label>
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
-                <button class="modal-btn gr semibold close" data-dismiss="modal">CANCELAR</button>
-                <button class="modal-btn ve white-text semibold" form="form_donar">ACEPTAR</button>
+                <div class="modal-btn gr semibold">CANCELAR</div>
+                <div class="modal-btn ve white-text semibold" >ACEPTAR</div>
             </div>
         </div>
 

@@ -2,8 +2,11 @@
 #Usando caracteres no ASCII
 from django.shortcuts import render
 from .models import *
+import datetime
+from datetime import date
 from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
+from donaciones.matchutils import *
 
 def menu (request):
 	string = ""
@@ -55,13 +58,31 @@ def entrada(request):
 
 	if request.method == "POST":
 		
-		nombre = request.POST['nombre']
-		vencimiento = request.POST['fechaven']
+		nombre = request.POST['nome']
+		vencimiento = request.POST['date']
 		prescripcion  = request.POST['prescripcion']
-		tipo = request.POST['tipo_verifacion']
-
+		tipo = request.POST['type']
+		
+		if vencimiento[:3] == "Sep":
+			nuevo = vencimiento[:3]+vencimiento[4:]
+		else :
+			nuevo = vencimiento
+		
+		try:
+			fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
+		except:
+			try: 
+				fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
+			except:
+				try:
+					fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
+				except:
+					fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+			
+		
+			
 		med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
-		med_donado.fecha_vencimiento = vencimiento
+		med_donado.fecha_vencimiento = fecha
 		med_donado.medicamento.nombre = nombre
 		med_donado.tipo = tipo
 		med_donado.prescripcion = prescripcion
@@ -72,10 +93,13 @@ def entrada(request):
 
 
 		#Cambiar /entrada/input por un template que comunique el exito de la operación
+
 		print("Donación registrada con exito")
+		if len(getMatches(med_donado)) != 0:
+			for peticion in getMatches(med_donado):
+				sendMatchEmail(peticion)
 		return HttpResponseRedirect("/verificacion/")
-
-
+			
 	else:
 		print(Donacion.objects.all().values('id'))
 
@@ -93,19 +117,11 @@ def entrada(request):
 def salida(request):
 
 	if request.method == "POST":
-		d_id = request.POST['donation_id']
-		print(len(request.POST.getlist('checks')))
-		donacion = MedicamentoDonado.objects.get(id = d_id)
-		code = request.POST['salida']
-		obj_med_donado = MedicamentoDonado.objects.all()
-		for i in obj_med_donado:
+#		code = request.POST['donation_id']
+#		donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
+		donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
 
-			if str(i.codigo()) == str(code):
-
-				donacion = i
-
-		#donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
-		if donacion.medicamento.prescripcion == True:
+		if donacion.prescripcion == True:
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
 				donacion.verificador_salida = request.user
@@ -118,27 +134,20 @@ def salida(request):
 				print("No se han verificado todos los campos, la operación ha sido cancelada")
 				return HttpResponseRedirect("/verificacion/input/entrada")
 		else:
-				donacion.stock = 'Entregado'
-				donacion.verificador_salida = request.user
-				donacion.save()
-				return HttpResponseRedirect("/verificacion/")
-
+			donacion.stock = 'Entregado'
+			donacion.verificador_salida = request.user
+			donacion.save()
+			return HttpResponseRedirect("/verificacion/")
 	else:
-		code = request.POST.get('salida', False)
-		obj_med_donado = MedicamentoDonado.objects.all()
+		code = request.GET['salida']
+		donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
 
-		for i in obj_med_donado:
-			if i.codigo() == code:
-
-				donacion = i
-
-
-
-		#donacion = MedicamentoDonado.objects.get(pk = d_id )
-
-		if donacion.stock == "Reservado":
-			return render(request,'salida.html',{'donation_id' : d_id,'donacion' : donacion})
+		if donacion[0].stock == "Reservado":
+			return render(request,'salida.html',{'donation_id' : donacion[0].id,'donacion' : donacion[0]})
 		else:
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
-			print("Esta donación ya se encuentra en stock")
+			print("Este codigo no existe")
 			return HttpResponseRedirect("/verificacion/input/entrada")
+
+
+
