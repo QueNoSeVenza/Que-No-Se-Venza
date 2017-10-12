@@ -32,6 +32,11 @@ def thanks2(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
+def thanks(request, id_med):
+    template = loader.get_template('thanks.html')
+    medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
+    context = {'medDona': medicamentoDonado}
+    return HttpResponse(template.render(context, request))
 
 
 
@@ -111,8 +116,8 @@ def donar(request):
 #                sendMatchEmail(pedido)
 #                print("Envio mail")
                 
-        id_med_donado = str(nuevo_medicamento_donado.id)
-        return redirect('/principal')
+        id_med = str(nuevo_medicamento_donado.id)
+        return redirect('/thanks/'+id_med)
     else:
         return redirect('/principal')
 
