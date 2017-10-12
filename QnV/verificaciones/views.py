@@ -8,15 +8,15 @@ from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
 from donaciones.matchutils import *
 
-def menu (request):
-	string = ""
-
-	if request.user.groups.filter(name='Verificadores').exists():
-		string = "Verificador! ;)"
-		return render(request,'menu.html',{'string' : string})
-	else:
-
-		return HttpResponseForbidden()
+#def menu (request):
+#	string = ""
+#
+#	if request.user.groups.filter(name='Verificadores').exists():
+#		string = "Verificador! ;)"
+#		return render(request,'menu.html',{'string' : string})
+#	else:
+#
+#		return HttpResponseForbidden()
 
 
 def stock (request):
@@ -54,60 +54,59 @@ def input_view (request,case):
 
 
 def entrada(request):
-    if request.method == "POST":
-        
-        nombre = request.POST['nome']
-        vencimiento = request.POST['date']
-        prescripcion  = request.POST['prescripcion']
-        tipo = request.POST['type']
-        
-        if vencimiento[:3] == "Sep":
-            nuevo = vencimiento[:3]+vencimiento[4:]
-        else :
-            nuevo = vencimiento
-        
-        try:
-            fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
-        except:
-            try: 
-                fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
-            except:
-                try:
-                    fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
-                except:
-                    fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
-            
-        
-            
-        med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
-        med_donado.fecha_vencimiento = fecha
-        med_donado.medicamento.nombre = nombre
-        med_donado.tipo = tipo
-        med_donado.prescripcion = prescripcion
-        med_donado.verificador_ingreso = request.user
-        med_donado.stock = "Disponible"
-        med_donado.save()
-        med_donado.medicamento.save()
+	if request.method == "POST":
+
+		nombre = request.POST['nome']
+		vencimiento = request.POST['date']
+		prescripcion  = request.POST['prescripcion']
+		tipo = request.POST['type']
+
+		if vencimiento[:3] == "Sep":
+			nuevo = vencimiento[:3]+vencimiento[4:]
+		else :
+			nuevo = vencimiento
+
+		try:
+			fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
+		except:
+			try: 
+				fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
+			except:
+				try:
+					fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
+				except:
+					fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
 
 
-        #Cambiar /entrada/input por un template que comunique el exito de la operación
-        print("Donación registrada con exito")
-        return HttpResponseRedirect("/verificacion/")
+		med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
+		med_donado.fecha_vencimiento = fecha
+		med_donado.medicamento.nombre = nombre
+		med_donado.tipo = tipo
+		med_donado.prescripcion = prescripcion
+		med_donado.verificador_ingreso = request.user
+		med_donado.stock = "Disponible"
+		med_donado.save()
+		med_donado.medicamento.save()
 
 
-    else:
-        print(Donacion.objects.all().values('id'))
-
-        medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
-        print(medicamento_donado.stock)
+		#Cambiar /entrada/input por un template que comunique el exito de la operación
+		print("Donación registrada con exito")
+		return HttpResponseRedirect("/verificacion/")
 
 
-        if medicamento_donado.stock == 'En Espera':
-            return render(request,'entrada.html',{'donacion' : medicamento_donado})
-        else:
-            #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
-            print("Esta donación ya se encuentra en stock")
-            return HttpResponseRedirect("/verificacion/input/entrada")
+	else:
+		print(Donacion.objects.all().values('id'))
+
+		medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
+		print(medicamento_donado.stock)
+
+
+		if medicamento_donado.stock == 'En Espera':
+			return render(request,'entrada.html',{'donacion' : medicamento_donado})
+		else:
+			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
+			print("Esta donación ya se encuentra en stock")
+			return HttpResponseRedirect("/verificacion/input/entrada")
 
 def salida(request):
 
