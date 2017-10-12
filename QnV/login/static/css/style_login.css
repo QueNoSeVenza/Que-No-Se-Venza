@@ -1,106 +1,177 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
+@font-face {
+    font-family: Avenir;
+    src: url(fonts/AvenirLTStd-Medium.otf);
+}
+
+@font-face {
+    font-family: Avenir-Heavy;
+    src: url(fonts/AvenirLTStd-Heavy.ttf);
+}
+
+@font-face {
+    font-family: Avenir-Light;
+    src: url(fonts/AvenirLTStd-Light.otf);
+}
+
 html,
 body {
-	font-family: 'Montserrat', sans-serif;
-	background-color: #e8eaf6;
-	height: 100%;
+    font-family: Avenir;
+    background-color: #e8eaf6;
+    height: 100%;
 }
-.monts {
-	font-weight: 500 !important;
+
+.font-light {
+    font-family: Avenir-Light;
 }
+
+.font-heavy {
+    font-family: Avenir-Heavy;
+}
+
 .login-card {
-	min-height: 40px;
-	height: 420px;
-	width: 300px;
-	background-color: #FFF;
-	margin: 0 auto 10px;
-	border-radius: 13px;
-	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05), 0 5px 5px 0 rgba(0, 0, 0, 0.005);
+    min-height: 40px;
+    height: 440px;
+    width: 300px;
+    background-color: #FFF;
+    margin: 0 auto 10px;
+    border-radius: 13px;
+    transition: box-shadow .5s linear;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05), 0 5px 5px 0 rgba(0, 0, 0, 0.005);
 }
+
+.new-shadow {
+    box-shadow: 0px 0px 23px -2px rgba(246,96,85,0.85);
+}
+
+.register-content {
+    opacity: 0;
+}
+
+.ch-box {
+    margin-left: -50px;
+}
+
 h5 {
-	margin: 3rem 0 1rem 0;
+    margin: 3rem 0 0rem 0;
 }
+
 .datSpace {
-	margin-top: 20px;
+    margin-top: 20px;
 }
+
+.datSpace:hover {
+    background-color: #f66055;
+}
+
+.font-heavy {
+    font-family: Avenir-Heavy;
+}
+
 .myImg {
-	margin-top: 5%;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	width: 48px;
-	height: 48px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 48px;
+    height: 48px;
 }
+
 .logBtn {
-	font-weight: 500;
-	font-size: 0.7em;
-	border-radius: 40px;
-	height: 35px;
-	width: 50%;
-	margin-left: 25%;
-	margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 0.8em;
+    padding-top: 1px;
+    border-radius: 40px;
+    height: 35px;
+    background-color: #ff6e66;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 10px;
 }
+
+.logBtn:focus {
+    background-color: #ff6e66;
+}
+
 .reg {
-	color: #808080;
+    color: #808080;
 }
+
+.psw-label {
+    margin-top: 15px;
+}
+
 .datArrow {
-	cursor: pointer;
-	position: absolute;
-	font-size: 20px;
-	margin-top: -6px;
-	margin-left: -20px;
+    cursor: pointer;
+    position: absolute;
+    font-size: 20px;
+    margin-top: -6px;
+    margin-left: -20px;
 }
+
 .nohover {
-	font-weight: 400;
-	margin-top: -15px;
-	padding-bottom: 40px;
-	background-color: transparent!important;
-	text-transform: none;
+    font-weight: 400;
+    margin-top: -15px;
+    padding-bottom: 40px;
+    background-color: transparent!important;
+    text-transform: none;
 }
+
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label {
-	color: #616161;
+    color: #616161;
 }
+
 .input-field input[type=text]:focus,
 .input-field input[type=password]:focus {
-	border-bottom: 1px solid #616161;
-	box-shadow: 0 1px 0 0 #616161;
+    border-bottom: 1px solid #616161;
+    box-shadow: 0 1px 0 0 #616161;
 }
+
 .comingBack {
-	cursor: pointer;
-	border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
 }
+
+.messages li {
+    top: 10p position: absolute;
+
+}
+
 .field:valid + .floating-label {
-	opacity: 1;
-	top: -5px;
-	color: #9e9e9e;
+    opacity: 1;
+    top: -5px;
+    color: #9e9e9e;
 }
+
 .field:focus + .floating-label {
-	color: #7986cb;
+    color: #7986cb;
 }
+
 @media (max-width: 600px) {
-	.login-card {
-		border-radius: 0px;
-		margin-top: 0px !important;
-		height: 100%;
-	}
-	.login-content {
-		margin-top: 15%;
-	}
-	
-	.wrapper, .row{
-		margin-bottom: 0px;
-	}
+    .login-card {
+        border-radius: 0px;
+        margin-top: 0px !important;
+        height: 100%;
+    }
+    .login-content {
+        margin-top: 15%;
+    }
+
+    .wrapper,
+    .row {
+        margin-bottom: 0px;
+    }
 }
+
 @media (min-width: 601px) {
-	.main {
-		height: 100%;
-		width: 100%;
-		display: table;
-	}
-	.wrapper {
-		display: table-cell;
-		height: 100%;
-		vertical-align: middle;
-	}
+    .main {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+    .wrapper {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
 }

@@ -1,14 +1,25 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600");
+@font-face {
+  font-family: Avenir-Normal;
+  src: url(fonts/AvenirLTStd-Medium.otf); }
+@font-face {
+  font-family: Avenir-Light;
+  src: url(fonts/AvenirLTStd-Light.otf); }
+@font-face {
+  font-family: Avenir-Heavy;
+  src: url(fonts/AvenirLTStd-Heavy.ttf); }
 html,
 body {
   height: 100%;
-  font-family: 'Source Sans Pro', sans-serif !important; }
+  font-family: Avenir-Light; }
 
 .semibold {
-  font-weight: 600; }
+  font-family: Avenir-Heavy !important; }
+
+.normal-font {
+  font-family: Avenir-Normal; }
 
 p {
-  font-size: 1.1em; }
+  font-size: 1.1rem; }
 
 .button-collapse {
   z-index: 999;
@@ -19,14 +30,6 @@ p {
 nav {
   position: fixed;
   z-index: 500; }
-  nav .icon {
-    margin-top: 25%;
-    width: 42px;
-    height: 42px;
-    background-image: url(../css/img/logo.svg); }
-  nav .userText {
-    transition: .3s linear;
-    color: #616161; }
 
 .side-nav {
   width: 100% !important;
@@ -36,6 +39,9 @@ nav {
   opacity: 0.98; }
   .side-nav .row {
     margin-bottom: 0; }
+
+.collapsible {
+  display: block !important; }
 
 .collapsible-container1 {
   height: 100%;
@@ -103,12 +109,15 @@ nav {
   vertical-align: middle; }
 
 #slide2 h3 {
-  margin-top: 0px; }
+  margin-top: 100px; }
   @media (max-width: 600px) {
     #slide2 h3 {
-      margin-top: 40px; } }
+      margin-top: 60px; } }
 #slide2 .btnsection {
   padding: 3em 0 0 0; }
+  @media (max-width: 600px) {
+    #slide2 .btnsection {
+      padding-bottom: 20px; } }
 #slide2 .optbutton {
   margin-left: 3% !important;
   margin-right: 3% !important;
@@ -193,5 +202,91 @@ nav {
 div.section.fp-section.active.fp-completely {
   padding-top: 0px !important;
   padding-bottom: 0px !important; }
+
+/*---------- Wrapper --------------------*/
+.my-wrapper {
+  line-height: 20px !important; }
+  .my-wrapper li {
+    float: none; }
+  .my-wrapper li.drop {
+    position: relative;
+    margin-right: 25px; }
+  .my-wrapper li a {
+    cursor: default;
+    line-height: 80px;
+    padding: 0 20px; }
+
+ul li:hover .dropdownContain {
+  top: 65px; }
+
+ul li:hover .dropOut {
+  opacity: 1;
+  margin-top: 8px; }
+
+.dropOut .triangle {
+  position: absolute;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  top: -8px;
+  left: 50%;
+  margin-left: -8px; }
+
+.dropdownContain {
+  cursor: pointer;
+  width: 160px;
+  position: absolute;
+  left: 50%;
+  margin-left: -80px;
+  /* half of width */
+  top: -400px; }
+
+.dropOut {
+  width: 160px;
+  background: white;
+  float: left;
+  position: relative;
+  margin-top: 0px;
+  opacity: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  transition: all .1s ease-out; }
+
+.dropOut ul li {
+  text-align: center;
+  padding: 12px 0 10px 0px;
+  color: #777; }
+
+.id-show {
+  margin-left: 10px;
+  padding: 10 10 10 10;
+  border-radius: 3px; }
+
+.thx-center {
+  text-align: center !important; }
+  .thx-center.lab {
+    left: 0 !important;
+    right: 0 !important; }
+
+.thx-right {
+  text-align: right !important; }
+  .thx-right.lab {
+    left: none !important;
+    right: 2% !important; }
+
+.don-dat {
+  padding-top: .8%;
+  padding-bottom: 1%; }
+
+.thx-body {
+  background-color: #f9f9f9; }
+
+.thx-float {
+  background-color: #fdfdfd;
+  border-radius: 10px; }
+
+.thx-icon {
+  margin-top: 1%;
+  cursor: pointer; }
 
 /*# sourceMappingURL=style_donar.css.map */

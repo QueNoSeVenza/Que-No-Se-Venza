@@ -1,59 +1,56 @@
 {% load static %} {% load staticfiles %}
 
 <html>
+
 <head>
 	<!-- Global -->
 	<title>QNV</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
-
-	<!-- Fuente -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8" />
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style_pres.css' %}">
 	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-	<link rel="stylesheet" href="{% static 'blockreveal/css/revealer.css' %}">
 </head>
+
 <body>
 
 	<!-- Nav -->
-	<nav>
-		<div class="col s12">
-			<ul class="center">
-				<div class="center">
-					<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
-				</div>
-				<li><a>QUE SOMOS</a></li>
-				<li><a>DONDE DONAR</a></li>
-				<li class="left-nav"><a>COMO DONAR</a></li>
-				<li class="left-nav"><a>CONTACTO</a></li>
-			</ul>
-		</div>
-	</nav>
 
-	<section id="section1" class="cd-section">
-		<div class="row">
-			<div class="col s12 panelbig fadeonscroll-title">
-				<div class="titleblock">
-					<h2 class="content__title content__title--center hide-on-mobile">
-					<div id="rev-1" class="content__title__inner">Proyecto</div><br/>
-					<div id="rev-2" class="content__title__inner content__title__inner--offset-1">Que no venza</div>
-				</h2>
+	<section id="section1" class="cd-section fadeonscroll-title">
+		<nav>
+			<div class="col s12">
+				<ul class="center">
 					<div class="center">
-						<a onclick="window.location.href = '/login'">INGRESAR</a>
+						<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
 					</div>
-					<div id="clipped-title1">
-						<h1 class="tinier-font hide-on-large">QUE NO <span>VENZA</span></h1>
-					</div>
+					<li><a href="#section6">CONTACTO</a></li>
+					<li><a href="#section4">COMO DONAR</a></li>
+					<li class="left-nav"><a href="#section2">QUE SOMOS</a></li>
+					<li class="left-nav"><a href="#section3">DONDE DONAR</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="qnv-title center fadeonscroll-title">
+				<h2>QUE</h2>
+				<h1>NO VENZA</h1>
+			</div>
+			<div class="title-pnl">
+				<div onclick="window.location.href = '/login'" class="col s10 offset-s1 m4 offset-m4 l2 offset-l5 center ing-btn">
+					<p>INGRESAR</p>
+				</div>
+				<div class="col s12 position-arrow hide-on-mobile">
+					<div class="scroll-down"></div>
 				</div>
 			</div>
 		</div>
 	</section>
+
 	<!-- Section -->
 	<section id="section2" class="cd-section">
 		<div class="row">
-			<div class="col s12 panelintro">
+			<div class="col s12 intro-pnl">
 				<div class="col s12 m10 offset-m1 fadeonscroll">
 					<h2 class="center">¿Qué es que no venza?</h2>
 					<div class="col s12 m8 offset-m2 center">
@@ -67,7 +64,7 @@
 	<!-- Section -->
 	<section id="section3" class="cd-section">
 		<div class="row">
-			<div class="col s12 paneldonde center">
+			<div class="col s12 where-pnl center">
 				<h2 class="fadeonscroll wtitle">Puntos de depósito</h2>
 				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
 					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Enrique Bochini</span></div>
@@ -82,14 +79,13 @@
 	<!-- Section -->
 	<section id="section4" class="cd-section">
 		<div class="row">
-			<div class="col s12 panelcomo center">
+			<div class="col s12 how-pnl center">
 				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
-
 				<!-- Primer paso -->
 				<table>
 					<tr>
 						<td>
-							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 1"/>
+							<div class="hide-on-mobile frame  fadeonscroll-left"><img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 1" />
 							</div>
 						</td>
 						<td>
@@ -100,7 +96,6 @@
 						</td>
 					</tr>
 				</table>
-
 				<!-- Segundo paso -->
 				<table>
 					<tr>
@@ -112,18 +107,17 @@
 						</td>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-right">
-								<img src="{% static 'css/img/step2.png' %}" height=300 alt="Paso 3"/>
+								<img src="{% static 'css/img/step2.png' %}" height=300 alt="Paso 3" />
 							</div>
 						</td>
 					</tr>
 				</table>
-
 				<!-- Tercer paso -->
 				<table>
 					<tr>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-left">
-								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3"/>
+								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3" />
 							</div>
 						</td>
 						<td>
@@ -141,7 +135,7 @@
 	<!-- Section -->
 	<section id="section5" class="cd-section">
 		<div class="row">
-			<div class="panelfinal">
+			<div class="final-pnl">
 				<div class="fadeonscroll">
 					<div class="col s12 center">
 						<h2 class="black-text center">Follow the code</h2>
@@ -157,14 +151,14 @@
 
 	<!-- Footer -->
 	<footer>
-		<div class="row fadeonscroll">
+		<div class="row fadeonscroll" id="section6">
 			<div class="col s12 l3 offset-l1">
 				<h4>Navegacion</h4>
 				<ul>
-					<li>Empezar</li>
-					<li>Qué somos</li>
-					<li>Dónde donar</li>
-					<li>Cómo donar</li>
+					<li><a href="#section1">Empezar</a></li>
+					<li><a href="#section2">Qué somos</a></li>
+					<li><a href="#section3">Dónde donar</a></li>
+					<li><a href="#section4">Cómo donar</a></li>
 				</ul>
 			</div>
 			<div class="col s12 l4">
@@ -195,41 +189,27 @@
 					<li id="comunicate" class="noupper">quenovenza@gmail.com</li>
 				</ul>
 			</div>
+
+			<div class="col s12 m6 offset-m3 center">
+				<div class="divider"></div><a id="mendiolaza_link" href="municipalidad-de-mendiolaza/" target="_blank">MUNICIPALIDAD EN MENDOZA</a></div>
 		</div>
+
 	</footer>
 
+	<!-- Javascripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="{% static 'blockreveal/js/main.js' %}"></script>
-	<script src="{% static 'blockreveal/js/anime.min.js' %}"></script>
 	<script src="{% static 'scroll-reveal/scrollreveal.min.js' %}">
 	</script>
 	<script src="{% static 'hover-image/jquery.plate.js' %}">
 	</script>
 	<script>
-		/*Block reveal*/
-		function init() {
-			var rev1 = new RevealFx(document.querySelector('#rev-1'), {
-				revealSettings: {
-					bgcolor: '#242424',
-					onCover: function(contentEl, revealerEl) {
-						contentEl.style.opacity = 1;
-					}
-				}
-			});
-			rev1.reveal();
-			var rev2 = new RevealFx(document.querySelector('#rev-2'), {
-				revealSettings: {
-					bgcolor: '#616161',
-					delay: 250,
-					onCover: function(contentEl, revealerEl) {
-						contentEl.style.opacity = 1;
-					}
-				}
-			});
-			rev2.reveal();
-		}
+		$('.titleblock').hide();
+
 		$(document).ready(function() {
-			setTimeout(init, 200);
+            $('.modal').modal();
+			$('.titleblock').show();
+			// Send to the top of page on refresh
+			// $(this).scrollTop(0);
 			// Image on hover
 			$('#plate-default').plate();
 			$('#plate-default-2').plate();
@@ -257,6 +237,25 @@
 				reset: true,
 				viewFactor: 0.7,
 				scale: 1,
+			});
+
+			/* Smooth anchor transitions on click */
+			$("a").on('click', function(event) {
+				// Make sure this.hash has a value before overriding default behavior
+				if (this.hash !== "") {
+					// Prevent default anchor click behavior
+					event.preventDefault();
+					// Store hash
+					var hash = this.hash;
+					/* Using jQuery's animate() method to add smooth page scroll
+					he optional number (800) specifies the number of milliseconds it takes to scroll to the specified area */
+					$('html, body').animate({
+						scrollTop: $(hash).offset().top
+					}, 1200, function() {
+						// Add hash (#) to URL when done scrolling (default click behavior)
+						window.hash = "";
+					});
+				}
 			});
 		});
 	</script>

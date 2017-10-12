@@ -5,7 +5,7 @@ from django.core import mail
 from django.core.mail import EmailMessage
 
 #Esta funcion devuelve una lista de MedicamentosDonados que comparten campo medicamento con el pedido
-#que se use como argumento solo si hay suficientes unidades para satisfacerlo. 
+#que se use como argumento solo si hay suficientes unidades para satisfacerlo.
 
 def getMatches(entity):
 	print("GETMATCHES>",entity.__class__.__name__)
@@ -17,12 +17,9 @@ def getMatches(entity):
 		quantities = [medicamento.cantidad for medicamento in match_list]
 		print(not_dull_medicines,match_list,quantities)
 
-		if sum(quantities) < entity.cantidad:
-			match_list = {}
-
 		print(match_list)
 		return match_list
-	
+
 	elif entity.__class__.__name__ == "MedicamentoDonado":
 		
 		print("MATCHMD")
@@ -30,7 +27,7 @@ def getMatches(entity):
 		print("<>",match_list)
 		return match_list
 
-#Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de 
+#Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
 #necesitar reservar parcialmente un MedicamentoDonado le sustrae la cantidad necesaria y
 #se crea otro MedicamentDonado con esa cantidad y el estado "Reservado".
 
@@ -40,8 +37,10 @@ def executeMatch(petition):
 
 	substaction_values = []
 	match_list = getMatches(petition)
+
 	match_obj = Match(pedido = petition)
 	match_obj.save()
+
 
 	for match in match_list:
 
@@ -49,7 +48,7 @@ def executeMatch(petition):
 		quantity -= petition.cantidad
 
 		if quantity > 0:
-			
+
 			print("#1 Block")
 
 			match.cantidad -= petition.cantidad
@@ -65,10 +64,10 @@ def executeMatch(petition):
 
 			return match_obj
 
-		else: 
+		else:
 
 			print("#2 Block")
-			
+
 			substaction_values.append((match,match.cantidad))
 			petition.cantidad = abs(quantity)
 			match.stock = "Reservado"
@@ -85,13 +84,11 @@ def executeMatch(petition):
 #Devuelve una lista de los medicamentos vencidos.
 
 def getDullMedicines():
-	
+
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
 def sendMatchEmail(petition):
-
 	body = "Quizás tengamos el medicamento que estabas buscando, entra en el siguiente enlace para revisar 127.0.0.1:800/matchs/",petition.id
 	email = EmailMessage('Ya puede buscar su '+petition.medicamento.nombre, body, to=[petition.user.email])
 	email.send()
-	

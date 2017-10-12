@@ -1,4 +1,12 @@
-<form action="/verificacion/salida/"  method="GET" >
-    <input type="text" name = "id">
-    <input type="submit" value="Seleccionar"/>
-</form>
+
+{% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
+
+<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+
+<div class="col s12 center-align">
+    <form action="/verificacion/salida/" method="GET">
+        <input class="large-input" type="text" name="salida" placeholder="CODE">
+        <input type="submit" value="✔" />
+    </form>
+</div>
