@@ -6,6 +6,7 @@ import datetime
 from datetime import date
 from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
+from donaciones.matchutils import *
 
 def menu (request):
 	string = ""
@@ -53,8 +54,6 @@ def input_view (request,case):
 
 
 def entrada(request):
-
-
     if request.method == "POST":
         
         nombre = request.POST['nome']
@@ -121,6 +120,8 @@ def salida(request):
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
 				donacion.verificador_salida = request.user
+				pedido.estado = "Entregado"
+				pedido.save()
 				donacion.save()
 
 				return HttpResponseRedirect("/verificacion/")
