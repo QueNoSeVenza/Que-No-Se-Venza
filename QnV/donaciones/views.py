@@ -32,6 +32,11 @@ def thanks2(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
+def thanks(request, id_med):
+    template = loader.get_template('thanks.html')
+    medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
+    context = {'medDona': medicamentoDonado}
+    return HttpResponse(template.render(context, request))
 
 
 
@@ -105,18 +110,15 @@ def donar(request):
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
 
-
 #        for pedido in getMatches(nuevo_medicamento_donado):
 #            if len(getMatches(pedido)) != 0:
 #                sendMatchEmail(pedido)
 #                print("Envio mail")
                 
-        id_med_donado = str(nuevo_medicamento_donado.id)
-        return redirect('/principal')
+        id_med = str(nuevo_medicamento_donado.id)
+        return redirect('/thanks/'+id_med)
     else:
         return redirect('/principal')
-
-
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
@@ -184,7 +186,9 @@ def matchs(request,pid):
         donacion = MedicamentoDonado.objects.get(pk=mid)
         match = Match(pedido=pedido,donacion=donacion)
         match.save()
+        pedido.estado = "Emparejado"
         donacion.stock = "Reservado"
+        pedido.save()
         donacion.save()
         return redirect('/thanks2')
 

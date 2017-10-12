@@ -45,7 +45,7 @@ def log(request):
             auth_login(request, user)
             return redirect('/principal')
         else:
-            messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
+            messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect('/login')
