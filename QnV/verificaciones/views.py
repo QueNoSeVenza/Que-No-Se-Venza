@@ -2,6 +2,8 @@
 #Usando caracteres no ASCII
 from django.shortcuts import render
 from .models import *
+import datetime
+from datetime import date
 from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
 
@@ -55,13 +57,31 @@ def entrada(request):
 
     if request.method == "POST":
         
-        nombre = request.POST['nombre']
-        vencimiento = request.POST['fechaven']
+        nombre = request.POST['nome']
+        vencimiento = request.POST['date']
         prescripcion  = request.POST['prescripcion']
-        tipo = request.POST['tipo_verifacion']
-
+        tipo = request.POST['type']
+        
+        if vencimiento[:3] == "Sep":
+            nuevo = vencimiento[:3]+vencimiento[4:]
+        else :
+            nuevo = vencimiento
+        
+        try:
+            fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
+        except:
+            try: 
+                fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
+            except:
+                try:
+                    fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
+                except:
+                    fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+            
+        
+            
         med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
-        med_donado.fecha_vencimiento = vencimiento
+        med_donado.fecha_vencimiento = fecha
         med_donado.medicamento.nombre = nombre
         med_donado.tipo = tipo
         med_donado.prescripcion = prescripcion

@@ -110,11 +110,10 @@ def donar(request):
             nuevo_medicamento_donado.save()
 
 
-        for pedido in getMatches(nuevo_medicamento_donado):
-            if len(getMatches(pedido)) != 0:
-                executeMatch(pedido)
-                sendMatchEmail(pedido)
-                print("Envio mail")
+#        for pedido in getMatches(nuevo_medicamento_donado):
+#            if len(getMatches(pedido)) != 0:
+#                sendMatchEmail(pedido)
+#                print("Envio mail")
                 
         id_med_donado = str(nuevo_medicamento_donado.id)
         return redirect('/principal')

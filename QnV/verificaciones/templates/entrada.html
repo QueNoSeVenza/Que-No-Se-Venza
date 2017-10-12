@@ -1,57 +1,45 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
-
-<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-
-<div class="row">
-    <div class="col s12 center-align">
-        <h3>Verificar si los siguientes datos coinciden con los de medicamento presentado</h3><br>
-    </div>
-    <table class="col s10 offset-s1">
-        <tr id="header">
-            <th class="center-align">Nombre</th>
-            <th class="center-align">Tipo</th>
-            <th class="center-align">Vencimiento</th>
-            <th class="center-align">Prescripcion medica</th>
-        </tr>
-
-        <tr>
-            <td id="v_nom" class="entrada-th center-align v_entrada aaa"><input name="nombre" value="{{donacion.medicamento.nombre}}" readonly="true"></td>
-            <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
-            <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
-            <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
-        </tr>
-    </table>
-    <form action="/verificacion/entrada/" method="POST">
-        {% csrf_token %}
-        <input type="hidden" value="" id="name">
-        <input type="hidden" value="" id="type">
-        <input type="hidden" value="" id="date">
-        <input type="hidden" value="" id="prescripcion">
-        <div class="col s12 center-align">
-            <input id="btn_entrada" class="indigo" type="submit" value="Guardar"><br>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+        <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3>Verificar si los siguientes datos coinciden con los de medicamento presentado</h3><br>
+            </div>
+            <table class="col s10 offset-s1" id="tabla_datos">
+                <tr id="header">
+                    <th class="center-align">Nombre</th>
+                    <th class="center-align">Tipo</th>
+                    <th class="center-align">Vencimiento</th>
+                    <th class="center-align">Prescripcion medica</th>
+                </tr>
+                <tr>
+                    <td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
+                    <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
+                    <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
+                    <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
+                </tr>
+            </table>
+            <form action="/verificacion/entrada/" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{donacion.id}}" name="donation_id">
+                <input type="hidden" value="" id="name" name="nome">
+                <input type="hidden" value="" id="type" name="type">
+                <input type="hidden" value="" id="date" name="date">
+                <input type="hidden" value="" id="prescripcion" name="prescripcion">
+                <div class="col s12 center-align">
+                    <input id="btn_entrada" class="indigo" type="submit" value="Guardar" onclick="dataToHiddenInputs()"><br>
+                </div>
+            </form>
+            <div class="col s12 center-align">
+                <button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
+            </div>
         </div>
-    </form>
-    <div class="col s12 center-align">
-        <button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
-    </div>
-</div>
-
-<!--<div class="row">
-<input type="hidden" name="donation_id" value="{{donacion.id}}" />
-<label for="id_prescripcion"></label><select id="id_prescripcion" name="prescripcion">
-<option value="True">Si</option>
-<option value="False">No</option>
-</select>
-<br> Especificar la función terapeutica: <br>
-<label for="id_funcion"></label><select id="id_funcion" name="funcion">
-{% for option in donacion.medicamento.FUNCION_FARMACEUTICA %}
-<option value="{{option.0}}">{{option.0}}</option>
-{% endfor %}
-
-
-</select></div>
-<br>-->
+    </body>
+</html>
 
 <script>
     var editable = false;
@@ -59,7 +47,7 @@
 
     function make_editable() {
         /*Codigo h o r r i b l e*/
-        document.getElementById('v_nom').readOnly = false;
+        document.getElementById('v_nom').contentEditable = true;
         document.getElementById('v_ven').contentEditable = "true";
         document.getElementById('edit_btn').style.visibility = "hidden";
         var ths = document.getElementsByClassName('entrada-th');
@@ -95,5 +83,17 @@
                 document.getElementById('txt_pre').innerText = "False";
             }
         }
+    }
+
+    function dataToHiddenInputs() {
+        var n = document.getElementById('v_nom').innerText;
+        var t = document.getElementById('v_tip').innerText;
+        var v = document.getElementById('v_ven').innerText;
+        var p = document.getElementById('txt_pre').innerText;
+        
+        document.getElementById("name").value = n;
+        document.getElementById("type").value = t;
+        document.getElementById("date").value = v;
+        document.getElementById("prescripcion").value = p;
     }
 </script>
