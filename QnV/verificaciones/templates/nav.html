@@ -4,12 +4,14 @@
 <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
 
 <div class="row">
-    <div class="col s12 center-align divider nav">
-        <a class="button" href="/verificacion/input/retiro"><button class="button">Verificar Retiro</button></a>
-        
-        <a class="button"  href="/verificacion/input/entrada"><button class="button-primary">Verificar Entrada</button></a>
-        
-        <a class="button"  href="/stock/"><button class="button">Control de Stock</button></a>
-    </div>
+	<div class="col s12 center-align divider nav">
+		<a class="button" href="/verificacion/input/retiro"><button id="retiro" class="">Verificar Retiro</button></a>
+
+		<a class="button"  href="/verificacion/stock"><button id="stock" class="">Control de Stock</button></a>
+
+		<a class="button"  href="/verificacion/input/entrada"><button id="entrada" class="">Verificar Entrada</button></a>
+	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/colorBtn.js' %}"></script>
 {% endblock %}

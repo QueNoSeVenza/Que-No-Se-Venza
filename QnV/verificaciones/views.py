@@ -22,6 +22,7 @@ def menu (request):
         return HttpResponseForbidden()
 
 
+
 def stock (request):
 
     if request.user.groups.filter(name='Verificadores').exists():
@@ -120,6 +121,7 @@ def entrada(request):
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
 
+
 def salida(request):
     if request.method == "POST":
 #       code = request.POST['donation_id']
@@ -156,7 +158,15 @@ def salida(request):
         else:
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
-
-
-
-
+		
+def search(request):
+	if request.method == "POST":
+		search = request.POST['search1']
+		meds = MedicamentoDonado.objects.all()
+		medicamentosMatch = []
+		
+		for i in meds:
+			if search in i.medicamento.nombre:
+				medicamentosMatch.append(i)
+				
+		return render(request,'stock.html',{'donaciones' : medicamentosMatch})
