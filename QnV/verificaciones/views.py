@@ -7,6 +7,7 @@ from datetime import date
 from donaciones.models import *
 from django.http import HttpResponseForbidden,HttpResponseRedirect
 from donaciones.matchutils import *
+from django.http import JsonResponse
 
 #def menu (request):
 #	string = ""
@@ -91,7 +92,7 @@ def entrada(request):
 
 		#Cambiar /entrada/input por un template que comunique el exito de la operación
 		print("Donación registrada con exito")
-		return HttpResponseRedirect("/verificacion/")
+		return HttpResponseRedirect("/verificacion/stock")
 
 
 	else:
@@ -123,7 +124,7 @@ def salida(request):
 				pedido.save()
 				donacion.save()
 
-				return HttpResponseRedirect("/verificacion/")
+				return HttpResponseRedirect("/verificacion/stock")
 
 			else:
 				#Cambiar /entrada/input por un template de error
@@ -133,7 +134,7 @@ def salida(request):
 			donacion.stock = 'Entregado'
 			donacion.verificador_salida = request.user
 			donacion.save()
-			return HttpResponseRedirect("/verificacion/")
+			return HttpResponseRedirect("/verificacion/stock")
 	else:
 		code = request.GET['salida']
 		donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
@@ -145,3 +146,16 @@ def salida(request):
 			#Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
 			print("Este codigo no existe")
 			return HttpResponseRedirect("/verificacion/input/entrada")
+
+		
+def search(request):
+	if request.method == "POST":
+		search = request.POST['search1']
+		meds = MedicamentoDonado.objects.all()
+		medicamentosMatch = []
+		
+		for i in meds:
+			if search in i.medicamento.nombre:
+				medicamentosMatch.append(i)
+				
+		return render(request,'stock.html',{'donaciones' : medicamentosMatch})

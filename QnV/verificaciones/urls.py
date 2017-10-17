@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^verificacion/input/(?P<case>.+)/$', input_view, name='input_view'),
     url(r'^verificacion/entrada', entrada, name='entrada'),
     url(r'^verificacion/salida', salida, name='salida'),
+	url(r'^verificacion/search', search, name='search'),
 
 
 ]

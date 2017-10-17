@@ -1,49 +1,71 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+		<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+		<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
 
-<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
+		<!--{{string}}<br>-->
+		<style type="text/css">
+			.Disponible {
+				background-color: green;
+			}
 
-<!--{{string}}<br>-->
-<style type="text/css">
-    .Disponible {
-        background-color: green;
-    }
+			.Pendiente {
+				background-color: yellow;
+			}
 
-    .Pendiente {
-        background-color: yellow;
-    }
-
-    .Eliminado {
-        background-color: red;
-    }
-</style>
-<div class="row">
-    <table class="col s12">
-        <tr id="header">
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Laboratorio</th>
-            <th>Tipo</th>
-            <th>¿Requiere receta?</th>
-            <th>Fecha de vencimiento</th>
-            <th>Veriificador Ingreso</th>
-	          <th>Verificador Egreso</th>
-        </tr>
-
-        {% for donacion in donaciones %}
-        <tr class="{{donacion.stock}}">
-            <td>{{donacion.id}}</td>
-            <td>{{donacion.medicamento.nombre}}</td>
-            <td>{{donacion.laboratorio}}</td>
-            <td>{{donacion.tipo}}</td>
-            <td>{{donacion.prescripcion}}</td>
-            <td>{{donacion.fecha_vencimiento}}</td>
-            <td>{{donacion.verificador_ingreso}}</td>
-          	<td>{{donacion.verificador_salida}}</td>   
-        </tr>
-
-
-        {% endfor %}
-    </table>
+			.Eliminado {
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="row">	
+			<div class="buscador" id="buscador">
+				<form method="POST" action="/verificacion/search">
+					{% csrf_token %}
+					<div class="input-field col s6">
+						<input id="search" name="search1" type="text" class="validate" placeholder="Search">
+					</div>
+				</form>
+<!--		
+<div>
+<input value="1" type="checkbox" id="ck1" checked><label>Todo</label>
+<input value="2" type="checkbox" id="ck2"><label>En Stock</label>
+<input value="3" type="checkbox" id="ck3"><label>No Verificado</label>
+<input value="4" type="checkbox" id="ck4"><label>Vencido</label>
 </div>
+-->
+			</div>
+			<br>
+			<table class="col s12">
+				<tr id="header">
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Laboratorio</th>
+					<th>Tipo</th>
+					<th>¿Requiere receta?</th>
+					<th>Fecha de vencimiento</th>
+					<th>Veriificador Ingreso</th>
+					<th>Verificador Egreso</th>
+				</tr>
+
+				{% for donacion in donaciones %}
+				<tr class="{{donacion.stock}}">
+					<td>{{donacion.id}}</td>
+					<td>{{donacion.medicamento.nombre}}</td>
+					<td>{{donacion.laboratorio}}</td>
+					<td>{{donacion.tipo}}</td>
+					<td>{{donacion.prescripcion}}</td>
+					<td>{{donacion.fecha_vencimiento}}</td>
+					<td>{{donacion.verificador_ingreso}}</td>
+					<td>{{donacion.verificador_salida}}</td>   
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+	</body>
+</html>
