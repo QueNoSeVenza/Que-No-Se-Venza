@@ -115,6 +115,9 @@ def entrada(request):
 
         if medicamento_donado.stock == 'En Espera':
             return render(request,'entrada.html',{'donacion' : medicamento_donado})
+        
+        elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado':
+            return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/';</script>")
         else:
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")

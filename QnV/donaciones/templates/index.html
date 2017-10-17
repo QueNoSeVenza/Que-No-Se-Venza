@@ -15,7 +15,7 @@
         <nav class="transparent z-depth-0 ">
             <ul id="nav-mobile" class="my-wrapper right hide-on-small-only">
                 <li class="drop">
-                    <a href="#" class="grey-text text-darken-1 light">{{django_users.first_name}}</a>
+                    <a href="#" class="grey-text text-darken-1 light">{{django_users.first_name|title}}</a>
                     <div class="dropdownContain">
                         <div class="dropOut">
                             <div class="triangle"></div>
@@ -155,7 +155,7 @@
                     <div class="col s12 grey lighten-4 bigpanel">
                         <div class="row center">
                             <h3 class="grey-text text-darken-2 normal-font">Bienvenido,
-                                <span class="red-text semibold">{{django_users.first_name}}</span></h3>
+                                <span class="red-text semibold">{{django_users.first_name|title}}</span></h3>
                             <p class="col m6 push-m3">On the other hand, we denounce with righteous
                                 indignation and dislike men who are so beguiled and demoralized by the
                                 charms of pleasure of the moment, so blinded by desire, that they cannot
