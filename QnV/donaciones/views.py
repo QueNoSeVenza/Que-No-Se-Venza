@@ -73,11 +73,10 @@ def donar(request):
         cantidad = medicamento_donado_kwargs['cantidad']
 
         if gramos <= "0" or cantidad <= "0":
-            print "se fue por gramos o cantidad"
+
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         if medicamento_donado_kwargs['fecha_vencimiento'] <= date.today():
-            print "se fue por fecha"
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
         nuevo_medicamento_donado= ""
@@ -109,12 +108,6 @@ def donar(request):
 
             nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
             nuevo_medicamento_donado.save()
-
-#        for pedido in getMatches(nuevo_medicamento_donado):
-#            if len(getMatches(pedido)) != 0:
-#                sendMatchEmail(pedido)
-#                print("Envio mail")
-                
         id_med = str(nuevo_medicamento_donado.id)
         return redirect('/thanks/'+id_med)
     else:
@@ -190,9 +183,12 @@ def matchs(request,pid):
         donacion.stock = "Reservado"
         pedido.save()
         donacion.save()
-        return redirect('/thanks2')
+        return redirect('/code/'+donacion.codigo())
 
     else:
 
         matchs = getMatches(Pedido.objects.get(pk = pid))
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
+def code(request,id):
+    d_id = id
+    return render(request,'code.html',{'id' : d_id})

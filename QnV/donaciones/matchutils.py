@@ -88,7 +88,10 @@ def getDullMedicines():
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
-def sendMatchEmail(petition):
-	body = "Quizás tengamos el medicamento que estabas buscando, entra en el siguiente enlace para revisar 127.0.0.1:800/matchs/",petition.id
-	email = EmailMessage('Ya puede buscar su '+petition.medicamento.nombre, body, to=[petition.user.email])
+
+def sendMatchEmail(pedido):
+
+	body = "Alguien ha donado "+str(pedido.medicamento)+". Quizas este disponnible para reservarlo, haga click en esta url para continuar: http://127.0.0.1:8000/matchs/"+str(pedido.id)
+  
+	email = EmailMessage('Alguien ha donado '+str(pedido.medicamento), body, to=[pedido.user.email])
 	email.send()
