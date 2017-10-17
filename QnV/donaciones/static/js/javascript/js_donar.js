@@ -78,9 +78,6 @@ $(document).ready(function () {
     var sidenav = $('.side-nav');
     firstSection();
     // Materialize
-    $('.modal').modal({
-        opacity: .75, // Opacity of modal background
-    });
     $('select').material_select();
     $('.collapsible').collapsible('open', 0);
     $('.datepicker').pickadate({

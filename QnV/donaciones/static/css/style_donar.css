@@ -108,21 +108,6 @@ nav {
   line-height: 30px;
   vertical-align: middle; }
 
-.modal-btn {
-  float: left;
-  width: 50%;
-  height: 100%;
-  font-size: .8rem;
-  padding-top: 19px; }
-  .modal-btn.gr {
-    color: #E0E0E0;
-    background-color: #333;
-    padding-left: 25px; }
-  .modal-btn.ve {
-    text-align: right;
-    background-color: #2AC87D;
-    padding-right: 25px; }
-
 #slide2 h3 {
   margin-top: 100px; }
   @media (max-width: 600px) {
@@ -271,5 +256,37 @@ ul li:hover .dropOut {
   text-align: center;
   padding: 12px 0 10px 0px;
   color: #777; }
+
+.id-show {
+  margin-left: 10px;
+  padding: 10 10 10 10;
+  border-radius: 3px; }
+
+.thx-center {
+  text-align: center !important; }
+  .thx-center.lab {
+    left: 0 !important;
+    right: 0 !important; }
+
+.thx-right {
+  text-align: right !important; }
+  .thx-right.lab {
+    left: none !important;
+    right: 2% !important; }
+
+.don-dat {
+  padding-top: .8%;
+  padding-bottom: 1%; }
+
+.thx-body {
+  background-color: #f9f9f9; }
+
+.thx-float {
+  background-color: #fdfdfd;
+  border-radius: 10px; }
+
+.thx-icon {
+  margin-top: 1%;
+  cursor: pointer; }
 
 /*# sourceMappingURL=style_donar.css.map */

@@ -53,7 +53,7 @@ class MedicamentoDonado(models.Model):
 
     def codigo(self):
         i = str(self.id)
-        a = str(self.medicamento.nombre[:3].upper()+self.medicamento.concentracion_gramos+"-"+i+self.tipo[:1])
+        a = str(self.medicamento.nombre[:3]+self.medicamento.concentracion_gramos+"-"+i+self.tipo[:1])
         return a
 
     def __str__(self):

@@ -1,22 +1,20 @@
 $(document).ready(function () {
-    var grams = $("#n-gramos");
-    var quantity = $("#n-cantidad");
+    var grams = $("#donar_concentracion_gramos");
+    var quantity = $("#donar_cantidad");
 
-    $('#anios').change(function(event){
+    $('#anio').change(function(event){
         checkDate();
     });
 
-    $('#n-gramos').keyup(function(event){
+    $('#donar_concentracion_gramos').keyup(function(event){
         checkNumber(grams);
     });
 
-    $('#n-cantidad').keyup(function(event){
-        console.log("ne");
+    $('#donar_cantidad').keyup(function(event){
         checkNumber(quantity);
     });
 
     $('#sendDonar').click(function(event){
-        console.log("pe");
         checkSelects();
     });
 
@@ -27,7 +25,7 @@ function inicialiceCmbox() {
     var currentDate = new Date();
     var currentYear = parseInt(currentDate.getFullYear());
     var listYears = [];
-    var cmboxYear = $("#anios");
+    var cmboxYear = $("#anio");
     for (var i = 0; i < 15; i++) {
         listYears.push(currentYear + i);
     }
@@ -44,8 +42,8 @@ function inicialiceCmbox() {
 }
 
 function checkDate() {
-    var cmboxYear = $("#anios");
-    var cmboxMonth = $("#meses");
+    var cmboxYear = $("#anio");
+    var cmboxMonth = $("#mes");
     var currentDate = new Date();
     var currentYear = parseInt(currentDate.getFullYear());
     var currentMonth = parseInt(currentDate.getMonth());
@@ -54,13 +52,13 @@ function checkDate() {
         for (var i = 1; i < (currentMonth + 2); i++) {
             cmboxMonth.find("option[value='"+i+"']").prop("disabled",true);
         }
-        $('#meses > option[value=""]').prop('selected', true)
+        $('#mes > option[value=""]').prop('selected', true)
         cmboxMonth.material_select();
     } else {
         for (var i = 1; i < (currentMonth + 2); i++) {
             cmboxMonth.find("option[value='"+i+"']").prop("disabled",false);
         }
-        $('#meses > option[value=""]').prop('selected', true)
+        $('#mes > option[value=""]').prop('selected', true)
         cmboxMonth.material_select();
     }
 }
@@ -84,45 +82,21 @@ function checkSelects() {
     var inputs = document.getElementsByClassName("isInput");
     var selects = [];
     var inputsValue = [];
-    var salida;
     
-    selects.push($("#meses"));
-    selects.push($("#anios"));
-    selects.push($("#tipo"));
-    
-    console.log(selects);
-    console.log(inputs);
+    selects.push($("#mes"));
+    selects.push($("#anio"));
+    selects.push($("#donar_tipo"));
     
     for (var i = 0; i < inputs.length; i++) {
         if (inputs[i].value == "") {
             console.log(inputs[i].value);
-            salida = "no";
             return;
-        } else {
-            salida = "si";
-            console.log(inputs[i].value);
-            console.log(salida);
         }
     }
     for (var i = 0; i < selects.length; i++) {
         if (selects[i].val() == null) {
             return;
         }
-    }
-    if (salida == "si") {
-        console.log("estoy en salida");
-        for (var i = 0; i < inputs.length; i++) {
-            inputsValue.push(inputs[i].value);
-        }
-        $("#n_1").val(inputsValue[0]);
-        $("#c_1").val(inputsValue[1]);
-        $("#ca_2").val(inputsValue[2]);
-        $("#l_1").val(inputsValue[3]);
-        $("#d_1").val(inputsValue[4]);
-        $("#f_1").val(selects[1].val());
-        $("#f_2").val(selects[0].val());
-        $("#t_1").val(selects[2].val());
-        $("#ahref")[0].click();
     }
 }
 

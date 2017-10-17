@@ -21,8 +21,10 @@ def getMatches(entity):
 		return match_list
 
 	elif entity.__class__.__name__ == "MedicamentoDonado":
-
+		
+		print("MATCHMD")
 		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
+		print("<>",match_list)
 		return match_list
 
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
@@ -86,9 +88,10 @@ def getDullMedicines():
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
+
 def sendMatchEmail(pedido):
 
 	body = "Alguien ha donado "+str(pedido.medicamento)+". Quizas este disponnible para reservarlo, haga click en esta url para continuar: http://127.0.0.1:8000/matchs/"+str(pedido.id)
-
+  
 	email = EmailMessage('Alguien ha donado '+str(pedido.medicamento), body, to=[pedido.user.email])
 	email.send()

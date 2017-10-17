@@ -57,8 +57,6 @@ def input_view (request,case):
 
 
 def entrada(request):
-
-
     if request.method == "POST":
         
         nombre = request.POST['nome']
@@ -123,7 +121,6 @@ def entrada(request):
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
 
 def salida(request):
-
     if request.method == "POST":
 #       code = request.POST['donation_id']
 #       donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
@@ -159,6 +156,7 @@ def salida(request):
         else:
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
+
 
 
 
