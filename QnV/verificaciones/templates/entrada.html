@@ -44,7 +44,6 @@
 <script>
     var editable = false;
     var types = ['Pastillas', 'Jarabe', 'Gotas'];
-
     function make_editable() {
         /*Codigo h o r r i b l e*/
         document.getElementById('v_nom').contentEditable = true;
@@ -56,7 +55,6 @@
         }
         editable = true;
     }
-
     function txt_tip() {
         if (editable) {
             var ty = document.getElementById('v_tip').innerText;
@@ -73,7 +71,6 @@
                       }
         }
     }
-
     function txt_pre() {
         if (editable) {
             var pre = document.getElementById('txt_pre').innerText;
@@ -84,7 +81,6 @@
             }
         }
     }
-
     function dataToHiddenInputs() {
         var n = document.getElementById('v_nom').innerText;
         var t = document.getElementById('v_tip').innerText;
