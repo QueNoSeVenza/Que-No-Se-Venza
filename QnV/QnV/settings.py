@@ -25,7 +25,7 @@ SECRET_KEY = 'pl#0n19!!#&dit9jy&2hnvnzym(p9m@87#4=9h6v)cy7emy18a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ["quenosevenza.pythonanywhere.com"]
+#ALLOWED_HOSTS = ["quenovenza.pythonanywhere.com"]
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',    
+    'django_extensions',
     'donaciones',
     'login',
     'presentacion',
@@ -54,7 +54,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com", u"127.0.0.1"]
+ALLOWED_HOSTS = [u"quenovenza.pythonanywhere.com", u"127.0.0.1"]
 ROOT_URLCONF = 'QnV.urls'
 
 TEMPLATES = [
@@ -126,7 +126,7 @@ USE_TZ = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
 
