@@ -1,0 +1,9 @@
+<form action="/matchs/{{pid}}/" method="POST">
+ {% csrf_token %}
+ Estas donaciones satisfacen a su peticion,seleccione la que mejor se adecua a sus necesidades:<br>
+{%for match in matchs%}
+ 	<input type="radio" name="match" value="{{match.id}}" checked> {{match.cantidad}} undidades de {{match.medicamento.nombre}} de la donación código {{match}}<br>
+{% endfor %}
+
+  <input type="submit" value="Submit">
+</form> 

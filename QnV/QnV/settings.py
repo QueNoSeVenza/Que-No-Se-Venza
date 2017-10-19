@@ -73,6 +73,13 @@ TEMPLATES = [
         },
     },
 ]
+# TEMPLATE_LOADERS = (
+#     'django.template.loaders.filesystem.Loader',
+#     'django.template.loaders.app_directories.Loader',
+#     )
+# TEMPLATE_DIRS = (
+#     os.path.join(BASE_DIR, 'templates'),
+# )
 
 WSGI_APPLICATION = 'QnV.wsgi.application'
 
@@ -132,8 +139,6 @@ STATIC_URL = '/static/'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATIC_URL = '/media/'
-
-
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

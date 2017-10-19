@@ -10,87 +10,102 @@
 </head>
 
 <body>
-	<div class="main">
-		<div class="wrapper row">
-			<div class="col s12 m8 l4 push-l4 push-m2 white login-card row">
-				<div class="row">
-					<div class="login-content s12">
-						<img class="myImg" src="{% static 'logo.png' %}">
-						<br>
-						<!-- form del login -->
-						<form method="POST" id="formLogin" action="{% url 'login:log' %}">
-							{% csrf_token %}
-							<div class="input-field col s12 m10 push-m1">
-								<input id="email" name="username" type="email" required>
-								<label for="email">Correo electrónico</label>
-							</div>
-							<div class="input-field col s12 m10 push-m1">
-								<input id="uspswd" name="password" type="password"  required oninvalid="setCustomValidity('El password es obligatorio ')" oninput="setCustomValidity('')">
-								<label for="uspswd">Contraseña</label>
-							</div>
-							<button class="waves-effect waves-dark btn logBtn z-depth-0 center-text datSpace font-heavy" id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
-						</form>
-						<button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 font-heavy" id="regBtn">REGISTRARSE</button>
-						<div class="col s12 center psw-label">
-							<a href="{% url 'password_reset' %}" class="font-light">¿Olvidó su contraseña?</a></div>
-						{% if messages %}
-						<script type="text/javascript">
-							$(window).load(function() {
-								$('#modal1').show();
-							});
-						</script>
+    <div class="main">
+        <div class="wrapper row">
+            <div class="col s12 m8 l4 push-l4 push-m2 white login-card row">
+                <div class="row">
+                    <div class="login-content s12">
+                        <img class="myImg" src="{% static 'logo.png' %}">
+                        <br>
+                        <!-- form del login -->
+                        <form method="POST" id="formLogin" action="{% url 'login:log' %}">
+                            {% csrf_token %}
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="email" name="username" type="email" required>
+                                <label for="email">Correo electrónico</label>
+                            </div>
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="uspswd" name="password" type="password" required oninvalid="setCustomValidity('El password es obligatorio ')" oninput="setCustomValidity('')">
+                                <label for="uspswd">Contraseña</label>
+                            </div>
+                            <button class="waves-effect waves-dark btn logBtn z-depth-0 center-text datSpace font-heavy" id="btn" type="submit" name="action" onclick="revisar()">INGRESAR</button>
+                        </form>
+                        <button class="waves-effect waves-dark btn logBtn reg grey lighten-3 z-depth-0 font-heavy" id="regBtn">REGISTRARSE</button>
+                        <div class="col s12 center psw-label">
+                            <a href="{% url 'password_reset' %}" class="font-light">¿Olvidó su contraseña?</a></div>
+                        {% if messages %}
+                        <ul class="messages white-text" id="findme">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}</div>
+                </div>
+                <div class="register-content" style="margin-top:17px;">
+                    <div class="row">
+                        <div class="comingBack col s12" style="text-align: center;">
+                            <a class="btn-flat center nohover center-btn grey-text">volver al ingreso</a>
+                        </div>
+                        <div class="divider"></div>
+                        <!-- form de registro -->
+                        <form method="POST" action="{% url 'login:reg' %}">
+                            {% csrf_token %}
+                            <h5 class="center grey-text font-heavy">REGISTRO</h5>
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="namm" name="name" type="text" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
+                                <label for="namm">Nombre y Apellido</label>
+                            </div>
 
-						<ul class="messages">
-							{% for message in messages %}
-							<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-							{% endfor %}
-						</ul>
-						{% endif %}
-					</div>
-				</div>
-				<div class="register-content" style="margin-top:17px;">
-					<div class="row">
-						<div class="comingBack col s12" style="text-align: center;">
-							<a class="btn-flat center nohover center-btn grey-text">volver al ingreso</a>
-						</div>
-						<div class="divider"></div>
-						<!-- form de registro -->
-						<form method="POST" action="{% url 'login:reg' %}">
-							{% csrf_token %}
-							<h5 class="center grey-text font-heavy">REGISTRO</h5>
-							<div class="input-field col s12 m10 push-m1">
-								<input id="namm" name="name" type="text" required oninvalid="setCustomValidity('Ingrese un nombre')" oninput="setCustomValidity('')">
-								<label for="namm">Nombre y Apellido</label>
-							</div>
-
-							<div class="input-field col s12 m10 push-m1">
-								<input id="corr" name="email" type="email" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
-								<label for="corr">Correo electrónico</label>
-							</div>
-							<div class="input-field col s12 m10 push-m1">
-								<input id="regpass" name="pass1" type="password" class="isRed" required oninvalid="setCustomValidity('Debes ingresar una contraseña')" oninput="setCustomValidity('')">
-								<label for="regpass">Contraseña</label>
-							</div>
-							<div class="input-field col s12 m10 push-m1">
-								<input id="regpass2" name="pass2" type="password" class="isRed" required oninvalid="setCustomValidity('#ElQueLasHaceLasPaga')" oninput="setCustomValidity('')">
-								<label for="regpass2">Repetir contraseña</label>
-							</div>
-							<div style="margin-top: -9px;margin-left: 17px;" class="input-field col s12 m10 push-m1">
-								<div class="col s12 center">
-								<input type="checkbox" class="filled-in" name="terms" id="terms">
-								<label for="terms">Acepto los <a onclick="window.open
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="corr" name="email" type="email" required poploninvalid="setCustomValidity('Debe ingresar un email válido')" oninput="setCustomValidity('')">
+                                <label for="corr">Correo electrónico</label>
+                            </div>
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="regpass" name="pass1" type="password" class="isRed" required oninvalid="setCustomValidity('Debes ingresar una contraseña')" oninput="setCustomValidity('')">
+                                <label for="regpass">Contraseña</label>
+                            </div>
+                            <div class="input-field col s12 m10 push-m1">
+                                <input id="regpass2" name="pass2" type="password" class="isRed" required oninvalid="setCustomValidity('#ElQueLasHaceLasPaga')" oninput="setCustomValidity('')">
+                                <label for="regpass2">Repetir contraseña</label>
+                            </div>
+                            <div style="margin-top: -9px;" class="input-field col s12 m10 push-m1">
+                                <div class="col s12 center">
+                                    <input type="checkbox" class="filled-in" name="terms" id="terms">
+                                    <label for="terms">Acepto los <a onclick="window.open
                   ('tyc')" target="_blank">términos y condiciones</a></label>
-							</div>
-							<button style="margin-top: 28px;" class="waves-effect waves-light btn logBtn z-depth-0 datSpace font-heavy" type="submit" id="register" name="action">REGISTRARSE</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
+                                </div>
+                                <button style="margin-top: 28px;" class="waves-effect waves-light btn logBtn z-depth-0 datSpace font-heavy" type="submit" id="register" name="action">REGISTRARSE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
+    <script>
+        if ($("#findme").length) {
+            var l = 20;
+            for (var i = 0; i <= 10; i++) {
+                $('.login-card').animate({
+                    'margin-left': '+=' + (l = -l) + 'px',
+                    'margin-right': '-=' + l + 'px'
+                }, 50);
+            }
+            $(".login-card").addClass("new-shadow");
+            
+            
+            /*$(".login-card").css("box-shadow", "0px 4px 19px -9px rgba(0,0,0,0.46)");*/
+            /*            $(".login-card").animate({
+                            boxShadow: "0px 0px 23px -2px rgba(246,96,85,0.85)"
+                        });*/
+            setTimeout(function() {
+                $(".login-card").css("box-shadow", "0px 4px 19px -13px rgba(0,0,0,0.46)");
+            }, 2000);
+        }
+    </script>
 
 </body>
 

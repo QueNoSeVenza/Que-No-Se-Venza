@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 #que se use como argumento solo si hay suficientes unidades para satisfacerlo.
 
 def getMatches(entity):
-	print(entity.__class__.__name__)
+	print("GETMATCHES>",entity.__class__.__name__)
 	if entity.__class__.__name__ == "Pedido":
 
 		print(entity)
@@ -17,15 +17,14 @@ def getMatches(entity):
 		quantities = [medicamento.cantidad for medicamento in match_list]
 		print(not_dull_medicines,match_list,quantities)
 
-		if sum(quantities) < entity.cantidad:
-			match_list = {}
-
 		print(match_list)
 		return match_list
 
 	elif entity.__class__.__name__ == "MedicamentoDonado":
-
+		
+		print("MATCHMD")
 		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
+		print("<>",match_list)
 		return match_list
 
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
@@ -63,7 +62,7 @@ def executeMatch(petition):
 			match_obj.save()
 			print("<<<<<<<<<<<zzzzzzzz",match_obj.medicamentos.all())
 
-			return substaction_values
+			return match_obj
 
 		else:
 
@@ -77,7 +76,7 @@ def executeMatch(petition):
 			print("<<<<",match_obj.medicamentos.all())
 			match_obj.save()			
 			if petition.cantidad == 0:
-				return substaction_values
+				return match_obj
 
 
 
@@ -89,9 +88,10 @@ def getDullMedicines():
 	dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 	return MedicamentoDonado.objects.filter(id__in=dull_medicines)
 
-def sendMatchEmail(petition):
 
-	body = "Le informamos que se encuentran disponibles las "+str(petition.cantidad)+" undidades de "+petition.medicamento.nombre+" que solicito en su peticion N "+str(petition.id)
+def sendMatchEmail(pedido):
 
-	email = EmailMessage('Ya puede buscar su '+petition.medicamento.nombre, body, to=[petition.user.email])
+	body = "Alguien ha donado "+str(pedido.medicamento)+". Quizas este disponnible para reservarlo, haga click en esta url para continuar: http://127.0.0.1:8000/matchs/"+str(pedido.id)
+  
+	email = EmailMessage('Alguien ha donado '+str(pedido.medicamento), body, to=[pedido.user.email])
 	email.send()

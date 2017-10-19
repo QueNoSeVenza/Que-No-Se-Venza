@@ -45,7 +45,7 @@ def log(request):
             auth_login(request, user)
             return redirect('/principal')
         else:
-            messages.add_message(request, messages.INFO, 'Usuario y/o contraseña incorrecta!')
+            messages.add_message(request, messages.INFO, 'Usuario o contraseña incorrecta!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect('/login')
@@ -58,7 +58,6 @@ def reg(request):
         password2 = request.POST['pass2']
         u = User.objects.filter(username=email)
         terms = request.POST.get('terms', False)
-        print terms
         if u is not None:
             if terms == "on":
                 if u.exists():
