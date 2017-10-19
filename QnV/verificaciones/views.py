@@ -100,7 +100,7 @@ def entrada(request):
         if len(getMatches(med_donado)) != 0:
             for peticion in getMatches(med_donado):
                 sendMatchEmail(peticion)
-        return HttpResponseRedirect("/verificacion/")
+        return HttpResponseRedirect("/verificacion/stock")
             
     else:
         print(Donacion.objects.all().values('id'))
@@ -116,10 +116,9 @@ def entrada(request):
             return render(request,'entrada.html',{'donacion' : medicamento_donado})
         
         elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado':
-            return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/';</script>")
+            return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/input/entrada';</script>")
         else:
-            #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
+            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/entrada';</script>")
 
 
 def salida(request):
@@ -134,19 +133,19 @@ def salida(request):
                 donacion.verificador_salida = request.user
                 donacion.save()
 
-                return HttpResponseRedirect("/verificacion/")
+                return HttpResponseRedirect("/verificacion/input/retiro")
 
             else:
                 #Cambiar /entrada/input por un template de error
                 print("No se han verificado todos los campos, la operación ha sido cancelada")
-                return HttpResponseRedirect("/verificacion/input/entrada")
+                return HttpResponseRedirect("/verificacion/input/retiro")
         else:
             donacion.stock = 'Entregado'
             donacion.verificador_salida = request.user
             donacion.save()
-            return HttpResponseRedirect("/verificacion/")
+            return HttpResponseRedirect("/verificacion/input/retiro")
     else:
-        code = request.GET['id']
+        code = request.GET['salida']
         try:
             donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
             donacion = donacion_list[0]
@@ -156,8 +155,7 @@ def salida(request):
         if donacion.stock == "Reservado":
             return render(request,'salida.html',{'donation_id' : donacion[0].id,'donacion' : donacion[0]})
         else:
-            #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
+            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 		
 def search(request):
 	if request.method == "POST":
