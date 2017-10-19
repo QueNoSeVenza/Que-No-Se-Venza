@@ -91,12 +91,13 @@
 							{% csrf_token %}							 
                             <div class="input-field col s6 m4 offset-m2 roboto">
                                 <input id="donar_nombre" name="donar_nombre" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="browsers">
-                                {% for medicamento in medi %}
                                 <datalist id="browsers">                                    
-                                    <option value="{{medicamento.nombre}}">       
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.nombre}}">
+                                        {% endfor %}
                                 </datalist>
 								<label for="donar_nombre">Nombre Comercial</label>
-                                {% endfor %}
+                                
 							</div>
 				            
                             <div class="input-field col s6 m4">
@@ -111,10 +112,17 @@
 								<input id="donar_laboratorio" name="donar_laboratorio" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
 								<label for="donar_laboratorio">Laboratorio</label>
 							</div>
-							<div class="input-field col s12 m8 offset-m2">
-								<input id="donar_droga" name="donar_droga" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
-								<label for="donar_droga">Droga</label>
+							
+                            <div class="input-field col s12 m8 offset-m2">
+								<input id="donar_droga" name="donar_droga" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="drogas">  
+                                <datalist id="drogas">                                    
+                                    {% for medicamento in medi %}
+                                    <option value="{{medicamento.droga}}"> 
+                                        {% endfor %}
+                                </datalist>
+								<label for="donar_droga">Droga</label>                               
 							</div>
+                            
 							<div class="input-field col s4 offset-s2">
 								<select id="anio" name="anio" required>
 									<option value="" disabled selected>Elije un Año</option>
