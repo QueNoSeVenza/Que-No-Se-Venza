@@ -100,7 +100,7 @@ def entrada(request):
         if medicamento_donado.stock == 'En Espera':
             return render(request,'entrada.html',{'donacion' : medicamento_donado})
         
-        elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado':
+        elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado' or medicamento_donado.stock == 'Entregado':
             return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/input/entrada';</script>")
         else:
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
@@ -119,7 +119,7 @@ def salida(request):
                 donacion.verificador_salida = request.user
                 donacion.save()
 
-                return HttpResponseRedirect("/verificacion/")
+                return HttpResponseRedirect("/verificacion/input/retiro")
 
             else:
                 #Cambiar /entrada/input por un template de error
@@ -129,9 +129,9 @@ def salida(request):
             donacion.stock = 'Entregado'
             donacion.verificador_salida = request.user
             donacion.save()
-            return HttpResponseRedirect("/verificacion/")
+            return HttpResponseRedirect("/verificacion/input/retiro")
     else:
-        code = request.GET['id']
+        code = request.GET['salida']
         try:
             donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
             donacion = donacion_list[0]
@@ -139,10 +139,10 @@ def salida(request):
             donacion = MedicamentoDonado(stock = 'empty')
 
         if donacion.stock == "Reservado":
-            return render(request,'salida.html',{'donation_id' : donacion[0].id,'donacion' : donacion[0]})
+            return render(request,'salida.html',{'donation_id' : donacion.id,'donacion' : donacion})
         else:
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
+            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
 
 def search(request):
