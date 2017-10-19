@@ -28,15 +28,13 @@
 					<div class="input-field col s6">
 						<input id="search" name="search1" type="text" class="validate" placeholder="Search">
 					</div>
+					<div>
+						<input value="todo" type="checkbox" name="fooby" id="ck1" checked><label>Todo</label>
+						<input value="stock" type="checkbox" name="fooby" id="ck2"><label>En Stock</label>
+						<input value="noVerificado" type="checkbox" name="fooby" id="ck3"><label>No Verificado</label>
+						<input value="vencido" type="checkbox" name="fooby" id="ck4"><label>Vencido</label>
+					</div>
 				</form>
-<!--		
-<div>
-<input value="1" type="checkbox" id="ck1" checked><label>Todo</label>
-<input value="2" type="checkbox" id="ck2"><label>En Stock</label>
-<input value="3" type="checkbox" id="ck3"><label>No Verificado</label>
-<input value="4" type="checkbox" id="ck4"><label>Vencido</label>
-</div>
--->
 			</div>
 			<br>
 			<table class="col s12">
@@ -68,4 +66,21 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 	</body>
+	<script>
+		$("input:checkbox").on('click', function() {
+			// in the handler, 'this' refers to the box clicked on
+			var $box = $(this);
+			if ($box.is(":checked")) {
+				// the name of the box is retrieved using the .attr() method
+				// as it is assumed and expected to be immutable
+				var group = "input:checkbox[name='" + $box.attr("name") + "']";
+				// the checked state of the group/box on the other hand will change
+				// and the current value is retrieved using .prop() method
+				$(group).prop("checked", false);
+				$box.prop("checked", true);
+			} else {
+				$box.prop("checked", false);
+			}
+		});
+	</script>
 </html>

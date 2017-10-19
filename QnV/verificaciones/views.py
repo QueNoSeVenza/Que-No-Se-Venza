@@ -11,18 +11,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 
 
-def menu (request):
-    string = ""
-
-    if request.user.groups.filter(name='Verificadores').exists():
-        string = "Verificador! ;)"
-        return render(request,'menu.html',{'string' : string})
-    else:
-
-        return HttpResponseForbidden()
-
-
-
 def stock (request):
 
     if request.user.groups.filter(name='Verificadores').exists():
@@ -159,14 +147,97 @@ def salida(request):
             #Cambiar /entrada/input por un template que avise que esta donación ya se encuentra en stock
             return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/';</script>")
 		
+		
 def search(request):
 	if request.method == "POST":
-		search = request.POST['search1']
-		meds = MedicamentoDonado.objects.all()
-		medicamentosMatch = []
+		search = request.POST.get('search1', "")
+		check = request.POST.getlist('fooby')
 		
-		for i in meds:
-			if search in i.medicamento.nombre:
-				medicamentosMatch.append(i)
-				
-		return render(request,'stock.html',{'donaciones' : medicamentosMatch})
+		operaciones = { 'todo': 'todo', 'stock': 'enStock', 'noVerificado': 'noVerificado', 'vencido': 'vencido'}
+		
+		try:
+			if search == "" and operaciones[check[0]] == "todo":
+				return HttpResponseRedirect("/verificacion/stock")
+			else:
+				if search == "":
+					return HttpResponseRedirect("/verificacion/stock/"+operaciones[check[0]])
+				else:
+					return HttpResponseRedirect("/verificacion/stock/"+operaciones[check[0]]+"/"+search)
+		except:
+			print("Esa no vale")
+			return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/stock';</script>")
+		
+		
+def todo(request, string):
+	meds = MedicamentoDonado.objects.all()
+	medicamentosMatch = []
+	
+	for i in meds:
+		if string in i.medicamento.nombre:
+			medicamentosMatch.append(i)
+		elif string in i.laboratorio:
+			medicamentosMatch.append(i)			
+		elif string in i.tipo:
+			medicamentosMatch.append(i)
+
+	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
+
+
+def enStock(request, string):
+	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None"]
+	medicamentosMatch = []
+
+	for i in meds:
+		if string in i.medicamento.nombre:
+			medicamentosMatch.append(i)
+		elif string in i.laboratorio:
+			medicamentosMatch.append(i)
+		elif string in i.tipo:
+			medicamentosMatch.append(i)
+
+	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
+
+
+def todoStock(request):
+	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None"]
+	return render(request,'stock.html',{'donaciones' : meds})
+
+
+def noVerificado(request, string):
+	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"]
+	medicamentosMatch = []
+	
+	for i in meds:
+		if string in i.medicamento.nombre:
+			medicamentosMatch.append(i)
+		elif string in i.laboratorio:
+			medicamentosMatch.append(i)			
+		elif string in i.tipo:
+			medicamentosMatch.append(i)
+
+	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
+
+
+def todoNoVerificado(request):
+	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"]
+	return render(request,'stock.html',{'donaciones' : meds})
+
+
+def vencido(request, string):
+	meds = [x for x in MedicamentoDonado.objects.all() if x.isDull() == True]
+	medicamentosMatch = []
+	
+	for i in meds:
+		if search in i.medicamento.nombre:
+			medicamentosMatch.append(i)
+		elif search in i.laboratorio:
+			medicamentosMatch.append(i)			
+		elif search in i.tipo:
+			medicamentosMatch.append(i)
+
+	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
+
+
+def todoVencido(request):
+	meds = [x for x in MedicamentoDonado.objects.all() if x.isDull() == True]
+	return render(request,'stock.html',{'donaciones' : meds})
