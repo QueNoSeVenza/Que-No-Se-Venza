@@ -191,4 +191,14 @@ def matchs(request,pid):
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
 def code(request,id):
     d_id = id
-    return render(request,'code.html',{'id' : d_id})
+    try:
+        donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == d_id]
+        donacion = donacion_list[0]
+    except IndexError:
+        donacion = MedicamentoDonado(stock = 'empty')
+    print(donacion.stock)
+    if donacion.stock == "Reservado":
+        return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+    else:
+        return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+
