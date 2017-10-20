@@ -101,7 +101,12 @@
 							</div>
 				            
                             <div class="input-field col s6 m4">
-								<input id="donar_concentracion_gramos" name="donar_concentracion_gramos" class="isInput" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)">
+								<input id="donar_concentracion_gramos" name="donar_concentracion_gramos" class="isInput" type="number" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" min="1" onkeypress="return isNumber(event)"list="con">
+                                <datalist id="con">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.concentracion_gramos}}">
+                                        {% endfor %}
+                                </datalist>
 								<label for="donar_concentracion_gramos">Concentracion en Gramos</label>
 							</div>
 							<div class="input-field col s6 m4 offset-m2">
@@ -109,7 +114,12 @@
 								<label for="donar_cantidad">Cantidad por Caja</label>
 							</div>
 							<div class="input-field col s6 m4">
-								<input id="donar_laboratorio" name="donar_laboratorio" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+								<input id="donar_laboratorio" name="donar_laboratorio" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')"list="lab">
+                                <datalist id="lab">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.laboratorio}}">
+                                        {% endfor %}
+                                </datalist>
 								<label for="donar_laboratorio">Laboratorio</label>
 							</div>
 							
@@ -186,16 +196,31 @@
                         <form id="form_pedir" method="POST" action="/pedir" class="normal-font">
                             {% csrf_token %}
                             <div class="input-field col s6 offset-s3">
-                                <input id="pedir_nombre" name="pedir_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1">
+                                <input id="pedir_nombre" name="pedir_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1"list="pedir">
+                                <datalist id="pedir">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.nombre}}">
+                                        {% endfor %}
+                                </datalist>
                                 <label for="pedir_nombre">Medicamento</label>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1">
+                                <input id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1"list="sentra">
+                                <datalist id="sentra">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.concentracion_gramos}}">
+                                        {% endfor %}
+                                </datalist>
                                 <label for="pedir_gramos">Concentracion en Gramos</label>
                             </div>
                             <div class="extra_info">
                                 <div class="input-field col s6 offset-s3">
-                                    <input name="pedir_laboratorio" id="pedir_laboratorio" type="text">
+                                    <input name="pedir_laboratorio" id="pedir_laboratorio" type="text"list="LAB">
+                                <datalist id="LAB">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.laboratorio}}">
+                                        {% endfor %}
+                                </datalist>
                                     <label for="pedir_laboratorio">Laboratorio</label></div>
                                 <div class="input-field col s6 offset-s3">
                                     <select name="pedir_tipo">
@@ -208,7 +233,12 @@
                                 </div>
                             </div>
                             <div class="input-field col s6 offset-s3">
-                                <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')">
+                                <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')"list="drugstore">
+                                <datalist id="drugstore">                                    
+                                {% for medicamento in medi %}
+                                    <option value="{{medicamento.droga}}">
+                                        {% endfor %}
+                                </datalist>
                                 <label for="pedir_droga">Droga</label>
                             </div>
                             <div class="col s12 center">
