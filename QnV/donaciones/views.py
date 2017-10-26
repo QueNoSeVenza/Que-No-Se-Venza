@@ -16,15 +16,19 @@ from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
 
 @login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
+    medicamentos = Medicamento.objects.all()
     user = request.user
+#    context.update(dict(medicamentos=medicamentos, user=request.user,
+#                        med_list=medicamentos.object_list))
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -191,4 +195,14 @@ def matchs(request,pid):
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
 def code(request,id):
     d_id = id
-    return render(request,'code.html',{'id' : d_id})
+    try:
+        donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == d_id]
+        donacion = donacion_list[0]
+    except IndexError:
+        donacion = MedicamentoDonado(stock = 'empty')
+    print(donacion.stock)
+    if donacion.stock == "Reservado":
+        return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+    else:
+        return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+
