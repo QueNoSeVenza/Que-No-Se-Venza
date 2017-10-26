@@ -193,18 +193,18 @@
 			<div class="col s12 m6 offset-m3 center">
 				<div class="divider"></div><a id="mendiolaza_link" href="municipalidad-de-mendiolaza/" target="_blank">MUNICIPALIDAD EN MENDOZA</a></div>
 		</div>
-
 	</footer>
 
 	<!-- Javascripts -->
-	<script src="{% static 'scroll-reveal/scrollreveal.min.js' %}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="{% static 'hover-image/jquery.plate.js' %}"></script>
+	<script src="{% static 'scroll-reveal/scrollreveal.min.js' %}">
+	</script>
+	<script src="{% static 'hover-image/jquery.plate.js' %}">
+	</script>
 	<script>
 		$('.titleblock').hide();
 
 		$(document).ready(function() {
-            $('.modal').modal();
 			$('.titleblock').show();
 			// Send to the top of page on refresh
 			// $(this).scrollTop(0);
