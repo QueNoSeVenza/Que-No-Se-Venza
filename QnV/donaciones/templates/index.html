@@ -91,6 +91,10 @@
 							{% csrf_token %}							 
                             <div class="input-field col s6 m4 offset-m2 roboto">
                                 <input id="donar_nombre" name="donar_nombre" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="browsers">
+                                
+                                
+                                
+                                
                                 <datalist id="browsers">                                    
                                 {% for medicamento in medi %}
                                     <option value="{{medicamento.nombre}}">
@@ -176,7 +180,7 @@
 						<div class="row center">
 							<h3 class="grey-text text-darken-2 normal-font">Bienvenido,
 								<span class="red-text semibold">{{django_users.first_name|title}}</span></h3>
-							<p class="col m6 push-m3">Si nos ponemos en el lugar de un ciudadano cordobes cualquiera, nos damos cuenta que en casa tenemos una caja llena de medicamentos, de los cuales mas de la mitad no los necesitamos o estan vencidos...Que mejor forma de realizar una limipeza de espacio de nuestra casa y a su vez birandarle cierta ayuda a personas, que donandolos.Ahi es donde entra QNV, una plataforma pensada para darle una herramienta simpliicadora a las personas que desean donar sus medicamentos y tambien a aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza!!!  </p>
+							<p class="col m6 push-m3">Si nos ponemos en el lugar de un ciudadano cordobes cualquiera, nos damos cuenta que en casa tenemos una caja llena de medicamentos, de los cuales mas de la mitad no los necesitamos o estan vencidos...Que mejor forma de realizar una limipeza de espacio de nuestra casa y a su vez birandarle cierta ayuda a personas, que donandolos. Ahi es donde entra QNV, una plataforma pensada para darle una herramienta simplicadora a las personas que desean donar sus medicamentos y tambien a aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza!!!  </p>
 
 						</div>
 
