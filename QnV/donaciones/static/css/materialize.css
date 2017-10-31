@@ -4682,11 +4682,11 @@ textarea {
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:before,
 [type="radio"].with-gap:checked + label:after {
-  border: 2px solid #757575; }
+  border: 2px solid #FF6F67; }
 
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:after {
-  background-color: #757575; }
+  background-color: #FF6F67; }
 
 [type="radio"]:checked + label:after {
   transform: scale(1.02); }
@@ -4790,8 +4790,8 @@ form p:last-child {
   height: 22px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #757575;
-  border-bottom: 2px solid #757575;
+  border-right: 2px solid #FF6F67;
+  border-bottom: 2px solid #FF6F67;
   transform: rotate(40deg);
   backface-visibility: hidden;
   transform-origin: 100% 100%; }
@@ -4807,7 +4807,7 @@ form p:last-child {
   height: 22px;
   border-top: none;
   border-left: none;
-  border-right: 2px solid #757575;
+  border-right: 2px solid #FF6F67;
   border-bottom: none;
   transform: rotate(90deg);
   backface-visibility: hidden;
@@ -5100,7 +5100,7 @@ input[type=range] + .thumb {
   height: 0;
   width: 0;
   border-radius: 50%;
-  background-color: #757575;
+  background-color: #FF6F67;
   margin-left: 7px;
   transform-origin: 50% 50%;
   transform: rotate(-45deg); }
@@ -5108,7 +5108,7 @@ input[type=range] + .thumb {
     display: block;
     width: 30px;
     text-align: center;
-    color: #757575;
+    color: #FF6F67;
     font-size: 0;
     transform: rotate(45deg); }
   input[type=range] + .thumb.active {
@@ -5133,7 +5133,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background-color: #757575;
+  background-color: #FF6F67;
   transform-origin: 50% 50%;
   margin: -5px 0 0 0;
   transition: .3s; }
@@ -5156,7 +5156,7 @@ input[type=range]::-moz-range-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #757575;
+  background: #FF6F67;
   margin-top: -5px; }
 
 input[type=range]:-moz-focusring {
@@ -5185,7 +5185,7 @@ input[type=range]::-ms-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #757575; }
+  background: #FF6F67; }
 
 input[type=range]:focus::-ms-fill-lower {
   background: #888; }
