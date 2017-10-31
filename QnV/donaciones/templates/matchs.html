@@ -1,3 +1,4 @@
+
 {% load static %} {% load staticfiles %}
 <html>
 
@@ -20,8 +21,8 @@
         <br>
       </div>
 
-      <form action="/matchs/{{pid}}/" method="POST">
-
+      <form action="/matchs/{{case}}/{{pid}}/" method="POST">
+        {% csrf_token %}
         {%for match in matchs%}
         <div class="col s6 offset-s3 thx-float z-depth-1" style="margin-bottom:20px;">
           <div class="row center-align">
