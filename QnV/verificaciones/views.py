@@ -15,11 +15,14 @@ from django.contrib import messages
 def stock (request):
 
     if request.user.groups.filter(name='Verificadores').exists():
-        string = "Verificador! ;)"
         verificador_ingreso =[]
         medicamentos = MedicamentoDonado.objects.all()
-        print(medicamentos)
-        return render(request,'stock.html',{'string' : string,'donaciones' : medicamentos})
+        for i in medicamentos:
+			if i.isDull() == True:
+				print(i.stock)
+				i.stock = "Vencido"
+				i.save()
+        return render(request,'stock.html',{'donaciones' : medicamentos})
     else:
 
         return HttpResponseForbidden()
