@@ -40,6 +40,9 @@ def thanks(request, id_med):
     template = loader.get_template('thanks.html')
     medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
     context = {'medDona': medicamentoDonado}
+    email = EmailMessage('Codigo de donacion','Tu codigo de donacion es '+id_med, to=[medicamentoDonado.donacion.user.email])
+    email.send()
+
     return HttpResponse(template.render(context, request))
 
 
@@ -202,7 +205,8 @@ def code(request,id):
         donacion = MedicamentoDonado(stock = 'empty')
     print(donacion.stock)
     if donacion.stock == "Reservado":
+        email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+        email.send()
         return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
-
