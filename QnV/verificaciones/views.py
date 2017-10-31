@@ -9,6 +9,7 @@ from django.http import HttpResponseForbidden,HttpResponseRedirect
 from donaciones.matchutils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 def stock (request):
@@ -47,11 +48,13 @@ def input_view (request,case):
 
 def entrada(request):
     if request.method == "POST":
-        
+        ndi = request.POST['donation_id']
         nombre = request.POST['nome']
         vencimiento = request.POST['date']
         prescripcion  = request.POST['prescripcion']
         tipo = request.POST['type']
+		
+        medicamento_donado = MedicamentoDonado.objects.get(id = ndi)
         
         if vencimiento[:3] == "Sep":
             nuevo = vencimiento[:3]+vencimiento[4:]
@@ -67,7 +70,17 @@ def entrada(request):
                 try:
                     fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
                 except:
-                    fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+					try:
+						fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+					except:
+						messages.info(request, 'Fecha no Valida!')
+						return render(request,'entrada.html',{'donacion' : medicamento_donado})
+					
+		fechaVen = datetime.strptime(fecha,'%Y-%m-%d').date()
+		
+		if fechaVen <= date.today():
+			messages.info(request, 'Fecha no Valida!')
+			return render(request,'entrada.html',{'donacion' : medicamento_donado})
 
         med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
         med_donado.fecha_vencimiento = fecha
