@@ -205,8 +205,13 @@ def code(request,id):
         donacion = MedicamentoDonado(stock = 'empty')
     print(donacion.stock)
     if donacion.stock == "Reservado":
-        email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
-        email.send()
-        return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        if donacion.prescripcion == True:
+            email = EmailMessage('Codigo de pedido','Recuerda que para retirar este medicamento es necesario que presentes su debida prescripcion. Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        elif donacion.prescripcion == False:
+            email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})            
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
