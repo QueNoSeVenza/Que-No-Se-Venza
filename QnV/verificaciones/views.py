@@ -9,7 +9,19 @@ from django.http import HttpResponseForbidden,HttpResponseRedirect
 from donaciones.matchutils import *
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.http import JsonResponse
 
+def delete_stock(request):
+
+    itemid = request.GET.get('itemid', None)
+    print("Entro el ajax ",itemid)
+    item = MedicamentoDonado.objects.get(pk=itemid)
+    print(item.stock)
+    item.stock = "Inactivo"
+    print(item.stock)
+    item.save()
+    data = {}
+    return JsonResponse(data)
 
 def menu (request):
     string = ""

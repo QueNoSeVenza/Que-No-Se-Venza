@@ -1,5 +1,22 @@
 $(document).ready(function () {
 	btnColor();	
+	$(".Inactivo").hide()
+	$(".btn-delete").click(function(){
+	var itemid = $(this).attr('value')
+	if(confirm('¿Estas seguro de que deseas eliminar este medicamento?')){
+	$.ajax({
+		url: '/ajax/delete_stock/',
+		data: {
+			'itemid': itemid,
+			},
+			dataType: 'json',
+			success: function (data) {
+			
+				$("#"+itemid).hide()
+			}
+		})}
+
+}); 
 });  
 
 

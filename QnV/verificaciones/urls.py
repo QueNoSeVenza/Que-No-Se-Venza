@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^verificacion/entrada', entrada, name='entrada'),
     url(r'^verificacion/salida', salida, name='salida'),
 	url(r'^verificacion/search', search, name='search'),
+	url(r'^ajax/delete_stock', delete_stock, name='delete_stock')
+
 
 
 ]
