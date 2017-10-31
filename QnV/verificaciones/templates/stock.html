@@ -21,7 +21,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="row">	
+		<div class="row">
 			<div class="buscador" id="buscador">
 				<form method="POST" action="/verificacion/search">
 					{% csrf_token %}
@@ -59,8 +59,8 @@
 					<td>{{donacion.prescripcion}}</td>
 					<td>{{donacion.fecha_vencimiento}}</td>
 					<td>{{donacion.verificador_ingreso}}</td>
-					<td>{{donacion.verificador_salida}}</td>  
-					<td> <button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>  
+					<td>{{donacion.verificador_salida}}</td>
+					<td> <button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>
 
 				</tr>
 				{% endfor %}
