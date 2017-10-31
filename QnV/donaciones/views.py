@@ -16,6 +16,7 @@ from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
 
 @login_required(login_url='/login/')
@@ -135,6 +136,10 @@ def pedir(request):
 
     if 'POST' in request.method:
         #Capturando argumentos para un Pedido y su Medicamento
+        try:
+            similar_flag = request.POST['similar']
+        except MultiValueDictKeyError:
+            similar_flag = 'off'
         medicamento_kwargs = {
             'nombre' :  request.POST['pedir_nombre'],
             'concentracion_gramos' : request.POST['pedir_gramos'],
@@ -171,14 +176,14 @@ def pedir(request):
 
         print(">>>>>>",nuevo_pedido.id)
         if len(getMatches(nuevo_pedido)) != 0:
-            return redirect('/matchs/'+str(nuevo_pedido.id))
+            return redirect('/matchs/'+similar_flag+'/'+str(nuevo_pedido.id))
         else:
             return redirect('/thanks2')
 
 
 
 
-def matchs(request,pid):
+def matchs(request,case,pid):
 
     if "POST" in request.method:
         mid = request.POST['match']
@@ -193,9 +198,17 @@ def matchs(request,pid):
         return redirect('/code/'+donacion.codigo())
 
     else:
+        if case == 'on':
 
-        matchs = getMatches(Pedido.objects.get(pk = pid))
-        return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
+            matchs = getSimilarMatches(Pedido.objects.get(pk = pid))
+
+        else:
+
+            matchs = getMatches(Pedido.objects.get(pk = pid))
+   
+        return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
+
+
 def code(request,id):
     d_id = id
     try:
