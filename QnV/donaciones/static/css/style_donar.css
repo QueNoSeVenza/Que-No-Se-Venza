@@ -279,7 +279,8 @@ ul li:hover .dropOut {
   padding-bottom: 1%; }
 
 .thx-body {
-  background-color: #f9f9f9; }
+  background-color: #f9f9f9;
+  height: auto; }
 
 .thx-float {
   background-color: #fdfdfd;
