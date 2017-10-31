@@ -1,4 +1,4 @@
-<form action="/matchs/{{pid}}/" method="POST">
+<form action="/matchs/{{case}}/{{pid}}/" method="POST">
  {% csrf_token %}
  Estas donaciones satisfacen a su peticion,seleccione la que mejor se adecua a sus necesidades:<br>
 {%for match in matchs%}

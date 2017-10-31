@@ -91,6 +91,10 @@
 							{% csrf_token %}							 
                             <div class="input-field col s6 m4 offset-m2 roboto">
                                 <input id="donar_nombre" name="donar_nombre" class="isInput" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="browsers">
+                                
+                                
+                                
+                                
                                 <datalist id="browsers">                                    
                                 {% for medicamento in medi %}
                                     <option value="{{medicamento.nombre}}">
@@ -176,7 +180,7 @@
 						<div class="row center">
 							<h3 class="grey-text text-darken-2 normal-font">Bienvenido,
 								<span class="red-text semibold">{{django_users.first_name|title}}</span></h3>
-							<p class="col m6 push-m3">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the <span class="semibold">pain</span> and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are <span class="semibold">perfectly</span> simple and easy to distinguish. In a free houasdr, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequentlasdy </p>
+							<p class="col m6 push-m3">Si nos ponemos en el lugar de un ciudadano cordobes cualquiera, nos damos cuenta que en casa tenemos una caja llena de medicamentos, de los cuales mas de la mitad no los necesitamos o estan vencidos...Que mejor forma de realizar una limipeza de espacio de nuestra casa y a su vez birandarle cierta ayuda a personas, que donandolos. Ahi es donde entra QNV, una plataforma pensada para darle una herramienta simplicadora a las personas que desean donar sus medicamentos y tambien a aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza!!!  </p>
 
 						</div>
 
@@ -229,6 +233,7 @@
                                         </select>
                                     <label>Tipo</label>
                                 </div>
+
                             </div>
                             <div class="input-field col s6 offset-s3">
                                 <input name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')"list="drugstore">
@@ -238,8 +243,14 @@
                                         {% endfor %}
                                 </datalist>
                                 <label for="pedir_droga">Droga</label>
+                                                            <p>
+                              <input type="checkbox" id="similar" name="similar" />
+                              <label for="similar">Incluir donaciones similares</label>
+                            </p><br>
+
                             </div>
                             <div class="col s12 center">
+
                                 <input id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">
                             </div>
                         </form>
@@ -249,10 +260,10 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="{% static 'js/javascript/js_donar.js' %}"></script>
-    <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
-    <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/fullpage/scrolloverflow.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/fullpage/jquery.fullPage_donar.min.js' %}"></script>
+    <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
+    <script src="{% static 'js/javascript/js_donar.js' %}"></script>
+    <script src="{% static 'js/javascript/verificar_numeros.js' %}"></script>
 </body>
 </html>

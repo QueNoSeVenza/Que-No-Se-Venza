@@ -21,6 +21,7 @@
 
 			.Entregado {
 				background-color: #8e7ffd;
+
 			}
 		</style>
 	</head>
@@ -51,10 +52,11 @@
 					<th>Fecha de vencimiento</th>
 					<th>Veriificador Ingreso</th>
 					<th>Verificador Egreso</th>
+					<th>Eliminar</th>
 				</tr>
 
 				{% for donacion in donaciones %}
-				<tr class="{{donacion.stock}}">
+				<tr id = "{{donacion.id}}" class="{{donacion.stock}}">
 					<td>{{donacion.id}}</td>
 					<td>{{donacion.medicamento.nombre}}</td>
 					<td>{{donacion.laboratorio}}</td>
@@ -62,7 +64,9 @@
 					<td>{{donacion.prescripcion}}</td>
 					<td>{{donacion.fecha_vencimiento}}</td>
 					<td>{{donacion.verificador_ingreso}}</td>
-					<td>{{donacion.verificador_salida}}</td>   
+					<td>{{donacion.verificador_salida}}</td>  
+					<td> <button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>  
+
 				</tr>
 				{% endfor %}
 			</table>

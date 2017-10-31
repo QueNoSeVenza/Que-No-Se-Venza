@@ -27,6 +27,14 @@ def getMatches(entity):
 		print("<>",match_list)
 		return match_list
 
+def getSimilarMatches(entity):
+		not_dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
+		match_list = MedicamentoDonado.objects.filter(medicamento__droga=entity.medicamento.droga, id__in=not_dull_medicines,stock="Disponible").order_by('fecha_vencimiento')
+		quantities = [medicamento.cantidad for medicamento in match_list]
+		print(not_dull_medicines,match_list,quantities)
+
+		print(match_list)
+		return match_list	
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
 #necesitar reservar parcialmente un MedicamentoDonado le sustrae la cantidad necesaria y
 #se crea otro MedicamentDonado con esa cantidad y el estado "Reservado".
