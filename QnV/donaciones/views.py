@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
 
+
 @login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
@@ -60,15 +61,15 @@ def donar(request):
         fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
-            'nombre' : request.POST['donar_nombre'],
+            'nombre' : request.POST['donar_nombre'].upper(),
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'].upper()
         }
 
         medicamento_donado_kwargs = {
             'cantidad' : request.POST['donar_cantidad'],
-            'tipo' : request.POST['donar_tipo'],
-            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'tipo' : request.POST['donar_tipo'].upper(),
+            'laboratorio' : request.POST['donar_laboratorio'].upper() ,
             'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
         }
@@ -126,9 +127,9 @@ def validate_medicamento(request):
     print(nombre)
     concentracion_gramos = request.GET.get('concentracion', None)
     print(concentracion_gramos)
-    print(Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos))
+    print(Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos))
     data = {
-        'exists': Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos).exists()
+        'exists': Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos).exists()
     }
     return JsonResponse(data)
 
@@ -141,9 +142,9 @@ def pedir(request):
         except MultiValueDictKeyError:
             similar_flag = 'off'
         medicamento_kwargs = {
-            'nombre' :  request.POST['pedir_nombre'],
+            'nombre' :  request.POST['pedir_nombre'].upper(),
             'concentracion_gramos' : request.POST['pedir_gramos'],
-            'droga' : request.POST['pedir_droga'],
+            'droga' : request.POST['pedir_droga'].upper(),
         }
 
         pedido_kwargs = {
@@ -205,7 +206,7 @@ def matchs(request,case,pid):
         else:
 
             matchs = getMatches(Pedido.objects.get(pk = pid))
-   
+
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
 
 
