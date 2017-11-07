@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
+
 @login_required(login_url='/login/')
 def principal(request):
     template = loader.get_template('index.html')
@@ -55,15 +56,15 @@ def donar(request):
         fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
-            'nombre' : request.POST['donar_nombre'],
+            'nombre' : request.POST['donar_nombre'].upper(),
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'].upper()
         }
 
         medicamento_donado_kwargs = {
             'cantidad' : request.POST['donar_cantidad'],
-            'tipo' : request.POST['donar_tipo'],
-            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'tipo' : request.POST['donar_tipo'].upper(),
+            'laboratorio' : request.POST['donar_laboratorio'].upper() ,
             'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
         }
@@ -136,9 +137,9 @@ def pedir(request):
         except MultiValueDictKeyError:
             similar_flag = 'off'
         medicamento_kwargs = {
-            'nombre' :  request.POST['pedir_nombre'],
+            'nombre' :  request.POST['pedir_nombre'].upper(),
             'concentracion_gramos' : request.POST['pedir_gramos'],
-            'droga' : request.POST['pedir_droga'],
+            'droga' : request.POST['pedir_droga'].upper(),
         }
 
         pedido_kwargs = {
@@ -200,7 +201,7 @@ def matchs(request,case,pid):
         else:
 
             matchs = getMatches(Pedido.objects.get(pk = pid))
-   
+
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
 
 

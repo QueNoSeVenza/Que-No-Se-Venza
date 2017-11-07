@@ -15,13 +15,13 @@ def getMatches(entity):
 		not_dull_medicines = [medicamento.id for medicamento in MedicamentoDonado.objects.all() if medicamento.isDull() == False]
 		match_list = MedicamentoDonado.objects.filter(medicamento=entity.medicamento, id__in=not_dull_medicines,stock="Disponible").order_by('fecha_vencimiento')
 		quantities = [medicamento.cantidad for medicamento in match_list]
-		print(not_dull_medicines,match_list,quantities)
+		print(match_list,"MATCHLIST")
 
 		print(match_list)
 		return match_list
 
 	elif entity.__class__.__name__ == "MedicamentoDonado":
-		
+
 		print("MATCHMD")
 		match_list = Pedido.objects.filter(medicamento=entity.medicamento,estado="Activo")
 		print("<>",match_list)
@@ -34,7 +34,7 @@ def getSimilarMatches(entity):
 		print(not_dull_medicines,match_list,quantities)
 
 		print(match_list)
-		return match_list	
+		return match_list
 #Esta funcion reserva la cantidad del pedido a uno o varios MedicamentoDonado, en caso de
 #necesitar reservar parcialmente un MedicamentoDonado le sustrae la cantidad necesaria y
 #se crea otro MedicamentDonado con esa cantidad y el estado "Reservado".
@@ -66,7 +66,7 @@ def executeMatch(petition):
 			kept_medicine.stock = "Reservado"
 			kept_medicine.pk = None
 			kept_medicine.save()
-			match_obj.medicamentos.add(kept_medicine)			
+			match_obj.medicamentos.add(kept_medicine)
 			match_obj.save()
 			print("<<<<<<<<<<<zzzzzzzz",match_obj.medicamentos.all())
 
@@ -82,7 +82,7 @@ def executeMatch(petition):
 			match.save()
 			match_obj.medicamentos.add(match)
 			print("<<<<",match_obj.medicamentos.all())
-			match_obj.save()			
+			match_obj.save()
 			if petition.cantidad == 0:
 				return match_obj
 
@@ -100,6 +100,6 @@ def getDullMedicines():
 def sendMatchEmail(pedido):
 
 	body = "Alguien ha donado "+str(pedido.medicamento)+". Quizas este disponnible para reservarlo, haga click en esta url para continuar: http://127.0.0.1:8000/matchs/"+str(pedido.id)
-  
+
 	email = EmailMessage('Alguien ha donado '+str(pedido.medicamento), body, to=[pedido.user.email])
 	email.send()
