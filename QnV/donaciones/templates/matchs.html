@@ -2,50 +2,50 @@
 {% load static %} {% load staticfiles %}
 <html>
 
-<head>
-  <title>QNV - Resultados de petición</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
-</head>
+  <head>
+    <title>QNV - Resultados de petición</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+  </head>
 
-<body class="thx-body">
-  <div class="row">
-    <div class="center thx-icon">
-      <img alt="Icon" src="{% static 'css/img/icon.png' %}" onclick="location.href='/principal'">
-    </div>
-    <div class="col s12">
-      <h3 class="center grey-text text-darken-3">Se encontraron los siguientes resultados</h3>
-      <div class="col s12 center">
-        <p>Seleccione el que considere adecuado</p>
-        <br>
+  <body class="thx-body">
+    <div class="row">
+      <div class="center thx-icon">
+        <img alt="Icon" src="{% static 'css/img/icon.png' %}" onclick="location.href='/principal'">
       </div>
-
-      <form action="/matchs/{{case}}/{{pid}}/" method="POST">
-        {% csrf_token %}
-        {%for match in matchs%}
-        <div class="col s6 offset-s3 thx-float z-depth-1" style="margin-bottom:20px;">
-          <div class="row center-align">
-            <input type="radio" name="match" value="{{match.id}}" checked> <br>
-
-            <p style="margin-top:-0px;" class="center-align">
-              <input class="with-gap" name="match" type="radio" id="med_1" value="{{match.id}}" />
-              <label for="med_1">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>)</label>
-            </p>
-          </div>{% endfor %}
+      <div class="col s12">
+        <h3 class="center grey-text text-darken-3">Se encontraron los siguientes resultados</h3>
+        <div class="col s12 center">
+          <p>Seleccione el que considere adecuado</p>
+          <br>
         </div>
 
-      </form>
+        <form action="/matchs/{{case}}/{{pid}}/" method="POST">
+          {% csrf_token %}
+          {%for match in matchs%}
+          <div class="col s6 offset-s3 thx-float z-depth-1" style="margin-bottom:20px;">
+            <div class="row center-align">
+              <input type="radio" name="match" value="{{match.id}}" checked> <br>
 
-      <div class="col s12 center">
-        <input class="btn indigo accent-2 semibold z-depth-0 center-align" type="submit" value="Aceptar">
+              <p style="margin-top:-0px;" class="center-align">
+                <input class="with-gap" name="match" type="radio" id="med_1" value="{{match.id}}" />
+                <label for="med_1">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>)</label>
+              </p>
+            </div>{% endfor %}
+          </div>
+          <div class="col s12 center">
+            <input class="btn indigo accent-2 semibold z-depth-0 center-align" type="submit" value="Aceptar">
+          </div>
+        </form>
+
+
       </div>
     </div>
-  </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'js/bin/materialize_donar.js' %}"></script>
 
-</body>
+  </body>
 
 </html>
