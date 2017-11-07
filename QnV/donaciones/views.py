@@ -180,6 +180,10 @@ def pedir(request):
 
 
 
+#def por_entregar(request):
+#meds = [x for x in MedicamentoporDonado.objects.all() if str(x.verificador_ingreso) == ""] 
+#MedicamentoporDonado =[]
+#return MedicamentoporDonado.length 
 
 def matchs(request,pid):
 
