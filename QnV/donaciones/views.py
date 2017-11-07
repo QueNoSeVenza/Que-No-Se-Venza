@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
+from django.template import RequestContext
 
 @login_required(login_url='/login/')
 def principal(request):
@@ -24,11 +25,13 @@ def principal(request):
     verificador = False
     medicamentos = Medicamento.objects.all()
     user = request.user
+    donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
+    
 #    context.update(dict(medicamentos=medicamentos, user=request.user,
 #                        med_list=medicamentos.object_list))
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
