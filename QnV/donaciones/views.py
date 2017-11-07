@@ -20,6 +20,14 @@ from django.views.generic.list import ListView
 from django.template import RequestContext
 
 @login_required(login_url='/login/')
+
+
+#def por_entregar(request):
+# 
+#cantidad_de =[]
+#meds = [x for x in MedicamentoporDonado.objects.all() if str(x.verificador_ingreso) == ""]
+
+
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
@@ -180,10 +188,7 @@ def pedir(request):
 
 
 
-#def por_entregar(request):
-#meds = [x for x in MedicamentoporDonado.objects.all() if str(x.verificador_ingreso) == ""] 
-#MedicamentoporDonado =[]
-#return MedicamentoporDonado.length 
+ 
 
 def matchs(request,pid):
 
