@@ -119,10 +119,9 @@ def donar(request):
 
 def validate_medicamento(request):
     nombre = request.GET.get('nombre', None)
-    print(nombre)
     concentracion_gramos = request.GET.get('concentracion', None)
     print(concentracion_gramos)
-    print(Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos))
+    print(Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos))
     data = {
         'exists': Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos).exists()
     }
