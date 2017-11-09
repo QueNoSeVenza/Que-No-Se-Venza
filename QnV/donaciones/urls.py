@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from .views import *
 from django.contrib.auth import views
+from donaciones import views  #entregar
+
 
 urlpatterns = [
     url(r'^principal', principal, name='principal'),
