@@ -112,7 +112,6 @@ def entrada(request):
 			medicamento_donado = MedicamentoDonado(stock = 'empty')
 
 		print(medicamento_donado.stock)
-
 		if medicamento_donado.stock == 'En Espera':
 			fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
 			return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
@@ -182,7 +181,7 @@ def search(request):
 def todo(request, string):
 	meds = MedicamentoDonado.objects.all()
 	medicamentosMatch = []
-	
+
 	for i in meds:
 		if string in i.medicamento.nombre:
 			medicamentosMatch.append(i)
@@ -217,7 +216,7 @@ def todoStock(request):
 def noVerificado(request, string):
 	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"]
 	medicamentosMatch = []
-	
+
 	for i in meds:
 		if string in i.medicamento.nombre:
 			medicamentosMatch.append(i)

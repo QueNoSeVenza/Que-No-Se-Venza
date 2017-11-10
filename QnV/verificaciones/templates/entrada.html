@@ -1,6 +1,8 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 <html>
 	<head>
+		<title>Verificacion - Verificar entrada</title>
+		<link rel="icon" href="{% static 'logo.png' %}">
 		<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
 		<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
 	</head>
@@ -46,7 +48,7 @@
 			{% endfor %}
 		</ul>
 		{% endif %}
-		
+
 	</body>
 </html>
 
