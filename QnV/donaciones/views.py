@@ -25,6 +25,7 @@ def principal(request):
     verificador = False
     medicamentos = Medicamento.objects.all()
     user = request.user
+    print user
     donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
     
 #    context.update(dict(medicamentos=medicamentos, user=request.user,

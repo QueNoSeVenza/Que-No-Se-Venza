@@ -19,14 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
 from django.contrib.auth.views import  password_reset, password_reset_done, password_reset_confirm, password_reset_complete
-from login.views import test
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('login.urls', namespace='login')),
     url(r'^', include('donaciones.urls', namespace='donaciones')),
     url(r'^', include('verificaciones.urls', namespace='verificaciones')),
     url(r'^', include('presentacion.urls', namespace='presentacion')),
-    url(r'^test' , test, name='test'),
     url(r'^reset/password_reset', password_reset,
         {'template_name':'password_reset_form.html',
          'email_template_name': 'password_reset_email.html'},
