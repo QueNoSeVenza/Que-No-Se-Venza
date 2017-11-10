@@ -4,7 +4,8 @@
 
 <head>
 	<!-- Global -->
-	<title>QNV</title>
+	<title>Que no venza</title>
+	<link rel="icon" href="{% static 'logo.png' %}">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8" />
 
 	<!-- CSS -->
@@ -22,7 +23,7 @@
 			<div class="col s12">
 				<ul class="center">
 					<div class="center">
-						<li id="centered"><img alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
+						<li id="centered"><img class="hide-onload" alt="Icon" src="{% static 'css/img/icon.png' %}"></li>
 					</div>
 					<li><a href="#section6">CONTACTO</a></li>
 					<li><a href="#section4">COMO DONAR</a></li>
@@ -32,11 +33,18 @@
 			</div>
 		</nav>
 		<div class="row">
-			<div class="qnv-title center fadeonscroll-title">
-				<h2>QUE</h2>
-				<h1>NO VENZA</h1>
+			<div class="logo-container" style="margin-top:-40px;">
+				<div class="content">
+					<div class="logo-wrap">
+						<div id='logo'></div>
+					</div>
+				</div>
 			</div>
-			<div class="title-pnl">
+			<div class="qnv-title center fadeonscroll-title">
+				<h2 id="title-pro">PROYECTO</h2>
+				<h1 id="title-qnv">QUE NO VENZA</h1>
+			</div>
+			<div class="title-pnl hide-onload">
 				<div onclick="window.location.href = '/login'" class="col s10 offset-s1 m4 offset-m4 l2 offset-l5 center ing-btn">
 					<p>INGRESAR</p>
 				</div>
@@ -52,9 +60,11 @@
 		<div class="row">
 			<div class="col s12 intro-pnl">
 				<div class="col s12 m10 offset-m1 fadeonscroll">
-					<h2 class="center">¿Qué es "que no venza"?</h2>
+					<h2 class="center semibold" style="margin-top:60px;">¿QUÉ ES QUE NO VENZA?</h2>
 					<div class="col s12 m8 offset-m2 center">
-						<p>Se podria decir que QNV es un gestor de donaciones web, pero va mas alla de la aplicacion, queremos cambiar la forma de ayudar a la gente, como?, brindando una herramienta que facilte el intercambio de medicamentos, asi aquellos medicamentos que tenemos guardados sin usar en nuestra casa terminen en manos de personas que no tienen la capacidad de adquirirlos. Una vez que una solicitud machea, el dispensario seleccionado funcionara como verificador del medicamento para asegurarse que se encuentre en buen estado y/o no haya sido adulterado.  </p>
+						<p>Se podria decir que QNV es un gestor de donaciones web, pero va mas alla de la aplicacion, queremos cambiar la forma de ayudar a la gente, como?, brindando una herramienta que facilte el intercambio de medicamentos, asi aquellos medicamentos que
+							tenemos guardados sin usar en nuestra casa terminen en manos de personas que no tienen la capacidad de adquirirlos. Una vez que una solicitud machea, el dispensario seleccionado funcionara como verificador del medicamento para asegurarse que se
+							encuentre en buen estado y/o no haya sido adulterado. </p>
 					</div>
 				</div>
 			</div>
@@ -65,7 +75,7 @@
 	<section id="section3" class="cd-section">
 		<div class="row">
 			<div class="col s12 where-pnl center">
-				<h2 class="fadeonscroll wtitle">Puntos de depósito</h2>
+				<h3 class="fadeonscroll wtitle semibold" style="font-size: 2.2rem;">PUNTOS DE DEPÓSITO</h3>
 				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
 					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Enrique Bochini</span></div>
 				</div>
@@ -80,7 +90,7 @@
 	<section id="section4" class="cd-section">
 		<div class="row">
 			<div class="col s12 how-pnl center">
-				<h2 class="fadeonscroll">¿Cómo donar o solicitar?</h2>
+				<h2 class="fadeonscroll semibold" style="margin-top:60px;">¿CÓMO DONAR O SOLICITAR?</h2>
 				<!-- Primer paso -->
 				<table>
 					<tr>
@@ -91,7 +101,8 @@
 						<td>
 							<div class="col m12 right fadeonscroll">
 								<h2>Registrate</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 							</div>
 						</td>
 					</tr>
@@ -102,7 +113,8 @@
 						<td>
 							<div class="col m12 fadeonscroll">
 								<h2>Completa el formulario</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 							</div>
 						</td>
 						<td>
@@ -117,13 +129,14 @@
 					<tr>
 						<td>
 							<div class="hide-on-mobile frame  fadeonscroll-left">
-								<img src="{% static 'css/img/step1.png' %}" height=300 alt="Paso 3" />
+								<img src="{% static 'css/img/step3.png' %}" height=300 alt="Paso 3" />
 							</div>
 						</td>
 						<td>
 							<div class="col m12 right fadeonscroll">
 								<h2>Presentate en el dispensario</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 							</div>
 						</td>
 					</tr>
@@ -138,7 +151,7 @@
 			<div class="final-pnl">
 				<div class="fadeonscroll">
 					<div class="col s12 center">
-						<h2 class="black-text center">Hora de donar!</h2>
+						<h2 class="black-text center semibold">¡HORA DE DONAR!</h2>
 						<p class="col s10 offset-s1 m8 offset-m2 center">Registrate y empeza a donar/solicitar un medicamento.</p>
 					</div>
 					<div class="center">
@@ -153,7 +166,7 @@
 	<footer>
 		<div class="row fadeonscroll" id="section6">
 			<div class="col s12 l3 offset-l1">
-				<h4>Navegacion</h4>
+				<h4 class="semibold">Navegacion</h4>
 				<ul>
 					<li><a href="#section1">Empezar</a></li>
 					<li><a href="#section2">Qué somos</a></li>
@@ -162,7 +175,7 @@
 				</ul>
 			</div>
 			<div class="col s12 l4">
-				<h4>correo</h4>
+				<h4 class="semibold">correo</h4>
 				<form>
 					<div class="row">
 						<div class="col s6">
@@ -181,7 +194,7 @@
 				</form>
 			</div>
 			<div class="col s12 l3">
-				<h4>Contacto</h4>
+				<h4 class="semibold">Contacto</h4>
 				<ul>
 					<li id="comunicate">+54 9 351 5115621</li>
 					<li id="comunicate">direccion 1</li>
@@ -190,7 +203,7 @@
 				</ul>
 			</div>
 
-			<div class="col s12 m6 offset-m3 center">
+			<div class="col s12 m6 offset-m3 center bb-effect">
 				<div class="divider"></div><a id="mendiolaza_link" href="municipalidad-de-mendiolaza/" target="_blank">MUNICIPALIDAD EN MENDOZA</a></div>
 		</div>
 	</footer>
@@ -201,11 +214,23 @@
 	</script>
 	<script src="{% static 'hover-image/jquery.plate.js' %}">
 	</script>
+	<script src="{% static 'lazy-line/jquery.lazylinepainter-1.7.0.min.js' %}">
+	</script>
+	<script src="{% static 'lazy-line/path.js' %}">
+	</script>
 	<script>
 		$('.titleblock').hide();
+		var $logo = $('#logo-lazy');
+
 
 		$(document).ready(function() {
 			$('.titleblock').show();
+			//Intro animation
+			$(".hide-onload").hide();
+			$(".logo-container").delay(2400).fadeOut("fast");
+			$(".hide-onload").delay(2800).fadeIn("slow");
+			$("#title-pro").hide().delay(3000).fadeIn("slow");
+			$("#title-qnv").hide().delay(3200).fadeIn("slow");
 			// Send to the top of page on refresh
 			// $(this).scrollTop(0);
 			// Image on hover
@@ -255,6 +280,7 @@
 					});
 				}
 			});
+
 		});
 	</script>
 </body>

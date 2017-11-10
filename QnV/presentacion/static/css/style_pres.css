@@ -1,14 +1,14 @@
 @font-face {
   font-family: Avenir-Normal;
-  src: url(fonts/AvenirLTStd-Medium.otf); }
+  src: url("fonts/AvenirLTStd-Medium.otf"); }
 @font-face {
   font-family: Avenir-Light;
-  src: url(fonts/AvenirLTStd-Light.otf); }
+  src: url("fonts/AvenirLTStd-Light.otf"); }
 @font-face {
   font-family: Avenir-Heavy;
-  src: url(fonts/AvenirLTStd-Heavy.ttf); }
-html,
-body {
+  src: url("fonts/AvenirLTStd-Heavy.ttf"); }
+body,
+html {
   height: 100%;
   width: 100%;
   font-family: Avenir-Normal; }
@@ -17,7 +17,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: #fcfcfc;
-  background-image: url(img/back.png);
+  background-image: url("img/back.png");
   background-repeat: repeat-x; }
 
 a {
@@ -38,7 +38,10 @@ p {
   float: right; }
 
 .row {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0 !important; }
+
+.semibold {
+  font-family: Avenir-Heavy !important; }
 
 @media screen and (max-width: 600px) {
   .hide-on-mobile {
@@ -66,7 +69,7 @@ nav {
         display: block;
         padding: 14px 16px;
         color: #757575;
-        font-size: .6rem;
+        font-size: 0.6rem;
         -moz-transition: all ease 0.4s;
         -o-transition: all ease 0.4s;
         -webkit-transition: all ease 0.4s;
@@ -99,6 +102,19 @@ nav {
 
 #section1 {
   height: 100%; }
+  #section1 .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 35%;
+    -ms-transform: translate(-50%, -50%);
+    /* IE 9 */
+    -webkit-transform: translate(-50%, -50%);
+    /* Chrome, Safari, Opera */
+    transform: translate(-50%, -50%); }
+  #section1 .logo-wrap {
+    width: 100%;
+    position: relative; }
   #section1 .qnv-title {
     position: absolute;
     width: 100%;
@@ -188,7 +204,7 @@ nav {
     border-radius: 10px;
     color: #fff;
     background-color: #707ff9;
-    box-shadow: 0px 23px 54px -16px rgba(0, 0, 0, 0.43); }
+    box-shadow: 0 23px 54px -16px rgba(0, 0, 0, 0.43); }
   .intro-pnl h2 {
     color: #fff;
     font-family: Avenir-Light; }
@@ -207,15 +223,14 @@ nav {
 
 .plate {
   border-radius: 10px;
-  box-shadow: 0px 23px 54px -16px rgba(0, 0, 0, 0.43);
+  box-shadow: 0 23px 54px -16px rgba(0, 0, 0, 0.43);
   width: 100%;
   height: 400px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("img/test.jpg");
   text-transform: uppercase;
   color: #fff;
   font-weight: 600;
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto 0;
   line-height: 200px;
   text-align: center;
   font-size: 2rem;
@@ -255,13 +270,13 @@ nav {
     background-size: cover;
     background-position: 50%; }
   @media screen and (max-width: 600px) {
-    .how-pnl p,
-    .how-pnl h2 {
+    .how-pnl h2,
+    .how-pnl p {
       text-align: center; } }
 
 .final-pnl {
   height: 500px;
-  background-image: url(img/repback2.png);
+  background-image: url("img/repback2.png");
   background-repeat: repeat;
   background-color: #fbfbfb; }
   .final-pnl h2 {
@@ -272,7 +287,7 @@ nav {
     color: #fff;
     background-color: #5ac8fa;
     border-radius: 5px;
-    padding: 20 65 20 65;
+    padding: 20 65;
     -moz-transition: 0.5s;
     -o-transition: 0.5s;
     -webkit-transition: 0.5s;
@@ -300,17 +315,17 @@ footer {
     footer ul li {
       font-family: Avenir-Heavy;
       letter-spacing: 1px;
-      font-size: .8rem;
+      font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
       margin-left: -15px;
       text-decoration: none;
-      padding: 10 0 10 0; }
+      padding: 10 0; }
       footer ul li:before {
         content: '- '; }
       footer ul li a,
-      footer ul li a:hover,
       footer ul li a:focus,
+      footer ul li a:hover,
       footer ul li a:link {
         color: #4c5a65; }
     footer ul #comunicate {
@@ -320,12 +335,12 @@ footer {
       footer ul #comunicate:after {
         content: ' -'; }
     @media screen and (max-width: 1000px) {
-      footer ul li,
-      footer ul #comunicate {
+      footer ul #comunicate,
+      footer ul li {
         text-align: center; }
-        footer ul li:after, footer ul li:before,
-        footer ul #comunicate:after,
-        footer ul #comunicate:before {
+        footer ul #comunicate:after, footer ul #comunicate:before,
+        footer ul li:after,
+        footer ul li:before {
           content: ' - ' !important; } }
   footer .divider {
     margin-top: 40px;
@@ -334,7 +349,7 @@ footer {
     width: 100%;
     margin-bottom: 40px; }
   footer #mendiolaza_link {
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: #546e7a;
     letter-spacing: 2px; }
   footer form {
@@ -344,10 +359,10 @@ footer {
     footer form input[type="email"] {
       font-family: 'Montserrat', sans-serif;
       background-color: #2b3339;
-      margin: 10 0 10 0;
+      margin: 10 0;
       color: #fff;
       padding: 12 35 12 35 !important;
-      border-radius: 0px;
+      border-radius: 0;
       border: 0;
       resize: none; }
     footer form input[type="submit"] {
@@ -357,7 +372,7 @@ footer {
       margin-left: 25px;
       font-size: 12px;
       text-transform: uppercase;
-      padding: 10 25 10 25;
+      padding: 10 25;
       border: 0;
       margin-right: 12px; }
       footer form input[type="submit"]:hover {
@@ -374,5 +389,23 @@ footer {
     text-align: center; }
   footer :-ms-input-placeholder {
     text-align: center; }
+  footer div.bb-effect a {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 5px;
+    margin-right: 10px; }
+  footer div.bb-effect a:last-child {
+    margin-right: 0; }
+  footer div.bb-effect a:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 0;
+    background: transparent;
+    transition: width 0.3s ease, background-color 0.5s ease; }
+  footer div.bb-effect a:hover:after {
+    width: 100%;
+    background: #35454d; }
 
 /*# sourceMappingURL=style_pres.css.map */
