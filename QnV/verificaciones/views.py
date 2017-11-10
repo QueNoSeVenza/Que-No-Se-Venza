@@ -26,19 +26,20 @@ def delete_stock(request):
 
 def stock (request):
 
-    if request.user.groups.filter(name='Verificadores').exists():
-        verificador_ingreso =[]
-        medicamentos = MedicamentoDonado.objects.all()
-        for i in medicamentos:
+	if request.user.groups.filter(name='Verificadores').exists():
+		verificador_ingreso =[]
+		fechaV = []
+		medicamentos = MedicamentoDonado.objects.all()
+		cant = len(medicamentos)
+		for i in medicamentos:
+			fechaV.append(datetime.strptime(str(i.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y'))
 			if i.isDull() == True:
 				print(i.stock)
 				i.stock = "Vencido"
 				i.save()
-        return render(request,'stock.html',{'donaciones' : medicamentos})
-    else:
-
-        return HttpResponseForbidden()
-
+		return render(request,'stock.html',{'donaciones' : medicamentos, 'fecha' : fechaV, 'cantidad' : cant})
+	else:
+		return HttpResponseForbidden()
 
 
 def input_view (request,case):
@@ -62,75 +63,63 @@ def input_view (request,case):
 
 
 def entrada(request):
-    if request.method == "POST":
-        ndi = request.POST['donation_id']
-        nombre = request.POST['nome']
-        vencimiento = request.POST['date']
-        prescripcion  = request.POST['prescripcion']
-        tipo = request.POST['type']
+	if request.method == "POST":
+		ndi = request.POST['donation_id']
+		nombre = request.POST['nome']
+		vencimiento = request.POST['date']
+		prescripcion  = request.POST['prescripcion']
+		tipo = request.POST['type']
+		medicamento_donado = MedicamentoDonado.objects.get(id = ndi)
+		fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
 
-        medicamento_donado = MedicamentoDonado.objects.get(id = ndi)
-
-        if vencimiento[:3] == "Sep":
-            nuevo = vencimiento[:3]+vencimiento[4:]
-        else :
-            nuevo = vencimiento
-
-        try:
-            fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
-        except:
-            try:
-                fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
-            except:
-                try:
-                    fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
-                except:
-					try:
-						fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
-					except:
-						messages.info(request, 'Fecha no Valida!')
-						return render(request,'entrada.html',{'donacion' : medicamento_donado})
+		try:
+			fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
+		except:
+			try:
+				fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+			except:
+				messages.info(request, 'Fecha no Valida!')
+				return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})		
 
 		fechaVen = datetime.strptime(fecha,'%Y-%m-%d').date()
 
 		if fechaVen <= date.today():
 			messages.info(request, 'Fecha no Valida!')
-			return render(request,'entrada.html',{'donacion' : medicamento_donado})
+			return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
-        med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
-        med_donado.fecha_vencimiento = fecha
-        med_donado.medicamento.nombre = nombre
-        med_donado.tipo = tipo
-        med_donado.prescripcion = prescripcion
-        med_donado.verificador_ingreso = request.user
-        med_donado.stock = "Disponible"
-        med_donado.save()
-        med_donado.medicamento.save()
+		med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])
+		med_donado.fecha_vencimiento = fecha
+		med_donado.medicamento.nombre = nombre
+		med_donado.tipo = tipo
+		med_donado.prescripcion = prescripcion
+		med_donado.verificador_ingreso = request.user
+		med_donado.stock = "Disponible"
+		med_donado.save()
+		med_donado.medicamento.save()
 
 
-        #Cambiar /entrada/input por un template que comunique el exito de la operación
+		#Cambiar /entrada/input por un template que comunique el exito de la operación
 
-        print("Donación registrada con exito")
-        if len(getMatches(med_donado)) != 0:
-            for peticion in getMatches(med_donado):
-                sendMatchEmail(peticion)
-        return HttpResponseRedirect("/verificacion/stock")
-    else:
-        print(Donacion.objects.all().values('id'))
-        try:
-            medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
-        except (ObjectDoesNotExist,ValueError):
-            medicamento_donado = MedicamentoDonado(stock = 'empty')
+		print("Donación registrada con exito")
+		if len(getMatches(med_donado)) != 0:
+			for peticion in getMatches(med_donado):
+				sendMatchEmail(peticion)
+		return HttpResponseRedirect("/verificacion/stock")
+	else:
+		try:
+			medicamento_donado = MedicamentoDonado.objects.get(id = request.GET['id'])
+		except (ObjectDoesNotExist,ValueError):
+			medicamento_donado = MedicamentoDonado(stock = 'empty')
 
-        print(medicamento_donado.stock)
+		print(medicamento_donado.stock)
+		if medicamento_donado.stock == 'En Espera':
+			fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
+			return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
-        if medicamento_donado.stock == 'En Espera':
-            return render(request,'entrada.html',{'donacion' : medicamento_donado})
-
-        elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado' or medicamento_donado.stock == 'Entregado':
-            return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/input/entrada';</script>")
-        else:
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/entrada';</script>")
+		elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado' or medicamento_donado.stock == 'Entregado':
+			return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/input/entrada';</script>")
+		else:
+			return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/entrada';</script>")
 
 
 def salida(request):
