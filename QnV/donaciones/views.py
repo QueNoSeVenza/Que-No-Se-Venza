@@ -18,19 +18,24 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
+from django.template import RequestContext
 
 
 @login_required(login_url='/login/')
+
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
     medicamentos = Medicamento.objects.all()
     user = request.user
+    print user
+    donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
+    por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"])
 #    context.update(dict(medicamentos=medicamentos, user=request.user,
 #                        med_list=medicamentos.object_list))
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -46,8 +51,6 @@ def thanks(request, id_med):
     email.send()
 
     return HttpResponse(template.render(context, request))
-
-
 
 
 ##############################################################################
@@ -183,6 +186,7 @@ def pedir(request):
 
 
 
+ 
 
 def matchs(request,case,pid):
 
