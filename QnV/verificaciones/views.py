@@ -68,18 +68,18 @@ def entrada(request):
         vencimiento = request.POST['date']
         prescripcion  = request.POST['prescripcion']
         tipo = request.POST['type']
-		
+
         medicamento_donado = MedicamentoDonado.objects.get(id = ndi)
-        
+
         if vencimiento[:3] == "Sep":
             nuevo = vencimiento[:3]+vencimiento[4:]
         else :
             nuevo = vencimiento
-        
+
         try:
             fecha = datetime.strptime(nuevo, '%b. %d, %Y').strftime('%Y-%m-%d')
         except:
-            try: 
+            try:
                 fecha = datetime.strptime(nuevo, '%B %d, %Y').strftime('%Y-%m-%d')
             except:
                 try:
@@ -90,9 +90,9 @@ def entrada(request):
 					except:
 						messages.info(request, 'Fecha no Valida!')
 						return render(request,'entrada.html',{'donacion' : medicamento_donado})
-					
+
 		fechaVen = datetime.strptime(fecha,'%Y-%m-%d').date()
-		
+
 		if fechaVen <= date.today():
 			messages.info(request, 'Fecha no Valida!')
 			return render(request,'entrada.html',{'donacion' : medicamento_donado})
@@ -126,7 +126,7 @@ def entrada(request):
 
         if medicamento_donado.stock == 'En Espera':
             return render(request,'entrada.html',{'donacion' : medicamento_donado})
-        
+
         elif medicamento_donado.stock == 'Disponible' or medicamento_donado.stock == 'Reservado' or medicamento_donado.stock == 'Entregado':
             return HttpResponse("<script>alert('Medicamento ya verificado'); window.location = '/verificacion/input/entrada';</script>")
         else:
@@ -192,7 +192,7 @@ def search(request):
 def todo(request, string):
 	meds = MedicamentoDonado.objects.all()
 	medicamentosMatch = []
-	
+
 	for i in meds:
 		if string in i.medicamento.nombre:
 			medicamentosMatch.append(i)
@@ -227,7 +227,7 @@ def todoStock(request):
 def noVerificado(request, string):
 	meds = [x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"]
 	medicamentosMatch = []
-	
+
 	for i in meds:
 		if string in i.medicamento.nombre:
 			medicamentosMatch.append(i)
