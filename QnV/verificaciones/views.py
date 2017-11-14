@@ -129,22 +129,23 @@ def salida(request):
         donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'].upper())
 
         if donacion.prescripcion == True:
+            print("primero")
             if len(request.POST.getlist('checks')) == 1:
                 donacion.stock = 'Entregado'
                 donacion.verificador_salida = request.user
                 donacion.save()
 
-                return HttpResponseRedirect("/verificacion/input/retiro")
+                return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
 
             else:
                 #Cambiar /entrada/input por un template de error
                 print("No se han verificado todos los campos, la operación ha sido cancelada")
-                return HttpResponseRedirect("/verificacion/input/retiro")
+              	return HttpResponse("<script>alert('Operacion cancelada, el medicamento sigue reservado, pero no sera entregado hasta que el usuario presente prescripcion'); window.location = '/verificacion/input/retiro';</script>")
         else:
             donacion.stock = 'Entregado'
             donacion.verificador_salida = request.user
             donacion.save()
-            return HttpResponseRedirect("/verificacion/input/retiro")
+            return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
     else:
         code = request.GET['salida']
         try:
