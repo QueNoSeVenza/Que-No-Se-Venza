@@ -1,25 +1,30 @@
+{% load static %} {% load staticfiles %}
+<html>
 
-<form action="/verificacion/salida/" method="POST">
-{% csrf_token %}
-<input type="hidden" name="donation_id" value="{{donation_id}}"/>
-{{match_id}}
-{% for medicamento_donado in match %}
+<head>
+  <title>Retirando medicamento</title>
+  <link rel="icon" href="{% static 'logo.png' %}">
+  <link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+  <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+</head>
 
-<p>{{medicamento_donado}}</p>	
+<body>
+  <div class="col s12 center-align">
+  <form action="/verificacion/salida/" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="donation_id" value="{{donation_id}}" /> {{match_id}} {% for medicamento_donado in match %}
 
-{% endfor %}
+    <p>{{medicamento_donado}}</p>
 
-{% if donacion.prescripcion %}
+    {% endfor %} {% if donacion.prescripcion %}
 
-Retirando {{donacion.medicamento.nombre}} <br>
+    <h1>Retirando {{donacion.medicamento.nombre}}</h1>
 
-<input type="checkbox" name="checks" value="nombre">¿Posee el beneficiario la receta correspondiente?<br>
+    <input type="checkbox" name="checks" value="nombre">¿Posee el beneficiario la receta correspondiente?<br> {% else %} Todo en orden, puede otorgar el medicamento al usuario. {% endif %}
+    <br>
+    <input type="submit" value="Aceptar">
+  </form>
+  </div>
+</body>
 
-{% else %}
-
-Todo en orden, puede otorgar el medicamento al usuario.
-
-{% endif %}
-<br>
-  <input type="submit" value="Aceptar">
-</form> 
+</html>
