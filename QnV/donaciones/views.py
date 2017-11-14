@@ -29,13 +29,14 @@ def principal(request):
     medicamentos = Medicamento.objects.all()
     user = request.user
     print user
-    donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
-    por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"])
-#    context.update(dict(medicamentos=medicamentos, user=request.user,
-#                        med_list=medicamentos.object_list))
+    donations = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Disponible'))
+    por_entregar = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='En Espera'))
+
+   # por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.MedicamentoDonado.stock) == "None"])
+
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, }
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):

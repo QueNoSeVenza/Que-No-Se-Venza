@@ -72,3 +72,5 @@ class Pedido(models.Model):
 class Match(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     donacion = models.ForeignKey(MedicamentoDonado,on_delete = models.CASCADE)
+
+
