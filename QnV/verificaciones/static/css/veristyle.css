@@ -42,6 +42,11 @@ body {
   border: 0 !important;
 }
 
+#invalid_date{
+  width: 100%;
+  text-align: center;
+}
+
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

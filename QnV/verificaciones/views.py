@@ -78,13 +78,13 @@ def entrada(request):
 			try:
 				fecha = datetime.strptime(vencimiento, '%d/%m/%Y').strftime('%Y-%m-%d')
 			except:
-				messages.info(request, 'Fecha no Valida!')
-				return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})		
+				messages.info(request, 'FECHA NO VALIDA')
+				return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
 		fechaVen = datetime.strptime(fecha,'%Y-%m-%d').date()
 
 		if fechaVen <= date.today():
-			messages.info(request, 'Fecha no Valida!')
+			messages.info(request, 'FECHA NO VALIDA')
 			return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
 		med_donado = MedicamentoDonado.objects.get(pk=request.POST['donation_id'])

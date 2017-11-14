@@ -42,9 +42,9 @@
 		</div>
 
 		{% if messages %}
-		<ul class="messages">
+		<ul class="messages" id="nonn" style="text-align:center; list-style: none; color: #f66055; border: 1px solid #f66055; width: 20%; margin-left: 40%;">
 			{% for message in messages %}
-			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			<li{% if message.tags %} class="{{ message.tags }}" style="margin-top:14px;"{% endif %}>{{ message }}</li>
 			{% endfor %}
 		</ul>
 		{% endif %}
@@ -105,7 +105,8 @@
 	}
 
 	$(document).ready(function(){
-		// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-		$('.modal').modal();
+		if ($("#nonn").length) {
+			$("#v_ven").css("color", "red");
+		}
 	});
 </script>
