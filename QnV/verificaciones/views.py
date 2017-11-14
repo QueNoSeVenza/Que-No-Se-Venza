@@ -73,10 +73,10 @@ def entrada(request):
 		fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
 
 		try:
-			fecha = datetime.strptime(nuevo, '%d-%m-%Y').strftime('%Y-%m-%d')
+			fecha = datetime.strptime(vencimiento, '%d-%m-%Y').strftime('%Y-%m-%d')
 		except:
 			try:
-				fecha = datetime.strptime(nuevo, '%d/%m/%Y').strftime('%Y-%m-%d')
+				fecha = datetime.strptime(vencimiento, '%d/%m/%Y').strftime('%Y-%m-%d')
 			except:
 				messages.info(request, 'Fecha no Valida!')
 				return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})		

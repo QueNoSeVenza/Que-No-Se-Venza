@@ -6,9 +6,8 @@ from django.contrib.auth.views import login, logout_then_login, password_reset, 
 from django.core.urlresolvers import reverse_lazy
 
 urlpatterns = [
-    url(r'^login', login, name='login'),
+    url(r'^login', login, name='loni'),
     url(r'^tyc', tyc, name='tyc'),
     url(r'^log', log, name='log'),
-    url(r'^reg', reg, name='reg'),  
-    url(r'^logout/$', log_out, name='log_out')
+    url(r'^reg', reg, name='reg'),      
 ]

@@ -80,8 +80,3 @@ def reg(request):
 
     else:
         return redirect('/login')
-
-def log_out(request):
-    print ("eiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    logout(request)
-    return HttpResponseRedirect("/")
