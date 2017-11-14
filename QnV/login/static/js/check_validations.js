@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('body').css('height',$(window).height()+'px');
   $(".register-content").css("opacity", "1");
   // Revisa que los password sean iguales
   $("#regpass, #regpass2, #txtConfirmPassword").keyup(function(event) {
