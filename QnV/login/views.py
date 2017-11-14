@@ -39,7 +39,7 @@ def log(request):
     if 'POST' in request.method:
         usern = request.POST['username']
         passw = request.POST['password']
-        print(usern + passw)
+        #print(usern + passw)
         user = authenticate(request, username=usern, password=passw)
         if user is not None:
             auth_login(request, user)

@@ -22,9 +22,71 @@
           <div class="dropOut">
             <div class="triangle"></div>
             <ul>
-              <li onclick="location.href='{% url 'donaciones:log_out' %}';">Cerrar sesión</li>
+              <li onclick="location.href='/logout';">Cerrar sesión</li>
             </ul>
           </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <ul id="slide-out" class="side-nav">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="collapsible-container1">
+                    <div class="collapsible-container2">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li onclick="firstSection();">
+                                <div class="collapsible-header semibold transparent white-text col s4 m12" id="active">Perfil</div>
+                            </li>
+                            <li onclick="secondSection();">
+                                <div class="collapsible-header semibold white-text col s4 m12">Contacto</div>
+                            </li>
+                            <li onclick="thirdSection();">
+                                <div class="collapsible-header semibold white-text col s4 m12">Acerca de</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m5">
+                <ul class="white-text">
+                    <!--Seccion NAV 1-->
+                    <li id="navsection1">
+                        {{django_users.first_name|title}}
+                        <br>
+                        Donaciones: {{ donacion }}
+                        <br>
+                        Falta de entregar: {{por_entregar}}
+                        
+                        
+                    </li>
+                    <!--Seccion NAV 2-->
+                    <li id="navsection2">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <h6>Introducción</h6>
+                                    <div class="input-field col s12">
+                                        <input id="a" type="text">
+                                        <label for="a">Nombre</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input id="b" type="text">
+                                        <label for="b">Correo electrónico</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea" data-length="420" maxlength="420" class="materialize-textarea  "></textarea>
+                                        <label for="textarea">Mensaje</label>
+                                    </div>
+                                    <button class="btn white-text right">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <!--Seccion NAV 3-->
+                    <li id="navsection3">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects</li>
+                </ul>
+            </div>
         </div>
       </li>
     </ul>

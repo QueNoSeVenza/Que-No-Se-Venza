@@ -18,18 +18,24 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
+from django.template import RequestContext
+
 
 @login_required(login_url='/login/')
+
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
     medicamentos = Medicamento.objects.all()
     user = request.user
+    print user
+    donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
+    por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"])
 #    context.update(dict(medicamentos=medicamentos, user=request.user,
 #                        med_list=medicamentos.object_list))
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -47,8 +53,6 @@ def thanks(request, id_med):
     return HttpResponse(template.render(context, request))
 
 
-
-
 ##############################################################################
 
 def donar(request):
@@ -60,15 +64,15 @@ def donar(request):
         fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
-            'nombre' : request.POST['donar_nombre'],
+            'nombre' : request.POST['donar_nombre'].upper(),
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'].upper()
         }
 
         medicamento_donado_kwargs = {
             'cantidad' : request.POST['donar_cantidad'],
-            'tipo' : request.POST['donar_tipo'],
-            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'tipo' : request.POST['donar_tipo'].upper(),
+            'laboratorio' : request.POST['donar_laboratorio'].upper() ,
             'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
         }
@@ -126,9 +130,9 @@ def validate_medicamento(request):
     print(nombre)
     concentracion_gramos = request.GET.get('concentracion', None)
     print(concentracion_gramos)
-    print(Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos))
+    print(Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos))
     data = {
-        'exists': Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos).exists()
+        'exists': Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos).exists()
     }
     return JsonResponse(data)
 
@@ -141,9 +145,9 @@ def pedir(request):
         except MultiValueDictKeyError:
             similar_flag = 'off'
         medicamento_kwargs = {
-            'nombre' :  request.POST['pedir_nombre'],
+            'nombre' :  request.POST['pedir_nombre'].upper(),
             'concentracion_gramos' : request.POST['pedir_gramos'],
-            'droga' : request.POST['pedir_droga'],
+            'droga' : request.POST['pedir_droga'].upper(),
         }
 
         pedido_kwargs = {
@@ -182,6 +186,7 @@ def pedir(request):
 
 
 
+ 
 
 def matchs(request,case,pid):
 
@@ -205,7 +210,7 @@ def matchs(request,case,pid):
         else:
 
             matchs = getMatches(Pedido.objects.get(pk = pid))
-   
+
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
 
 
@@ -228,3 +233,7 @@ def code(request,id):
             return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})            
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+    
+    def logout(request):
+        logout(request)
+        return HttpResponseRedirect("/")
