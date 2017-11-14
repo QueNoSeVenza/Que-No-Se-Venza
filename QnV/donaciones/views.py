@@ -234,6 +234,6 @@ def code(request,id):
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
     
-#    def logoutt(request):
-#        logout(request)
-#        return HttpResponseRedirect("/")
+    def logout(request):
+        logout(request)
+        return HttpResponseRedirect("/")
