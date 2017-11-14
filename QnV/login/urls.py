@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^tyc', tyc, name='tyc'),
     url(r'^log', log, name='log'),
     url(r'^reg', reg, name='reg'),  
-    url(r'^logout/$', log_out, name='log_out')
+    
 ]

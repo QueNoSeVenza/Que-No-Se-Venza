@@ -233,3 +233,7 @@ def code(request,id):
             return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})            
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+    
+#    def logoutt(request):
+#        logout(request)
+#        return HttpResponseRedirect("/")
