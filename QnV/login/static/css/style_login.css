@@ -116,6 +116,24 @@ h5 {
     text-transform: none;
 }
 
+#findme{
+  opacity: 0;
+  position: absolute;
+  width: 64.5%;
+  margin-left: 15%;
+  border-radius: 50px;
+  height: 30px;
+  top: 5%;
+  border: 1px solid #ff6e66;
+}
+
+#error_message{
+  font-size: .8rem;
+  margin-top: 6px;
+  color: #ff6e66;
+  text-align: center;
+}
+
 .input-field input[type=text]:focus + label,
 .input-field input[type=password]:focus + label {
     color: #616161;
@@ -160,6 +178,17 @@ h5 {
     .wrapper,
     .row {
         margin-bottom: 0px;
+    }
+
+    #findme{
+      opacity: 0;
+      position: absolute;
+      width: 84.5%;
+      margin-left: 5%;
+      border-radius: 50px;
+      height: 30px;
+      top: 5%;
+      border: 1px solid #ff6e66;
     }
 }
 
