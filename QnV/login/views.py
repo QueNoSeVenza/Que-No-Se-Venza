@@ -39,7 +39,7 @@ def log(request):
     if 'POST' in request.method:
         usern = request.POST['username']
         passw = request.POST['password']
-        print(usern + passw)
+        #print(usern + passw)
         user = authenticate(request, username=usern, password=passw)
         if user is not None:
             auth_login(request, user)
@@ -80,3 +80,8 @@ def reg(request):
 
     else:
         return redirect('/login')
+
+def log_out(request):
+    print ("eiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    logout(request)
+    return HttpResponseRedirect("/")
