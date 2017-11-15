@@ -17,15 +17,27 @@ from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.generic.list import ListView
+from django.template import RequestContext
+
 
 @login_required(login_url='/login/')
+
 def principal(request):
     template = loader.get_template('index.html')
     verificador = False
+    medicamentos = Medicamento.objects.all()
     user = request.user
+    print user
+    donations = len(MedicamentoDonado.objects.filter(donacion__user=user))
+    por_entregar = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='En Espera'))
+    donations_done = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Entregado'))
+
+   # por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.MedicamentoDonado.stock) == "None"])
+
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'donacion_done': donations_done, }
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -37,12 +49,10 @@ def thanks(request, id_med):
     template = loader.get_template('thanks.html')
     medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
     context = {'medDona': medicamentoDonado}
-    email = EmailMessage('Código de donacion','Tu código de donacion es '+id_med, to=[medicamentoDonado.donacion.user.email])
+    email = EmailMessage('Codigo de donacion','Tu codigo de donacion es '+id_med, to=[medicamentoDonado.donacion.user.email])
     email.send()
 
     return HttpResponse(template.render(context, request))
-
-
 
 
 ##############################################################################
@@ -178,6 +188,7 @@ def pedir(request):
 
 
 
+ 
 
 def matchs(request,case,pid):
 
@@ -214,8 +225,17 @@ def code(request,id):
         donacion = MedicamentoDonado(stock = 'empty')
     print(donacion.stock)
     if donacion.stock == "Reservado":
-        email = EmailMessage('Código de pedido','Tu código de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
-        email.send()
-        return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        if donacion.prescripcion == True:
+            email = EmailMessage('Codigo de pedido','Recuerda que para retirar este medicamento es necesario que presentes su debida prescripcion. Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        elif donacion.prescripcion == False:
+            email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})            
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+    
+    def logout(request):
+        logout(request)
+        return HttpResponseRedirect("/")

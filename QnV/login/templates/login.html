@@ -15,7 +15,7 @@
             <div class="col s12 m8 l4 push-l4 push-m2 white login-card row">
                 <div class="row">
                     <div class="login-content s12">
-                        <img id="center_logo" class="myImg" src="{% static 'logo.png' %}">
+                        <img class="myImg" src="{% static 'logo.png' %}">
                         <br>
                         <!-- form del login -->
                         <form method="POST" id="formLogin" action="{% url 'login:log' %}">
@@ -34,9 +34,9 @@
                         <div class="col s12 center psw-label">
                             <a href="{% url 'password_reset' %}" class="font-light">¿Olvidó su contraseña?</a></div>
                         {% if messages %}
-                        <ul class="messages" id="findme">
+                        <ul class="messages white-text" id="findme">
                             {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}" id="error_message" {% endif %}>{{ message }}</li>
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                             {% endfor %}
                         </ul>
                         {% endif %}</div>
@@ -85,6 +85,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/check_validations.js' %}"></script>
+    <script>
+        if ($("#findme").length) {
+            var l = 20;
+            for (var i = 0; i <= 10; i++) {
+                $('.login-card').animate({
+                    'margin-left': '+=' + (l = -l) + 'px',
+                    'margin-right': '-=' + l + 'px'
+                }, 50);
+            }
+            $(".login-card").addClass("new-shadow");
+            
+            
+            /*$(".login-card").css("box-shadow", "0px 4px 19px -9px rgba(0,0,0,0.46)");*/
+            /*            $(".login-card").animate({
+                            boxShadow: "0px 0px 23px -2px rgba(246,96,85,0.85)"
+                        });*/
+            setTimeout(function() {
+                $(".login-card").css("box-shadow", "0px 4px 19px -13px rgba(0,0,0,0.46)");
+            }, 2000);
+        }
+    </script>
+
 </body>
 
 </html>

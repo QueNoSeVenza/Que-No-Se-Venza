@@ -1,95 +1,112 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 <html>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-        <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-    </head>
-    <body>
-        <div class="row">
-            <div class="col s12 center-align">
-                <h3>Verificar si los siguientes datos coinciden con los de medicamento presentado</h3><br>
-            </div>
-            <table class="col s10 offset-s1" id="tabla_datos">
-                <tr id="header">
-                    <th class="center-align">Nombre</th>
-                    <th class="center-align">Tipo</th>
-                    <th class="center-align">Vencimiento</th>
-                    <th class="center-align">Prescripcion medica</th>
-                </tr>
-                <tr>
-                    <td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
-                    <td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
-                    <td id="v_ven" class="entrada-th center-align">{{donacion.fecha_vencimiento}}</td>
-                    <td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
-                </tr>
-            </table>
-            <form action="/verificacion/entrada/" method="POST">
-                {% csrf_token %}
-                <input type="hidden" value="{{donacion.id}}" name="donation_id">
-                <input type="hidden" value="" id="name" name="nome">
-                <input type="hidden" value="" id="type" name="type">
-                <input type="hidden" value="" id="date" name="date">
-                <input type="hidden" value="" id="prescripcion" name="prescripcion">
-                <div class="col s12 center-align">
-                    <input id="btn_entrada" class="indigo" type="submit" value="Guardar" onclick="dataToHiddenInputs()"><br>
-                </div>
-            </form>
-            <div class="col s12 center-align">
-                <button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
-            </div>
-        </div>
-    </body>
+	<head>
+		<title>Verificacion - Verificar entrada</title>
+		<link rel="icon" href="{% static 'logo.png' %}">
+		<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+		<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+	</head>
+	<body>
+		<div class="row">
+			<div class="col s12 center-align">
+				<h3>Verificar si los siguientes datos coinciden con los de medicamento presentado</h3><br>
+			</div>
+			<table class="col s10 offset-s1" id="tabla_datos">
+				<tr id="header">
+					<th class="center-align">Nombre</th>
+					<th class="center-align">Tipo</th>
+					<th class="center-align">Vencimiento</th>
+					<th class="center-align">Prescripcion medica</th>
+				</tr>
+				<tr>
+					<td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
+					<td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
+					<td id="v_ven" class="entrada-th center-align">{{fecha}}</td>
+					<td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
+				</tr>
+			</table>
+			<form action="/verificacion/entrada/" method="POST">
+				{% csrf_token %}
+				<input type="hidden" value="{{donacion.id}}" name="donation_id">
+				<input type="hidden" value="" id="name" name="nome">
+				<input type="hidden" value="" id="type" name="type">
+				<input type="hidden" value="" id="date" name="date">
+				<input type="hidden" value="" id="prescripcion" name="prescripcion">
+				<div class="col s12 center-align">
+					<input id="btn_entrada" class="indigo" type="submit" value="Guardar" onclick="dataToHiddenInputs()"><br>
+				</div>
+			</form>
+			<div class="col s12 center-align">
+				<button id="edit_btn" class="button" onclick="make_editable()">Editar</button>
+			</div>
+		</div>
+
+		{% if messages %}
+		<ul class="messages" id="nonn" style="text-align:center; list-style: none; color: #f66055; border: 1px solid #f66055; width: 20%; margin-left: 40%;">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}" style="margin-top:14px;"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+	</body>
 </html>
 
 <script>
-    var editable = false;
-    var types = ['Pastillas', 'Jarabe', 'Gotas'];
-    function make_editable() {
-        /*Codigo h o r r i b l e*/
-        document.getElementById('v_nom').contentEditable = true;
-        document.getElementById('v_ven').contentEditable = "true";
-        document.getElementById('edit_btn').style.visibility = "hidden";
-        var ths = document.getElementsByClassName('entrada-th');
-        for (i = 0; i < ths.length; i++) {
-            ths[i].style.backgroundColor = '#C5CAE9';
-        }
-        editable = true;
-    }
-    function txt_tip() {
-        if (editable) {
-            var ty = document.getElementById('v_tip').innerText;
-            switch (ty) {
-                case 'Pastillas':
-                    document.getElementById('v_tip').innerText = "Jarabe";
-                    break;
-                case 'Jarabe':
-                    document.getElementById('v_tip').innerText = "Gotas";
-                    break;
-                case 'Gotas':
-                    document.getElementById('v_tip').innerText = "Pastillas";
-                    break;
-                      }
-        }
-    }
-    function txt_pre() {
-        if (editable) {
-            var pre = document.getElementById('txt_pre').innerText;
-            if (pre == 'False') {
-                document.getElementById('txt_pre').innerText = "True";
-            } else {
-                document.getElementById('txt_pre').innerText = "False";
-            }
-        }
-    }
-    function dataToHiddenInputs() {
-        var n = document.getElementById('v_nom').innerText;
-        var t = document.getElementById('v_tip').innerText;
-        var v = document.getElementById('v_ven').innerText;
-        var p = document.getElementById('txt_pre').innerText;
-        
-        document.getElementById("name").value = n;
-        document.getElementById("type").value = t;
-        document.getElementById("date").value = v;
-        document.getElementById("prescripcion").value = p;
-    }
+	var editable = false;
+	var types = ['Pastillas', 'Jarabe', 'Gotas'];
+	function make_editable() {
+		/*Codigo h o r r i b l e*/
+		document.getElementById('v_nom').contentEditable = true;
+		document.getElementById('v_ven').contentEditable = "true";
+		document.getElementById('edit_btn').style.visibility = "hidden";
+		var ths = document.getElementsByClassName('entrada-th');
+		for (i = 0; i < ths.length; i++) {
+			ths[i].style.backgroundColor = '#C5CAE9';
+		}
+		editable = true;
+	}
+	function txt_tip() {
+		if (editable) {
+			var ty = document.getElementById('v_tip').innerText;
+			switch (ty) {
+				case 'Pastillas':
+					document.getElementById('v_tip').innerText = "Jarabe";
+					break;
+				case 'Jarabe':
+					document.getElementById('v_tip').innerText = "Gotas";
+					break;
+				case 'Gotas':
+					document.getElementById('v_tip').innerText = "Pastillas";
+					break;
+			}
+		}
+	}
+	function txt_pre() {
+		if (editable) {
+			var pre = document.getElementById('txt_pre').innerText;
+			if (pre == 'False') {
+				document.getElementById('txt_pre').innerText = "True";
+			} else {
+				document.getElementById('txt_pre').innerText = "False";
+			}
+		}
+	}
+	function dataToHiddenInputs() {
+		var n = document.getElementById('v_nom').innerText;
+		var t = document.getElementById('v_tip').innerText;
+		var v = document.getElementById('v_ven').innerText;
+		var p = document.getElementById('txt_pre').innerText;
+
+		document.getElementById("name").value = n;
+		document.getElementById("type").value = t;
+		document.getElementById("date").value = v;
+		document.getElementById("prescripcion").value = p;
+	}
+
+	$(document).ready(function(){
+		if ($("#nonn").length) {
+			$("#v_ven").css("color", "red");
+		}
+	});
 </script>

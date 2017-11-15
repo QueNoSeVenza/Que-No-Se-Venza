@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com", u"127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 ROOT_URLCONF = 'QnV.urls'
 
 TEMPLATES = [
@@ -74,13 +74,7 @@ TEMPLATES = [
         },
     },
 ]
-# TEMPLATE_LOADERS = (
-#     'django.template.loaders.filesystem.Loader',
-#     'django.template.loaders.app_directories.Loader',
-#     )
-# TEMPLATE_DIRS = (
-#     os.path.join(BASE_DIR, 'templates'),
-# )
+
 
 WSGI_APPLICATION = 'QnV.wsgi.application'
 
@@ -160,3 +154,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute=45, hour=14),
     }
 }
+
+LOGIN_REDIRECT_URL = '/principal'
+LOGIN_URL = '/login/'

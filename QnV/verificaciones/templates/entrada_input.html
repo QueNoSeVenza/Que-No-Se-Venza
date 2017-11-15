@@ -1,11 +1,15 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 
-<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+<head>
+  <title>Verificacion - Verificar entrada</title>
+  <link rel="icon" href="{% static 'logo.png' %}">
+  <link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+  <link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+</head>
 
 <div class="col s12 center-align">
-    <form action="/verificacion/entrada" method="GET">
-        <input class="large-input" type="number" name="id" placeholder="ID" min="1">
-        <input type="submit" value="✔" />
-    </form>
+  <form action="/verificacion/entrada" method="GET">
+    <input class="large-input" type="number" name="id" placeholder="ID" min="1" required>
+    <input type="submit" value="✔" />
+  </form>
 </div>

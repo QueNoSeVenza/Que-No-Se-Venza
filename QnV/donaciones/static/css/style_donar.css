@@ -1,14 +1,14 @@
 @font-face {
   font-family: Avenir-Normal;
-  src: url(fonts/AvenirLTStd-Medium.otf); }
+  src: url("fonts/AvenirLTStd-Medium.otf"); }
 @font-face {
   font-family: Avenir-Light;
-  src: url(fonts/AvenirLTStd-Light.otf); }
+  src: url("fonts/AvenirLTStd-Light.otf"); }
 @font-face {
   font-family: Avenir-Heavy;
-  src: url(fonts/AvenirLTStd-Heavy.ttf); }
-html,
-body {
+  src: url("fonts/AvenirLTStd-Heavy.ttf"); }
+body,
+html {
   height: 100%;
   font-family: Avenir-Light; }
 
@@ -23,8 +23,7 @@ p {
 
 .button-collapse {
   z-index: 999;
-  margin: 20;
-  margin-top: 25;
+  margin: 25 20 20;
   position: absolute; }
 
 nav {
@@ -114,7 +113,7 @@ nav {
     #slide2 h3 {
       margin-top: 60px; } }
 #slide2 .btnsection {
-  padding: 3em 0 0 0; }
+  padding: 3em 0 0; }
   @media (max-width: 600px) {
     #slide2 .btnsection {
       padding-bottom: 20px; } }
@@ -133,21 +132,21 @@ nav {
     width: 28px;
     height: 4px;
     background: #616161;
-    border-radius: 0px;
+    border-radius: 0;
     position: absolute;
     top: 50%;
     left: 0;
     margin-top: -2px;
-    transition: all .2s linear; }
-    .menu-toggle .bars:before, .menu-toggle .bars:after {
+    transition: all 0.2s linear; }
+    .menu-toggle .bars:after, .menu-toggle .bars:before {
       display: block;
       width: 28px;
       height: 4px;
       background: #616161;
-      border-radius: 0px;
+      border-radius: 0;
       content: "";
       position: absolute;
-      transition: .2s linear; }
+      transition: 0.2s linear; }
     .menu-toggle .bars:before {
       top: -8px; }
     .menu-toggle .bars:after {
@@ -157,23 +156,23 @@ nav {
     width: 28px;
     height: 4px;
     background: #616161;
-    border-radius: 0px;
+    border-radius: 0;
     background: black;
     position: absolute;
     top: 50%;
     left: 0;
     margin-top: -2px;
-    transition: all .2s linear; }
-    .menu-toggle .barsTwo:before, .menu-toggle .barsTwo:after {
+    transition: all 0.2s linear; }
+    .menu-toggle .barsTwo:after, .menu-toggle .barsTwo:before {
       display: block;
       width: 28px;
       height: 4px;
       background: #616161;
-      border-radius: 0px;
+      border-radius: 0;
       background: #fff;
       content: "";
       position: absolute;
-      transition: .2s linear; }
+      transition: 0.2s linear; }
     .menu-toggle .barsTwo:before {
       top: -8px; }
     .menu-toggle .barsTwo:after {
@@ -181,7 +180,7 @@ nav {
 
 .active .bars {
   background-color: transparent;
-  transition: all .2s linear; }
+  transition: all 0.2s linear; }
   .active .bars:before {
     top: 0;
     transform: rotate(45deg); }
@@ -189,7 +188,7 @@ nav {
     bottom: 0;
     transform: rotate(-45deg); }
 .active .barsTwo {
-  transition: all .2s linear; }
+  transition: all 0.2s linear; }
   .active .barsTwo:before {
     background: #fff;
     top: 0;
@@ -200,8 +199,8 @@ nav {
     transform: rotate(-45deg); }
 
 div.section.fp-section.active.fp-completely {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important; }
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; }
 
 /*---------- Wrapper --------------------*/
 .my-wrapper {
@@ -210,7 +209,7 @@ div.section.fp-section.active.fp-completely {
     float: none; }
   .my-wrapper li.drop {
     position: relative;
-    margin-right: 25px; }
+    margin-right: 50px; }
   .my-wrapper li a {
     cursor: default;
     line-height: 80px;
@@ -246,20 +245,20 @@ ul li:hover .dropOut {
   background: white;
   float: left;
   position: relative;
-  margin-top: 0px;
+  margin-top: 0;
   opacity: 0;
   border-radius: 4px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-  transition: all .1s ease-out; }
+  transition: all 0.1s ease-out; }
 
 .dropOut ul li {
   text-align: center;
-  padding: 12px 0 10px 0px;
+  padding: 12px 0 10px;
   color: #777; }
 
 .id-show {
   margin-left: 10px;
-  padding: 10 10 10 10;
+  padding: 10;
   border-radius: 3px; }
 
 .thx-center {
@@ -275,11 +274,12 @@ ul li:hover .dropOut {
     right: 2% !important; }
 
 .don-dat {
-  padding-top: .8%;
+  padding-top: 0.8%;
   padding-bottom: 1%; }
 
 .thx-body {
-  background-color: #f9f9f9; }
+  background-color: #f9f9f9;
+  height: auto; }
 
 .thx-float {
   background-color: #fdfdfd;
@@ -288,5 +288,8 @@ ul li:hover .dropOut {
 .thx-icon {
   margin-top: 1%;
   cursor: pointer; }
+
+input[type="text"]:disabled {
+  color: #424242 !important; }
 
 /*# sourceMappingURL=style_donar.css.map */
