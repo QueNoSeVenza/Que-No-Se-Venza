@@ -3,6 +3,7 @@
 
 <head>
     <title>QNV - Gracias por donar</title>
+    <link rel="icon" href="{% static 'logo.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
@@ -47,7 +48,7 @@
                     </div> -->
                     <!--   para poner adentro del value de fecha          value="{{medDona.fecha_vencimiento}}"                 -->
                     <div class="input-field col s4">
-                        <input disabled name="anio" value="value" id="f_1" type="text" class="thx-center">
+                        <input disabled name="anio" value="{{fecha}}" id="f_1" type="text" class="thx-center">
                         <label for="f_1" class="semibold thx-center lab grey-text text-darken-1">FECHA</label>
                     </div>
                     <div class="input-field col s4 l3">
