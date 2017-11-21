@@ -27,15 +27,15 @@ def principal(request):
     template = loader.get_template('index.html')
     verificador = False
     medicamentos = Medicamento.objects.all()
+    stores = Store.objects.all()
+    tipos = Tipo.objects.all()
     user = request.user
     print user
     donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
     por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"])
-#    context.update(dict(medicamentos=medicamentos, user=request.user,
-#                        med_list=medicamentos.object_list))
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'stores': stores, 'tipos': tipos}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
@@ -60,9 +60,11 @@ def donar(request):
     if 'POST' in request.method:
         #Capturando argumentos del request para cada objeto a crear.
         mes = request.POST['mes']
-
-        fecha_vencimiento =  mes+request.POST['anio']
-
+        print mes
+        anio = request.POST['anio']
+        print anio
+        fecha_vencimiento = mes + anio
+        print fecha_vencimiento
         medicamento_kwargs = {
             'nombre' : request.POST['donar_nombre'].upper(),
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
@@ -71,15 +73,22 @@ def donar(request):
 
         medicamento_donado_kwargs = {
             'cantidad' : request.POST['donar_cantidad'],
-            'tipo' : request.POST['donar_tipo'].upper(),
             'laboratorio' : request.POST['donar_laboratorio'].upper() ,
             'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
-                                            '%m%Y').date(),
+                                            '%m%Y').date()
         }
+		
+        tipo_kwargs = {
+			'nombre' : request.POST['donar_tipo'],
+		}
 
         donacion_kwargs = {
-        'user' : request.user,
+        	'user' : request.user,
         }
+		
+        store_kwargs = {
+			'nombre' : request.POST['store']
+		}
 
         gramos = medicamento_kwargs['concentracion_gramos']
         cantidad = medicamento_donado_kwargs['cantidad']
@@ -95,31 +104,41 @@ def donar(request):
 
         #Si ya existe un Medicamento para medicamento_donado simplemente lo guardo.
         try:
+			
+			store_medicamento = Store.objects.get(**store_kwargs)
+			tipo_medicamento = Tipo.objects.get(**tipo_kwargs)
+			
+			medicamento_guardado = Medicamento.objects.get(**medicamento_kwargs)
+			nueva_donacion = Donacion(**donacion_kwargs)
+			nueva_donacion.save()
 
-            medicamento_guardado = Medicamento.objects.get(**medicamento_kwargs)
-            nueva_donacion = Donacion(**donacion_kwargs)
-            nueva_donacion.save()
+			medicamento_donado_kwargs['store'] = store_medicamento
+			medicamento_donado_kwargs['tipo'] = tipo_medicamento
+			medicamento_donado_kwargs['donacion'] = nueva_donacion
+			medicamento_donado_kwargs['medicamento'] = medicamento_guardado
 
-            medicamento_donado_kwargs['donacion'] = nueva_donacion
-            medicamento_donado_kwargs['medicamento'] = medicamento_guardado
-
-            nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()
+			nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
+			nuevo_medicamento_donado.save()
 
         #De lo contrario, además guardo un medicamento.
         except Medicamento.DoesNotExist:
+			
+			store_medicamento = Store.objects.get(**store_kwargs)
+			tipo_medicamento = Tipo.objects.get(**tipo_kwargs)
+			
+			nuevo_medicamento = Medicamento(**medicamento_kwargs)
+			nuevo_medicamento.save()
 
-            nuevo_medicamento = Medicamento(**medicamento_kwargs)
-            nuevo_medicamento.save()
+			nueva_donacion = Donacion(**donacion_kwargs)
+			nueva_donacion.save()
 
-            nueva_donacion = Donacion(**donacion_kwargs)
-            nueva_donacion.save()
+			medicamento_donado_kwargs['store'] = store_medicamento
+			medicamento_donado_kwargs['tipo'] = tipo_medicamento
+			medicamento_donado_kwargs['donacion'] = nueva_donacion
+			medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
 
-            medicamento_donado_kwargs['donacion'] = nueva_donacion
-            medicamento_donado_kwargs['medicamento'] = nuevo_medicamento
-
-            nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
-            nuevo_medicamento_donado.save()
+			nuevo_medicamento_donado = MedicamentoDonado(**medicamento_donado_kwargs)
+			nuevo_medicamento_donado.save()
         id_med = str(nuevo_medicamento_donado.id)
         return redirect('/thanks/'+id_med)
     else:
@@ -183,10 +202,8 @@ def pedir(request):
             return redirect('/matchs/'+similar_flag+'/'+str(nuevo_pedido.id))
         else:
             return redirect('/thanks2')
-
-
-
- 
+    else:
+		return redirect('/principal')
 
 def matchs(request,case,pid):
 
