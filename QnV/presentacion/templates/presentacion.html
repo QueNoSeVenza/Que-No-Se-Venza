@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+<div id="loading"></div>
 	<!-- Nav -->
 
 	<section id="section1" class="cd-section fadeonscroll-title">
@@ -222,8 +222,9 @@
 		$('.titleblock').hide();
 		var $logo = $('#logo-lazy');
 
-
 		$(document).ready(function() {
+			//Loading animation
+			$("#loading").fadeOut("fast");
 			$('.titleblock').show();
 			//Intro animation
 			$(".hide-onload").hide();
