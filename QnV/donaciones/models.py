@@ -10,6 +10,9 @@ from django.db.models.functions import Upper
 
 class Tipo(models.Model):
 	nombre = models.CharField(max_length=60)
+	
+	def __str__(self):
+		return self.nombre
 
 class Store(models.Model):
 	nombre = models.CharField(max_length=60)
