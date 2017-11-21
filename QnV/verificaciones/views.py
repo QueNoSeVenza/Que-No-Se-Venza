@@ -14,15 +14,15 @@ from django.http import JsonResponse
 
 def delete_stock(request):
 
-    itemid = request.GET.get('itemid', None)
-    print("Entro el ajax ",itemid)
-    item = MedicamentoDonado.objects.get(pk=itemid)
-    print(item.stock)
-    item.stock = "Inactivo"
-    print(item.stock)
-    item.save()
-    data = {}
-    return JsonResponse(data)
+	itemid = request.GET.get('itemid', None)
+	print("Entro el ajax ",itemid)
+	item = MedicamentoDonado.objects.get(pk=itemid)
+	print(item.stock)
+	item.stock = "Inactivo"
+	print(item.stock)
+	item.save()
+	data = {}
+	return JsonResponse(data)
 
 def stock (request):
 
@@ -44,20 +44,20 @@ def stock (request):
 
 def input_view (request,case):
 
-    if request.user.groups.filter(name='Verificadores').exists():
+	if request.user.groups.filter(name='Verificadores').exists():
 
-        if case == "entrada":
+		if case == "entrada":
 
-            return render(request,'entrada_input.html',{})
+			return render(request,'entrada_input.html',{})
 
-        elif case == "retiro":
+		elif case == "retiro":
 
-            return render(request,'retiro_input.html',{})
+			return render(request,'retiro_input.html',{})
 
 
-    else:
+	else:
 
-        return HttpResponseForbidden()
+		return HttpResponseForbidden()
 
 
 
@@ -123,41 +123,41 @@ def entrada(request):
 
 
 def salida(request):
-    if request.method == "POST":
+	if request.method == "POST":
 #       code = request.POST['donation_id']
 #       donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
-        donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'].upper())
+		donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'].upper())
 
-        if donacion.prescripcion == True:
-            print("primero")
-            if len(request.POST.getlist('checks')) == 1:
-                donacion.stock = 'Entregado'
-                donacion.verificador_salida = request.user
-                donacion.save()
+		if donacion.prescripcion == True:
+			print("primero")
+			if len(request.POST.getlist('checks')) == 1:
+				donacion.stock = 'Entregado'
+				donacion.verificador_salida = request.user
+				donacion.save()
 
-                return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
+				return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
 
-            else:
-                #Cambiar /entrada/input por un template de error
-                print("No se han verificado todos los campos, la operación ha sido cancelada")
-              	return HttpResponse("<script>alert('Operacion cancelada, el medicamento sigue reservado, pero no sera entregado hasta que el usuario presente prescripcion'); window.location = '/verificacion/input/retiro';</script>")
-        else:
-            donacion.stock = 'Entregado'
-            donacion.verificador_salida = request.user
-            donacion.save()
-            return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
-    else:
-        code = request.GET['salida']
-        try:
-            donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
-            donacion = donacion_list[0]
-        except IndexError:
-            donacion = MedicamentoDonado(stock = 'empty')
+			else:
+				#Cambiar /entrada/input por un template de error
+				print("No se han verificado todos los campos, la operación ha sido cancelada")
+				return HttpResponse("<script>alert('Operacion cancelada, el medicamento sigue reservado, pero no sera entregado hasta que el usuario presente prescripcion'); window.location = '/verificacion/input/retiro';</script>")
+		else:
+			donacion.stock = 'Entregado'
+			donacion.verificador_salida = request.user
+			donacion.save()
+			return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
+	else:
+		code = request.GET['salida']
+		try:
+			donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
+			donacion = donacion_list[0]
+		except IndexError:
+			donacion = MedicamentoDonado(stock = 'empty')
 
-        if donacion.stock == "Reservado":
-            return render(request,'salida.html',{'donation_id' : donacion.id,'donacion' : donacion})
-        else:
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+		if donacion.stock == "Reservado":
+			return render(request,'salida.html',{'donation_id' : donacion.id,'donacion' : donacion})
+		else:
+			return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
 def search(request):
 	if request.method == "POST":

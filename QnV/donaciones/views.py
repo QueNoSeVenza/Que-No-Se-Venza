@@ -19,16 +19,17 @@ from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
 from django.template import RequestContext
-
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 @login_required(login_url='/login/')
 
 def principal(request):
+
     template = loader.get_template('index.html')
     verificador = False
     medicamentos = Medicamento.objects.all()
     user = request.user
-    print user
     donations = len(MedicamentoDonado.objects.filter(donacion__user=user))
     por_entregar = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='En Espera'))
     donations_done = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Entregado'))
@@ -41,11 +42,19 @@ def principal(request):
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
+
+
+    # grab the user in question
+    user = User.objects.get(username=request.user.username)
+    [s.delete() for s in Session.objects.all() if s.get_decoded().get('_auth_user_id') == user.id]
+    user.is_active = False
+    user.save()
     template = loader.get_template('thanks2.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
 def thanks(request, id_med):
+
     template = loader.get_template('thanks.html')
     medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
     fechaV = datetime.strptime(str(medicamentoDonado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
@@ -237,6 +246,7 @@ def code(request,id):
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
-    def logout(request):
-        logout(request)
-        return HttpResponseRedirect("/")
+
+def lout(request):
+    logout(request)
+    return HttpResponseRedirect("/")
