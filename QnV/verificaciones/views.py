@@ -66,7 +66,8 @@ def input_view (request,case):
 def entrada(request):
 	global donacionesStore
 	if request.method == "POST":
-		meds = [x for x in donacionesStore if x.id == request.POST['donation_id']]
+		print donacionesStore
+		meds = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
 		nombre = request.POST['nome']
 		vencimiento = request.POST['date']
 		prescripcion  = request.POST['prescripcion']
@@ -114,7 +115,9 @@ def entrada(request):
 		return HttpResponseRedirect("/verificacion/stock")
 	else:
 		try:
-			meds = [x for x in donacionesStore if x.id == request.GET['id']]
+			print "das", donacionesStore
+			meds = [x for x in donacionesStore if str(x.id) == request.GET['id']]
+			print meds
 			medicamento_donado = meds[0]
 		except (ObjectDoesNotExist,ValueError):
 			medicamento_donado = MedicamentoDonado(stock = 'empty')
@@ -132,40 +135,43 @@ def entrada(request):
 
 def salida(request):
 	global donacionesStore
-
 	if request.method == "POST":
-		meds = [x for x in donacionesStore if x.id == request.POST['donation_id']]
-        donacion = meds[0]
+#       code = request.POST['donation_id']
+#       donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
+#		donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'].upper())
+		donacion_list = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
+		donacion = donacion_list[0]
 
-        if donacion.prescripcion == True:
-            if len(request.POST.getlist('checks')) == 1:
-                donacion.stock = 'Entregado'
-                donacion.verificador_salida = request.user
-                donacion.save()
+		if donacion.prescripcion == True:
+			print("primero")
+			if len(request.POST.getlist('checks')) == 1:
+				donacion.stock = 'Entregado'
+				donacion.verificador_salida = request.user
+				donacion.save()
 
-                return HttpResponseRedirect("/verificacion/input/retiro")
+				return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
 
-            else:
-                #Cambiar /entrada/input por un template de error
-                print("No se han verificado todos los campos, la operación ha sido cancelada")
-                return HttpResponseRedirect("/verificacion/input/retiro")
-        else:
-            donacion.stock = 'Entregado'
-            donacion.verificador_salida = request.user
-            donacion.save()
-            return HttpResponseRedirect("/verificacion/input/retiro")
+			else:
+				#Cambiar /entrada/input por un template de error
+				print("No se han verificado todos los campos, la operación ha sido cancelada")
+				return HttpResponse("<script>alert('Operacion cancelada, el medicamento sigue reservado, pero no sera entregado hasta que el usuario presente prescripcion'); window.location = '/verificacion/input/retiro';</script>")
+		else:
+			donacion.stock = 'Entregado'
+			donacion.verificador_salida = request.user
+			donacion.save()
+			return HttpResponse("<script>alert('Operacion realizada con exito'); window.location = '/verificacion/input/retiro';</script>")
 	else:
-        code = request.GET['salida']
-        try:
-            donacion_list = [x for x in donacionesStore if x.codigo() == code]
-            donacion = donacion_list[0]
-        except IndexError:
-            donacion = MedicamentoDonado(stock = 'empty')
+		code = request.GET['salida']
+		try:
+			donacion_list = [x for x in donacionesStore if x.codigo() == code]
+			donacion = donacion_list[0]
+		except IndexError:
+			donacion = MedicamentoDonado(stock = 'empty')
 
-        if donacion.stock == "Reservado":
-            return render(request,'salida.html',{'donation_id' : donacion.id,'donacion' : donacion})
-        else:
-            return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+		if donacion.stock == "Reservado":
+			return render(request,'salida.html',{'donation_id' : donacion.id,'donacion' : donacion})
+		else:
+			return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
 def search(request):
 	if request.method == "POST":
@@ -191,14 +197,15 @@ def search(request):
 def todo(request, string):
 	global donacionesStore
 	meds = donacionesStore
+	print meds
 	medicamentosMatch = []
 
 	for i in meds:
-		if string in i.medicamento.nombre:
+		if string.upper() in i.medicamento.nombre.upper():
 			medicamentosMatch.append(i)
-		elif string in i.laboratorio:
+		elif string.upper()  in i.laboratorio.upper():
 			medicamentosMatch.append(i)
-		elif string in i.tipo.nombre:
+		elif string.upper() in i.tipo.nombre.upper():
 			medicamentosMatch.append(i)
 
 	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
@@ -206,15 +213,16 @@ def todo(request, string):
 
 def enStock(request, string):
 	global donacionesStore
+	print "pone ", donacionesStore
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None"]
 	medicamentosMatch = []
-
+	
 	for i in meds:
-		if string in i.medicamento.nombre:
+		if string.upper() in i.medicamento.nombre.upper():
 			medicamentosMatch.append(i)
-		elif string in i.laboratorio:
+		elif string.upper() in i.laboratorio.upper():
 			medicamentosMatch.append(i)
-		elif string in i.tipo.nombre:
+		elif string.upper() in i.tipo.nombre.upper():
 			medicamentosMatch.append(i)
 
 	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
@@ -222,6 +230,7 @@ def enStock(request, string):
 
 def todoStock(request):
 	global donacionesStore
+	print "pene" , donacionesStore
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None" and x.store]
 	return render(request,'stock.html',{'donaciones' : meds})
 
@@ -232,11 +241,11 @@ def noVerificado(request, string):
 	medicamentosMatch = []
 
 	for i in meds:
-		if string in i.medicamento.nombre:
+		if string.upper() in i.medicamento.nombre.upper():
 			medicamentosMatch.append(i)
-		elif string in i.laboratorio:
+		elif string.upper() in i.laboratorio.upper():
 			medicamentosMatch.append(i)
-		elif string in i.tipo.nombre:
+		elif string.upper() in i.tipo.nombre.upper():
 			medicamentosMatch.append(i)
 
 	return render(request,'stock.html',{'donaciones' : medicamentosMatch})
