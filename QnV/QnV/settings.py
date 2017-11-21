@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+from celery.schedules import crontab
+from QnV.tasks import task_number_one   # << GOOD
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -73,13 +74,7 @@ TEMPLATES = [
         },
     },
 ]
-# TEMPLATE_LOADERS = (
-#     'django.template.loaders.filesystem.Loader',
-#     'django.template.loaders.app_directories.Loader',
-#     )
-# TEMPLATE_DIRS = (
-#     os.path.join(BASE_DIR, 'templates'),
-# )
+
 
 WSGI_APPLICATION = 'QnV.wsgi.application'
 
@@ -146,3 +141,19 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'quenosevenza@gmail.com'
 EMAIL_HOST_PASSWORD = 'Quenosevenza123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_BEAT_SCHEDULE = {
+    'task-number-one': {
+        'task': 'QnV.tasks.task_number_one',
+        'schedule': crontab(minute=45, hour=14),
+    }
+}
+
+LOGIN_REDIRECT_URL = '/principal'
+LOGIN_URL = '/login/'

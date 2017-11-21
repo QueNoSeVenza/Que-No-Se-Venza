@@ -16,29 +16,52 @@ from django.contrib.auth import login as auth_login
 from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.utils.datastructures import MultiValueDictKeyError
+from django.views.generic.list import ListView
+from django.template import RequestContext
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 @login_required(login_url='/login/')
+
 def principal(request):
+
     template = loader.get_template('index.html')
     verificador = False
+    medicamentos = Medicamento.objects.all()
     user = request.user
+    donations = len(MedicamentoDonado.objects.filter(donacion__user=user))
+    por_entregar = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='En Espera'))
+    donations_done = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Entregado'))
+
+   # por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.MedicamentoDonado.stock) == "None"])
+
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'donacion_done': donations_done, }
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
+
+
+    # grab the user in question
+    user = User.objects.get(username=request.user.username)
+    [s.delete() for s in Session.objects.all() if s.get_decoded().get('_auth_user_id') == user.id]
+    user.is_active = False
+    user.save()
     template = loader.get_template('thanks2.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
 def thanks(request, id_med):
+
     template = loader.get_template('thanks.html')
     medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
     context = {'medDona': medicamentoDonado}
+    email = EmailMessage('Codigo de donacion','Tu codigo de donacion es '+id_med, to=[medicamentoDonado.donacion.user.email])
+    email.send()
+
     return HttpResponse(template.render(context, request))
-
-
 
 
 ##############################################################################
@@ -52,15 +75,15 @@ def donar(request):
         fecha_vencimiento =  mes+request.POST['anio']
 
         medicamento_kwargs = {
-            'nombre' : request.POST['donar_nombre'],
+            'nombre' : request.POST['donar_nombre'].upper(),
             'concentracion_gramos' : request.POST['donar_concentracion_gramos'],
-            'droga' : request.POST['donar_droga']
+            'droga' : request.POST['donar_droga'].upper()
         }
 
         medicamento_donado_kwargs = {
             'cantidad' : request.POST['donar_cantidad'],
-            'tipo' : request.POST['donar_tipo'],
-            'laboratorio' : request.POST['donar_laboratorio'] ,
+            'tipo' : request.POST['donar_tipo'].upper(),
+            'laboratorio' : request.POST['donar_laboratorio'].upper() ,
             'fecha_vencimiento' : datetime.strptime(fecha_vencimiento,
                                             '%m%Y').date(),
         }
@@ -118,9 +141,9 @@ def validate_medicamento(request):
     print(nombre)
     concentracion_gramos = request.GET.get('concentracion', None)
     print(concentracion_gramos)
-    print(Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos))
+    print(Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos))
     data = {
-        'exists': Medicamento.objects.filter(nombre=nombre,concentracion_gramos=concentracion_gramos).exists()
+        'exists': Medicamento.objects.filter(nombre=nombre.upper(),concentracion_gramos=concentracion_gramos).exists()
     }
     return JsonResponse(data)
 
@@ -128,10 +151,14 @@ def pedir(request):
 
     if 'POST' in request.method:
         #Capturando argumentos para un Pedido y su Medicamento
+        try:
+            similar_flag = request.POST['similar']
+        except MultiValueDictKeyError:
+            similar_flag = 'off'
         medicamento_kwargs = {
-            'nombre' :  request.POST['pedir_nombre'],
+            'nombre' :  request.POST['pedir_nombre'].upper(),
             'concentracion_gramos' : request.POST['pedir_gramos'],
-            'droga' : request.POST['pedir_droga'],
+            'droga' : request.POST['pedir_droga'].upper(),
         }
 
         pedido_kwargs = {
@@ -164,14 +191,15 @@ def pedir(request):
 
         print(">>>>>>",nuevo_pedido.id)
         if len(getMatches(nuevo_pedido)) != 0:
-            return redirect('/matchs/'+str(nuevo_pedido.id))
+            return redirect('/matchs/'+similar_flag+'/'+str(nuevo_pedido.id))
         else:
             return redirect('/thanks2')
 
 
 
 
-def matchs(request,pid):
+
+def matchs(request,case,pid):
 
     if "POST" in request.method:
         mid = request.POST['match']
@@ -186,9 +214,17 @@ def matchs(request,pid):
         return redirect('/code/'+donacion.codigo())
 
     else:
+        if case == 'on':
 
-        matchs = getMatches(Pedido.objects.get(pk = pid))
-        return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid})
+            matchs = getSimilarMatches(Pedido.objects.get(pk = pid))
+
+        else:
+
+            matchs = getMatches(Pedido.objects.get(pk = pid))
+
+        return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
+
+
 def code(request,id):
     d_id = id
     try:
@@ -198,7 +234,17 @@ def code(request,id):
         donacion = MedicamentoDonado(stock = 'empty')
     print(donacion.stock)
     if donacion.stock == "Reservado":
-        return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        if donacion.prescripcion == True:
+            email = EmailMessage('Codigo de pedido','Recuerda que para retirar este medicamento es necesario que presentes su debida prescripcion. Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+        elif donacion.prescripcion == False:
+            email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
+            email.send()
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
+def lout(request):
+    logout(request)
+    return HttpResponseRedirect("/")

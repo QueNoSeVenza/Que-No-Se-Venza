@@ -29,6 +29,8 @@ class Donacion(models.Model):
         return str(self.user) + ": " + str(self.medicamentos.count())
 
 class MedicamentoDonado(models.Model):
+
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     verificador_ingreso = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True,default="")
     verificador_salida = models.ForeignKey(User, on_delete=models.CASCADE,default="",blank=True,null=True, related_name="verificador_salida")
     prescripcion = models.BooleanField(default=False)
@@ -72,3 +74,5 @@ class Pedido(models.Model):
 class Match(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     donacion = models.ForeignKey(MedicamentoDonado,on_delete = models.CASCADE)
+
+
