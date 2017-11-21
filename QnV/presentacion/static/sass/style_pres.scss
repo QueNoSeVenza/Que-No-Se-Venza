@@ -21,6 +21,17 @@ $gris-claro: #fcfcfc; //Global
 	src: url("fonts/AvenirLTStd-Heavy.ttf");
 }
 
+#loading {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: white;
+	left: 0;
+	position: fixed;
+	display: block;
+	z-index: 99;
+}
+
 body,
 html {
 	height: 100%;
@@ -171,14 +182,13 @@ nav {
 	}
 
 	.qnv-title {
-		
 		position: absolute;
 		width: 100%;
 		top: 20%;
 
 		h1 {
 			margin-top: 1.6rem;
-			margin-bottom: .3rem;
+			margin-bottom: 0.3rem;
 			font-size: 5rem;
 			font-family: Avenir-Heavy;
 			font-weight: 600;
@@ -186,7 +196,7 @@ nav {
 				font-size: 4.5rem;
 			}
 			@media only screen and (max-width: 500px) {
-			font-size: 4rem;
+				font-size: 4rem;
 			}
 		}
 
@@ -198,7 +208,7 @@ nav {
 				font-size: 2.5rem;
 			}
 			@media only screen and (max-width: 500px) {
-			font-size: 2rem;
+				font-size: 2rem;
 			}
 		}
 	}
@@ -402,7 +412,6 @@ nav {
 			width: 50%;
 		}
 	}
-
 	@media screen and (max-width: 600px) {
 		h2,
 		p {

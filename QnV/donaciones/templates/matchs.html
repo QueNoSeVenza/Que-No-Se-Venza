@@ -4,6 +4,7 @@
 
   <head>
     <title>QNV - Resultados de petición</title>
+    <link rel="icon" href="{% static 'logo.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
@@ -29,8 +30,8 @@
               <input type="radio" name="match" value="{{match.id}}" checked/> <br>
 
               <p style="margin-top:-0px;" class="center-align">
-                <input class="with-gap" name="match" type="radio" id="med_1" value="{{match.id}}" />
-                <label for="med_1">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>)</label>
+                <input class="with-gap" name="match" type="radio" id="{{match.id}}" value="{{match.id}}" />
+                <label for="{{match.id}}">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>)</label>
               </p>
             </div>
           </div>
