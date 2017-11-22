@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 					<td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
-					<td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo}}</td>
+					<td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo.nombre}}</td>
 					<td id="v_ven" class="entrada-th center-align">{{fecha}}</td>
 					<td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
 				</tr>
@@ -70,14 +70,14 @@
 		if (editable) {
 			var ty = document.getElementById('v_tip').innerText;
 			switch (ty) {
-				case 'Pastillas':
+				case 'Comprimidos':
 					document.getElementById('v_tip').innerText = "Jarabe";
 					break;
 				case 'Jarabe':
 					document.getElementById('v_tip').innerText = "Gotas";
 					break;
 				case 'Gotas':
-					document.getElementById('v_tip').innerText = "Pastillas";
+					document.getElementById('v_tip').innerText = "Comprimidos";
 					break;
 			}
 		}
