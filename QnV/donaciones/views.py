@@ -246,7 +246,7 @@ def matchs(request,case,pid):
         return render(request,'matchs.html',{'matchs' : matchs, 'pid': pid,'case' : case})
 
 
-def code(request,id):
+def code(request, id):
     d_id = id
     try:
         donacion_list = [x for x in MedicamentoDonado.objects.all() if x.codigo() == d_id]
@@ -254,15 +254,16 @@ def code(request,id):
     except IndexError:
         donacion = MedicamentoDonado(stock = 'empty')
     print(donacion.stock)
+    fechaV = datetime.strptime(str(donacion.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
     if donacion.stock == "Reservado":
         if donacion.prescripcion == True:
             email = EmailMessage('Codigo de pedido','Recuerda que para retirar este medicamento es necesario que presentes su debida prescripcion. Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
             email.send()
-            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+            return render(request,'code.html',{'donation' : donacion, 'fecha': fechaV, 'donation_id' : d_id.upper()})
         elif donacion.prescripcion == False:
             email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
             email.send()
-            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
+            return render(request,'code.html',{'donation' : donacion, 'fecha': fechaV, 'donation_id' : d_id.upper()})
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
 
