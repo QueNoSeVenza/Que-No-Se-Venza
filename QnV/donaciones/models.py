@@ -8,8 +8,22 @@ from datetime import datetime
 from django.db.models.functions import Upper
 
 
-class Medicamento(models.Model):
+class Tipo(models.Model):
+	nombre = models.CharField(max_length=60)
+	
+	def __str__(self):
+		return self.nombre
 
+class Store(models.Model):
+	nombre = models.CharField(max_length=60)
+	provincia = models.CharField(max_length=60)
+	barrio = models.CharField(max_length=60)
+	direccion = models.CharField(max_length=60)
+	
+	def __str__(self):
+		return self.nombre
+
+class Medicamento(models.Model):
     nombre = models.CharField(max_length=60)
     concentracion_gramos = models.CharField(max_length=60)
     droga = models.CharField(max_length=60)
@@ -21,7 +35,6 @@ class Medicamento(models.Model):
         return self.nombre+" "+self.concentracion_gramos
 
 class Donacion(models.Model):
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     medicamentos = models.ManyToManyField(Medicamento, through='MedicamentoDonado')
 
@@ -40,12 +53,8 @@ class MedicamentoDonado(models.Model):
     laboratorio = models.CharField(max_length=60)
     fecha_vencimiento = models.DateField()
     stock = models.CharField(max_length=60, default="En Espera")
-    TIPO = (
-        ('Pastillas', 'Pastillas'),
-        ('Jarabe', 'Jarabe'),
-        ('Gotas', 'Gotas'),
-    )
-    tipo = models.CharField(max_length=60, choices=TIPO, default=0)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, default="")
+    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE, default="")
 
     def isDull(self):
         if self.fecha_vencimiento < datetime.now().date():
@@ -55,7 +64,7 @@ class MedicamentoDonado(models.Model):
 
     def codigo(self):
         i = str(self.id)
-        a = str(self.medicamento.nombre[:3].upper()+self.medicamento.concentracion_gramos+"-"+i+self.tipo[:1])
+        a = str(self.medicamento.nombre[:3].upper()+self.medicamento.concentracion_gramos+"-"+i+self.tipo.nombre[:1])
         return a
 
     def __str__(self):
@@ -74,5 +83,3 @@ class Pedido(models.Model):
 class Match(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     donacion = models.ForeignKey(MedicamentoDonado,on_delete = models.CASCADE)
-
-

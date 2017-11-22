@@ -1,7 +1,6 @@
 
 {% load static %} {% load staticfiles %}
 <html>
-
   <head>
     <title>QNV - Resultados de petición</title>
     <link rel="icon" href="{% static 'logo.png' %}">
@@ -31,7 +30,7 @@
 
               <p style="margin-top:-0px;" class="center-align">
                 <input class="with-gap" name="match" type="radio" id="{{match.id}}" value="{{match.id}}" />
-                <label for="{{match.id}}">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>)</label>
+                <label for="{{match.id}}">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>) Storage: {{match.store.nombre}}</label>
               </p>
             </div>
           </div>
@@ -40,8 +39,6 @@
             <input class="btn indigo accent-2 semibold z-depth-0 center-align" type="submit" value="Aceptar">
           </div>
         </form>
-
-
       </div>
     </div>
 
