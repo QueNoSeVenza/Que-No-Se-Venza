@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+from celery.schedules import crontab
+from QnV.tasks import task_number_one   # << GOOD
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'pl#0n19!!#&dit9jy&2hnvnzym(p9m@87#4=9h6v)cy7emy18a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ["quenosevenza.pythonanywhere.com"]
+#ALLOWED_HOSTS = ["quenovenza.pythonanywhere.com"]
 
 
 # Application definition
@@ -54,7 +55,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-ALLOWED_HOSTS = [u"quenosevenza.pythonanywhere.com", u"127.0.0.1"]
+ALLOWED_HOSTS = [u"quenovenza.pythonanywhere.com", u"127.0.0.1"]
 ROOT_URLCONF = 'QnV.urls'
 
 TEMPLATES = [
@@ -127,7 +128,7 @@ USE_TZ = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
 
@@ -140,6 +141,19 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'quenosevenza@gmail.com'
 EMAIL_HOST_PASSWORD = 'Quenosevenza123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_BEAT_SCHEDULE = {
+    'task-number-one': {
+        'task': 'QnV.tasks.task_number_one',
+        'schedule': crontab(minute=45, hour=14),
+    }
+}
 
 LOGIN_REDIRECT_URL = '/principal'
 LOGIN_URL = '/login/'

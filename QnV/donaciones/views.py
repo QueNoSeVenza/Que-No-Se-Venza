@@ -19,34 +19,48 @@ from django.contrib.auth.decorators import login_required
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic.list import ListView
 from django.template import RequestContext
-
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 @login_required(login_url='/login/')
 
 def principal(request):
+
     template = loader.get_template('index.html')
     verificador = False
     medicamentos = Medicamento.objects.all()
     stores = Store.objects.all()
     tipos = Tipo.objects.all()
     user = request.user
-    print user
-    donations = len(MedicamentoDonado.objects.filter(verificador_ingreso=user, stock='Disponible'))
-    por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.verificador_ingreso) == "None"])
+    donations = len(MedicamentoDonado.objects.filter(donacion__user=user))
+    por_entregar = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='En Espera'))
+    donations_done = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Entregado'))
+
+   # por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.MedicamentoDonado.stock) == "None"])
+
     if request.user.groups.filter(name='Verificadores').exists():
         verificador = True
-    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'stores': stores, 'tipos': tipos}
+    context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'donacion_done': donations_done, 'stores': stores, 'tipos': tipos}
     return HttpResponse(template.render(context, request))
 
 def thanks2(request):
+
+
+    # grab the user in question
+    user = User.objects.get(username=request.user.username)
+    [s.delete() for s in Session.objects.all() if s.get_decoded().get('_auth_user_id') == user.id]
+    user.is_active = False
+    user.save()
     template = loader.get_template('thanks2.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
 def thanks(request, id_med):
+
     template = loader.get_template('thanks.html')
     medicamentoDonado = MedicamentoDonado.objects.get(pk=id_med)
-    context = {'medDona': medicamentoDonado}
+    fechaV = datetime.strptime(str(medicamentoDonado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
+    context = {'medDona': medicamentoDonado, 'fecha': fechaV}
     email = EmailMessage('Codigo de donacion','Tu codigo de donacion es '+id_med, to=[medicamentoDonado.donacion.user.email])
     email.send()
 
@@ -205,6 +219,7 @@ def pedir(request):
     else:
 		return redirect('/principal')
 
+
 def matchs(request,case,pid):
 
     if "POST" in request.method:
@@ -247,6 +262,11 @@ def code(request,id):
         elif donacion.prescripcion == False:
             email = EmailMessage('Codigo de pedido','Tu codigo de pedido es '+d_id.upper(), to=[donacion.donacion.user.email])
             email.send()
-            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})            
+            return render(request,'code.html',{'donation' : donacion,'donation_id' : d_id.upper()})
     else:
         return HttpResponse("<script>alert('Código no valido'); window.location = '/verificacion/input/retiro';</script>")
+
+
+def lout(request):
+    logout(request)
+    return HttpResponseRedirect("/")

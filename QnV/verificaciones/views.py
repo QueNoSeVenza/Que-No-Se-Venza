@@ -16,15 +16,15 @@ donacionesStore = []
 
 def delete_stock(request):
 
-    itemid = request.GET.get('itemid', None)
-    print("Entro el ajax ",itemid)
-    item = MedicamentoDonado.objects.get(pk=itemid)
-    print(item.stock)
-    item.stock = "Inactivo"
-    print(item.stock)
-    item.save()
-    data = {}
-    return JsonResponse(data)
+	itemid = request.GET.get('itemid', None)
+	print("Entro el ajax ",itemid)
+	item = MedicamentoDonado.objects.get(pk=itemid)
+	print(item.stock)
+	item.stock = "Inactivo"
+	print(item.stock)
+	item.save()
+	data = {}
+	return JsonResponse(data)
 
 def stock (request):
 	global donacionesStore
@@ -45,20 +45,20 @@ def stock (request):
 
 def input_view (request,case):
 
-    if request.user.groups.filter(name='Verificadores').exists():
+	if request.user.groups.filter(name='Verificadores').exists():
 
-        if case == "entrada":
+		if case == "entrada":
 
-            return render(request,'entrada_input.html',{})
+			return render(request,'entrada_input.html',{})
 
-        elif case == "retiro":
+		elif case == "retiro":
 
-            return render(request,'retiro_input.html',{})
+			return render(request,'retiro_input.html',{})
 
 
-    else:
+	else:
 
-        return HttpResponseForbidden()
+		return HttpResponseForbidden()
 
 
 
@@ -86,13 +86,13 @@ def entrada(request):
 			try:
 				fecha = datetime.strptime(vencimiento, '%d/%m/%Y').strftime('%Y-%m-%d')
 			except:
-				messages.info(request, 'Fecha no Valida!')
+				messages.info(request, 'FECHA NO VALIDA')
 				return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
 		fechaVen = datetime.strptime(fecha,'%Y-%m-%d').date()
 
 		if fechaVen <= date.today():
-			messages.info(request, 'Fecha no Valida!')
+			messages.info(request, 'FECHA NO VALIDA')
 			return render(request,'entrada.html',{'donacion' : medicamento_donado, 'fecha' : fechaV})
 
 		med_donado = medicamento_donado
@@ -115,9 +115,7 @@ def entrada(request):
 		return HttpResponseRedirect("/verificacion/stock")
 	else:
 		try:
-			print "das", donacionesStore
 			meds = [x for x in donacionesStore if str(x.id) == request.GET['id']]
-			print meds
 			medicamento_donado = meds[0]
 		except (ObjectDoesNotExist,ValueError):
 			medicamento_donado = MedicamentoDonado(stock = 'empty')
@@ -136,14 +134,11 @@ def entrada(request):
 def salida(request):
 	global donacionesStore
 	if request.method == "POST":
-#       code = request.POST['donation_id']
-#       donacion = [x for x in MedicamentoDonado.objects.all() if x.codigo() == code]
-#		donacion = MedicamentoDonado.objects.get(pk=request.POST['donation_id'].upper())
 		donacion_list = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
 		donacion = donacion_list[0]
 
+
 		if donacion.prescripcion == True:
-			print("primero")
 			if len(request.POST.getlist('checks')) == 1:
 				donacion.stock = 'Entregado'
 				donacion.verificador_salida = request.user
@@ -197,7 +192,6 @@ def search(request):
 def todo(request, string):
 	global donacionesStore
 	meds = donacionesStore
-	print meds
 	medicamentosMatch = []
 
 	for i in meds:
@@ -213,7 +207,6 @@ def todo(request, string):
 
 def enStock(request, string):
 	global donacionesStore
-	print "pone ", donacionesStore
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None"]
 	medicamentosMatch = []
 	
@@ -230,7 +223,6 @@ def enStock(request, string):
 
 def todoStock(request):
 	global donacionesStore
-	print "pene" , donacionesStore
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None" and x.store]
 	return render(request,'stock.html',{'donaciones' : meds})
 
