@@ -46,11 +46,7 @@ def principal(request):
 def thanks2(request):
 
 
-    # grab the user in question
-    user = User.objects.get(username=request.user.username)
-    [s.delete() for s in Session.objects.all() if s.get_decoded().get('_auth_user_id') == user.id]
-    user.is_active = False
-    user.save()
+
     template = loader.get_template('thanks2.html')
     context = {}
     return HttpResponse(template.render(context, request))
