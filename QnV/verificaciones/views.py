@@ -37,20 +37,13 @@ def stock (request):
 
 def input_view (request,case):
 
-	if request.user.groups.filter(name='Verificadores').exists():
+	if case == "entrada":
 
-		if case == "entrada":
+		return render(request,'entrada_input.html',{})
 
-			return render(request,'entrada_input.html',{})
+	elif case == "retiro":
 
-		elif case == "retiro":
-
-			return render(request,'retiro_input.html',{})
-
-
-	else:
-
-		return HttpResponseForbidden()
+		return render(request,'retiro_input.html',{})
 
 
 
@@ -61,10 +54,10 @@ def entrada(request):
 	
 	if request.method == "POST":
 		meds = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
+		medicamento_donado = meds[0]
 		nombre = request.POST['nome']
 		vencimiento = request.POST['date']
 		prescripcion  = request.POST['prescripcion']
-		medicamento_donado = meds[0]
 		fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
 
 		tipo_kwargs = {
@@ -110,7 +103,7 @@ def entrada(request):
 		try:
 			meds = [x for x in donacionesStore if str(x.id) == request.GET['id']]
 			medicamento_donado = meds[0]
-		except (ObjectDoesNotExist,ValueError):
+		except:
 			medicamento_donado = MedicamentoDonado(stock = 'empty')
 
 		print(medicamento_donado.stock)
