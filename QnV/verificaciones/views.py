@@ -12,8 +12,6 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.http import JsonResponse
 
-donacionesStore = []
-
 def delete_stock(request):
 
 	itemid = request.GET.get('itemid', None)
@@ -27,51 +25,39 @@ def delete_stock(request):
 	return JsonResponse(data)
 
 def stock (request):
-	global donacionesStore
-	donacionesStore = []
-	if request.user.groups.filter(name='Verificadores').exists():
-		stores = Store.objects.all()
-		for store in stores:
-			if request.user.groups.filter(name=store.nombre).exists():
-				medicamentos = MedicamentoDonado.objects.all()
-				for i in medicamentos:
-					if i.store.nombre == store.nombre:
-						donacionesStore.append(i)
-				cant = len(medicamentos)
-				return render(request,'stock.html',{'donaciones' : donacionesStore, 'cantidad' : cant})
+	groups = request.user.groups.all()
+	stores = Store.objects.filter(nombre=groups[0])
+	if stores != None:
+		donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
+		cant = len(donacionesStore)
+		return render(request,'stock.html',{'donaciones' : donacionesStore, 'cantidad' : cant})
 	else:
 		return HttpResponseForbidden()
 
 
 def input_view (request,case):
 
-	if request.user.groups.filter(name='Verificadores').exists():
+	if case == "entrada":
 
-		if case == "entrada":
+		return render(request,'entrada_input.html',{})
 
-			return render(request,'entrada_input.html',{})
+	elif case == "retiro":
 
-		elif case == "retiro":
-
-			return render(request,'retiro_input.html',{})
-
-
-	else:
-
-		return HttpResponseForbidden()
+		return render(request,'retiro_input.html',{})
 
 
 
 
 def entrada(request):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
+	
 	if request.method == "POST":
-		print donacionesStore
 		meds = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
+		medicamento_donado = meds[0]
 		nombre = request.POST['nome']
 		vencimiento = request.POST['date']
 		prescripcion  = request.POST['prescripcion']
-		medicamento_donado = meds[0]
 		fechaV = datetime.strptime(str(medicamento_donado.fecha_vencimiento), '%Y-%m-%d').strftime('%d/%m/%Y')
 
 		tipo_kwargs = {
@@ -117,7 +103,7 @@ def entrada(request):
 		try:
 			meds = [x for x in donacionesStore if str(x.id) == request.GET['id']]
 			medicamento_donado = meds[0]
-		except (ObjectDoesNotExist,ValueError):
+		except:
 			medicamento_donado = MedicamentoDonado(stock = 'empty')
 
 		print(medicamento_donado.stock)
@@ -132,7 +118,9 @@ def entrada(request):
 
 
 def salida(request):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
+	
 	if request.method == "POST":
 		donacion_list = [x for x in donacionesStore if str(x.id) == request.POST['donation_id']]
 		donacion = donacion_list[0]
@@ -190,11 +178,11 @@ def search(request):
 
 
 def todo(request, string):
-	global donacionesStore
-	meds = donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
 	medicamentosMatch = []
 
-	for i in meds:
+	for i in donacionesStore:
 		if string.upper() in i.medicamento.nombre.upper():
 			medicamentosMatch.append(i)
 		elif string.upper()  in i.laboratorio.upper():
@@ -206,7 +194,8 @@ def todo(request, string):
 
 
 def enStock(request, string):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None"]
 	medicamentosMatch = []
 	
@@ -222,13 +211,15 @@ def enStock(request, string):
 
 
 def todoStock(request):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) != "None" and str(x.verificador_salida) == "None" and x.store]
 	return render(request,'stock.html',{'donaciones' : meds})
 
 
 def noVerificado(request, string):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) == "None"]
 	medicamentosMatch = []
 
@@ -244,6 +235,7 @@ def noVerificado(request, string):
 
 
 def todoNoVerificado(request):
-	global donacionesStore
+	groups = request.user.groups.all()
+	donacionesStore = MedicamentoDonado.objects.filter(store__nombre=groups[0])
 	meds = [x for x in donacionesStore if str(x.verificador_ingreso) == "None"]
 	return render(request,'stock.html',{'donaciones' : meds})

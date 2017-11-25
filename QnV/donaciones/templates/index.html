@@ -1,6 +1,5 @@
 {% load static %} {% load staticfiles %}
 <html>
-
 	<head>
 		<title>QNV</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
@@ -154,7 +153,6 @@
 				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
 					<h4 style="margin-left:39%;">Donando Una Caja</h4>
 					<div class="row center white-text">
-						<!--                        <form class="normal-font">-->
 						<form id="from_donar" method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
 							{% csrf_token %}
 							<div class="input-field col s6 m4 offset-m2 roboto">
@@ -257,11 +255,11 @@
 								aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza!!! </p>
 						</div>
 						<div class="col l6 push-l3 center btnsection">
-							<button tabindex="-1" class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button> {% if verificador %}
-							<a tabindex="-1" href="/verificacion/stock" class="waves-effect waves-light btn-large green z-depth-3
-																			   optbutton semibold" id="panelbtn">VERIFICAR</a> {% endif %}
-							<button tabindex="-1" class="waves-effect waves-light btn-large blue z-depth-3
-														 optbutton semibold" id="panelbtn" onclick="toRight()" tabindex="-1">SOLICITAR</button>
+							<button tabindex="-1" class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button> 
+							{% if verificador %}
+							<a tabindex="-1" href="/verificacion/stock" class="waves-effect waves-light btn-large green z-depth-3 optbutton semibold" id="panelbtn">VERIFICAR</a> 
+							{% endif %}
+							<button tabindex="-1" class="waves-effect waves-light btn-large blue z-depth-3 optbutton semibold" id="panelbtn" onclick="toRight()" tabindex="-1">SOLICITAR</button>
 						</div>
 					</div>
 					<!--Slide derecho solicitar-->
@@ -299,9 +297,9 @@
 									<div class="input-field col s6 offset-s3">
 										<select name="pedir_tipo">
 											<option value="" disabled selected>Elije una opcion</option>
-											<option value="Pastillas">Pastillas</option>
-											<option value="Jarabe">Jarabe</option>
-											<option value="Gotas">Gotas</option>
+											{% for tipo in tipos %}
+											<option value="{{tipo.nombre}}">{{tipo.nombre}}</option>
+											{% endfor %}
 										</select>
 										<label>Tipo</label>
 									</div>

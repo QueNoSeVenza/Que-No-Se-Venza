@@ -37,9 +37,9 @@ def principal(request):
     donations_done = len(MedicamentoDonado.objects.filter(donacion__user=user, stock='Entregado'))
 
    # por_entregar = len([x for x in MedicamentoDonado.objects.all() if str(x.MedicamentoDonado.stock) == "None"])
-
-    if request.user.groups.filter(name='Verificadores').exists():
-        verificador = True
+    for store in stores:
+		if request.user.groups.filter(name=store.nombre).exists():
+			verificador = True
     context = {'verificador':verificador, 'django_users':user,'medi' : medicamentos, 'donacion': donations, 'por_entregar': por_entregar, 'donacion_done': donations_done, 'stores': stores, 'tipos': tipos}
     return HttpResponse(template.render(context, request))
 
