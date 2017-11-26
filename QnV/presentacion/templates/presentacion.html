@@ -62,9 +62,9 @@
 				<div class="col s12 m10 offset-m1 fadeonscroll">
 					<h2 class="center semibold" style="margin-top:60px;">¿QUÉ ES QUE NO VENZA?</h2>
 					<div class="col s12 m8 offset-m2 center">
-						<p>Se podria decir que QNV es un gestor de donaciones web, pero va mas alla de la aplicacion, queremos cambiar la forma de ayudar a la gente, como?, brindando una herramienta que facilte el intercambio de medicamentos, asi aquellos medicamentos que
-							tenemos guardados sin usar en nuestra casa terminen en manos de personas que no tienen la capacidad de adquirirlos. Una vez que una solicitud machea, el dispensario seleccionado funcionara como verificador del medicamento para asegurarse que se
-							encuentre en buen estado y/o no haya sido adulterado. </p>
+						<p>Se podría decir que QNV es un gestor de donaciones web, pero va más allá de la aplicación, queremos cambiar la forma de ayudar a la gente, como?, brindando una herramienta que facilite el intercambio de medicamentos, así aquellos medicamentos que
+							tenemos guardados sin usar en nuestra casa terminen en manos de personas que no tienen el capital para adquirirlos. Una vez que una donación cumple con los requisitos de un pedido, el dispensario seleccionado funcionara como verificador del medicamento para asegurarse que se
+							encuentre en buen estado y/o no haya sido adulterado.</p>
 					</div>
 				</div>
 			</div>
@@ -77,10 +77,10 @@
 			<div class="col s12 where-pnl center">
 				<h3 class="fadeonscroll wtitle semibold" style="font-size: 2.2rem;">PUNTOS DE DEPÓSITO</h3>
 				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
-					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Enrique Bochini</span></div>
+					<div id="plate-default" class="plate pointer">Mendiolaza<span> Av. Malvinas Argentinas 170</span></div>
 				</div>
 				<div class="col s12 m8 offset-m2 l4 offset-l2 fadeonscroll-right rightimg">
-					<div id="plate-default-2" class="plate pointer">Talar<span>Daniel Montenegro 1010</span></div>
+					<div id="plate-default-2" class="plate pointer">Talar<span>Av. Martín Tissera 2096</span></div>
 				</div>
 			</div>
 		</div>
@@ -101,8 +101,7 @@
 						<td>
 							<div class="col m12 right fadeonscroll">
 								<h2>Registrate</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Para poder utilizar QNV es necesario estar registrado en nuestra página web, para hacerlo simplemente completa los datos necesarios para crear un perfil y ya seras parte de la comunidad de QNV.</p>
 							</div>
 						</td>
 					</tr>
@@ -113,8 +112,7 @@
 						<td>
 							<div class="col m12 fadeonscroll">
 								<h2>Completa el formulario</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Si usted desea donar o solicitar un medicamento lo que debe hacer es completar el formulario con los datos del mismo, antes de seguir asegúrese de haber colocado los datos correctamente. Una vez completado se le entregará un código, ya sea de retiro o de donación.</p>
 							</div>
 						</td>
 						<td>
@@ -135,8 +133,7 @@
 						<td>
 							<div class="col m12 right fadeonscroll">
 								<h2>Presentate en el dispensario</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+								<p>Una vez que tengamos el código en mano, el mismo será enviado por correo electrónico a su cuenta, debemos presentarnos en el dispensario seleccionado, ya sea para retirar nuestro pedido o para entregar una nueva donación. No olvide llevar la receta del médico si es necesario.</p>
 							</div>
 						</td>
 					</tr>
@@ -176,17 +173,17 @@
 			</div>
 			<div class="col s12 l4">
 				<h4 class="semibold">correo</h4>
-				<form>
+				<form action="{% url 'presentacion:mensaje' %}">
 					<div class="row">
 						<div class="col s6">
-							<input class="col s12" placeholder="Nombre" id="exampleEmailInput" type="text">
+							<input class="col s12" placeholder="Nombre" id="exampleEmailInput" type="text" required>
 						</div>
 						<div class="col s6">
-							<input class="col s12" placeholder="Correo electrónico" type="email">
+							<input class="col s12" placeholder="Correo electrónico" type="email" required>
 						</div>
 					</div>
 					<div class="col s12">
-						<textarea class="col s12" placeholder="Mensaje" id="exampleMessage"></textarea>
+						<textarea class="col s12" placeholder="Mensaje" id="exampleMessage" required></textarea>
 					</div>
 					<div class="col s12 center">
 						<input value="Enviar" type="submit">
@@ -196,9 +193,9 @@
 			<div class="col s12 l3">
 				<h4 class="semibold">Contacto</h4>
 				<ul>
-					<li id="comunicate">+54 9 351 5115621</li>
-					<li id="comunicate">direccion 1</li>
-					<li id="comunicate">direccion 2</li>
+					<li id="comunicate">+54 9 351 3481354</li>
+					<li id="comunicate">Av. Malvinas Argentinas 170</li>
+					<li id="comunicate">Av. Martín Tissera 2096</li>
 					<li id="comunicate" class="noupper">quenovenza@gmail.com</li>
 				</ul>
 			</div>

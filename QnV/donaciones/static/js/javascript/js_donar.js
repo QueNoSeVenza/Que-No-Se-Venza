@@ -105,20 +105,24 @@ $(document).ready(function () {
     $(toggle).click(function () {
         document.getElementById('sidenav').style.pointerEvents = 'none';
         sidenav.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
-            function (e) {
-                document.getElementById('sidenav').style.pointerEvents = 'auto';
-                if ($('.menu-toggle').hasClass('active')) {
-                    /*Cambiar a blanco*/
-                    $(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
-                    $(toggle).toggleClass('active');
-                } else {
-                    /*Cambiar a gris*/
-                    $(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
-                    $(toggle).toggleClass('active');
-                }
-            });
+                    function (e) {
+            document.getElementById('sidenav').style.pointerEvents = 'auto';
+            if ($('.menu-toggle').hasClass('active')) {
+                /*Cambiar a blanco*/
+                $(".menu-toggle .barsTwo").removeClass("barsTwo").addClass("bars");
+                $(toggle).toggleClass('active');
+            } else {
+                /*Cambiar a gris*/
+                $(".menu-toggle .bars").removeClass("bars").addClass("barsTwo");
+                $(toggle).toggleClass('active');
+            }
+        });
     });
     /*$('body').toggleClass('active');*/
 
 
 });
+
+function funcion() {
+    document.getElementById('sendDonar').disabled = 'disabled';
+}

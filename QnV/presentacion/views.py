@@ -14,3 +14,6 @@ def presentacion(request):
 
 def municipalidad(request):
     return redirect("http://www.municipiomendiolaza.com.ar/")
+
+def mensaje(request):
+    return HttpResponse("<script>alert('Su mensaje fue enviado, gracias por colaborar con QNV'); window.location = '/';</script>")

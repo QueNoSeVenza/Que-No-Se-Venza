@@ -239,7 +239,7 @@
 								<label for="donar_tipo">Tipo</label>
 							</div>
 							<div class="col s12 center">
-								<button id="sendDonar" class="btn red accent-2 semibold">Aceptar</button>
+								<button id="sendDonar" class="btn red accent-2 semibold" onclick="funcion()">Aceptar</button>
 							</div>
 						</form>
 					</div>
@@ -250,9 +250,9 @@
 						<div class="row center">
 							<h3 class="grey-text text-darken-2 normal-font">Bienvenido,
 								<span class="red-text semibold">{{django_users.first_name|title}}</span></h3>
-							<p class="col m6 push-m3">Si nos ponemos en el lugar de un ciudadano cordobes cualquiera, nos damos cuenta que en casa tenemos una caja llena de medicamentos, de los cuales mas de la mitad no los necesitamos o estan vencidos...Que mejor forma de realizar una limipeza
+							<p class="col m6 push-m3">Si nos ponemos en el lugar de un ciudadano cordobes cualquiera, nos damos cuenta que en casa tenemos una caja llena de medicamentos, de los cuales mas de la mitad no los necesitamos o estan vencidos. Que mejor forma de realizar una limipeza
 								de espacio de nuestra casa y a su vez birandarle cierta ayuda a personas, que donandolos. Ahi es donde entra QNV, una plataforma pensada para darle una herramienta simplicadora a las personas que desean donar sus medicamentos y tambien a
-								aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza!!! </p>
+								aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza! </p>
 						</div>
 						<div class="col l6 push-l3 center btnsection">
 							<button tabindex="-1" class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button> 
@@ -305,7 +305,7 @@
 									</div>
 								</div>
 								<div class="input-field col s6 offset-s3">
-									<input tabindex="-1" name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="drugstore">
+									<input tabindex="-1" name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="drugstore" required>
 									<datalist id="drugstore">
 										{% for medicamento in medi %}
 										<option value="{{medicamento.droga}}">
