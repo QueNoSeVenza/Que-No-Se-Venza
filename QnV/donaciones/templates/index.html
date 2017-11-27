@@ -151,7 +151,7 @@
 			<div class="section">
 				<!--Slide izquierdo donar-->
 				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
-					<h4 style="margin-left:39%;">Donando Una Caja</h4>
+					<h4 style="margin-left:39%;">Donando medicamento</h4>
 					<div class="row center white-text">
 						<form id="from_donar" method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
 							{% csrf_token %}
@@ -198,7 +198,7 @@
 							</div>
 							<div class="input-field col s4 offset-s2">
 								<select id="anio" name="anio" required>
-									<option value="" disabled selected>Elije un Año</option>
+									<option value="" disabled selected>Elija un año</option>
 								</select>
 								<label for="anio">Año</label>
 							</div>
@@ -222,7 +222,7 @@
 							</div>
 							<div class="input-field col s4 offset-s2">
 								<select id="store" name="store" required>
-									<option value="" disabled selected>Elije uno</option>
+									<option value="" disabled selected>Elija uno</option>
 									{% for store in stores %}
 									<option value="{{store.nombre}}">{{store.nombre}}</option>
 									{% endfor %}
@@ -255,9 +255,9 @@
 								aquellas que los necesitan, aqui abajo tendras la opcion de seleccionar la accion que desees realizar. Y no te olvides Que no se venza! </p>
 						</div>
 						<div class="col l6 push-l3 center btnsection">
-							<button tabindex="-1" class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button> 
+							<button tabindex="-1" class="waves-effect waves-light btn-large red z-depth-3 optbutton semibold" id="panelbtn" onclick="toLeft()" tabindex="-1">DONAR</button>
 							{% if verificador %}
-							<a tabindex="-1" href="/verificacion/stock" class="waves-effect waves-light btn-large green z-depth-3 optbutton semibold" id="panelbtn">VERIFICAR</a> 
+							<a tabindex="-1" href="/verificacion/stock" class="waves-effect waves-light btn-large green z-depth-3 optbutton semibold" id="panelbtn">VERIFICAR</a>
 							{% endif %}
 							<button tabindex="-1" class="waves-effect waves-light btn-large blue z-depth-3 optbutton semibold" id="panelbtn" onclick="toRight()" tabindex="-1">SOLICITAR</button>
 						</div>
