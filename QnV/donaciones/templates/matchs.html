@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
   </head>
 
+
   <body class="thx-body">
     <div class="row">
       <div class="center thx-icon">
@@ -26,7 +27,7 @@
           {%for match in matchs%}
           <div class="col s6 offset-s3 thx-float z-depth-1" style="margin-bottom:20px;">
             <div class="row center-align">
-              <input type="radio" name="match" value="{{match.id}}" checked/> <br>
+              <input type="radio" name="match" value="{{match.id}}"/> <br>
 
               <p style="margin-top:-0px;" class="center-align">
                 <input class="with-gap" name="match" type="radio" id="{{match.id}}" value="{{match.id}}" />

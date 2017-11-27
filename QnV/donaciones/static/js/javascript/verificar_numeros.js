@@ -86,7 +86,7 @@ function checkSelects() {
     selects.push($("#mes"));
     selects.push($("#anio"));
     selects.push($("#donar_tipo"));
-    
+  
     for (var i = 0; i < inputs.length; i++) {
         if (inputs[i].value == "") {
             console.log(inputs[i].value);

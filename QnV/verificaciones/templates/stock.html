@@ -1,105 +1,118 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 <html>
 
-<head>
-	<title>Verificacion - Stock</title>
-	<link rel="icon" href="{% static 'logo.png' %}">
-	<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-	<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
+	<head>
+		<title>Verificacion - Stock</title>
+		<link rel="icon" href="{% static 'logo.png' %}">
+		<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+		<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+		<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
 
-	<!--{{string}}<br>-->
-	<style type="text/css">
-		.Vencido {
-			background-color: #FF5252;
-		}
+		<!--{{string}}<br>-->
+		<style type="text/css">
+			.Vencido {
+				background-color: #FF5252;
+			}
 
-		.grtr {
-			background-color: #FCFCFC;
-		}
+			.grtr{
+				background-color: #FCFCFC;
+			}
 
-		.grtr:hover {
-			background-color: #EEEEEE;
-		}
+			.grtr:hover{
+				background-color: #EEEEEE;
+			}
 
-		.Disponible {
-			background-color: #00E676;
-		}
+			.Disponible {
+				background-color: #00E676;
+			}
 
-		.Reservado {
-			background-color: #FFEE58;
-		}
+			.Reservado {
+				background-color: #FFEE58;
+			}
 
-		.Entregado {
-			background-color: #448AFF;
+			.Entregado {
+				background-color: #448AFF;
 
-		}
-	</style>
-</head>
+			}
+		</style>
+	</head>
 
-<body>
-	<div class="row">
-		<form method="POST" action="/verificacion/search" style="margin-top:-20px;">
-			{% csrf_token %}
-			<div class="col s12 input-field center-align">
-				<input id="search" name="search1" type="text" class="large-input validate" placeholder="BUSCAR">
-				<button id="search_1" class="btn red accent-2 semibold">✔</button>
-			</div>
-			<div class="col s2 offset-s3 center-align">
-				<label>Todo</label>
-				<input value="todo" type="checkbox" name="fooby" id="ck1" checked>
-			</div>
-			<div class="col s2 center-align">
-				<label>No Verificado</label>
-				<input value="noVerificado" type="checkbox" name="fooby" id="ck3">
-			</div>
-			<div class="col s2 center-align">
-				<label>En Stock</label>
-				<input value="stock" type="checkbox" name="fooby" id="ck2">
-			</div>
+	<body>
+		<div class="row">
+			<form method="POST" action="/verificacion/search" style="margin-top:-20px;">
+				{% csrf_token %}
+				<div class="col s12 input-field center-align">
+					<input id="search" name="search1" type="text" class="large-input validate" placeholder="BUSCAR">
+					<button id="search" class="btn red accent-2 semibold">✔</button>
+				</div>
+				<div class="col s2 offset-s3 center-align">
+					<label>Todo</label>
+					<input value="todo" type="checkbox" name="fooby" id="ck1" checked>
+				</div>
+				<div class="col s2 center-align">
+					<label>No Verificado</label>
+					<input value="noVerificado" type="checkbox" name="fooby" id="ck3">
+				</div>
+				<div class="col s2 center-align">
+					<label>En Stock</label>
+					<input value="stock" type="checkbox" name="fooby" id="ck2">
+				</div>
 
-		</form>
-		<br>
-		<table class="col s12" style="padding-left:0px; padding-right:0px;">
-			<tr id="header">
-				<th class="center-align">ID</th>
-				<th class="center-align">Nombre</th>
-				<th class="center-align">Laboratorio</th>
-				<th class="center-align">Tipo</th>
-				<th class="center-align">¿Requiere receta?</th>
-				<th class="center-align">Vencimiento</th>
-				<th class="center-align">Veriificador Ingreso</th>
-				<th class="center-align">Verificador Egreso</th>
-				<th class="center-align">Eliminar</th>
-			</tr>
+			</form>
+			<br>
+			<table class="col s12" style="padding-left:0px; padding-right:0px;">
+				<tr id="header">
+					<th class="center-align">ID</th>
+					<th class="center-align">Nombre</th>
+					<th class="center-align">Laboratorio</th>
+					<th class="center-align">Tipo</th>
+					<th class="center-align">¿Requiere receta?</th>
+					<th class="center-align">Vencimiento</th>
+					<th class="center-align">Veriificador Ingreso</th>
+					<th class="center-align">Verificador Egreso</th>
+					<th class="center-align">Eliminar</th>
+				</tr>
 
-			{% for donacion in donaciones %}
-			<tr id="{{donacion.id}}" class="tr-data {{donacion.stock}}">
-				<td class="center-align">{{donacion.id}}</td>
-				<td class="center-align grtr">{{donacion.medicamento.nombre}}</td>
-				<td class="center-align grtr">{{donacion.laboratorio}}</td>
-				<td class="center-align grtr">{{donacion.tipo.nombre}}</td>
-				<td class="center-align grtr">{{donacion.prescripcion}}</td>
-				<td class="center-align grtr">{{donacion.fecha_vencimiento}}</td>
-				<td class="center-align grtr">{{donacion.verificador_ingreso}}</td>
-				<td class="center-align grtr">{{donacion.verificador_salida}}</td>
-				<td class="center-align grtr"> <button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>
-			</tr>
-			{% endfor %}
-		</table>
-	</div>
+				{% for donacion in donaciones %}
+				<tr id="{{donacion.id}}" class="tr-data {{donacion.stock}}">
+					<td class="center-align">{{donacion.id}}</td>
+					<td class="center-align grtr">{{donacion.medicamento.nombre}}</td>
+					<td class="center-align grtr">{{donacion.laboratorio}}</td>
+					<td class="center-align grtr">{{donacion.tipo.nombre}}</td>
+					{% if donacion.prescripcion == True %}
+					<td class="center-align grtr">Si</td>
+					{% else %}
+					<td class="center-align grtr">No</td>
+					{% endif %}
+					<td class="center-align grtr">{{donacion.fecha_vencimiento}}</td>
+					<td class="center-align grtr">{{donacion.verificador_ingreso}}</td>
+					<td class="center-align grtr">{{donacion.verificador_salida}}</td>
+					<td class="center-align grtr"><button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
 
-	<div id="contextMenu">
-		<ul class="rc-dropdown-menu btn-delete" role="menu" value="{{donacion.id}}">
-			<li style="list-style:none; margin-top:11px;">
-				<a class="rc-pad" tabindex="-1" href="#">Eliminar</a>
-			</li>
-		</ul>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-</body>
-<script>
-	$('#ck1').click(function() {
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	</body>
+	<script>
+		$("input:checkbox").on('click', function() {
+			// in the handler, 'this' refers to the box clicked on
+			var $box = $(this);
+			if ($box.is(":checked")) {
+				// the name of the box is retrieved using the .attr() method
+				// as it is assumed and expected to be immutable
+				var group = "input:checkbox[name='" + $box.attr("name") + "']";
+				// the checked state of the group/box on the other hand will change
+				// and the current value is retrieved using .prop() method
+				$(group).prop("checked", false);
+				$box.prop("checked", true);
+			} else {
+				$box.prop("checked", false);
+			}
+		});
+ 
+    $('#ck1').click(function() {
 		console.log("siendo");
 		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
 	});
@@ -111,41 +124,24 @@
 		console.log("siendo");
 		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
 	});
+		$(function() {
 
-	$("input:checkbox").on('click', function() {
-		// in the handler, 'this' refers to the box clicked on
-		var $box = $(this);
-		if ($box.is(":checked")) {
-			// the name of the box is retrieved using the .attr() method
-			// as it is assumed and expected to be immutable
-			var group = "input:checkbox[name='" + $box.attr("name") + "']";
-			// the checked state of the group/box on the other hand will change
-			// and the current value is retrieved using .prop() method
-			$(group).prop("checked", false);
-			$box.prop("checked", true);
-		} else {
-			$box.prop("checked", false);
-		}
-	});
+			var $contextMenu = $("#contextMenu");
 
-	$(function() {
-
-		var $contextMenu = $("#contextMenu");
-
-		$("body").on("contextmenu", "table tr", function(e) {
-			$contextMenu.css({
-				display: "block",
-				left: e.pageX,
-				top: e.pageY
+			$("body").on("contextmenu", "table tr", function(e) {
+				$contextMenu.css({
+					display: "block",
+					left: e.pageX,
+					top: e.pageY
+				});
+				return false;
 			});
-			return false;
-		});
 
-		$('html').click(function() {
-			$contextMenu.hide();
-		});
+			$('html').click(function() {
+				$contextMenu.hide();
+			});
 
-	});
-</script>
+		});
+	</script>
 
 </html>

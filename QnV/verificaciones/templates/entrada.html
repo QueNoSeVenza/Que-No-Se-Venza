@@ -22,7 +22,11 @@
 					<td id="v_nom" class="entrada-th center-align v_entrada aaa">{{donacion.medicamento.nombre}}</td>
 					<td id="v_tip" class="entrada-th center-align" onclick="txt_tip()">{{donacion.tipo.nombre}}</td>
 					<td id="v_ven" class="entrada-th center-align">{{fecha}}</td>
-					<td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">{{donacion.prescripcion}}</td>
+					{% if donacion.prescripcion == True %}
+					<td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">Si</td>
+					{% else %}
+					<td id="txt_pre" class="entrada-th center-align txt_pre" onclick="txt_pre()">No</td>
+					{% endif %}
 				</tr>
 			</table>
 			<form action="/verificacion/entrada/" method="POST">
@@ -54,7 +58,7 @@
 
 <script>
 	var editable = false;
-	var types = ['Pastillas', 'Jarabe', 'Gotas'];
+	
 	function make_editable() {
 		/*Codigo h o r r i b l e*/
 		document.getElementById('v_nom').contentEditable = true;
@@ -66,42 +70,51 @@
 		}
 		editable = true;
 	}
+	
 	function txt_tip() {
 		if (editable) {
 			var ty = document.getElementById('v_tip').innerText;
 			switch (ty) {
-				case 'Comprimidos':
-					document.getElementById('v_tip').innerText = "Jarabe";
+				case 'Comprimidos'.toUpperCase():
+					document.getElementById('v_tip').innerText = "Jarabe".toUpperCase();
 					break;
-				case 'Jarabe':
-					document.getElementById('v_tip').innerText = "Gotas";
+				case 'Jarabe'.toUpperCase():
+					document.getElementById('v_tip').innerText = "Gotas".toUpperCase();
 					break;
-				case 'Gotas':
-					document.getElementById('v_tip').innerText = "Comprimidos";
+				case 'Gotas'.toUpperCase():
+					document.getElementById('v_tip').innerText = "Comprimidos".toUpperCase();
 					break;
 			}
 		}
 	}
+	
 	function txt_pre() {
 		if (editable) {
 			var pre = document.getElementById('txt_pre').innerText;
-			if (pre == 'False') {
-				document.getElementById('txt_pre').innerText = "True";
+			if (pre == 'No') {
+				document.getElementById('txt_pre').innerText = "Si";
 			} else {
-				document.getElementById('txt_pre').innerText = "False";
+				document.getElementById('txt_pre').innerText = "No";
 			}
 		}
 	}
+	
 	function dataToHiddenInputs() {
 		var n = document.getElementById('v_nom').innerText;
 		var t = document.getElementById('v_tip').innerText;
 		var v = document.getElementById('v_ven').innerText;
 		var p = document.getElementById('txt_pre').innerText;
-
+		
+		if(p == "Si") {
+			var pre =  "True";
+		} else {
+			var pre =  "False";
+		}
+		
 		document.getElementById("name").value = n;
 		document.getElementById("type").value = t;
 		document.getElementById("date").value = v;
-		document.getElementById("prescripcion").value = p;
+		document.getElementById("prescripcion").value = pre;
 	}
 
 	$(document).ready(function(){
