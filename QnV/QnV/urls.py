@@ -24,5 +24,21 @@ urlpatterns = [
     url(r'^', include('donaciones.urls', namespace='donaciones')),
     url(r'^', include('verificaciones.urls', namespace='verificaciones')),
     url(r'^', include('presentacion.urls', namespace='presentacion')),
-    url('^', include('django.contrib.auth.urls')),
+    url(r'^reset/password_reset', password_reset,
+        {'template_name':'password_reset_form.html',
+         'email_template_name': 'password_reset_email.html'},
+        name='password_reset'),
+
+    url(r'^password_reset_done', password_reset_done,
+        {'template_name': 'password_reset_done.html'},
+        name='password_reset_done'),
+
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
+        password_reset_confirm,
+        {'template_name': 'password_reset_confirm.html'},
+        name='password_reset_confirm'
+       ),
+
+    url(r'^reset/done', password_reset_complete, {'template_name': 'password_reset_complete.html'},
+        name='password_reset_complete'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
