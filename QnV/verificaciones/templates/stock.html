@@ -14,11 +14,11 @@
 			background-color: #FF5252;
 		}
 
-		.grtr{
+		.grtr {
 			background-color: #FCFCFC;
 		}
 
-		.grtr:hover{
+		.grtr:hover {
 			background-color: #EEEEEE;
 		}
 
@@ -43,7 +43,7 @@
 			{% csrf_token %}
 			<div class="col s12 input-field center-align">
 				<input id="search" name="search1" type="text" class="large-input validate" placeholder="BUSCAR">
-				<button id="search" class="btn red accent-2 semibold">✔</button>
+				<button id="search_1" class="btn red accent-2 semibold">✔</button>
 			</div>
 			<div class="col s2 offset-s3 center-align">
 				<label>Todo</label>
@@ -96,10 +96,22 @@
 			</li>
 		</ul>
 	</div>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </body>
 <script>
+	$('#ck1').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
+	$('#ck2').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
+	$('#ck3').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
+
 	$("input:checkbox").on('click', function() {
 		// in the handler, 'this' refers to the box clicked on
 		var $box = $(this);
