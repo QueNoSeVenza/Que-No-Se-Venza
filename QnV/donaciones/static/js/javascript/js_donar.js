@@ -38,6 +38,10 @@ function isNumber(evt) {
 }
 
 $(document).ready(function () {
+  $('#sendDonar').click(function () {
+    $('#sendDonar').css('pointerEvents', 'none');
+    setTimeout(function(){ $('#sendDonar').delay(3000).css('pointerEvents', 'auto'); }, 3000);
+  });
     // Select your input element.
     var numInput = document.querySelector('input');
 
@@ -50,6 +54,7 @@ $(document).ready(function () {
             this.value = "";
         }
     }, false)
+
     $(".extra_info").hide();
     $("#pedir_nombre,#pedir_gramos").change(function () {
         var nombre = $("#pedir_nombre").val();
@@ -122,7 +127,3 @@ $(document).ready(function () {
 
 
 });
-
-function funcion() {
-    document.getElementById('sendDonar').disabled = 'disabled';
-}

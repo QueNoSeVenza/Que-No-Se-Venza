@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  dissableButtonSend();
+  $(".register-content").css("opacity", "1");
   $('body').css('height',$(window).height()+'px');
   $(".register-content").css("opacity", "1");
   // Revisa que los password sean iguales

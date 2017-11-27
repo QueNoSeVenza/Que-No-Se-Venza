@@ -111,7 +111,19 @@
 				$box.prop("checked", false);
 			}
 		});
-
+ 
+    $('#ck1').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
+	$('#ck2').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
+	$('#ck3').click(function() {
+		console.log("siendo");
+		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+	});
 		$(function() {
 
 			var $contextMenu = $("#contextMenu");

@@ -30,13 +30,14 @@
               <input type="radio" name="match" value="{{match.id}}"/> <br>
 
               <p style="margin-top:-0px;" class="center-align">
-                <input class="with-gap" name="match" type="radio" id="{{match.id}}" value="{{match.id}}" {% if forloop.counter  == 1 %} checked {% endif %}/>
-                <label for="{{match.id}}">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>) Storage: {{match.store.nombre}}</label>
+                <input class="with-gap" name="match" type="radio" id="{{match.id}}" value="{{match.id}}" />
+                <label for="{{match.id}}">{{match.cantidad}} unidades de {{match.medicamento.nombre}} (CÓD. <span class="semibold">{{match}}</span>) Dispensario: {{match.store.nombre}}</label>
               </p>
             </div>
           </div>
           {% endfor %}
           <div class="col s12 center">
+            <a class="btn bckBtn transparent z-depth-0 grey-text text-darken-1 semibold" onclick="location.href='/principal'">Volver</a>
             <input class="btn indigo accent-2 semibold z-depth-0 center-align" type="submit" value="Aceptar">
           </div>
         </form>
