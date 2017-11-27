@@ -216,16 +216,20 @@ def pedir(request):
 def matchs(request,case,pid):
 
     if "POST" in request.method:
-        mid = request.POST['match']
-        pedido = Pedido.objects.get(pk=pid)
-        donacion = MedicamentoDonado.objects.get(pk=mid)
-        match = Match(pedido=pedido,donacion=donacion)
-        match.save()
-        pedido.estado = "Emparejado"
-        donacion.stock = "Reservado"
-        pedido.save()
-        donacion.save()
-        return redirect('/code/'+donacion.codigo())
+        try:
+            mid = request.POST['match']
+            pedido = Pedido.objects.get(pk=pid)
+            donacion = MedicamentoDonado.objects.get(pk=mid)
+            match = Match(pedido=pedido,donacion=donacion)
+            match.save()
+            pedido.estado = "Emparejado"
+            donacion.stock = "Reservado"
+            pedido.save()
+            donacion.save()
+            return redirect('/code/'+donacion.codigo())
+        except MultiValueDictKeyError:
+            return redirect('/principal')
+
 
     else:
         if case == 'on':
