@@ -1,0 +1,28 @@
+@font-face {
+    font-family: Avenir;
+    src: url(fonts/AvenirLTStd-Medium.otf);
+}
+
+@font-face {
+    font-family: Avenir-Heavy;
+    src: url(fonts/AvenirLTStd-Heavy.ttf);
+}
+
+@font-face {
+    font-family: Avenir-Light;
+    src: url(fonts/AvenirLTStd-Light.otf);
+}
+
+html,
+body {
+    font-family: Avenir;
+    background-color: #F5F5F5;
+}
+
+.font-light {
+    font-family: Avenir-Light;
+}
+
+.font-heavy {
+    font-family: Avenir-Heavy;
+}
