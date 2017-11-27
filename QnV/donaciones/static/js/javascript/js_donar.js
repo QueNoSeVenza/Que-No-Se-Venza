@@ -40,7 +40,7 @@ function isNumber(evt) {
 $(document).ready(function () {
   $('#sendDonar').click(function () {
     $('#sendDonar').css('pointerEvents', 'none');
-    setTimeout(function(){ $('#sendDonar').delay(3000).css('pointerEvents', 'auto'); }, 3000);
+    setTimeout(function(){ $('#sendDonar').delay(4000).css('pointerEvents', 'auto'); }, 3000);
   });
     // Select your input element.
     var numInput = document.querySelector('input');
