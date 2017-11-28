@@ -295,6 +295,7 @@ input[type="text"]:disabled {
 .bckBtn {
   left: 10;
   top: 20;
-  border: 1px solid grey !important; }
+  border: 1px solid grey !important; 
+}
 
 /*# sourceMappingURL=style_donar.css.map */
