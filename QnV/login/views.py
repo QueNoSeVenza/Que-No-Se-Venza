@@ -33,8 +33,7 @@ def login(request):
 
 
 def tyc(request):
-#    return render(request, 'tyc.html', {})
-    return redirect('/tyc.html')
+    return render(request, 'tyc.html', {})
 
 def log(request):
     if 'POST' in request.method:
