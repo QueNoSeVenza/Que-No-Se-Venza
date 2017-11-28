@@ -64,8 +64,8 @@ $(document).ready(function() {
     $("#center_logo").animate({
       opacity: 0
     });
-    $("#findme").delay(1400).fadeOut("fast");
-    $("#center_logo").delay(2000).animate({
+    $("#findme").delay(14000).fadeOut("fast");
+    $("#center_logo").delay(20000).animate({
       opacity: 1
     });
     if ($(window).width() > 600) {

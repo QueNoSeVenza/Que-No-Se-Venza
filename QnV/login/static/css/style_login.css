@@ -27,7 +27,7 @@ body {
 .font-heavy {
     font-family: Avenir-Heavy;
 }
-li{
+.conf2-card li{
   display: none;
 }
 
@@ -189,10 +189,10 @@ h5 {
     border-bottom: 1px solid #ccc;
 }
 
-.messages li {
+/*.messages li {
     top: 10p position: absolute;
 
-}
+}*/
 
 .field:valid + .floating-label {
     opacity: 1;
