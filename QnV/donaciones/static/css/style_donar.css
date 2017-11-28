@@ -261,17 +261,27 @@ ul li:hover .dropOut {
   padding: 10;
   border-radius: 3px; }
 
-.thx-center {
-  text-align: center !important; }
-  .thx-center.lab {
-    left: 0 !important;
-    right: 0 !important; }
+@media only screen and (max-width: 600px) {
+  .thx-txt {
+    text-align: center !important;
+    right: 0; }
+    .thx-txt.lab {
+      left: 0 !important;
+      right: 0 !important; } }
 
-.thx-right {
-  text-align: right !important; }
-  .thx-right.lab {
-    left: none !important;
-    right: 2% !important; }
+@media only screen and (min-width: 600px) {
+  .thx-center {
+    text-align: center !important; }
+    .thx-center.lab {
+      left: 0 !important;
+      right: 0 !important; } }
+
+@media only screen and (min-width: 600px) {
+  .thx-right {
+    text-align: right !important; }
+    .thx-right.lab {
+      left: none !important;
+      right: 2% !important; } }
 
 .don-dat {
   padding-top: 0.8%;
@@ -295,7 +305,6 @@ input[type="text"]:disabled {
 .bckBtn {
   left: 10;
   top: 20;
-  border: 1px solid grey !important; 
-}
+  border: 1px solid grey !important; }
 
 /*# sourceMappingURL=style_donar.css.map */

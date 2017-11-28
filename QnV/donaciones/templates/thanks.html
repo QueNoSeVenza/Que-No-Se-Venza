@@ -17,7 +17,7 @@
         <div class="col s12">
             <h1 class="center grey-text text-darken-3">¡Gracias por donar!</h1>
             <div class="col s10 offset-s1 l6 offset-l3">
-                <h5 class="center grey-text text-darken-3 z-depth-0 semibold">Tu codigo de donacion es:<span class="white-text indigo accent-3 id-show">{{medDona.id}}</span></h5>
+                <h5 class="center grey-text text-darken-3 z-depth-0 semibold">Tu codigo de donacion es:<span class="col s12 white-text indigo accent-3 id-show">{{medDona.id}}</span></h5>
             </div>
             <div class="col s12 center">
                 <p>Con este codigo debes presentarte en el dispensario seleccioando para finalizar con la donacion</p>
@@ -26,33 +26,33 @@
             <div class="col s12 l10 offset-l1 thx-float z-depth-1">
                 <div class="row">
                     <h5 class="center don-dat">Datos de donacion</h5>
-                    <div class="input-field col s5 l4 offset-l1">
-                        <input disabled name="donar_nombre" value="{{medDona.medicamento.nombre}}" id="n_1" type="text">
-                        <label for="n_1" class="semibold grey-text text-darken-1">NOMBRE COMERCIAL</label>
+                    <div class="input-field col s12 m4 offset-m1">
+                        <input disabled name="donar_nombre" value="{{medDona.medicamento.nombre}}" id="n_1" type="text" class="thx-txt">
+                        <label for="n_1" class="semibold grey-text text-darken-1 thx-txt">NOMBRE COMERCIAL</label>
                     </div>
-                    <div class="input-field col s2">
-                        <input disabled name="donar_cantidad" value="{{medDona.cantidad}}" id="ca_2" type="text" class="thx-center">
-                        <label for="ca_2" class="semibold thx-center lab grey-text text-darken-1">CANTIDAD</label>
+                    <div class="input-field col s6 m2">
+                        <input disabled name="donar_cantidad" value="{{medDona.cantidad}}" id="ca_2" type="text" class="thx-center thx-txt">
+                        <label for="ca_2" class="semibold thx-center lab grey-text text-darken-1 thx-txt">CANTIDAD</label>
                     </div>
-                    <div class="input-field col s5 l4">
-                        <input disabled name="donar_concentracion_gramos" value="{{medDona.medicamento.concentracion_gramos}}" id="c_1" type="text" class="thx-right">
-                        <label for="c_1" class="semibold thx-right lab grey-text text-darken-1">CONCENTRACION(GR)</label>
+                    <div class="input-field col s6 m4">
+                        <input disabled name="donar_concentracion_gramos" value="{{medDona.medicamento.concentracion_gramos}}" id="c_1" type="text" class="thx-right thx-txt">
+                        <label for="c_1" class="semibold thx-right lab grey-text text-darken-1 thx-txt">CONCENTRACION(GR)</label>
                     </div>
-                    <div class="input-field col s4 l3 offset-l1">
-                        <input disabled name="donar_laboratorio" value="{{medDona.laboratorio}}" id="l_1" type="text" class="">
-                        <label for="l_1" class="semibold grey-text text-darken-1">LABORATORIO</label>
+                    <div class="input-field col s6 m3 offset-m1">
+                        <input disabled name="donar_laboratorio" value="{{medDona.laboratorio}}" id="l_1" type="text" class="thx-txt">
+                        <label for="l_1" class="semibold grey-text text-darken-1 thx-txt">LABORATORIO</label>
                     </div>
-                    <div class="input-field col s4">
-                        <input disabled name="anio" value="{{fecha}}" id="f_1" type="text" class="thx-center">
-                        <label for="f_1" class="semibold thx-center lab grey-text text-darken-1">FECHA</label>
+                    <div class="input-field col s6 m4">
+                        <input disabled name="anio" value="{{fecha}}" id="f_1" type="text" class="thx-center thx-txt">
+                        <label for="f_1" class="semibold thx-center lab grey-text text-darken-1 thx-txt">FECHA</label>
                     </div>
-                    <div class="input-field col s4 l3">
-                        <input disabled name="donar_tipo" value="{{medDona.tipo.nombre}}" id="t_1" type="text" class="thx-right">
-                        <label for="t_1" class="semibold thx-right lab grey-text text-darken-1">TIPO</label>
+                    <div class="input-field col s12 m3">
+                        <input disabled name="donar_tipo" value="{{medDona.tipo.nombre}}" id="t_1" type="text" class="thx-right thx-txt">
+                        <label for="t_1" class="semibold thx-right lab grey-text text-darken-1 thx-txt">TIPO</label>
                     </div>
-                    <div class="input-field col s12 l10 offset-l1">
-                        <input disabled name="donar_droga" value="{{medDona.medicamento.droga}}" id="d_1" type="text" class="thx-center">
-                        <label for="d_1" class="semibold thx-center lab don-back grey-text text-darken-1">DROGA</label>
+                    <div class="input-field col s12 m10 offset-m1">
+                        <input disabled name="donar_droga" value="{{medDona.medicamento.droga}}" id="d_1" type="text" class="thx-center thx-txt">
+                        <label for="d_1" class="semibold thx-center lab don-back grey-text text-darken-1 thx-txt">DROGA</label>
                     </div>
                 </div>
             </div>

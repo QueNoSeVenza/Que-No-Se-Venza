@@ -61,8 +61,6 @@
 							<br>
 							Donaciones ya retiradas: {{ donacion_done }}
 
-
-
 						</li>
 						<!--Seccion NAV 2-->
 						<li id="navsection2">
@@ -153,7 +151,7 @@
 			<div class="section">
 				<!--Slide izquierdo donar-->
 				<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide1" style="height: 100%">
-					<h4 style="margin-left:39%;">Donando medicamento</h4>
+					<h4 class="center">Donando medicamento</h4>
 					<div class="row center white-text">
 						<form id="from_donar" method="POST" action="{% url 'donaciones:donar' %}" class="normal-font">
 							{% csrf_token %}
@@ -198,7 +196,7 @@
 								</datalist>
 								<label for="donar_droga">Droga</label>
 							</div>
-							<div class="input-field col s4 offset-s2">
+							<div class="input-field col s6 m4 offset-m2">
 								<select id="anio" name="anio" required>
 									<option value="" disabled selected>Elija un año</option>
 								</select>
@@ -222,7 +220,7 @@
 								</select>
 								<label for="mes">Mes</label>
 							</div>
-							<div class="input-field col s4 offset-s2">
+							<div class="input-field col s6 m4 offset-m2">
 								<select id="store" name="store" required>
 									<option value="" disabled selected>Elija uno</option>
 									{% for store in stores %}
@@ -266,10 +264,11 @@
 					</div>
 					<!--Slide derecho solicitar-->
 					<div class="slide grey lighten-4 fp-auto-height-responsive" id="slide3">
+						<h4 class="center">Solicitando medicamento</h4>
 						<div class="row center">
 							<form id="form_pedir" method="POST" action="/pedir" class="normal-font">
 								{% csrf_token %}
-								<div class="input-field col s6 offset-s3">
+								<div class="input-field col s12 m6 offset-m3">
 									<input tabindex="-3" id="pedir_nombre" name="pedir_nombre" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" tabindex="-1" list="pedir">
 									<datalist id="pedir">
 										{% for medicamento in medi %}
@@ -278,7 +277,7 @@
 									</datalist>
 									<label for="pedir_nombre">Medicamento</label>
 								</div>
-								<div class="input-field col s6 offset-s3">
+								<div class="input-field col s12 m6 offset-m3">
 									<input tabindex="-2" id="pedir_gramos" name="pedir_gramos" id="pedir_gramos" type="text" required oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" onkeypress="return isNumber(event)" min="1" tabindex="-1" list="sentra">
 									<datalist id="sentra">
 										{% for medicamento in medi %}
@@ -288,7 +287,7 @@
 									<label for="pedir_gramos">Concentracion en Gramos</label>
 								</div>
 								<div class="extra_info">
-									<div class="input-field col s6 offset-s3">
+									<div class="input-field col s12 m6 offset-m3">
 										<input tabindex="-1" name="pedir_laboratorio" id="pedir_laboratorio" type="text" list="LAB">
 										<datalist id="LAB">
 											{% for medicamento in medi %}
@@ -296,7 +295,7 @@
 												{% endfor %}
 										</datalist>
 										<label for="pedir_laboratorio">Laboratorio</label></div>
-									<div class="input-field col s6 offset-s3">
+									<div class="input-field col s12 m6 offset-m3">
 										<select name="pedir_tipo">
 											<option value="" disabled selected>Elije una opcion</option>
 											{% for tipo in tipos %}
@@ -306,7 +305,7 @@
 										<label>Tipo</label>
 									</div>
 								</div>
-								<div class="input-field col s6 offset-s3">
+								<div class="input-field col s12 m6 offset-m3">
 									<input tabindex="-1" name="pedir_droga" id="pedir_droga" type="text" oninvalid="setCustomValidity('Campo requerido')" oninput="setCustomValidity('')" list="drugstore" required>
 									<datalist id="drugstore">
 										{% for medicamento in medi %}
@@ -314,10 +313,11 @@
 											{% endfor %}
 									</datalist>
 									<label for="pedir_droga">Droga</label>
-									<p>
+									<div class="col s12 center">
+									<p class="center">
 										<input tabindex="-1" type="checkbox" id="similar" name="similar" />
 										<label for="similar">Incluir donaciones similares</label>
-									</p><br>
+									</p><br></div>
 								</div>
 								<div class="col s12 center">
 									<input tabindex="-1" id="submit_pedir" type="submit" value="Aceptar" class="btn blue semibold" tabindex="-1">

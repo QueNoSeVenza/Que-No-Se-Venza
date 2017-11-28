@@ -34,6 +34,7 @@ p {
   font-size: 1.1rem;
 }
 // Nav
+
 .button-collapse {
   z-index: 999;
   margin: 25 20 20;
@@ -45,6 +46,7 @@ nav {
   z-index: 500;
 }
 // Slide-Out
+
 .side-nav {
   width: 100% !important;
   background-color: #000 !important;
@@ -92,6 +94,7 @@ nav {
   }
 }
 //Secciones slide-out
+
 #navsection1,
 #navsection2,
 #navsection3 {
@@ -143,6 +146,7 @@ nav {
   vertical-align: middle;
 }
 // Slider inicio
+
 #slide2 {
   h3 {
     margin-top: 100px;
@@ -265,6 +269,7 @@ nav {
   }
 }
 //FullPage
+
 div.section.fp-section.active.fp-completely {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -337,27 +342,44 @@ ul li:hover .dropOut {
   color: #777;
 }
 // HTML De agradecimiento
+
 .id-show {
   margin-left: 10px;
   padding: 10;
   border-radius: 3px;
 }
 
-.thx-center {
-  text-align: center !important;
+.thx-txt {
+  @media only screen and (max-width: 600px) {
+    text-align: center !important;
+    right: 0;
 
-  &.lab {
-    left: 0 !important;
-    right: 0 !important;
+    &.lab {
+      left: 0 !important;
+      right: 0 !important;
+    }
+  }
+}
+
+.thx-center {
+  @media only screen and (min-width: 600px) {
+    text-align: center !important;
+
+    &.lab {
+      left: 0 !important;
+      right: 0 !important;
+    }
   }
 }
 
 .thx-right {
-  text-align: right !important;
+  @media only screen and (min-width: 600px) {
+    text-align: right !important;
 
-  &.lab {
-    left: none !important;
-    right: 2% !important;
+    &.lab {
+      left: none !important;
+      right: 2% !important;
+    }
   }
 }
 
