@@ -1,12 +1,18 @@
 {% load static %} {% load staticfiles %}
 <html>
 	<head>
-		<title>QNV</title>
+		<!-- Global -->
+		<title>QnV - Principal</title>
+		<link rel="icon" href="{% static 'logo.png' %}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+
+		<!-- Chrome mobile -->
+		<meta name="theme-color" content="#FF5349">
+
+    <!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/fullpage/jquery.fullPage_donar.css' %}">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
-		<link rel="shortcut icon" href="">
 	</head>
 
 	<body>
@@ -315,7 +321,7 @@
 									<label for="pedir_droga">Droga</label>
 									<div class="col s12 center">
 									<p class="center">
-										<input tabindex="-1" type="checkbox" id="similar" name="similar" />
+										<input tabindex="-1" type="checkbox" checked="checked" id="similar" name="similar" class="blue-text" />
 										<label for="similar">Incluir donaciones similares</label>
 									</p><br></div>
 								</div>

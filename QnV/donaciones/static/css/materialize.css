@@ -4682,7 +4682,7 @@ textarea {
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:before,
 [type="radio"].with-gap:checked + label:after {
-  border: 2px solid #FF6F67; }
+  border: 2px solid #2196F3; }
 
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:after {
@@ -4790,8 +4790,8 @@ form p:last-child {
   height: 22px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #FF6F67;
-  border-bottom: 2px solid #FF6F67;
+  border-right: 2px solid #2196F3;
+  border-bottom: 2px solid #2196F3;
   transform: rotate(40deg);
   backface-visibility: hidden;
   transform-origin: 100% 100%; }
@@ -4807,7 +4807,7 @@ form p:last-child {
   height: 22px;
   border-top: none;
   border-left: none;
-  border-right: 2px solid #FF6F67;
+  border-right: 2px solid #2196F3;
   border-bottom: none;
   transform: rotate(90deg);
   backface-visibility: hidden;

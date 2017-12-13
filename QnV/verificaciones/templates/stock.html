@@ -1,148 +1,157 @@
 {% load static %} {% load staticfiles %} {% block nav %} {% include "nav.html" %} {% endblock %}
 <html>
 
-	<head>
-		<title>Verificacion - Stock</title>
-		<link rel="icon" href="{% static 'logo.png' %}">
-		<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
-		<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
-		<!--<link rel="stylesheet" href="{% static 'css/normalize.css' %}">-->
+<head>
+	<!-- Global -->
+	<title>QnV Verificacion - Stock</title>
+	<link rel="icon" href="{% static 'logo.png' %}">
 
-		<!--{{string}}<br>-->
-		<style type="text/css">
-			.Vencido {
-				background-color: #FF5252;
-			}
+	<!-- Chrome mobile -->
+	<meta name="theme-color" content="#FF5349">
 
-			.grtr{
-				background-color: #FCFCFC;
-			}
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'css/veristyle.css' %}">
+	<link rel="stylesheet" href="{% static 'css/_grid.css' %}">
+	<style type="text/css">
+		.Vencido {
+			background-color: #FF5252;
+		}
 
-			.grtr:hover{
-				background-color: #EEEEEE;
-			}
+		.grtr {
+			background-color: #FCFCFC;
+		}
 
-			.Disponible {
-				background-color: #00E676;
-			}
+		.grtr:hover {
+			background-color: #EEEEEE;
+		}
 
-			.Reservado {
-				background-color: #FFEE58;
-			}
+		.Disponible {
+			background-color: #00E676;
+		}
 
-			.Entregado {
-				background-color: #448AFF;
+		.Reservado {
+			background-color: #FFEE58;
+		}
 
-			}
-		</style>
-	</head>
+		.Entregado {
+			background-color: #448AFF;
 
-	<body>
-		<div class="row">
-			<form method="POST" action="/verificacion/search" style="margin-top:-20px;">
-				{% csrf_token %}
-				<div class="col s12 input-field center-align">
-					<input id="search" name="search1" type="text" class="large-input validate" placeholder="BUSCAR">
-					<button id="search_1" class="btn red accent-2 semibold">✔</button>
-				</div>
-				<div class="col s2 offset-s3 center-align">
-					<label>Todo</label>
-					<input value="todo" type="checkbox" name="fooby" id="ck1">
-				</div>
-				
-				<div class="col s2 center-align">
-					<label>No Verificado</label>
-					<input value="noVerificado" type="checkbox" name="fooby" id="ck3">
-				</div>
-				<div class="col s2 center-align">
-					<label>En Stock</label>
-					<input value="stock" type="checkbox" name="fooby" id="ck2">
-				</div>
+		}
+	</style>
+</head>
 
-			</form>
-			<br>
-			<table class="col s12" style="padding-left:0px; padding-right:0px;">
-				<tr id="header">
-					<th class="center-align">ID</th>
-					<th class="center-align">Nombre</th>
-					<th class="center-align">Laboratorio</th>
-					<th class="center-align">Tipo</th>
-					<th class="center-align">¿Requiere receta?</th>
-					<th class="center-align">Vencimiento</th>
-					<th class="center-align">Veriificador Ingreso</th>
-					<th class="center-align">Verificador Egreso</th>
-					<th class="center-align">Eliminar</th>
-				</tr>
+<body>
+	<div class="row">
+		<form method="POST" action="/verificacion/search" style="margin-top:-20px;">
+			{% csrf_token %}
+			<div class="col s12 input-field center-align">
+				<input id="search" name="search1" type="text" class="large-input validate" placeholder="BUSCAR">
+				<button id="search_1" class="btn red accent-2 semibold">✔</button>
+			</div>
+			<div class="col s2 offset-s3 center-align">
+				<label>Todo</label>
+				<input value="todo" type="checkbox" name="fooby" id="ck1">
+			</div>
 
-				{% for donacion in donaciones %}
-				<tr id="{{donacion.id}}" class="tr-data {{donacion.stock}}">
-					<td class="center-align">{{donacion.id}}</td>
-					<td class="center-align grtr">{{donacion.medicamento.nombre}}</td>
-					<td class="center-align grtr">{{donacion.laboratorio}}</td>
-					<td class="center-align grtr">{{donacion.tipo.nombre}}</td>
-					{% if donacion.prescripcion == True %}
-					<td class="center-align grtr">Si</td>
-					{% else %}
-					<td class="center-align grtr">No</td>
-					{% endif %}
-					<td class="center-align grtr">{{donacion.fecha_vencimiento}}</td>
-					<td class="center-align grtr">{{donacion.verificador_ingreso}}</td>
-					<td class="center-align grtr">{{donacion.verificador_salida}}</td>
-					<td class="center-align grtr"><button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
+			<div class="col s2 center-align">
+				<label>No Verificado</label>
+				<input value="noVerificado" type="checkbox" name="fooby" id="ck3">
+			</div>
+			<div class="col s2 center-align">
+				<label>En Stock</label>
+				<input value="stock" type="checkbox" name="fooby" id="ck2">
+			</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	</body>
-	<script>
-		$('#ck1').click(function() {
+		</form>
+		<br>
+		<table class="col s12" style="padding-left:0px; padding-right:0px;">
+			<tr id="header">
+				<th class="center-align">ID</th>
+				<th class="center-align">Nombre</th>
+				<th class="center-align">Laboratorio</th>
+				<th class="center-align">Tipo</th>
+				<th class="center-align">¿Requiere receta?</th>
+				<th class="center-align">Vencimiento</th>
+				<th class="center-align">Veriificador Ingreso</th>
+				<th class="center-align">Verificador Egreso</th>
+				<th class="center-align">Eliminar</th>
+			</tr>
+
+			{% for donacion in donaciones %}
+			<tr id="{{donacion.id}}" class="tr-data {{donacion.stock}}">
+				<td class="center-align">{{donacion.id}}</td>
+				<td class="center-align grtr">{{donacion.medicamento.nombre}}</td>
+				<td class="center-align grtr">{{donacion.laboratorio}}</td>
+				<td class="center-align grtr">{{donacion.tipo.nombre}}</td>
+				{% if donacion.prescripcion == True %}
+				<td class="center-align grtr">Si</td>
+				{% else %}
+				<td class="center-align grtr">No</td>
+				{% endif %}
+				<td class="center-align grtr">{{donacion.fecha_vencimiento}}</td>
+				<td class="center-align grtr">{{donacion.verificador_ingreso}}</td>
+				<td class="center-align grtr">{{donacion.verificador_salida}}</td>
+				<td class="center-align grtr"><button class="btn-delete" type="button" value="{{donacion.id}}">X</button></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</body>
+<script>
+	$('#ck1').click(function() {
 		console.log("siendo");
-		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+		setTimeout(function() {
+			$("#search_1").trigger('click');
+		}, 50);
 	});
 	$('#ck2').click(function() {
 		console.log("siendo");
-		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+		setTimeout(function() {
+			$("#search_1").trigger('click');
+		}, 50);
 	});
 	$('#ck3').click(function() {
 		console.log("siendo");
-		setTimeout(function(){ $("#search_1").trigger('click'); }, 50);
+		setTimeout(function() {
+			$("#search_1").trigger('click');
+		}, 50);
 	});
-		$("input:checkbox").on('click', function() {
-			// in the handler, 'this' refers to the box clicked on
-			var $box = $(this);
-			if ($box.is(":checked")) {
-				// the name of the box is retrieved using the .attr() method
-				// as it is assumed and expected to be immutable
-				var group = "input:checkbox[name='" + $box.attr("name") + "']";
-				// the checked state of the group/box on the other hand will change
-				// and the current value is retrieved using .prop() method
-				$(group).prop("checked", false);
-				$box.prop("checked", true);
-			} else {
-				$box.prop("checked", false);
-			}
-		});
- 
-		$(function() {
+	$("input:checkbox").on('click', function() {
+		// in the handler, 'this' refers to the box clicked on
+		var $box = $(this);
+		if ($box.is(":checked")) {
+			// the name of the box is retrieved using the .attr() method
+			// as it is assumed and expected to be immutable
+			var group = "input:checkbox[name='" + $box.attr("name") + "']";
+			// the checked state of the group/box on the other hand will change
+			// and the current value is retrieved using .prop() method
+			$(group).prop("checked", false);
+			$box.prop("checked", true);
+		} else {
+			$box.prop("checked", false);
+		}
+	});
 
-			var $contextMenu = $("#contextMenu");
+	$(function() {
 
-			$("body").on("contextmenu", "table tr", function(e) {
-				$contextMenu.css({
-					display: "block",
-					left: e.pageX,
-					top: e.pageY
-				});
-				return false;
+		var $contextMenu = $("#contextMenu");
+
+		$("body").on("contextmenu", "table tr", function(e) {
+			$contextMenu.css({
+				display: "block",
+				left: e.pageX,
+				top: e.pageY
 			});
-
-			$('html').click(function() {
-				$contextMenu.hide();
-			});
-
+			return false;
 		});
-	</script>
+
+		$('html').click(function() {
+			$contextMenu.hide();
+		});
+
+	});
+</script>
 
 </html>

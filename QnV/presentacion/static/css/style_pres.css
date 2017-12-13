@@ -248,6 +248,7 @@ nav {
     color: #757575; }
 
 .plate {
+  cursor: pointer;
   border-radius: 10px;
   box-shadow: 0 23px 54px -16px rgba(0, 0, 0, 0.43);
   width: 100%;
@@ -308,6 +309,7 @@ nav {
   .final-pnl p {
     margin-bottom: 80px; }
   .final-pnl a {
+    cursor: pointer;
     color: #fff;
     background-color: #5ac8fa;
     border-radius: 5px;

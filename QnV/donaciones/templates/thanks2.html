@@ -2,26 +2,34 @@
 <html>
 
 <head>
-    <title>QNV - No se encontraron resultados</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+  <!-- Global -->
+  <title>QnV - No se encontraron resultados</title>
+  <link rel="icon" href="{% static 'logo.png' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+
+  <!-- Chrome mobile -->
+  <meta name="theme-color" content="#FF5349">
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style_donar.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}">
 </head>
 
 <body class="thx-body">
-    <div class="row">
-        <div class="center thx-icon">
-            <img alt="Icon" src="{% static 'css/img/icon.png' %}" onclick="location.href='/principal'">
-        </div>
-        <div class="col s12">
-            <h2 class="center grey-text text-darken-3 semibold">No se encontraron resultados</h2>
-            <div class="col s12 center" style="margin-top:-10px;">
-                <p>Te enviaremos un correo electrónico cuando tu medicamento esté disponible</p>
-            </div>
-        </div>
+  <div class="row">
+    <div class="center thx-icon">
+      <img alt="Icon" src="{% static 'css/img/icon.png' %}" onclick="location.href='/principal'">
     </div>
-      <div class="col s12 center">
-            <button class="btn red accent-2 semibold" onclick="location.href='/principal'">Volver</button>
-        </div>
-    </body>
+    <div class="col s12">
+      <h2 class="center grey-text text-darken-3 semibold">No se encontraron resultados</h2>
+      <div class="col s12 center" style="margin-top:-10px;">
+        <p>Te enviaremos un correo electrónico cuando tu medicamento esté disponible</p>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 center">
+    <button class="btn red accent-2 semibold" onclick="location.href='/principal'">Volver</button>
+  </div>
+</body>
+
 </html>

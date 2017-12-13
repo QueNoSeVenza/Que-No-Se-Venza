@@ -95,10 +95,10 @@ function checkPasswordMatch() {
   var confirmPassword = $("#regpass2").val();
 
   if (password != confirmPassword && confirmPassword != "") {
-    $("#regpass2").css("border-bottom-color", "red");
+    $("#regpass2").css("border-bottom-color", "#F44336");
     dissableButtonSend();
   } else if (password == confirmPassword && password != "" && confirmPassword != "") {
-    $("#regpass2").css("border-bottom-color", "green");
+    $("#regpass2").css("border-bottom-color", "#00C853");
     dissableButtonSend();
   } else {
     $("#regpass2").css("border-bottom-color", "grey");

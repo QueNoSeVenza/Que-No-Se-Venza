@@ -1,12 +1,14 @@
 {% load static %} {% load staticfiles %}
-
 <html>
 
 <head>
 	<!-- Global -->
-	<title>Que no venza</title>
+	<title>QnV - Que No Venza</title>
 	<link rel="icon" href="{% static 'logo.png' %}">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8" />
+
+	 <!-- Chrome mobile -->
+	<meta name="theme-color" content="#FF5349">
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
@@ -74,11 +76,11 @@
 		<div class="row">
 			<div class="col s12 where-pnl center">
 				<h3 class="fadeonscroll wtitle semibold" style="font-size: 2.2rem;">PUNTOS DE DEPÓSITO</h3>
-				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left">
-					<div id="plate-default" class="plate pointer">Mendiolaza<span> Av. Malvinas Argentinas 170</span></div>
+				<div class="col s12 m8 offset-m2 l4 offset-l1 fadeonscroll-left" onclick="window.open('https://goo.gl/maps/CqcoJyqkuDS2')">
+					<div id="plate-default" class="plate pointer">Mendiolaza<span>Av. Malvinas Argentinas 170</span></div>
 				</div>
 				<div class="col s12 m8 offset-m2 l4 offset-l2 fadeonscroll-right rightimg">
-					<div id="plate-default-2" class="plate pointer">Talar<span>Av. Martín Tissera 2096</span></div>
+					<div id="plate-default-2" class="plate pointer" onclick="window.open('https://goo.gl/maps/Zr2orZWmW9U2')">Talar<span>Av. Martín Tissera 2096</span></div>
 				</div>
 			</div>
 		</div>

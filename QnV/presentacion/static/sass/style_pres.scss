@@ -7,7 +7,10 @@ $azul: #707ff9;
 $violeta: #5856d6;
 $rosa: #ff2d55;
 $gris-oscuro: #15191c;
-$gris-claro: #fcfcfc; //Global
+$gris-claro: #fcfcfc;
+
+// Global
+
 @font-face {
 	font-family: Avenir-Normal;
 	src: url("fonts/AvenirLTStd-Medium.otf");
@@ -76,6 +79,7 @@ p {
 .semibold {
 	font-family: Avenir-Heavy !important;
 }
+
 // Hide on mobile - on large
 @media screen and (max-width: 600px) {
 	.hide-on-mobile {
@@ -353,6 +357,7 @@ nav {
 }
 
 .plate {
+	cursor: pointer;
 	border-radius: 10px;
 	box-shadow: 0 23px 54px -16px rgba(0, 0, 0, .43);
 	width: 100%;
@@ -439,6 +444,7 @@ nav {
 	}
 
 	a {
+		cursor: pointer;
 		color: #fff;
 		background-color: $celeste;
 		border-radius: 5px;
